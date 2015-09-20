@@ -1,0 +1,23 @@
+{
+  "name": "spendless",
+  "version": "0.0.0",
+  "description": "Personal finance tracker built using electron",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joeynguyen/spendless.git"
+  },
+  "author": "Giao Nguyen",
+  "license": "GNU GENERAL PUBLIC LICENSE Version 3",
+  "bugs": {
+    "url": "https://github.com/joeynguyen/spendless/issues"
+  },
+  "homepage": "https://github.com/joeynguyen/spendless",
+  "devDependencies": {
+    "electron-prebuilt": "^0.33.0"
+  }
+}

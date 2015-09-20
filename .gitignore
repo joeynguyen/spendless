@@ -1,0 +1,13 @@
+*.log
+/bower_components/
+/node_modules/
+node_modules/
+/dest/
+/css/
+/js/main.js
+/js/main.min.js
+/images/
+*.swp
+*.swo
+.DS_Store
+.sass-cache
