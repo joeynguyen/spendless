@@ -1,7 +1,20 @@
-document.write('The current version of io.js is ' + process.version +
-        'and Electron is ' + process.versions['electron']);
+var parse = require('../../node_modules/csv-parse'),
+    fileReaderStream = require('../../node_modules/filereader-stream');
 
-var fs = require('fs'),
-    contents = fs.readFileSync('./package.json', 'utf8');
-
-alert(contents);
+var holder = document.getElementById('holder');
+holder.ondragover = function () {
+    return false;
+};
+holder.ondragleave = holder.ondragend = function () {
+    return false;
+};
+holder.ondrop = function (e) {
+    e.preventDefault();
+    var file = e.dataTransfer.files[0],
+        rs = fileReaderStream(file),
+        parser = parse({columns: true, trim: true}, function(err, data){
+            console.log(JSON.stringify(data));
+        });
+    rs.pipe(parser);
+    return false;
+};
