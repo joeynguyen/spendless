@@ -11,6 +11,10 @@
     <div class="header">
         <h1>Hi</h1>
     </div>
+    <form>
+        <input type="file" id="fileUpload" onchange="readFile(this.files)"/>
+        <button type="submit">Submit</button>
+    </form>
     <ul class="nav">
         <li class="first"><a href="#"></a></li>
         <li class=""><a href="#"></a></li>
@@ -24,8 +28,6 @@
     <div class="footer">
 
     </div>
-    <script>
-        require('./js/app.js');
-    </script>
+    <script type="text/javascript" src="./js/app.js"></script>
 </body>
 </html>
