@@ -7,6 +7,9 @@ var parse = require('../node_modules/csv-parse'),
     Transactions = new LinvoDB(modelName, schema, options);
 
 LinvoDB.dbPath = process.cwd();
+Transactions.findOne({"amount": {$gt: 2} }).exec(function(err, doc) {
+    console.log(doc);
+});
 
 var holder = document.getElementById('holder');
 holder.ondragover = function () {
@@ -30,7 +33,6 @@ holder.ondrop = function (e) {
                 transactionObj.description = transactionsArray[i].Description;
                 transactionObj.amount = transactionsArray[i].Amount;
                 filteredArray.push(transactionObj);
-                console.log(filteredArray);
             }
             Transactions.insert(filteredArray, function(err, newDocs) {
             });
