@@ -47,7 +47,18 @@ function readFile() {
     var selectedFile = document.getElementById('fileUpload').files[0],
         rs = fileReaderStream(selectedFile),
         parser = parse({columns: true, trim: true}, function(err, data){
-            console.log(JSON.stringify(data));
+            var transactionsArray = Object.keys(data).map(function(k) { return data[k]; });
+            var filteredArray = [];
+            var transactionObj = {};
+            console.log("data length: " + transactionsArray.length);
+            console.log(transactionsArray);
+            for (var i = 0; i < transactionsArray.length; i++) {
+                transactionObj.transactionDate = transactionsArray[i]["Trans. Date"];
+                transactionObj.description = transactionsArray[i].Description;
+                transactionObj.amount = transactionsArray[i].Amount;
+                filteredArray.push(transactionObj);
+            }
+            console.log(filteredArray);
         });
     rs.pipe(parser);
 }
