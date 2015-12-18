@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/joeynguyen/spendless",
   "devDependencies": {
-    "electron-prebuilt": "^0.33.0"
+    "electron-prebuilt": "^0.36.0"
   },
   "dependencies": {
     "csv-parse": "^1.0.0",
