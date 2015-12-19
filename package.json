@@ -4,6 +4,7 @@
   "description": "Personal finance tracker built using electron",
   "main": "main.js",
   "scripts": {
+    "hot-server": "node devServer.js",
     "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -41,9 +42,11 @@
     "style-loader": "^0.13.0",
     "webpack": "^1.12.3",
     "webpack-dev-middleware": "^1.2.0",
-    "webpack-hot-middleware": "^2.5.0"
+    "webpack-hot-middleware": "^2.5.0",
+    "webpack-target-electron-renderer": "^0.3.0"
   },
   "dependencies": {
+    "babel-preset-stage-0": "^6.3.13",
     "csv-parse": "^1.0.0",
     "filereader-stream": "^0.2.0",
     "font-awesome": "^4.5.0",
