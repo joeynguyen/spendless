@@ -1,5 +1,7 @@
 /* eslint strict: 0, no-console: 0 */
 'use strict';
+const webpackMiddleware = require('webpack-dev-middleware');
+const webpackHotMiddleware = require('webpack-hot-middleware');
 
 const path = require('path');
 const express = require('express');
@@ -11,14 +13,14 @@ const compiler = webpack(config);
 
 const PORT = 3000;
 
-app.use(require('webpack-dev-middleware')(compiler, {
+app.use(webpackMiddleware(compiler, {
   publicPath: config.output.publicPath,
   stats: {
     colors: true
   }
 }));
 
-app.use(require('webpack-hot-middleware')(compiler));
+app.use(webpackHotMiddleware(compiler));
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'app', 'hot-dev-app.html'));

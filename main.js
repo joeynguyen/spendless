@@ -17,7 +17,7 @@ let mainWindow = null;
 app.on('window-all-closed', () => {
     // On OS X it is common for applications and their menu bar
     // to stay active until the user quits explicitly with Cmd + Q
-    if (process.platform != 'darwin') {
+    if (process.platform !== 'darwin') {
         app.quit();
     }
 });
@@ -28,8 +28,11 @@ app.on('ready', () => {
     // Create the browser window.
     mainWindow = new BrowserWindow({width: 800, height: 600});
 
-    // and load the index.html of the app.
-    mainWindow.loadUrl('file://' + __dirname + '/public/' + 'index.html');
+    if (process.env.HOT) {
+        mainWindow.loadURL(`file://${__dirname}/app/hot-dev-app.html`);
+    } else {
+        mainWindow.loadURL(`file://${__dirname}/app/app.html`);
+    }
 
     // Open the DevTools.
     mainWindow.openDevTools();
