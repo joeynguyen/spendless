@@ -1,7 +1,7 @@
 /* eslint strict: 0 */
 'use strict';
 
-const path = require('path');
+import path from 'path';
 
 module.exports = {
   module: {

@@ -4,3 +4,5 @@ node_modules
 coverage
 webpack.*.js
 *Server.js
+server.js
+devServer.js

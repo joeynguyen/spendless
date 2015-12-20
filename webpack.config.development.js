@@ -1,9 +1,9 @@
 /* eslint strict: 0 */
 'use strict';
 
-const webpack = require('webpack');
-const webpackTargetElectronRenderer = require('webpack-target-electron-renderer');
-const baseConfig = require('./webpack.config.base');
+import webpack from 'webpack';
+import webpackTargetElectronRenderer from 'webpack-target-electron-renderer';
+import baseConfig from './webpack.config.base';
 
 const config = Object.create(baseConfig);
 

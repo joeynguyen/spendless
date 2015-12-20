@@ -4,7 +4,7 @@
   "description": "Personal finance tracker built using electron",
   "main": "main.js",
   "scripts": {
-    "hot-server": "node devServer.js",
+    "hot-server": "node server.js",
     "start": "better-npm-run start",
     "start-hot": "better-npm-run start-hot",
     "test": "echo \"Error: no test specified\" && exit 1"
