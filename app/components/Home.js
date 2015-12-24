@@ -10,7 +10,7 @@ export default class Home extends Component {
         <div>
           <div className={styles.container}>
             <h2 className={styles.header}>Giao</h2>
-            <CsvParser />
+            <FileUpload />
             <TransactionsTable />
             {/* <Link to="/counter">to Counter</Link> */}
           </div>

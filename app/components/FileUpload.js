@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import parse from 'csv-parse';
 import fileReaderStream from 'filereader-stream';
 
-export default class CsvParser extends Component {
+export default class FileUpload extends Component {
   handleFile(e) {
     const selectedFile = e.target.files[0];
     const rs = fileReaderStream(selectedFile);
