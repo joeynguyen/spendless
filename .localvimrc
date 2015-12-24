@@ -1,0 +1,3 @@
+ set tabstop=2                      " Number of spaces per tab
+ set shiftwidth=2                   " Number of spaces when indenting
+ set softtabstop=2                  " Use soft tabs
