@@ -23,9 +23,9 @@ export default class FileUpload extends Component {
   }
   render() {
     return (
-        <form encType="multipart/form-data">
-          <input type="file" onChange={this.handleFile} />
-        </form>
+      <form encType="multipart/form-data">
+        <input type="file" onChange={this.handleFile} />
+      </form>
     );
   }
 }
