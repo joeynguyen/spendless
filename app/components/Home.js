@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import { Link } from 'react-router';
-import CsvParser from './CsvParser.js';
+import FileUpload from './FileUpload.js';
 import TransactionsTable from './TransactionsTable.js';
 import styles from './Home.module.css';
 
