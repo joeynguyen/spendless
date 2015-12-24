@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 // import { Link } from 'react-router';
 import CsvSubmit from './CsvSubmit.js';
+import TransactionsTable from './TransactionsTable.js';
 import styles from './Home.module.css';
 
 export default class Home extends Component {
@@ -10,6 +11,7 @@ export default class Home extends Component {
           <div className={styles.container}>
             <h2 className={styles.header}>Giao</h2>
             <CsvSubmit />
+            <TransactionsTable />
             {/* <Link to="/counter">to Counter</Link> */}
           </div>
         </div>
