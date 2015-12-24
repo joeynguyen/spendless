@@ -23,7 +23,9 @@ export default class CsvParser extends Component {
   }
   render() {
     return (
-        <input type="file" onChange={this.handleFile} />
+        <form encType="multipart/form-data">
+          <input type="file" onChange={this.handleFile} />
+        </form>
     );
   }
 }
