@@ -17,11 +17,13 @@ export default class TransactionsList extends Component {
           </tr>
         </thead>
         <tbody>
-          {this.props.transactions.map(function(itemData) {
-            return (
-              <TransactionsItem key={itemData.id} item={itemData} />
-            );
-          }, this)}
+          {
+            this.props.transactions.map(function(itemData) {
+              return (
+                <TransactionsItem key={itemData.id} item={itemData} />
+              );
+            })
+          }
         </tbody>
       </table>
     );

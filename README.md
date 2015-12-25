@@ -20,3 +20,5 @@ npm run start-hot
 ```
 
 *Note: requires a node version >= 4 and an npm version >= 2.*
+
+Architecture for this app was inspired by react-transform-boilerplate and electron-react-boilerplate
