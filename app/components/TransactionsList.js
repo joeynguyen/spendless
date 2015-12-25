@@ -1,6 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import TransactionsItem from './TransactionsItem.js';
 
 export default class TransactionsList extends Component {
+  static propTypes = {
+    transactions: PropTypes.arrayOf(React.PropTypes.object)
+  }
   render() {
     return (
       <table className="table table-bordered table-hover">
@@ -13,24 +17,11 @@ export default class TransactionsList extends Component {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th>1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th>2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th>3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-          </tr>
+          {this.props.transactions.map(function(itemData) {
+            return (
+              <TransactionsItem key={itemData.id} item={itemData} />
+            );
+          }, this)}
         </tbody>
       </table>
     );
