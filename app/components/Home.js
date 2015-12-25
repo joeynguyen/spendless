@@ -27,7 +27,9 @@ export default class Home extends Component {
     console.log(this.state);
   }
   onUpdate = (val) => {
-    this.setState({transactions: val});
+    this.setState({
+      transactions: this.state.transactions.concat(val)
+    });
   }
   render() {
     return (
