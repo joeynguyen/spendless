@@ -12,7 +12,7 @@ npm install
 
 ## Run
 
-Run these two commands __simultaneously__ in different console tabs.
+Run these two commands __in the order they're given__ and  __simultaneously__ in different console tabs.
 
 ```bash
 npm run hot-server
