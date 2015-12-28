@@ -20,7 +20,7 @@ export default class TransactionsList extends Component {
           {
             this.props.transactions.map(function(itemData) {
               return (
-                <TransactionsItem key={itemData.id} item={itemData} />
+                <TransactionsItem key={itemData._id} item={itemData} />
               );
             })
           }

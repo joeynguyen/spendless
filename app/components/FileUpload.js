@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import parse from 'csv-parse';
-import uuid from 'node-uuid';
 import fileReaderStream from 'filereader-stream';
 
 export default class FileUpload extends Component {
@@ -12,7 +11,7 @@ export default class FileUpload extends Component {
       const transactionsArray = Object.keys(data).map(function(item) { return data[item]; });
       const filteredArray = transactionsArray.map(function(transaction) {
         return {
-          'id': uuid.v4(),
+          '_id': new Date().toISOString(),
           'amount': transaction.Amount,
           'category': transaction.Category,
           'description': transaction.Description,
