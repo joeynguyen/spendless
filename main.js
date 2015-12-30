@@ -26,7 +26,7 @@ app.on('window-all-closed', () => {
 // initialization and is ready to create browser windows.
 app.on('ready', () => {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600});
+  mainWindow = new BrowserWindow({width: 1200, height: 800});
 
   if (process.env.HOT) {
     mainWindow.loadURL(`file://${__dirname}/app/hot-dev-app.html`);

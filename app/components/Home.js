@@ -7,12 +7,15 @@ import styles from './Home.module.css';
 // PouchDB is loaded externally through a script tag in the browser
 const db = new PouchDB('transactions');
 db.info().then(function(info) {
-  console.log(info);
+  console.log('db info: ', info);
 });
 
 export default class Home extends Component {
   state = {
     transactions: []
+  }
+  componentDidMount() {
+    this.importTransactions();
   }
   logState = () => {
     console.log(this.state);
@@ -41,7 +44,7 @@ export default class Home extends Component {
       include_docs: true,
       descending: true,
     }).then(function(result) {
-      console.log(result);
+      console.log('result :', result);
       const filteredArray = result.rows.map(function(row) {
         return {
           '_id': row.doc._id,
@@ -51,7 +54,7 @@ export default class Home extends Component {
           'transactionDate': row.doc.transactionDate,
         };
       });
-      console.log(filteredArray);
+      console.log('filteredArray: ', filteredArray);
       that.setState({
         transactions: that.state.transactions.concat(filteredArray)
       });

@@ -9,9 +9,10 @@ export default class FileUpload extends Component {
     const rs = fileReaderStream(selectedFile);
     const parser = parse({columns: true, trim: true}, function(err, data) {
       const transactionsArray = Object.keys(data).map(function(item) { return data[item]; });
-      const filteredArray = transactionsArray.map(function(transaction) {
+      const filteredArray = transactionsArray.map(function(transaction, i) {
         return {
-          '_id': new Date().toISOString(),
+          // included 'i' iterator to prevent duplicate _id error
+          '_id': new Date().toISOString() + i,
           'amount': transaction.Amount,
           'category': transaction.Category,
           'description': transaction.Description,
