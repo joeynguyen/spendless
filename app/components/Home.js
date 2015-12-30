@@ -72,7 +72,6 @@ export default class Home extends Component {
           <TransactionsList transactions={this.state.transactions} />
           {/* <Link to="/counter">to Counter</Link> */}
           <button onClick={this.logState}>console.log(state)</button>
-          <button onClick={this.importTransactions}>Import transactions</button>
         </div>
       </div>
     );
