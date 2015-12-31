@@ -3,7 +3,7 @@ import TransactionsItem from './TransactionsItem.js';
 
 export default class TransactionsList extends Component {
   static propTypes = {
-    transactions: PropTypes.arrayOf(React.PropTypes.object)
+    transactions: PropTypes.arrayOf(React.PropTypes.object).isRequired
   }
   render() {
     return (
