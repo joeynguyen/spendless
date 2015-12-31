@@ -14,17 +14,25 @@ export default class Home extends Component {
   state = {
     transactions: []
   }
+
   componentDidMount() {
     this.importTransactions();
   }
+
   logState = () => {
     console.log(this.state);
   }
+
+  // When CSV file is uploaded, append new transactions to current transactions state
+  // TODO: Add different color for pending transactions not in database
   onUpdate = (val) => {
     this.setState({
       transactions: this.state.transactions.concat(val)
     });
   }
+
+  // Save transactions uploaded from CSV to database
+  // TODO: Don't save transactions that are already saved
   handleSave = () => {
     console.log('Trying to submit...');
     console.log(this.state.transactions);
@@ -38,6 +46,8 @@ export default class Home extends Component {
       });
     });
   }
+
+  // Show the current list of transactions by reading them from the database
   importTransactions = () => {
     const that = this;
     db.allDocs({
