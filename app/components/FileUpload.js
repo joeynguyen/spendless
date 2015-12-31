@@ -4,8 +4,8 @@ import ReactDOM from 'react-dom';
 export default class FileUpload extends Component {
   handleFile = () => {
     const that = this;
-    const fileReader = new FileReader();
     const selectedFile = ReactDOM.findDOMNode(this.refs.csv).files[0];
+    const fileReader = new FileReader();
     fileReader.readAsText(selectedFile);
     fileReader.onload = function parseCSV() {
       // Naive approach for testing if the first row of the CSV contains a header
@@ -41,26 +41,24 @@ export default class FileUpload extends Component {
           );
         console.log('transactionRowsArray: ', transactionRowsArray);
 
-        const transactionsArray = transactionRowsArray
-          .map(function(transaction) {
-            const newTransObj = {};
-            headerRowArray.forEach(function(item, i) {
-              newTransObj[headerRowArray[i]] = transaction[i];
-            });
-            return newTransObj;
-          })
+        const newTransactions = transactionRowsArray
           .map(function(transaction, i) {
+            const newTransObj = {};
+            headerRowArray.forEach(function(item, j) {
+              newTransObj[headerRowArray[j]] = transaction[j];
+            });
             return {
-              // included 'i' iterator to prevent duplicate _id error
+              // included 'i' index to prevent duplicate _id error
+              // TODO: Change hard-coded values in key:value pair
               '_id': new Date().toISOString() + i,
-              'amount': transaction.Amount,
-              'category': transaction.Category,
-              'description': transaction.Description,
-              'transactionDate': transaction['Trans. Date']
+              'amount': newTransObj.Amount,
+              'category': newTransObj.Category,
+              'description': newTransObj.Description,
+              'transactionDate': newTransObj['Trans. Date']
             };
           });
-        console.log('transactionsArray: ', transactionsArray);
-        that.props.onUpdate(transactionsArray);
+        console.log('newTransactions: ', newTransactions);
+        that.props.onUpdate(newTransactions);
       }
     };
   }

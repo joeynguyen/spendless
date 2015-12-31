@@ -55,7 +55,7 @@ export default class Home extends Component {
       descending: true,
     }).then(function(result) {
       console.log('result :', result);
-      const filteredArray = result.rows.map(function(row) {
+      const allTransactions = result.rows.map(function(row) {
         return {
           '_id': row.doc._id,
           'amount': row.doc.amount,
@@ -64,9 +64,9 @@ export default class Home extends Component {
           'transactionDate': row.doc.transactionDate,
         };
       });
-      console.log('filteredArray: ', filteredArray);
+      console.log('allTransactions: ', allTransactions);
       that.setState({
-        transactions: that.state.transactions.concat(filteredArray)
+        transactions: that.state.transactions.concat(allTransactions)
       });
     }).catch(function(err) {
       console.log(err);
