@@ -10,9 +10,9 @@ import './app.css';
 
 render(
   // <Provider store={store}>
-    <Router>
-      {routes}
-    </Router>,
+  <Router>
+    {routes}
+  </Router>,
   // </Provider>,
   document.getElementById('root')
 );

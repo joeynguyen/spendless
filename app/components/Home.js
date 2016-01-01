@@ -74,15 +74,16 @@ export default class Home extends Component {
   }
   render() {
     return (
-      <div>
-        <div className={styles.container}>
-          <h2 className={styles.header}>Giao</h2>
-          <FileUpload onUpdate={this.onUpdate} />
-          <button onClick={this.handleSave} >Save</button>
-          <TransactionsList transactions={this.state.transactions} />
-          {/* <Link to="/counter">to Counter</Link> */}
-          <button onClick={this.logState}>console.log(state)</button>
+      <div className="col-xs-9">
+        <div className="header">
+          <h2 className={styles.header}>Discover Card <br />
+            <small>Discover IT</small></h2>
         </div>
+        <FileUpload onUpdate={this.onUpdate} />
+        <button onClick={this.handleSave} >Save</button>
+        <TransactionsList transactions={this.state.transactions} />
+        {/* <Link to="/counter">to Counter</Link> */}
+        <button onClick={this.logState}>console.log(state)</button>
       </div>
     );
   }

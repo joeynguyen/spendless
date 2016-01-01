@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import Sidebar from '../components/Sidebar';
 
 export default class App extends Component {
   static propTypes = {
@@ -7,7 +8,8 @@ export default class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className="row">
+        <Sidebar />
         {this.props.children}
         {
         /*
