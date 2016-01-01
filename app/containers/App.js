@@ -8,7 +8,7 @@ export default class App extends Component {
 
   render() {
     return (
-      <div className="row">
+      <div className="row expanded">
         <Sidebar />
         {this.props.children}
         {

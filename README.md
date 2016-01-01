@@ -1,5 +1,5 @@
 # spendless
-Personal finance tracker built using Electron, React, PouchDB, Bootstrap, and soon Redux. Compiled with Babel and bundled with Webpack.
+Personal finance tracker built using Electron, React, PouchDB, Zurb-Foundation, and coming soon, Redux. Compiled with Babel and bundled with Webpack.
 
 ## Install
 

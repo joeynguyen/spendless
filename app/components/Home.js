@@ -74,10 +74,10 @@ export default class Home extends Component {
   }
   render() {
     return (
-      <div className="col-xs-9">
-        <div className="header">
-          <h2 className={styles.header}>Discover Card <br />
-            <small>Discover IT</small></h2>
+      <div className="small-9 columns">
+        <div className="account-header">
+          <h3 className={styles.header}>Discover Card <br />
+            <small>Discover IT</small></h3>
         </div>
         <FileUpload onUpdate={this.onUpdate} />
         <button onClick={this.handleSave} >Save</button>
