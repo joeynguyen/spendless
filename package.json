@@ -35,16 +35,17 @@
   },
   "keywords": [
     "babel",
+    "bootstrap",
     "electron",
     "es6",
     "express",
     "node",
     "pouchdb",
     "react",
+    "react-bootstrap",
     "react-router",
     "redux",
-    "webpack",
-    "zurb-foundation"
+    "webpack"
   ],
   "homepage": "https://github.com/joeynguyen/spendless",
   "devDependencies": {
@@ -78,10 +79,12 @@
   },
   "dependencies": {
     "babel-preset-stage-0": "^6.3.13",
+    "bootstrap": "^3.3.6",
     "font-awesome": "^4.5.0",
     "foundation-sites": "^6.1.1",
     "history": "~1.13.0",
     "react": "^0.14.3",
+    "react-bootstrap": "^0.28.1",
     "react-dom": "^0.14.3",
     "react-router": "^1.0.0",
     "should": "^7.1.0"

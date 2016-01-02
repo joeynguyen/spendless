@@ -74,8 +74,8 @@ export default class Home extends Component {
   }
   render() {
     return (
-      <div className="small-9 columns">
-        <div className="account-header">
+      <div className="col-xs-9">
+        <div className="header">
           <h3 className={styles.header}>Discover Card <br />
             <small>Discover IT</small></h3>
         </div>
