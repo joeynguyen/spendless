@@ -83,6 +83,7 @@
     "font-awesome": "^4.5.0",
     "foundation-sites": "^6.1.1",
     "history": "~1.13.0",
+    "pouchdb": "^5.1.0",
     "react": "^0.14.3",
     "react-bootstrap": "^0.28.1",
     "react-dom": "^0.14.3",
