@@ -7,7 +7,7 @@ export default class AccountGroup extends Component {
     icon: PropTypes.string.isRequired,
   }
   render() {
-    const panelHeader = (<div><i className={'fa fa-' + this.props.icon }></i> {this.props.title}</div>);
+    const panelHeader = (<div><i className={'fa fa-lg fa-fw fa-' + this.props.icon }></i> {this.props.title}</div>);
     return (
       <Panel collapsible defaultExpanded header={panelHeader}>
         <ListGroup fill>
