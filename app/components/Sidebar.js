@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { OverlayTrigger, Tooltip, Modal, Button } from 'react-bootstrap';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import styles from './Sidebar.module.css';
 import AccountGroup from './AccountGroup.js';
+import ManageAccountsWindow from './ManageAccounts.js';
 
 export default class Home extends Component {
   state = {
@@ -27,19 +28,7 @@ export default class Home extends Component {
         </h3>
         <AccountGroup title="Banks" icon="bank" />
         <AccountGroup title="Credit Cards" icon="credit-card" />
-        <Modal show={this.state.showModal} onHide={this.close}>
-          <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <h4>Text in a modal</h4>
-            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
-
-          </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={this.close}>Close</Button>
-          </Modal.Footer>
-        </Modal>
+        <ManageAccountsWindow showModal={this.state.showModal} close={this.close} />
       </div>
     );
   }

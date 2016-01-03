@@ -25,7 +25,7 @@ export default function parseCSV(selectedFile) {
           .split(',');
         console.log('headerRowArray: ', headerRowArray);
 
-        // TODO: Handle transaction descriptions that have commas
+        // TODO: Handle transaction descriptions that have commas, tokenize quotes or replace commas inside quotes with dashes?
         // See file VISA_561_010115_113015.CSV
         // TODO: Handle other possible bad data inside rows? Empty rows?
         const transactionRowsArray = rows
