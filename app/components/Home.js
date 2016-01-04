@@ -49,11 +49,10 @@ export default class Home extends Component {
 
   // Show the current list of transactions by reading them from the database
   importTransactions = () => {
-    const that = this;
     db.allDocs({
       include_docs: true,
       descending: true,
-    }).then(function(result) {
+    }).then((result) => {
       console.log('result :', result);
       const allTransactions = result.rows.map(function(row) {
         return {
@@ -65,8 +64,8 @@ export default class Home extends Component {
         };
       });
       console.log('allTransactions: ', allTransactions);
-      that.setState({
-        transactions: that.state.transactions.concat(allTransactions)
+      this.setState({
+        transactions: this.state.transactions.concat(allTransactions)
       });
     }).catch(function(err) {
       console.log(err);
