@@ -39,6 +39,8 @@ export default class ManageAccountsWindow extends Component {
     }
     this.setState({accountType: e.target.value});
   }
+  // Combine bankName and ccType into one variable like 'company'
+  // and combine handleBankNameChange() and handleCcTypeChange()
   handleBankNameChange = (e) => {
     this.setState({bankName: e.target.value});
   }

@@ -59,7 +59,7 @@ export default class Home extends Component {
     console.log('credit cards: ', ccAccounts);
     console.log('banks: ', bankAccounts);
     return (
-      <div id="sidebar" className={styles.sidebar + ' col-xs-3'}>
+      <div id="sidebar" className={styles.sidebar + ' col-xs-3 sidebar'}>
         <SidebarHeader open={this.open} />
         <AccountGroup title="Banks" icon="bank" accounts={bankAccounts} />
         <AccountGroup title="Credit Cards" icon="credit-card" accounts={ccAccounts} />
