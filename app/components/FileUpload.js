@@ -7,6 +7,10 @@ export default class FileUpload extends Component {
     onUpdate: PropTypes.func.isRequired
   }
   handleFile = () => {
+    // using a ref String attribute is a legacy approach ??
+    // https://facebook.github.io/react/docs/more-about-refs.html#the-ref-string-attribute
+    // using findDOMNode is discouraged
+    // https://facebook.github.io/react/docs/top-level-api.html#reactdom.finddomnode
     const selectedFile = ReactDOM.findDOMNode(this.refs.csv).files[0];
     const newTransactions = parseCSV(selectedFile);
     newTransactions.then(val => this.props.onUpdate(val));

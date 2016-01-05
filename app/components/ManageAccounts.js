@@ -10,6 +10,10 @@ export default class ManageAccountsWindow extends Component {
     close: PropTypes.func.isRequired,
   }
   state = {
+    accountName: '',
+    accountType: '',
+    bankName: '',
+    ccType: '',
     showAdd: false,
     showBank: false,
     showCredit: false
@@ -21,14 +25,28 @@ export default class ManageAccountsWindow extends Component {
     this.setState({showAdd: false, showBank: false, showCredit: false});
     this.props.close();
   }
-  handleType = (event) => {
-    if (event.target.value === 'creditcard') {
-      this.setState({showCredit: true, showBank: false});
-    } else if (event.target.value === 'bank') {
-      this.setState({showBank: true, showCredit: false});
+  handleAccountNameChange = (e) => {
+    this.setState({accountName: e.target.value});
+  }
+  handleAccountTypeChange = (e) => {
+    if (e.target.value === 'creditcard') {
+      this.setState({showCredit: true, showBank: false, bankName: ''});
+    } else if (e.target.value === 'bank') {
+      this.setState({showBank: true, showCredit: false, ccType: ''});
     } else {
       this.setState({showCredit: false, showBank: false});
     }
+    this.setState({accountType: e.target.value});
+  }
+  handleBankNameChange = (e) => {
+    this.setState({bankName: e.target.value});
+  }
+  handleCcTypeChange = (e) => {
+    this.setState({ccType: e.target.value});
+  }
+  handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(this.state);
   }
   render() {
     let addButton = {};
@@ -48,9 +66,9 @@ export default class ManageAccountsWindow extends Component {
               <Button onClick={this.toggleAddAccount} bsStyle={addButton.style} bsSize="large" block><i className={addButton.class}></i>{addButton.text}</Button>
               <Panel collapsible expanded={this.state.showAdd}>
                 {/* Add form validation. Don't allow 'select' value to be chosen */}
-                <form>
-                  <Input type="text" label="Name" placeholder="Enter a name for the account" />
-                  <Input type="select" label="Type" placeholder="Type" onChange={this.handleType} >
+                <form onSubmit={this.handleSubmit}>
+                  <Input type="text" label="Name" placeholder="Enter a name for the account" value={this.state.accountName} onChange={this.handleAccountNameChange} />
+                  <Input type="select" label="Type" placeholder="Type" value={this.state.accountType} onChange={this.handleAccountTypeChange} >
                     <option value="select">select</option>
                     <option value="bank">Bank</option>
                     <option value="creditcard">Credit Card</option>
@@ -58,12 +76,12 @@ export default class ManageAccountsWindow extends Component {
 
                   <Collapse in={this.state.showBank}>
                     <div>
-                      <Input type="text" label="Name of Institution" placeholder="Enter the name of the financial institution" />
+                      <Input type="text" label="Name of Institution" placeholder="Enter the name of the financial institution" value={this.state.bankName} onChange={this.handleBankNameChange} />
                     </div>
                   </Collapse>
                   <Collapse in={this.state.showCredit}>
                     <div>
-                      <Input type="select" label="Credit Card Company" placeholder="Credit Card Company">
+                      <Input type="select" label="Credit Card Company" placeholder="Credit Card Company" value={this.state.ccType} onChange={this.handleCcTypeChange}>
                         <option value="select">select</option>
                         <option value="visa">Visa</option>
                         <option value="mc">Mastercard</option>
