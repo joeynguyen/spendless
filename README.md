@@ -1,4 +1,4 @@
-# spendless
+# spendLess
 Personal finance tracker built using Electron, React, PouchDB, React-Bootstrap, and coming soon, Redux. Compiled with Babel and bundled with Webpack.
 
 ## Install
@@ -8,7 +8,6 @@ Install dependencies.
 ```bash
 npm install
 ```
-
 
 ## Run
 

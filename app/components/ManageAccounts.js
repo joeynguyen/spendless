@@ -46,7 +46,20 @@ export default class ManageAccountsWindow extends Component {
   }
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state);
+    const newAccount = {
+      '_id': new Date().toISOString(),
+      'name': this.state.accountName,
+      'type': this.state.accountType,
+      'bank': this.state.bankName,
+      'cc': this.state.ccType,
+    };
+    console.log(newAccount);
+    db.put(newAccount).then(function(result) {
+      console.log('Successfully added new account');
+      console.log(result);
+    }).catch(function(err) {
+      console.log(err);
+    });
   }
   render() {
     let addButton = {};
