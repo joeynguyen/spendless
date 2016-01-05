@@ -38,6 +38,11 @@ export default class Home extends Component {
       console.log(err);
     });
   }
+  onNewAccount = (newAccount) => {
+    this.setState({
+      accounts: this.state.accounts.concat(newAccount)
+    });
+  }
   close = () => {
     this.setState({ showModal: false });
   }
@@ -58,7 +63,7 @@ export default class Home extends Component {
         <SidebarHeader open={this.open} />
         <AccountGroup title="Banks" icon="bank" accounts={bankAccounts} />
         <AccountGroup title="Credit Cards" icon="credit-card" accounts={ccAccounts} />
-        <ManageAccountsWindow showModal={this.state.showModal} close={this.close} />
+        <ManageAccountsWindow showModal={this.state.showModal} close={this.close} onNewAccount={this.onNewAccount} />
       </div>
     );
   }

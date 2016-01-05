@@ -6,6 +6,7 @@ const db = new PouchDB('accounts');
 
 export default class ManageAccountsWindow extends Component {
   static propTypes = {
+    onNewAccount: PropTypes.func.isRequired,
     showModal: PropTypes.bool.isRequired,
     close: PropTypes.func.isRequired,
   }
@@ -53,13 +54,18 @@ export default class ManageAccountsWindow extends Component {
       'bank': this.state.bankName,
       'cc': this.state.ccType,
     };
+    const self = this;
     console.log(newAccount);
     db.put(newAccount).then(function(result) {
       console.log('Successfully added new account');
       console.log(result);
+      self.updateAccounts(newAccount);
     }).catch(function(err) {
       console.log(err);
     });
+  }
+  updateAccounts = (newAccount) => {
+    this.props.onNewAccount(newAccount);
   }
   render() {
     let addButton = {};
