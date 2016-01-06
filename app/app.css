@@ -3,6 +3,7 @@
   margin-bottom: 10px;
 }
 
-.sidebar .panel-title > a:hover {
+.sidebar .panel-title > a:hover,
+.sidebar .panel-title > a:focus {
   text-decoration: none;
 }
