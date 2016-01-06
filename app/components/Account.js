@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import FileUpload from './FileUpload.js';
 import TransactionsList from './TransactionsList.js';
 import styles from './Account.module.css';
+import { Link } from 'react-router';
 
 // PouchDB is loaded externally through a script tag in the browser
 const db = new PouchDB('transactions');
@@ -79,6 +80,7 @@ export default class Home extends Component {
         </div>
         <FileUpload onUpdate={this.onUpdate} />
         <button onClick={this.handleSave} >Save</button>
+        <p><Link to="/">Back to Home</Link></p>
         <TransactionsList transactions={this.state.transactions} />
         {/* <Link to="/counter">to Counter</Link> */}
         <button onClick={this.logState}>console.log(state)</button>

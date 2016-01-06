@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Panel, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 
 export default class AccountGroup extends Component {
   static propTypes = {
@@ -14,7 +15,11 @@ export default class AccountGroup extends Component {
         <ListGroup fill>
           {
             this.props.accounts.map(function(account) {
-              return <ListGroupItem key={account._id}>{account.name}</ListGroupItem>;
+              return (
+                <LinkContainer to={'/account/' + account._id} key={account._id}>
+                  <ListGroupItem>{account.name}</ListGroupItem>
+                </LinkContainer>
+              );
             })
           }
         </ListGroup>
