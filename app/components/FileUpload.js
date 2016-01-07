@@ -19,7 +19,12 @@ export default class FileUpload extends Component {
   render() {
     return (
       <form encType="multipart/form-data">
-        <input type="file" accept=".csv" onChange={this.handleFile} ref="csv"/>
+        {/*
+        Added key property so the input resets (gets rid of uploaded csv file) on account change
+        http://stackoverflow.com/questions/26358144/how-to-reset-a-reactjs-element
+        "Adding a key to the element forces the element (and all its children) to be re-rendered when that key changes."
+        */}
+        <input key={this.props.accountId} type="file" accept=".csv" onChange={this.handleFile} ref="csv"/>
       </form>
     );
   }
