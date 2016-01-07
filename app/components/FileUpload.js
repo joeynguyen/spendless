@@ -4,7 +4,8 @@ import parseCSV from '../utils/csvParser.js';
 
 export default class FileUpload extends Component {
   static propTypes = {
-    onUpdate: PropTypes.func.isRequired
+    onUpdate: PropTypes.func.isRequired,
+    accountId: PropTypes.string.isRequired
   }
   handleFile = () => {
     // using a ref String attribute is a legacy approach ??
@@ -12,7 +13,7 @@ export default class FileUpload extends Component {
     // using findDOMNode is discouraged
     // https://facebook.github.io/react/docs/top-level-api.html#reactdom.finddomnode
     const selectedFile = ReactDOM.findDOMNode(this.refs.csv).files[0];
-    const newTransactions = parseCSV(selectedFile);
+    const newTransactions = parseCSV(selectedFile, this.props.accountId);
     newTransactions.then(val => this.props.onUpdate(val));
   }
   render() {

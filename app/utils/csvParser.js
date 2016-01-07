@@ -1,4 +1,4 @@
-export default function parseCSV(selectedFile) {
+export default function parseCSV(selectedFile, accountId) {
   return new Promise(function(resolve) {
     const fileReader = new FileReader();
     let newTransactions;
@@ -47,6 +47,7 @@ export default function parseCSV(selectedFile) {
               // included 'i' index to prevent duplicate _id error
               // TODO: Change hard-coded values in key:value pair
               '_id': new Date().toISOString() + i,
+              'accountId': accountId,
               'amount': newTransObj.Amount,
               'category': newTransObj.Category,
               'description': newTransObj.Description,

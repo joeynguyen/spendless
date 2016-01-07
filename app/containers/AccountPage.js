@@ -44,7 +44,6 @@ export default class Account extends Component {
   }
 
   // Save transactions uploaded from CSV to database
-  // TODO: Don't save transactions that are already saved
   handleSave = () => {
     console.log('Trying to submit...');
     console.log(this.state.transactions);
@@ -116,7 +115,7 @@ export default class Account extends Component {
             <h3 className={styles.header}>{icon} {this.state.account.name} <br />
               <small>{this.state.account.company}</small></h3>
           </div>
-          <FileUpload onUpdate={this.onUpdate} />
+          <FileUpload onUpdate={this.onUpdate} accountId={this.props.params.id} />
           <button onClick={this.handleSave} >Save</button>
           <p><Link to="/">Back to Home</Link></p>
           <TransactionsList transactions={this.state.transactions} />
