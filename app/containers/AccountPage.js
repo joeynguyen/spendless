@@ -84,10 +84,7 @@ export default class Account extends Component {
     });
   }
   importAccount = (_props) => {
-    let props = this.props;
-    if (_props) {
-      props = _props;
-    }
+    const props = _props ? _props : this.props;
     acctsDB.get(props.params.id).then((doc) => {
       this.setState({ account: doc });
       console.log(doc);
