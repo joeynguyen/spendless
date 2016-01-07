@@ -83,7 +83,7 @@ export default class ManageAccountsWindow extends Component {
             <div className="col-xs-8">
               <Button onClick={this.toggleAddAccount} bsStyle={addButton.style} bsSize="large" block><i className={addButton.class}></i>{addButton.text}</Button>
               <Panel collapsible expanded={this.state.showAdd}>
-                {/* Add form validation. Don't allow 'select' value to be chosen */}
+                {/* TODO: Add form validation. Don't allow 'select' value to be chosen */}
                 <form onSubmit={this.handleSubmit}>
                   <Input type="text" label="Name" placeholder="Enter a name for the account" value={this.state.accountName} onChange={this.handleAccountNameChange} />
                   <Input type="select" label="Type" placeholder="Type" value={this.state.accountType} onChange={this.handleAccountTypeChange} >
@@ -106,6 +106,8 @@ export default class ManageAccountsWindow extends Component {
                         <option value="American Express">American Express</option>
                         <option value="Discover">Discover</option>
                         <option value="Diners Club">Diners Club</option>
+                        <option value="JCB">JCB</option>
+                        <option value="Other">Other</option>
                       </Input>
                     </div>
                   </Collapse>

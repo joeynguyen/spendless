@@ -93,12 +93,30 @@ export default class Account extends Component {
       console.log(doc);
     });
   }
+  findFaIcon(cc) {
+    let iconSuffix;
+    switch (cc) {
+      case 'American Express':
+        iconSuffix = 'cc-amex';
+        break;
+      case 'Other':
+        iconSuffix = 'credit-card-alt';
+        break;
+      default:
+        iconSuffix = 'cc-' + cc.toLowerCase().replace(/ /, '-');
+    }
+    return <i className={'fa fa-lg fa-fw fa-' + iconSuffix}></i>;
+  }
   render() {
     if (this.state.account) {
+      let icon = '';
+      if (this.state.account.type === 'creditcard') {
+        icon = this.findFaIcon(this.state.account.company);
+      }
       return (
         <div className="col-xs-9">
           <div className="header">
-            <h3 className={styles.header}>{this.state.account.name} <br />
+            <h3 className={styles.header}>{icon} {this.state.account.name} <br />
               <small>{this.state.account.company}</small></h3>
           </div>
           <FileUpload onUpdate={this.onUpdate} />
