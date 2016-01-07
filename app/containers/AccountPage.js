@@ -99,7 +99,7 @@ export default class Account extends Component {
         <div className="col-xs-9">
           <div className="header">
             <h3 className={styles.header}>{this.state.account.name} <br />
-              <small>{this.state.account.bank || this.state.account.cc}</small></h3>
+              <small>{this.state.account.company}</small></h3>
           </div>
           <FileUpload onUpdate={this.onUpdate} />
           <button onClick={this.handleSave} >Save</button>

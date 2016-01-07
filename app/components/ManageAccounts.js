@@ -13,8 +13,7 @@ export default class ManageAccountsWindow extends Component {
   state = {
     accountName: '',
     accountType: '',
-    bankName: '',
-    ccType: '',
+    accountCompany: '',
     showAdd: false,
     showBank: false,
     showCredit: false
@@ -31,21 +30,16 @@ export default class ManageAccountsWindow extends Component {
   }
   handleAccountTypeChange = (e) => {
     if (e.target.value === 'creditcard') {
-      this.setState({showCredit: true, showBank: false, bankName: ''});
+      this.setState({showCredit: true, showBank: false, accountCompany: ''});
     } else if (e.target.value === 'bank') {
-      this.setState({showBank: true, showCredit: false, ccType: ''});
+      this.setState({showBank: true, showCredit: false, accountCompany: ''});
     } else {
       this.setState({showCredit: false, showBank: false});
     }
     this.setState({accountType: e.target.value});
   }
-  // Combine bankName and ccType into one variable like 'company'
-  // and combine handleBankNameChange() and handleCcTypeChange()
-  handleBankNameChange = (e) => {
-    this.setState({bankName: e.target.value});
-  }
-  handleCcTypeChange = (e) => {
-    this.setState({ccType: e.target.value});
+  handleAccountCompanyChange = (e) => {
+    this.setState({accountCompany: e.target.value});
   }
   handleSubmit = (e) => {
     e.preventDefault();
@@ -53,8 +47,7 @@ export default class ManageAccountsWindow extends Component {
       '_id': new Date().toISOString(),
       'name': this.state.accountName,
       'type': this.state.accountType,
-      'bank': this.state.bankName,
-      'cc': this.state.ccType,
+      'company': this.state.accountCompany,
     };
     const self = this;
     console.log(newAccount);
@@ -62,8 +55,12 @@ export default class ManageAccountsWindow extends Component {
       console.log('Successfully added new account');
       console.log(result);
       self.updateAccounts(newAccount);
+      self.setState({showAdd: false, showBank: false, showCredit: false});
+      // TODO: reset form inputs
+      // TODO: Add success message after successful submit
     }).catch(function(err) {
       console.log(err);
+      // TODO: Add error message after submit fail
     });
   }
   updateAccounts = (newAccount) => {
@@ -97,18 +94,18 @@ export default class ManageAccountsWindow extends Component {
 
                   <Collapse in={this.state.showBank}>
                     <div>
-                      <Input type="text" label="Name of Institution" placeholder="Enter the name of the financial institution" value={this.state.bankName} onChange={this.handleBankNameChange} />
+                      <Input type="text" label="Name of Institution" placeholder="Enter the name of the financial institution" value={this.state.accountCompany} onChange={this.handleAccountCompanyChange } />
                     </div>
                   </Collapse>
                   <Collapse in={this.state.showCredit}>
                     <div>
-                      <Input type="select" label="Credit Card Company" placeholder="Credit Card Company" value={this.state.ccType} onChange={this.handleCcTypeChange}>
+                      <Input type="select" label="Credit Card Company" placeholder="Credit Card Company" value={this.state.accountCompany} onChange={this.handleAccountCompanyChange}>
                         <option value="select">select</option>
-                        <option value="visa">Visa</option>
-                        <option value="mc">Mastercard</option>
-                        <option value="amex">American Express</option>
-                        <option value="discover">Discover</option>
-                        <option value="diners">Diners Club</option>
+                        <option value="Visa">Visa</option>
+                        <option value="MasterCard">Mastercard</option>
+                        <option value="American Express">American Express</option>
+                        <option value="Discover">Discover</option>
+                        <option value="Diners Club">Diners Club</option>
                       </Input>
                     </div>
                   </Collapse>
