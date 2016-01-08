@@ -5,7 +5,10 @@ import styles from '../components/Account.module.css';
 import { Link } from 'react-router';
 
 // PouchDB is loaded externally through a script tag in the browser
+// PouchDB.debug.enable('pouchdb:find')
+
 const transDB = new PouchDB('transactions');
+
 transDB.info().then(function(info) {
   console.log('transDB info: ', info);
 });
@@ -27,8 +30,13 @@ export default class Account extends Component {
     this.importTransactions();
   }
 
+  // componentWillReceiveProps here handles scenario of switching between account pages
   componentWillReceiveProps(nextProps) {
+    this.setState({
+      transactions: []
+    });
     this.importAccount(nextProps);
+    this.importTransactions();
   }
 
   logState = () => {
@@ -60,35 +68,47 @@ export default class Account extends Component {
 
   // Show the current list of transactions by reading them from the database
   importTransactions = () => {
-    transDB.allDocs({
-      include_docs: true,
-      descending: true,
+    transDB.createIndex({
+      index: {
+        fields: ['transactionDate', 'accountId']
+      }
+    }).then((result) => {
+      console.log('Successfully created an index!', result);
+      return transDB.find({
+        // using $gt: null because "$exists doesn't do what you think it does"
+        // http://stackoverflow.com/questions/34366615/creating-a-usable-index-in-pouchdb-with-pouchdb-find
+        selector: { transactionDate: {'$gt': null}, accountId: this.props.params.id },
+        fields: ['_id', '_rev', 'amount', 'category', 'description', 'transactionDate'],
+        sort: [{transactionDate: 'desc'}]
+      });
     }).then((result) => {
       console.log('result :', result);
-      const allTransactions = result.rows.map(function(row) {
+      const allTransactions = result.docs.map(function(doc) {
         return {
-          '_id': row.doc._id,
-          'amount': row.doc.amount,
-          'category': row.doc.category,
-          'description': row.doc.description,
-          'transactionDate': row.doc.transactionDate,
+          '_id': doc._id,
+          'amount': doc.amount,
+          'category': doc.category,
+          'description': doc.description,
+          'transactionDate': doc.transactionDate,
         };
       });
       console.log('allTransactions: ', allTransactions);
       this.setState({
-        transactions: this.state.transactions.concat(allTransactions)
+        transactions: allTransactions
       });
     }).catch(function(err) {
-      console.log(err);
+      console.log('Failed to create an index!', err);
     });
   }
+
   importAccount = (_props) => {
     const props = _props ? _props : this.props;
     acctsDB.get(props.params.id).then((doc) => {
       this.setState({ account: doc });
-      console.log(doc);
+      console.log('currentAccount', doc);
     });
   }
+
   findFaIcon(cc) {
     let iconSuffix;
     switch (cc) {
@@ -103,6 +123,7 @@ export default class Account extends Component {
     }
     return <i className={'fa fa-lg fa-fw fa-' + iconSuffix}></i>;
   }
+
   render() {
     if (this.state.account) {
       let icon = '';
