@@ -3,9 +3,14 @@ import styles from './Sidebar.module.css';
 import SidebarHeader from './SidebarHeader.js';
 import AccountGroup from './AccountGroup.js';
 import ManageAccountsWindow from './ManageAccounts.js';
+import ApiKey from '../api-key.js';
 
 // PouchDB is loaded externally through a script tag in the browser
 const db = new PouchDB('accounts');
+let remoteCouch = false;
+if (ApiKey.user !== undefined && ApiKey.pass !== undefined) {
+  remoteCouch = `http://${ApiKey.user}:${ApiKey.pass}@joeynguyen.cloudant.com/spendless-accounts`;
+}
 
 export default class Home extends Component {
   state = {
@@ -13,7 +18,24 @@ export default class Home extends Component {
     accounts: [],
   }
   componentDidMount() {
-    this.importAccounts();
+    if (remoteCouch) {
+      this.syncDB();
+    } else {
+      this.importAccounts();
+    }
+  }
+  syncDB = () => {
+    const self = this;
+    const opts = {live: false};
+    db.sync(remoteCouch, opts)
+      .on('complete', function(success) {
+        console.log('CouchDB sync success :', success);
+        self.importAccounts();
+      })
+      .on('error', function(err) {
+        console.log('CouchDB sync error :', err);
+        self.importAccounts();
+      });
   }
   // Show the current list of transactions by reading them from the database
   importAccounts = () => {

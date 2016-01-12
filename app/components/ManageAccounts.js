@@ -1,8 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import { Modal, Button, ButtonInput, Collapse, Panel, Input } from 'react-bootstrap';
+import ApiKey from '../api-key.js';
 
 // PouchDB is loaded externally through a script tag in the browser
 const db = new PouchDB('accounts');
+let remoteCouch = false;
+if (ApiKey.user !== undefined && ApiKey.pass !== undefined) {
+  remoteCouch = `http://${ApiKey.user}:${ApiKey.pass}@joeynguyen.cloudant.com/spendless-accounts`;
+}
 
 export default class ManageAccountsWindow extends Component {
   static propTypes = {
@@ -17,6 +22,16 @@ export default class ManageAccountsWindow extends Component {
     showAdd: false,
     showBank: false,
     showCredit: false
+  }
+  syncDB() {
+    const opts = {live: true};
+    db.sync(remoteCouch, opts)
+      .on('complete', function(success) {
+        console.log('CouchDB sync success :', success);
+      })
+      .on('error', function(err) {
+        console.log('CouchDB sync error :', err);
+      });
   }
   toggleAddAccount = () => {
     this.setState({showAdd: !this.state.showAdd});
@@ -62,6 +77,9 @@ export default class ManageAccountsWindow extends Component {
       console.log(err);
       // TODO: Add error message after submit fail
     });
+    if (remoteCouch) {
+      this.syncDB();
+    }
   }
   updateAccounts = (newAccount) => {
     this.props.onNewAccount(newAccount);
