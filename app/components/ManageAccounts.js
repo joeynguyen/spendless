@@ -5,7 +5,7 @@ import ApiKey from '../api-key.js';
 // PouchDB is loaded externally through a script tag in the browser
 const db = new PouchDB('accounts');
 let remoteCouch = false;
-if (ApiKey.user !== undefined && ApiKey.pass !== undefined) {
+if (ApiKey.user !== '' && ApiKey.pass !== '') {
   remoteCouch = `http://${ApiKey.user}:${ApiKey.pass}@joeynguyen.cloudant.com/spendless-accounts`;
 }
 
