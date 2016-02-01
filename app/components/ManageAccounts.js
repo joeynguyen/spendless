@@ -19,7 +19,7 @@ export default class ManageAccountsWindow extends Component {
     showCredit: false
   }
   toggleAddAccount = () => {
-    this.setState({showAdd: !this.state.showAdd});
+    this.setState({showAdd: !this.state.showAdd, accountName: '', accountType: '', accountCompany: ''});
   }
   closeWindow = () => {
     this.setState({showAdd: false, showBank: false, showCredit: false});
@@ -55,7 +55,7 @@ export default class ManageAccountsWindow extends Component {
       console.log('Successfully added new account');
       console.log(result);
       self.updateAccounts(newAccount);
-      self.setState({showAdd: false, showBank: false, showCredit: false});
+      self.setState({showAdd: false, showBank: false, showCredit: false, accountName: '', accountType: '', accountCompany: ''});
       // TODO: reset form inputs
       // TODO: Add success message after successful submit
     }).catch(function(err) {
@@ -87,7 +87,7 @@ export default class ManageAccountsWindow extends Component {
                 <form onSubmit={this.handleSubmit}>
                   <Input type="text" label="Name" placeholder="Enter a name for the account" value={this.state.accountName} onChange={this.handleAccountNameChange} />
                   <Input type="select" label="Type" placeholder="Type" value={this.state.accountType} onChange={this.handleAccountTypeChange} >
-                    <option value="select">select</option>
+                    <option value="">select</option>
                     <option value="bank">Bank</option>
                     <option value="creditcard">Credit Card</option>
                   </Input>
@@ -100,7 +100,7 @@ export default class ManageAccountsWindow extends Component {
                   <Collapse in={this.state.showCredit}>
                     <div>
                       <Input type="select" label="Credit Card Company" placeholder="Credit Card Company" value={this.state.accountCompany} onChange={this.handleAccountCompanyChange}>
-                        <option value="select">select</option>
+                        <option value="">select</option>
                         <option value="Visa">Visa</option>
                         <option value="MasterCard">Mastercard</option>
                         <option value="American Express">American Express</option>

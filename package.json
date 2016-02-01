@@ -81,7 +81,6 @@
     "babel-preset-stage-0": "^6.3.13",
     "bootstrap": "^3.3.6",
     "font-awesome": "^4.5.0",
-    "foundation-sites": "^6.1.1",
     "pouchdb": "^5.1.0",
     "pouchdb-find": "^0.8.0",
     "react": "^0.14.3",
