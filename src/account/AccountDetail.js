@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import FileUpload from '../components/FileUpload.js';
-import TransactionsList from '../components/TransactionsList.js';
-import styles from '../components/Account.module.css';
 import { Link } from 'react-router';
+import FileUpload from './FileUpload.js';
+import TransactionsList from './TransactionsList.js';
+import styles from './Account.module.css';
 
 // PouchDB is loaded externally through a script tag in the browser
 // PouchDB.debug.enable('pouchdb:find')

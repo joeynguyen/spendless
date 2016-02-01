@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styles from './Sidebar.module.css';
 import SidebarHeader from './SidebarHeader.js';
-import AccountGroup from './AccountGroup.js';
+import AccountGroup from '../account/AccountGroup.js';
 import ManageAccountsWindow from './ManageAccounts.js';
 
 // PouchDB is loaded externally through a script tag in the browser
