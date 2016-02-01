@@ -1,17 +1,15 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 
-export default class TransactionsItem extends Component {
-  static propTypes = {
-    item: PropTypes.object
-  }
-  render() {
-    return (
-      <tr>
-        <td>{this.props.item.transactionDate}</td>
-        <td>{this.props.item.description}</td>
-        <td>{this.props.item.category}</td>
-        <td>{this.props.item.amount}</td>
-      </tr>
-    );
-  }
-}
+const TransactionsItem = ({ item }) => {
+  return (
+    <tr>
+      <td>{item.transactionDate}</td>
+      <td>{item.description}</td>
+      <td>{item.category}</td>
+      <td>{item.amount}</td>
+    </tr>
+  );
+};
+TransactionsItem.propTypes = { item: PropTypes.object.isRequired };
+
+export default TransactionsItem;
