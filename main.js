@@ -29,9 +29,9 @@ app.on('ready', () => {
   mainWindow = new BrowserWindow({width: 1200, height: 800});
 
   if (process.env.HOT) {
-    mainWindow.loadURL(`file://${__dirname}/app/hot-dev-app.html`);
+    mainWindow.loadURL(`file://${__dirname}/src/hot-dev-app.html`);
   } else {
-    mainWindow.loadURL(`file://${__dirname}/app/app.html`);
+    mainWindow.loadURL(`file://${__dirname}/src/app.html`);
   }
 
   // Open the DevTools.
