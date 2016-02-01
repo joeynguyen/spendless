@@ -21,7 +21,7 @@ export default class Home extends Component {
       include_docs: true,
       descending: true,
     }).then((result) => {
-      const allAccounts = result.rows.map(function(row) {
+      const allAccounts = result.rows.map((row) => {
         return {
           '_id': row.doc._id,
           'name': row.doc.name,
@@ -50,10 +50,10 @@ export default class Home extends Component {
     this.setState({ showModal: true });
   }
   render() {
-    const ccAccounts = this.state.accounts.filter(function(account) {
+    const ccAccounts = this.state.accounts.filter((account) => {
       return account.type === 'creditcard';
     });
-    const bankAccounts = this.state.accounts.filter(function(account) {
+    const bankAccounts = this.state.accounts.filter((account) => {
       return account.type === 'bank';
     });
     console.log('credit cards: ', ccAccounts);
