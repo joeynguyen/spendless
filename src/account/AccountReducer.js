@@ -1,11 +1,13 @@
-import { FETCH_ACCOUNTS } from '../account/AccountActions.js';
+import { FETCH_ACCOUNTS, ADD_ACCOUNT } from '../account/AccountActions.js';
 
-export default function(state = null, action) {
+export default function(state = [], action) {
   console.log('Action received', action);
 
   switch (action.type) {
     case FETCH_ACCOUNTS:
-      return action.payload;
+      return state.concat(action.payload);
+    case ADD_ACCOUNT:
+      return state.concat(action.payload);
     default:
       return state;
   }

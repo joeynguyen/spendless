@@ -1,12 +1,14 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Modal, Button, ButtonInput, Collapse, Panel, Input } from 'react-bootstrap';
+import { addAccount } from '../account/AccountActions.js';
 
 // PouchDB is loaded externally through a script tag in the browser
 const db = new PouchDB('accounts');
 
-export default class ManageAccountsWindow extends Component {
+class ManageAccountsWindow extends Component {
   static propTypes = {
-    onNewAccount: PropTypes.func.isRequired,
     showModal: PropTypes.bool.isRequired,
     close: PropTypes.func.isRequired,
   }
@@ -51,20 +53,19 @@ export default class ManageAccountsWindow extends Component {
     };
     const self = this;
     console.log(newAccount);
+
+    // Save account to DB
     db.put(newAccount).then(function(result) {
       console.log('Successfully added new account');
       console.log(result);
-      self.updateAccounts(newAccount);
+      // Update app state
+      self.props.doAddAccount(newAccount);
       self.setState({showAdd: false, showBank: false, showCredit: false, accountName: '', accountType: '', accountCompany: ''});
-      // TODO: reset form inputs
       // TODO: Add success message after successful submit
     }).catch(function(err) {
       console.log(err);
       // TODO: Add error message after submit fail
     });
-  }
-  updateAccounts = (newAccount) => {
-    this.props.onNewAccount(newAccount);
   }
   render() {
     let addButton = {};
@@ -81,7 +82,10 @@ export default class ManageAccountsWindow extends Component {
         <Modal.Body>
           <div className="row">
             <div className="col-xs-8">
-              <Button onClick={this.toggleAddAccount} bsStyle={addButton.style} bsSize="large" block><i className={addButton.class}></i>{addButton.text}</Button>
+              <Button onClick={this.toggleAddAccount} bsStyle={addButton.style} bsSize="large" block>
+                <i className={addButton.class}></i>
+                {addButton.text}
+              </Button>
               <Panel collapsible expanded={this.state.showAdd}>
                 {/* TODO: Add form validation. Don't allow 'select' value to be chosen */}
                 <form onSubmit={this.handleSubmit}>
@@ -112,16 +116,24 @@ export default class ManageAccountsWindow extends Component {
                     </div>
                   </Collapse>
 
-                  <ButtonInput bsStyle="primary" type="submit" value="Add" />
+                  <ButtonInput
+                    bsStyle="primary"
+                    type="submit"
+                    disabled={!(this.state.accountName.length > 0 &&
+                                this.state.accountType.length > 0 &&
+                                this.state.accountCompany.length > 0)}
+                    value="Add" />
                 </form>
               </Panel>
               <hr />
               {/* Use state to display 'No accounts' */}
+              {/* TODO: Show all accounts in this window */}
               <p>No accounts found.</p>
             </div>
 
             <div className="col-xs-4">
               <ul>
+                {/* TODO: Dynamically show number of accounts */}
                 <li>1 Checking accounts</li>
                 <li>2 Credit card accounts</li>
               </ul>
@@ -136,3 +148,9 @@ export default class ManageAccountsWindow extends Component {
     );
   }
 }
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ doAddAccount: addAccount }, dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(ManageAccountsWindow);

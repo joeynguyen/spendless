@@ -73,7 +73,7 @@ export default class Account extends Component {
         fields: ['transactionDate', 'accountId']
       }
     }).then((result) => {
-      console.log('Successfully created an index!', result);
+      // console.log('Successfully created an index!', result);
       return transDB.find({
         // using $gt: null because "$exists doesn't do what you think it does"
         // http://stackoverflow.com/questions/34366615/creating-a-usable-index-in-pouchdb-with-pouchdb-find
@@ -82,7 +82,6 @@ export default class Account extends Component {
         sort: [{transactionDate: 'desc'}]
       });
     }).then((result) => {
-      console.log('result :', result);
       const allTransactions = result.docs.map(function(doc) {
         return {
           '_id': doc._id,

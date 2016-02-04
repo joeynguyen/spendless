@@ -1,4 +1,5 @@
 export const FETCH_ACCOUNTS = 'FETCH_ACCOUNTS';
+export const ADD_ACCOUNT = 'ADD_ACCOUNT';
 
 export function fetchAccounts() {
   // PouchDB is loaded externally through a script tag in the browser
@@ -14,8 +15,7 @@ export function fetchAccounts() {
         '_id': row.doc._id,
         'name': row.doc.name,
         'type': row.doc.type,
-        'bank': row.doc.bank,
-        'cc': row.doc.cc,
+        'company': row.doc.company,
       };
     });
     console.log('allAccounts: ', allAccounts);
@@ -25,5 +25,12 @@ export function fetchAccounts() {
   return {
     type: FETCH_ACCOUNTS,
     payload: allAccounts
+  };
+}
+
+export function addAccount(newAccount) {
+  return {
+    type: ADD_ACCOUNT,
+    payload: newAccount
   };
 }
