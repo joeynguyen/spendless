@@ -1,19 +1,21 @@
 import React from 'react';
 import { render } from 'react-dom';
-// import { Provider } from 'react-redux';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import ReduxPromise from 'redux-promise';
 import { Router } from 'react-router';
-import routes from './routes';
-// import configureStore from './store/configureStore';
+import routes from './routes.js';
+import reducers from './reducers.js';
 import './app.css';
 
-// const store = configureStore();
+const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 
 render(
-  // <Provider store={store}>
-  <Router>
-    {routes}
-  </Router>,
-  // </Provider>,
+  <Provider store={createStoreWithMiddleware(reducers)}>
+    <Router>
+      {routes}
+    </Router>
+  </Provider>,
   document.getElementById('root')
 );
 

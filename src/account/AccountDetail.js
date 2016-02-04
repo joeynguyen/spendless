@@ -9,9 +9,9 @@ import styles from './Account.module.css';
 
 const transDB = new PouchDB('transactions');
 
-transDB.info().then(function(info) {
-  console.log('transDB info: ', info);
-});
+// transDB.info().then(function(info) {
+//   console.log('transDB info: ', info);
+// });
 
 const acctsDB = new PouchDB('accounts');
 

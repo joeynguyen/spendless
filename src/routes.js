@@ -8,6 +8,5 @@ export default (
   <Route path="/" component={App}>
     <IndexRoute component={HomePage} />
     <Route path="account/:id" component={AccountDetail} />
-    {/* <Route path="/counter" component={CounterPage} /> */}
   </Route>
 );
