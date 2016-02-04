@@ -11,6 +11,7 @@ class ManageAccountsWindow extends Component {
   static propTypes = {
     showModal: PropTypes.bool.isRequired,
     close: PropTypes.func.isRequired,
+    doAddAccount: PropTypes.func.isRequired
   }
   state = {
     accountName: '',
@@ -60,6 +61,7 @@ class ManageAccountsWindow extends Component {
       console.log(result);
       // Update app state
       self.props.doAddAccount(newAccount);
+      // Reset input fields to blank
       self.setState({showAdd: false, showBank: false, showCredit: false, accountName: '', accountType: '', accountCompany: ''});
       // TODO: Add success message after successful submit
     }).catch(function(err) {
@@ -68,11 +70,9 @@ class ManageAccountsWindow extends Component {
     });
   }
   render() {
-    let addButton = {};
+    let addButton = { style: 'primary', class: 'fa fa-plus', text: ' Add Account' };
     if (this.state.showAdd) {
       addButton = { style: 'danger', class: '', text: 'Cancel' };
-    } else {
-      addButton = { style: 'primary', class: 'fa fa-plus', text: ' Add Account' };
     }
     return (
       <Modal show={this.props.showModal} onHide={this.closeWindow}>

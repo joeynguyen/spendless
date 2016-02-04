@@ -8,8 +8,8 @@ import { toggleManageAccounts } from '../manage-accounts/ManageAccountsActions.j
 class App extends Component {
   static propTypes = {
     children: PropTypes.element.isRequired,
-    showManageAccounts: PropTypes.bool,
-    doToggleManageAccounts: PropTypes.func
+    showManageAccounts: PropTypes.bool.isRequired,
+    doToggleManageAccounts: PropTypes.func.isRequired
   }
   close = () => {
     this.props.doToggleManageAccounts(false);
