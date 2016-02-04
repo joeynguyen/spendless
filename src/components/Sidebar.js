@@ -1,30 +1,16 @@
-import React, { Component } from 'react';
+import React, { PropTypes } from 'react';
 import styles from './Sidebar.module.css';
 import SidebarHeader from './SidebarHeader.js';
-import ManageAccountsWindow from './ManageAccounts.js';
-import AccountContainer from '../account/AccountContainer.js';
+import AccountsContainer from '../account/AccountsContainer.js';
 
-// PouchDB is loaded externally through a script tag in the browser
-// const db = new PouchDB('accounts');
+const Sidebar = ({ open }) => {
+  return (
+    <div id="sidebar" className={styles.sidebar + ' col-xs-3 sidebar'}>
+      <SidebarHeader open={open} />
+      <AccountsContainer />
+    </div>
+  );
+};
+Sidebar.propTypes = { open: PropTypes.func.isRequired };
 
-export default class Sidebar extends Component {
-  state = {
-    showModal: false,
-  }
-  close = () => {
-    this.setState({ showModal: false });
-  }
-  open = () => {
-    this.setState({ showModal: true });
-  }
-  render() {
-    return (
-      <div id="sidebar" className={styles.sidebar + ' col-xs-3 sidebar'}>
-        <SidebarHeader open={this.open} />
-        <AccountContainer />
-        <ManageAccountsWindow showModal={this.state.showModal} close={this.close} />
-      </div>
-    );
-  }
-}
-
+export default Sidebar;
