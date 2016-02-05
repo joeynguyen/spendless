@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
-import AccountReducer from './account/AccountReducer.js';
+import AccountsReducer from './account/AccountsReducer.js';
 import ShowManageAccountsReducer from './manage-accounts/ShowManageAccountsReducer.js';
 
 const rootReducer = combineReducers({
-  accounts: AccountReducer,
+  accounts: AccountsReducer,
   showManageAccounts: ShowManageAccountsReducer
 });
 

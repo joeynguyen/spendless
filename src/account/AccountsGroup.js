@@ -2,7 +2,7 @@ import React, {  PropTypes } from 'react';
 import { Panel, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
-const AccountGroup = ({ title, icon, accounts }) => {
+const AccountsGroup = ({ title, icon, accounts }) => {
   const panelHeader = (
     <div>
       <i className={'fa fa-lg fa-fw fa-' + icon }></i>
@@ -25,10 +25,10 @@ const AccountGroup = ({ title, icon, accounts }) => {
     </Panel>
   );
 };
-AccountGroup.propTypes = {
+AccountsGroup.propTypes = {
   title: PropTypes.string.isRequired,
   icon: PropTypes.string.isRequired,
   accounts: PropTypes.array.isRequired,
 };
 
-export default AccountGroup;
+export default AccountsGroup;

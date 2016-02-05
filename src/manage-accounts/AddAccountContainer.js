@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Button, ButtonInput, Collapse, Panel, Input } from 'react-bootstrap';
-import { addAccount } from '../account/AccountActions.js';
+import { addAccount } from '../account/AccountsActions.js';
 
 // PouchDB is loaded externally through a script tag in the browser
 const db = new PouchDB('accounts');

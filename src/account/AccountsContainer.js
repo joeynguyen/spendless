@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import AccountGroup from './AccountGroup.js';
-import { fetchAccounts } from './AccountActions.js';
+import AccountsGroup from './AccountsGroup.js';
+import { fetchAccounts } from './AccountsActions.js';
 
 class AccountContainer extends Component {
   static propTypes = {
@@ -26,8 +26,8 @@ class AccountContainer extends Component {
     });
     return (
       <div>
-        <AccountGroup title="Banks" icon="bank" accounts={bankAccounts} />
-        <AccountGroup title="Credit Cards" icon="credit-card" accounts={ccAccounts} />
+        <AccountsGroup title="Banks" icon="bank" accounts={bankAccounts} />
+        <AccountsGroup title="Credit Cards" icon="credit-card" accounts={ccAccounts} />
       </div>
     );
   }
