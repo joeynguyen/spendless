@@ -10,13 +10,9 @@ class ManageAccountsWindow extends Component {
     showManageAccounts: PropTypes.bool.isRequired,
     doToggleManageAccounts: PropTypes.func.isRequired
   }
-  closeWindow = () => {
-    // this.setState({showAdd: false, showBank: false, showCredit: false});
-    this.props.doToggleManageAccounts(false);
-  }
   render() {
     return (
-      <Modal show={this.props.showManageAccounts} onHide={this.closeWindow}>
+      <Modal show={this.props.showManageAccounts} onHide={() => this.props.doToggleManageAccounts(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Manage Accounts</Modal.Title>
         </Modal.Header>
@@ -41,7 +37,7 @@ class ManageAccountsWindow extends Component {
 
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={this.closeWindow}>Close</Button>
+          <Button onClick={() => this.props.doToggleManageAccounts(false)}>Close</Button>
         </Modal.Footer>
       </Modal>
     );
