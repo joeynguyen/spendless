@@ -29,9 +29,9 @@ class AddAccountContainer extends Component {
     if (e.target.value === 'creditcard') {
       this.setState({showCredit: true, showBank: false, accountCompany: ''});
     } else if (e.target.value === 'bank') {
-      this.setState({showBank: true, showCredit: false, accountCompany: ''});
+      this.setState({showCredit: false, showBank: true, accountCompany: ''});
     } else {
-      this.setState({showCredit: false, showBank: false});
+      this.setState({showCredit: false, showBank: false, accountCompany: ''});
     }
     this.setState({accountType: e.target.value});
   }

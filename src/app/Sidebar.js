@@ -5,7 +5,7 @@ import AccountsContainer from '../account/AccountsContainer.js';
 
 const Sidebar = () => {
   return (
-    <div id="sidebar" className={styles.sidebar + ' col-xs-3 sidebar'}>
+    <div className={styles.sidebar + ' col-xs-3 sidebar'}>
       <SidebarHeader />
       <AccountsContainer />
     </div>
