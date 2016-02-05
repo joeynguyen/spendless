@@ -8,11 +8,7 @@ import { toggleManageAccounts } from '../manage-accounts/ManageAccountsActions.j
 class App extends Component {
   static propTypes = {
     children: PropTypes.element.isRequired,
-    showManageAccounts: PropTypes.bool.isRequired,
     doToggleManageAccounts: PropTypes.func.isRequired
-  }
-  close = () => {
-    this.props.doToggleManageAccounts(false);
   }
   open = () => {
     this.props.doToggleManageAccounts(true);
@@ -22,7 +18,7 @@ class App extends Component {
       <div className="row">
         <Sidebar open={this.open} />
         {this.props.children}
-        <ManageAccountsWindow showModal={this.props.showManageAccounts} close={this.close} />
+        <ManageAccountsWindow />
         {
         /*
           (() => {
@@ -38,14 +34,8 @@ class App extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    showManageAccounts: state.showManageAccounts
-  };
-}
-
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ doToggleManageAccounts: toggleManageAccounts }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(null, mapDispatchToProps)(App);

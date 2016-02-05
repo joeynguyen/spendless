@@ -1,19 +1,22 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Modal, Button } from 'react-bootstrap';
-import { AddAccountContainer } from '../manage-accounts/AddAccountContainer.js';
+import { toggleManageAccounts } from '../manage-accounts/ManageAccountsActions.js';
+import AddAccountContainer from '../manage-accounts/AddAccountContainer.js';
 
-export default class ManageAccountsWindow extends Component {
+class ManageAccountsWindow extends Component {
   static propTypes = {
-    showModal: PropTypes.bool.isRequired,
-    close: PropTypes.func.isRequired,
+    showManageAccounts: PropTypes.bool.isRequired,
+    doToggleManageAccounts: PropTypes.func.isRequired
   }
   closeWindow = () => {
-    this.setState({showAdd: false, showBank: false, showCredit: false});
-    this.props.close();
+    // this.setState({showAdd: false, showBank: false, showCredit: false});
+    this.props.doToggleManageAccounts(false);
   }
   render() {
     return (
-      <Modal show={this.props.showModal} onHide={this.closeWindow}>
+      <Modal show={this.props.showManageAccounts} onHide={this.closeWindow}>
         <Modal.Header closeButton>
           <Modal.Title>Manage Accounts</Modal.Title>
         </Modal.Header>
@@ -44,3 +47,15 @@ export default class ManageAccountsWindow extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    showManageAccounts: state.showManageAccounts
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ doToggleManageAccounts: toggleManageAccounts }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ManageAccountsWindow);
