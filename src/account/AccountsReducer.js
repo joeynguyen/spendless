@@ -1,4 +1,4 @@
-import { FETCH_ACCOUNTS, ADD_ACCOUNT } from '../account/AccountsActions.js';
+import { FETCH_ACCOUNTS, ADD_ACCOUNT } from './AccountsActions.js';
 
 export default function(state = [], action) {
   console.log('Action received', action);

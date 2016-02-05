@@ -18,12 +18,8 @@ class AccountContainer extends Component {
     if (!this.props.accounts) {
       return <div>Loading...</div>;
     }
-    const ccAccounts = this.props.accounts.filter((account) => {
-      return account.type === 'creditcard';
-    });
-    const bankAccounts = this.props.accounts.filter((account) => {
-      return account.type === 'bank';
-    });
+    const ccAccounts = this.props.accounts.filter(account => account.type === 'creditcard');
+    const bankAccounts = this.props.accounts.filter(account => account.type === 'bank');
     return (
       <div>
         <AccountsGroup title="Banks" icon="bank" accounts={bankAccounts} />
