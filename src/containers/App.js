@@ -1,13 +1,13 @@
 import React, { PropTypes } from 'react';
 import Sidebar from '../components/Sidebar';
-import ManageAccountsWindow from '../components/ManageAccounts.js';
+import ManageAccountsContainer from '../manage-accounts/ManageAccountsContainer.js';
 
 const App = ({ children }) => {
   return (
     <div className="row">
       <Sidebar />
       {children}
-      <ManageAccountsWindow />
+      <ManageAccountsContainer />
       {
       /*
         (() => {

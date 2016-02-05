@@ -5,7 +5,7 @@ import { Modal, Button } from 'react-bootstrap';
 import { toggleManageAccounts } from '../manage-accounts/ManageAccountsActions.js';
 import AddAccountContainer from '../manage-accounts/AddAccountContainer.js';
 
-class ManageAccountsWindow extends Component {
+class ManageAccountsContainer extends Component {
   static propTypes = {
     showManageAccounts: PropTypes.bool.isRequired,
     doToggleManageAccounts: PropTypes.func.isRequired
@@ -54,4 +54,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({ doToggleManageAccounts: toggleManageAccounts }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ManageAccountsWindow);
+export default connect(mapStateToProps, mapDispatchToProps)(ManageAccountsContainer);
