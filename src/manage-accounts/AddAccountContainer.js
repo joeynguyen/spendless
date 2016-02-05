@@ -71,47 +71,47 @@ class AddAccountContainer extends Component {
     return (
       <div>
         <Button onClick={this.toggleAddAccount} bsStyle={addButton.style} bsSize="large" block>
-        <i className={addButton.class}></i>
-        {addButton.text}
+          <i className={addButton.class}></i>
+          {addButton.text}
         </Button>
         <Panel collapsible expanded={this.state.showAdd}>
-        {/* TODO: Add form validation. Don't allow 'select' value to be chosen */}
-        <form onSubmit={this.handleSubmit}>
-        <Input type="text" label="Name" placeholder="Enter a name for the account" value={this.state.accountName} onChange={this.handleAccountNameChange} />
-        <Input type="select" label="Type" placeholder="Type" value={this.state.accountType} onChange={this.handleAccountTypeChange} >
-        <option value="">select</option>
-        <option value="bank">Bank</option>
-        <option value="creditcard">Credit Card</option>
-        </Input>
+          {/* TODO: Add form validation. Don't allow 'select' value to be chosen */}
+          <form onSubmit={this.handleSubmit}>
+            <Input type="text" label="Name" placeholder="Enter a name for the account" value={this.state.accountName} onChange={this.handleAccountNameChange} />
+            <Input type="select" label="Type" placeholder="Type" value={this.state.accountType} onChange={this.handleAccountTypeChange} >
+              <option value="">select</option>
+              <option value="bank">Bank</option>
+              <option value="creditcard">Credit Card</option>
+            </Input>
 
-        <Collapse in={this.state.showBank}>
-        <div>
-        <Input type="text" label="Name of Institution" placeholder="Enter the name of the financial institution" value={this.state.accountCompany} onChange={this.handleAccountCompanyChange } />
-        </div>
-        </Collapse>
-        <Collapse in={this.state.showCredit}>
-        <div>
-        <Input type="select" label="Credit Card Company" placeholder="Credit Card Company" value={this.state.accountCompany} onChange={this.handleAccountCompanyChange}>
-        <option value="">select</option>
-        <option value="Visa">Visa</option>
-        <option value="MasterCard">Mastercard</option>
-        <option value="American Express">American Express</option>
-        <option value="Discover">Discover</option>
-        <option value="Diners Club">Diners Club</option>
-        <option value="JCB">JCB</option>
-        <option value="Other">Other</option>
-        </Input>
-        </div>
-        </Collapse>
+            <Collapse in={this.state.showBank}>
+              <div>
+                <Input type="text" label="Name of Institution" placeholder="Enter the name of the financial institution" value={this.state.accountCompany} onChange={this.handleAccountCompanyChange } />
+              </div>
+            </Collapse>
+            <Collapse in={this.state.showCredit}>
+              <div>
+                <Input type="select" label="Credit Card Company" placeholder="Credit Card Company" value={this.state.accountCompany} onChange={this.handleAccountCompanyChange}>
+                  <option value="">select</option>
+                  <option value="Visa">Visa</option>
+                  <option value="MasterCard">Mastercard</option>
+                  <option value="American Express">American Express</option>
+                  <option value="Discover">Discover</option>
+                  <option value="Diners Club">Diners Club</option>
+                  <option value="JCB">JCB</option>
+                  <option value="Other">Other</option>
+                </Input>
+              </div>
+            </Collapse>
 
-        <ButtonInput
-        bsStyle="primary"
-        type="submit"
-        disabled={!(this.state.accountName.length > 0 &&
-                    this.state.accountType.length > 0 &&
-                    this.state.accountCompany.length > 0)}
-        value="Add" />
-        </form>
+            <ButtonInput
+              bsStyle="primary"
+              type="submit"
+              disabled={!(this.state.accountName.length > 0 &&
+                          this.state.accountType.length > 0 &&
+                          this.state.accountCompany.length > 0)}
+              value="Add" />
+          </form>
         </Panel>
       </div>
     );
