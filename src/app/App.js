@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import Sidebar from '../components/Sidebar';
+import Sidebar from '../Sidebar.js';
 import ManageAccountsContainer from '../manage-accounts/ManageAccountsContainer.js';
 
 const App = ({ children }) => {
