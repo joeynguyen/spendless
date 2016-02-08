@@ -4,8 +4,6 @@
 .sidebar-header {
   margin-left: 5px;
 }
-.accounts-edit {
-  cursor: pointer;
-  font-size: .85em;
-  vertical-align: middle;
+.header-text {
+  line-height: 36px;
 }
