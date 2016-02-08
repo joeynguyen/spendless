@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { ButtonInput, Collapse, Panel, Input } from 'react-bootstrap';
+import { Collapse, Panel, Input } from 'react-bootstrap';
 import RaisedButton from 'material-ui/lib/raised-button';
 import AddIcon from 'material-ui/lib/svg-icons/content/add.js';
 import RemoveIcon from 'material-ui/lib/svg-icons/content/remove.js';
@@ -114,13 +114,14 @@ class AddAccountContainer extends Component {
               </div>
             </Collapse>
 
-            <ButtonInput
-              bsStyle="primary"
+            <RaisedButton
               type="submit"
+              label="Save"
+              secondary={true}
               disabled={!(this.state.accountName.length > 0 &&
                           this.state.accountType.length > 0 &&
                           this.state.accountCompany.length > 0)}
-              value="Save" />
+            />
           </form>
         </Panel>
       </div>
