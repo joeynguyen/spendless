@@ -4,16 +4,11 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxPromise from 'redux-promise';
 import { Router } from 'react-router';
-import injectTapEventPlugin from 'react-tap-event-plugin';
 import routes from './routes.js';
 import reducers from './reducers.js';
 import './app.css';
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
-
-// Needed for material-ui functionality
-// Can go away when react 1.0 release
-injectTapEventPlugin();
 
 render(
   <Provider store={createStoreWithMiddleware(reducers)}>
