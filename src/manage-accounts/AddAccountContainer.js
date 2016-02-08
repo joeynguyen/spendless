@@ -1,9 +1,17 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Button, ButtonInput, Collapse, Panel, Input } from 'react-bootstrap';
+import { ButtonInput, Collapse, Panel, Input } from 'react-bootstrap';
+import RaisedButton from 'material-ui/lib/raised-button';
+import AddIcon from 'material-ui/lib/svg-icons/content/add.js';
+import RemoveIcon from 'material-ui/lib/svg-icons/content/remove.js';
 import { addAccount } from '../account/AccountsActions.js';
 
+const styles = {
+  buttonLabel: {
+    fontSize: 17
+  }
+};
 // PouchDB is loaded externally through a script tag in the browser
 const db = new PouchDB('accounts');
 
@@ -64,16 +72,18 @@ class AddAccountContainer extends Component {
     });
   }
   render() {
-    let addButton = { style: 'primary', class: 'fa fa-plus', text: ' Add Account' };
-    if (this.state.showAdd) {
-      addButton = { style: 'danger', class: '', text: 'Cancel' };
-    }
     return (
       <div>
-        <Button onClick={this.toggleAddAccount} bsStyle={addButton.style} bsSize="large" block>
-          <i className={addButton.class}></i>
-          {addButton.text}
-        </Button>
+        <RaisedButton
+          onClick={this.toggleAddAccount}
+          label={this.state.showAdd ? 'Cancel' : 'Add Account'}
+          fullWidth={true}
+          secondary={!this.state.showAdd}
+          primary={this.state.showAdd}
+          icon={this.state.showAdd ? <RemoveIcon viewBox="0 2 24 24"/> : <AddIcon viewBox="0 2 24 24"/>}
+          labelStyle={styles.buttonLabel}
+        />
+
         <Panel collapsible expanded={this.state.showAdd}>
           {/* TODO: Add form validation. Don't allow 'select' value to be chosen */}
           <form onSubmit={this.handleSubmit}>
@@ -110,7 +120,7 @@ class AddAccountContainer extends Component {
               disabled={!(this.state.accountName.length > 0 &&
                           this.state.accountType.length > 0 &&
                           this.state.accountCompany.length > 0)}
-              value="Add" />
+              value="Save" />
           </form>
         </Panel>
       </div>
