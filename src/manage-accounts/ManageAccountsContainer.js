@@ -29,8 +29,8 @@ class ManageAccountsContainer extends Component {
       <Dialog
         title="Manage Accounts"
         actions={actions}
-        modal="true"
-        autoScrollBodyContent="true"
+        modal={true}
+        autoScrollBodyContent={true}
         open={this.props.showManageAccounts}
       >
         {/* TODO: Replace Bootstrap classes */}

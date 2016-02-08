@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Collapse, Panel, Input } from 'react-bootstrap';
 import RaisedButton from 'material-ui/lib/raised-button';
+import TextField from 'material-ui/lib/text-field';
+import SelectField from 'material-ui/lib/select-field';
+import MenuItem from 'material-ui/lib/menus/menu-item';
 import AddIcon from 'material-ui/lib/svg-icons/content/add.js';
 import RemoveIcon from 'material-ui/lib/svg-icons/content/remove.js';
 import { addAccount } from '../account/AccountsActions.js';
@@ -33,15 +36,17 @@ class AddAccountContainer extends Component {
   handleAccountNameChange = (e) => {
     this.setState({accountName: e.target.value});
   }
-  handleAccountTypeChange = (e) => {
-    if (e.target.value === 'creditcard') {
+  handleAccountTypeChange = (event, index, value) => {
+    console.log('value: ', value.trim().length);
+
+    if (value === 'creditcard') {
       this.setState({showCredit: true, showBank: false, accountCompany: ''});
-    } else if (e.target.value === 'bank') {
+    } else if (value === 'bank') {
       this.setState({showCredit: false, showBank: true, accountCompany: ''});
     } else {
       this.setState({showCredit: false, showBank: false, accountCompany: ''});
     }
-    this.setState({accountType: e.target.value});
+    this.setState({accountType: value});
   }
   handleAccountCompanyChange = (e) => {
     this.setState({accountCompany: e.target.value});
@@ -87,12 +92,23 @@ class AddAccountContainer extends Component {
         <Panel collapsible expanded={this.state.showAdd}>
           {/* TODO: Add form validation. Don't allow 'select' value to be chosen */}
           <form onSubmit={this.handleSubmit}>
-            <Input type="text" label="Name" placeholder="Enter a name for the account" value={this.state.accountName} onChange={this.handleAccountNameChange} />
-            <Input type="select" label="Type" placeholder="Type" value={this.state.accountType} onChange={this.handleAccountTypeChange} >
-              <option value="">select</option>
-              <option value="bank">Bank</option>
-              <option value="creditcard">Credit Card</option>
-            </Input>
+            <TextField
+              hintText="Name"
+              floatingLabelText="Name"
+              value={this.state.accountName}
+              onChange={this.handleAccountNameChange}
+            />
+            <br />
+            <SelectField
+              floatingLabelText="Type"
+              value={this.state.accountType}
+              onChange={this.handleAccountTypeChange}
+            >
+              <MenuItem value=" " primaryText="select..."/>
+              <MenuItem value="bank" primaryText="Bank"/>
+              <MenuItem value="creditcard" primaryText="Credit Card"/>
+            </SelectField>
+            <br />
 
             <Collapse in={this.state.showBank}>
               <div>
@@ -119,7 +135,7 @@ class AddAccountContainer extends Component {
               label="Save"
               secondary={true}
               disabled={!(this.state.accountName.length > 0 &&
-                          this.state.accountType.length > 0 &&
+                          this.state.accountType.trim().length > 0 &&
                           this.state.accountCompany.length > 0)}
             />
           </form>
