@@ -1,5 +1,6 @@
 export const FETCH_ACCOUNTS = 'FETCH_ACCOUNTS';
 export const ADD_ACCOUNT = 'ADD_ACCOUNT';
+export const ACCOUNT_SELECTED = 'ACCOUNT_SELECTED';
 
 export function fetchAccounts() {
   // PouchDB is loaded externally through a script tag in the browser
@@ -32,5 +33,12 @@ export function addAccount(newAccount) {
   return {
     type: ADD_ACCOUNT,
     payload: newAccount
+  };
+}
+
+export function selectAccount(account) {
+  return {
+    type: ACCOUNT_SELECTED,
+    payload: account
   };
 }

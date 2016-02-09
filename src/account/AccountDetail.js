@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
+import { connect } from 'react-redux';
 import FileUpload from './FileUpload.js';
 import TransactionsList from './TransactionsList.js';
 import styles from './Account.module.css';
@@ -13,29 +13,24 @@ const transDB = new PouchDB('transactions');
 //   console.log('transDB info: ', info);
 // });
 
-const acctsDB = new PouchDB('accounts');
-
-export default class Account extends Component {
+class Account extends Component {
   static propTypes = {
-    params: PropTypes.object.isRequired
+    activeAccount: PropTypes.object,
   }
 
   state = {
-    account: {},
     transactions: []
   }
 
   componentDidMount() {
-    this.importAccount();
     this.importTransactions();
   }
 
   // componentWillReceiveProps here handles scenario of switching between account pages
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps() {
     this.setState({
       transactions: []
     });
-    this.importAccount(nextProps);
     this.importTransactions();
   }
 
@@ -77,7 +72,7 @@ export default class Account extends Component {
       return transDB.find({
         // using $gt: null because "$exists doesn't do what you think it does"
         // http://stackoverflow.com/questions/34366615/creating-a-usable-index-in-pouchdb-with-pouchdb-find
-        selector: { transactionDate: {'$gt': null}, accountId: this.props.params.id },
+        selector: { transactionDate: {'$gt': null}, accountId: this.props.activeAccount._id },
         fields: ['_id', '_rev', 'amount', 'category', 'description', 'transactionDate'],
         sort: [{transactionDate: 'desc'}]
       });
@@ -100,14 +95,6 @@ export default class Account extends Component {
     });
   }
 
-  importAccount = (_props) => {
-    const props = _props ? _props : this.props;
-    acctsDB.get(props.params.id).then((doc) => {
-      this.setState({ account: doc });
-      console.log('currentAccount', doc);
-    });
-  }
-
   findFaIcon(cc) {
     let iconSuffix;
     switch (cc) {
@@ -124,22 +111,21 @@ export default class Account extends Component {
   }
 
   render() {
-    if (this.state.account) {
+    console.log(this.props);
+    if (this.props.activeAccount) {
       let icon = '';
-      if (this.state.account.type === 'creditcard') {
-        icon = this.findFaIcon(this.state.account.company);
+      if (this.props.activeAccount.type === 'creditcard') {
+        icon = this.findFaIcon(this.props.activeAccount.company);
       }
       return (
         <div className="col-xs-9">
           <div className="header">
-            <h3 className={styles.header}>{icon} {this.state.account.name} <br />
-              <small>{this.state.account.company}</small></h3>
+            <h3 className={styles.header}>{icon} {this.props.activeAccount.name} <br />
+              <small>{this.props.activeAccount.company}</small></h3>
           </div>
-          <FileUpload onUpdate={this.onUpdate} accountId={this.props.params.id} />
+          <FileUpload onUpdate={this.onUpdate} accountId={this.props.activeAccount._id} />
           <button onClick={this.handleSave} >Save</button>
-          <p><Link to="/">Back to Home</Link></p>
           <TransactionsList transactions={this.state.transactions} />
-          {/* <Link to="/counter">to Counter</Link> */}
           <button onClick={this.logState}>console.log(state)</button>
         </div>
       );
@@ -147,3 +133,11 @@ export default class Account extends Component {
     return <div>Loading...</div>;
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    activeAccount: state.activeAccount
+  };
+}
+
+export default connect(mapStateToProps)(Account);

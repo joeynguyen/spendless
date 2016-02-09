@@ -1,12 +1,15 @@
 import React from 'react';
+import Sidebar from './Sidebar.js';
+import AccountDetail from '../account/AccountDetail.js';
+import ManageAccountsContainer from '../manage-accounts/ManageAccountsContainer.js';
 // import styles from './Home.module.css';
 
 const Home = () => {
   return (
-    <div className="col-xs-9">
-      <div className="header">
-        <h3>Home page</h3>
-      </div>
+    <div>
+      <Sidebar />
+      <AccountDetail />
+      <ManageAccountsContainer />
     </div>
   );
 };
