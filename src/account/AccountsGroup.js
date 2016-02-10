@@ -2,7 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Panel, ListGroup, ListGroupItem } from 'react-bootstrap';
-import { selectAccount, fetchAccountTransactions } from './AccountsActions.js';
+import { selectAccount } from './AccountsActions.js';
+import { fetchAccountTransactions } from './TransactionsActions.js';
 
 const styles = {
   listGroupItem: {
