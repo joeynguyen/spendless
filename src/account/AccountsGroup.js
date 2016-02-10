@@ -4,11 +4,18 @@ import { bindActionCreators } from 'redux';
 import { Panel, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { selectAccount } from './AccountsActions.js';
 
+const styles = {
+  listGroupItem: {
+    outline: 'none'
+  }
+};
+
 class AccountsGroup extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
     icon: PropTypes.string.isRequired,
     accounts: PropTypes.array.isRequired,
+    activeAccount: PropTypes.object,
     doSelectAccount: PropTypes.func.isRequired,
   }
   render() {
@@ -23,8 +30,16 @@ class AccountsGroup extends Component {
         <ListGroup fill>
           {
             this.props.accounts.map((account) => {
+              const isActive = (this.props.activeAccount !== null && account._id === this.props.activeAccount._id) ? true : false;
               return (
-                <ListGroupItem key={account._id} onClick={() => this.props.doSelectAccount(account)}>{account.name}</ListGroupItem>
+                <ListGroupItem
+                  style={styles.listGroupItem}
+                  active={isActive}
+                  key={account._id}
+                  onClick={() => this.props.doSelectAccount(account)}
+                >
+                  {account.name}
+                </ListGroupItem>
               );
             })
           }
@@ -34,8 +49,14 @@ class AccountsGroup extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    activeAccount: state.activeAccount
+  };
+}
+
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ doSelectAccount: selectAccount }, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(AccountsGroup);
+export default connect(mapStateToProps, mapDispatchToProps)(AccountsGroup);
