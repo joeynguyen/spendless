@@ -66,25 +66,32 @@ class AccountDetails extends Component {
   }
 
   render() {
-    if (this.props.activeAccount) {
-      let icon = '';
-      if (this.props.activeAccount.type === 'creditcard') {
-        icon = this.findFaIcon(this.props.activeAccount.company);
-      }
+    if (!this.props.activeAccount) {
       return (
         <div className="col-xs-9">
           <div className="header">
-            <h3 className={styles.header}>{icon} {this.props.activeAccount.name} <br />
-              <small>{this.props.activeAccount.company}</small></h3>
+            <h3>Accounts Summary</h3>
+            <p>Select an account from the sidebar to see its details.</p>
           </div>
-          <FileUpload onUpdate={this.onUpdate} accountId={this.props.activeAccount._id} />
-          <button onClick={this.handleSave} >Save</button>
-          <TransactionsList />
-          <button onClick={this.logState}>console.log(state)</button>
         </div>
       );
     }
-    return <div>Loading...</div>;
+    let icon = '';
+    if (this.props.activeAccount.type === 'creditcard') {
+      icon = this.findFaIcon(this.props.activeAccount.company);
+    }
+    return (
+      <div className="col-xs-9">
+        <div className="header">
+          <h3 className={styles.header}>{icon} {this.props.activeAccount.name} <br />
+            <small>{this.props.activeAccount.company}</small></h3>
+        </div>
+        <FileUpload onUpdate={this.onUpdate} accountId={this.props.activeAccount._id} />
+        <button onClick={this.handleSave} >Save</button>
+        <TransactionsList />
+        <button onClick={this.logState}>console.log(state)</button>
+      </div>
+    );
   }
 }
 
