@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Panel, ListGroup, ListGroupItem } from 'react-bootstrap';
-import { selectAccount } from './AccountsActions.js';
+import { selectAccount, fetchAccountTransactions } from './AccountsActions.js';
 
 const styles = {
   listGroupItem: {
@@ -17,6 +17,11 @@ class AccountsGroup extends Component {
     accounts: PropTypes.array.isRequired,
     activeAccount: PropTypes.object,
     doSelectAccount: PropTypes.func.isRequired,
+    doFetchAccountTransactions: PropTypes.func.isRequired,
+  }
+  handleAccountSelect(account) {
+    this.props.doSelectAccount(account);
+    this.props.doFetchAccountTransactions(account);
   }
   render() {
     const panelHeader = (
@@ -36,7 +41,7 @@ class AccountsGroup extends Component {
                   style={styles.listGroupItem}
                   active={isActive}
                   key={account._id}
-                  onClick={() => this.props.doSelectAccount(account)}
+                  onClick={() => this.handleAccountSelect(account)}
                 >
                   {account.name}
                 </ListGroupItem>
@@ -56,7 +61,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ doSelectAccount: selectAccount }, dispatch);
+  return bindActionCreators({ doSelectAccount: selectAccount, doFetchAccountTransactions: fetchAccountTransactions }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AccountsGroup);

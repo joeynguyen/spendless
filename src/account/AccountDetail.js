@@ -13,25 +13,14 @@ const transDB = new PouchDB('transactions');
 //   console.log('transDB info: ', info);
 // });
 
-class Account extends Component {
+class AccountDetails extends Component {
   static propTypes = {
     activeAccount: PropTypes.object,
+    accountTransactions: PropTypes.arrayOf(React.PropTypes.object),
   }
 
   state = {
-    transactions: []
-  }
-
-  componentDidMount() {
-    this.importTransactions();
-  }
-
-  // componentWillReceiveProps here handles scenario of switching between account pages
-  componentWillReceiveProps() {
-    this.setState({
-      transactions: []
-    });
-    this.importTransactions();
+  //   transactions: this.props.accountTransactions
   }
 
   logState = () => {
@@ -41,58 +30,24 @@ class Account extends Component {
   // When CSV file is uploaded, append new transactions to current transactions state
   // TODO: Add different color for pending transactions not in database
   onUpdate = (val) => {
-    this.setState({
-      transactions: this.state.transactions.concat(val)
-    });
+    // this.setState({
+    //   transactions: this.state.transactions.concat(val)
+    // });
   }
 
   // Save transactions uploaded from CSV to database
   handleSave = () => {
-    console.log('Trying to submit...');
-    console.log(this.state.transactions);
-    this.state.transactions.forEach(function(transaction) {
-      console.log(transaction);
-      transDB.put(transaction).then(function(result) {
-        console.log('Successfully posted transactions');
-        console.log(result);
-      }).catch(function(err) {
-        console.log(err);
-      });
-    });
-  }
-
-  // Show the current list of transactions by reading them from the database
-  importTransactions = () => {
-    transDB.createIndex({
-      index: {
-        fields: ['transactionDate', 'accountId']
-      }
-    }).then((result) => {
-      // console.log('Successfully created an index!', result);
-      return transDB.find({
-        // using $gt: null because "$exists doesn't do what you think it does"
-        // http://stackoverflow.com/questions/34366615/creating-a-usable-index-in-pouchdb-with-pouchdb-find
-        selector: { transactionDate: {'$gt': null}, accountId: this.props.activeAccount._id },
-        fields: ['_id', '_rev', 'amount', 'category', 'description', 'transactionDate'],
-        sort: [{transactionDate: 'desc'}]
-      });
-    }).then((result) => {
-      const allTransactions = result.docs.map(function(doc) {
-        return {
-          '_id': doc._id,
-          'amount': doc.amount,
-          'category': doc.category,
-          'description': doc.description,
-          'transactionDate': doc.transactionDate,
-        };
-      });
-      console.log('allTransactions: ', allTransactions);
-      this.setState({
-        transactions: allTransactions
-      });
-    }).catch(function(err) {
-      console.log('Failed to create an index!', err);
-    });
+    // console.log('Trying to submit...');
+    // console.log(this.state.transactions);
+    // this.state.transactions.forEach(function(transaction) {
+    //   console.log(transaction);
+    //   transDB.put(transaction).then(function(result) {
+    //     console.log('Successfully posted transactions');
+    //     console.log(result);
+    //   }).catch(function(err) {
+    //     console.log(err);
+    //   });
+    // });
   }
 
   findFaIcon(cc) {
@@ -111,7 +66,6 @@ class Account extends Component {
   }
 
   render() {
-    console.log(this.props);
     if (this.props.activeAccount) {
       let icon = '';
       if (this.props.activeAccount.type === 'creditcard') {
@@ -125,7 +79,7 @@ class Account extends Component {
           </div>
           <FileUpload onUpdate={this.onUpdate} accountId={this.props.activeAccount._id} />
           <button onClick={this.handleSave} >Save</button>
-          <TransactionsList transactions={this.state.transactions} />
+          <TransactionsList />
           <button onClick={this.logState}>console.log(state)</button>
         </div>
       );
@@ -136,8 +90,9 @@ class Account extends Component {
 
 function mapStateToProps(state) {
   return {
-    activeAccount: state.activeAccount
+    activeAccount: state.activeAccount,
+    accountTransactions: state.accountTransactions
   };
 }
 
-export default connect(mapStateToProps)(Account);
+export default connect(mapStateToProps)(AccountDetails);
