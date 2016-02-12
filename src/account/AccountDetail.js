@@ -19,22 +19,6 @@ class AccountDetails extends Component {
     accountTransactions: PropTypes.arrayOf(React.PropTypes.object),
   }
 
-  state = {
-  //   transactions: this.props.accountTransactions
-  }
-
-  logState = () => {
-    console.log(this.state);
-  }
-
-  // When CSV file is uploaded, append new transactions to current transactions state
-  // TODO: Add different color for pending transactions not in database
-  onUpdate = (val) => {
-    // this.setState({
-    //   transactions: this.state.transactions.concat(val)
-    // });
-  }
-
   // Save transactions uploaded from CSV to database
   handleSave = () => {
     // console.log('Trying to submit...');
@@ -89,7 +73,6 @@ class AccountDetails extends Component {
         <FileUpload onUpdate={this.onUpdate} accountId={this.props.activeAccount._id} />
         <button onClick={this.handleSave} >Save</button>
         <TransactionsList />
-        <button onClick={this.logState}>console.log(state)</button>
       </div>
     );
   }

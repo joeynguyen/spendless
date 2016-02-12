@@ -1,12 +1,11 @@
-import { FETCH_ACCOUNT_TRANSACTIONS } from './TransactionsActions.js';
 import { ADD_UPLOADED_TRANSACTIONS } from './TransactionsActions.js';
 
 export default function(state = [], action) {
+  console.log('UploadedTransactionsReducer: action received', action);
+
   switch (action.type) {
-    case FETCH_ACCOUNT_TRANSACTIONS:
-      return action.payload;
     case ADD_UPLOADED_TRANSACTIONS:
-      return state.concat(action.payload);
+      return action.payload;
     default:
       return state;
   }

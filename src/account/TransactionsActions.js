@@ -1,4 +1,6 @@
 export const FETCH_ACCOUNT_TRANSACTIONS = 'FETCH_ACCOUNT_TRANSACTIONS';
+export const ADD_UPLOADED_TRANSACTIONS = 'ADD_UPLOADED_TRANSACTIONS';
+export const SAVE_UPLOADED_TRANSACTIONS = 'SAVE_UPLOADED_TRANSACTIONS';
 
 export function fetchAccountTransactions(activeAccount) {
   // PouchDB is loaded externally through a script tag in the browser
@@ -40,3 +42,16 @@ export function fetchAccountTransactions(activeAccount) {
   };
 }
 
+export function addUploadedTransactions(uploadedTransactions) {
+  return {
+    type: ADD_UPLOADED_TRANSACTIONS,
+    payload: uploadedTransactions
+  };
+}
+
+export function saveUploadedTransactions(uploadedTransactions) {
+  return {
+    type: SAVE_UPLOADED_TRANSACTIONS,
+    payload: uploadedTransactions
+  };
+}
