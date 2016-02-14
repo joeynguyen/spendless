@@ -36,7 +36,14 @@ export function addAccount(newAccount) {
   };
 }
 
-export function selectAccount(account) {
+export function selectAccount(accountId) {
+  const db = new PouchDB('accounts');
+  const account = db.get(accountId).then((doc) => {
+    return doc;
+  }).catch(function(err) {
+    console.log(err);
+  });
+
   return {
     type: ACCOUNT_SELECTED,
     payload: account
