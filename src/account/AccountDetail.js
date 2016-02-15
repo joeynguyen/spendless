@@ -4,8 +4,6 @@ import { bindActionCreators } from 'redux';
 import { IndexLink } from 'react-router';
 import { selectAccount } from './AccountsActions.js';
 import { fetchAccountTransactions } from './TransactionsActions.js';
-import Sidebar from '../app/Sidebar.js';
-import ManageAccountsContainer from '../manage-accounts/ManageAccountsContainer.js';
 import FileUpload from './FileUpload.js';
 import TransactionsList from './TransactionsList.js';
 import styles from './Account.module.css';
@@ -80,8 +78,6 @@ class AccountDetails extends Component {
       icon = this.findFaIcon(this.props.activeAccount.company);
     }
     return (
-      <div>
-      <Sidebar />
       <div className="col-xs-9">
         <p><IndexLink to="/">Back to Home</IndexLink></p>
         <div className="header">
@@ -91,8 +87,6 @@ class AccountDetails extends Component {
         <FileUpload onUpdate={this.onUpdate} accountId={this.props.activeAccount._id} />
         <button onClick={this.handleSave} >Save</button>
         <TransactionsList />
-      </div>
-      <ManageAccountsContainer />
       </div>
     );
   }

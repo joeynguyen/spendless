@@ -4,6 +4,7 @@ import App from './app/App.js';
 import Home from './app/Home.js';
 import AccountDetail from './account/AccountDetail.js';
 
+
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={Home} />
