@@ -1,11 +1,26 @@
-import React from 'react';
-import Overview from '../overview/Overview.js';
-// import styles from './Home.module.css';
+import React, { PropTypes } from 'react';
+import Sidebar from './Sidebar.js';
+import ManageAccountsContainer from '../manage-accounts/ManageAccountsContainer.js';
 
-const Home = () => {
+const Home = ({ children }) => {
   return (
-    <Overview />
+    <div className="row">
+      <Sidebar />
+      {children}
+      {
+      /*
+        (() => {
+          if (process.env.NODE_ENV !== 'production') {
+            const DevTools = require('./DevTools');
+            return <DevTools />;
+          }
+        })()
+      */
+      }
+      <ManageAccountsContainer />
+    </div>
   );
 };
+Home.propTypes = { children: PropTypes.element.isRequired };
 
 export default Home;
