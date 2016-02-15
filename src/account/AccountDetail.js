@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { IndexLink } from 'react-router';
-import { selectAccount } from './AccountsActions.js';
 import { fetchAccountTransactions } from './TransactionsActions.js';
 import FileUpload from './FileUpload.js';
 import TransactionsList from './TransactionsList.js';
@@ -20,21 +19,18 @@ import styles from './Account.module.css';
 class AccountDetails extends Component {
   static propTypes = {
     params: PropTypes.object.isRequired,
-    activeAccount: PropTypes.object,
+    location: PropTypes.object.isRequired,
     accountTransactions: PropTypes.arrayOf(React.PropTypes.object),
-    doSelectAccount: PropTypes.func.isRequired,
     doFetchAccountTransactions: PropTypes.func.isRequired,
   }
 
   componentDidMount() {
-    this.props.doSelectAccount(this.props.params.id);
     this.props.doFetchAccountTransactions(this.props.params.id);
   }
   componentDidUpdate(prevProps) {
     console.log('prevProps.params.id', prevProps.params.id);
     console.log('this.props.params.id', this.props.params.id);
     if (this.props.params.id !== prevProps.params.id) {
-      this.props.doSelectAccount(this.props.params.id);
       this.props.doFetchAccountTransactions(this.props.params.id);
     }
   }
@@ -70,21 +66,22 @@ class AccountDetails extends Component {
   }
 
   render() {
-    if (this.props.activeAccount === null) {
+    const { accountName, accountCompany, accountType } = this.props.location.query;
+    if (accountName === null) {
       return <div>Loading...</div>;
     }
     let icon = '';
-    if (this.props.activeAccount.type === 'creditcard') {
-      icon = this.findFaIcon(this.props.activeAccount.company);
+    if (accountType === 'creditcard') {
+      icon = this.findFaIcon(accountCompany);
     }
     return (
       <div className="col-xs-9">
         <p><IndexLink to="/">Back to Home</IndexLink></p>
         <div className="header">
-          <h3 className={styles.header}>{icon} {this.props.activeAccount.name} <br />
-            <small>{this.props.activeAccount.company}</small></h3>
+          <h3 className={styles.header}>{icon} {accountName} <br />
+            <small>{accountCompany}</small></h3>
         </div>
-        <FileUpload onUpdate={this.onUpdate} accountId={this.props.activeAccount._id} />
+        <FileUpload onUpdate={this.onUpdate} accountId={this.props.params.id} />
         <button onClick={this.handleSave} >Save</button>
         <TransactionsList />
       </div>
@@ -94,13 +91,12 @@ class AccountDetails extends Component {
 
 function mapStateToProps(state) {
   return {
-    activeAccount: state.activeAccount,
     accountTransactions: state.accountTransactions
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ doSelectAccount: selectAccount, doFetchAccountTransactions: fetchAccountTransactions }, dispatch);
+  return bindActionCreators({ doFetchAccountTransactions: fetchAccountTransactions }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AccountDetails);
