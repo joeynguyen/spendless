@@ -44,6 +44,11 @@ class TransactionsList extends Component {
         </thead>
         <tbody>
           {
+            this.props.uploadedTransactions.map(itemData =>
+              <TransactionsItem key={itemData._id} item={itemData} unsaved={true} />
+            )
+          }
+          {
             this.props.accountTransactions.map(itemData =>
               <TransactionsItem key={itemData._id} item={itemData} unsaved={false} />
             )
