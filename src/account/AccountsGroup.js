@@ -15,7 +15,7 @@ const AccountsGroup = ({ title, icon, accounts }) => {
         {
           accounts.map(function(account) {
             return (
-              <LinkContainer to={`account/${account._id}?accountName=${account.name}&accountType=${account.type}&accountCompany=${account.company}`} key={account._id}>
+              <LinkContainer to={{ pathname: `account/${account._id}`, query: { accountName: account.name, accountType: account.type, accountCompany: account.company } }} key={account._id}>
                 <ListGroupItem>{account.name}</ListGroupItem>
               </LinkContainer>
             );
@@ -23,7 +23,7 @@ const AccountsGroup = ({ title, icon, accounts }) => {
         }
       </ListGroup>
     </Panel>
-  );
+);
 };
 AccountsGroup.propTypes = {
   title: PropTypes.string.isRequired,

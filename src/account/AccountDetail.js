@@ -17,7 +17,6 @@ export default class AccountDetails extends Component {
   static propTypes = {
     params: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
-    accountTransactions: PropTypes.arrayOf(React.PropTypes.object),
   }
 
   // Save transactions uploaded from CSV to database
