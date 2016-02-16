@@ -33,7 +33,8 @@ export function fetchAccountTransactions(accountId) {
     console.log('allAccountTransactions: ', allAccountTransactions);
     return allAccountTransactions;
   }).catch(function(err) {
-    console.log('Failed to create an index!', err);
+    console.log('Error while attempting to retrieve transactions!', err);
+    return [];
   });
 
   return {

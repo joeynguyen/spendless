@@ -21,6 +21,9 @@ class TransactionsList extends Component {
       this.props.doFetchAccountTransactions(this.props.accountId);
     }
   }
+  componentWillUnmount() {
+    this.props.doFetchAccountTransactions(null);
+  }
 
   logProps = () => {
     console.log(this.props);

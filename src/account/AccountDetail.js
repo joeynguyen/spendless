@@ -13,7 +13,7 @@ import styles from './Account.module.css';
 //   console.log('transDB info: ', info);
 // });
 
-class AccountDetails extends Component {
+export default class AccountDetails extends Component {
   static propTypes = {
     params: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
@@ -66,12 +66,10 @@ class AccountDetails extends Component {
           <h3 className={styles.header}>{icon} {accountName} <br />
             <small>{accountCompany}</small></h3>
         </div>
-        <FileUpload onUpdate={this.onUpdate} accountId={this.props.params.id} />
+        <FileUpload accountId={this.props.params.id} />
         <button onClick={this.handleSave} >Save</button>
         <TransactionsList accountId={this.props.params.id} />
       </div>
     );
   }
 }
-
-export default AccountDetails;
