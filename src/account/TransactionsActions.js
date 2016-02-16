@@ -1,4 +1,5 @@
 export const FETCH_ACCOUNT_TRANSACTIONS = 'FETCH_ACCOUNT_TRANSACTIONS';
+export const RESET_ACCOUNT_TRANSACTIONS = 'RESET_ACCOUNT_TRANSACTIONS';
 export const ADD_UPLOADED_TRANSACTIONS = 'ADD_UPLOADED_TRANSACTIONS';
 export const SAVE_UPLOADED_TRANSACTIONS = 'SAVE_UPLOADED_TRANSACTIONS';
 
@@ -40,6 +41,13 @@ export function fetchAccountTransactions(accountId) {
   return {
     type: FETCH_ACCOUNT_TRANSACTIONS,
     payload: payload
+  };
+}
+
+export function resetAccountTransactions() {
+  return {
+    type: RESET_ACCOUNT_TRANSACTIONS,
+    payload: []
   };
 }
 

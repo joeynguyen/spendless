@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { fetchAccountTransactions } from './TransactionsActions.js';
+import { fetchAccountTransactions, resetAccountTransactions } from './TransactionsActions.js';
 import TransactionsItem from './TransactionsItem.js';
 
 class TransactionsList extends Component {
@@ -10,6 +10,7 @@ class TransactionsList extends Component {
     accountTransactions: PropTypes.arrayOf(React.PropTypes.object),
     uploadedTransactions: PropTypes.arrayOf(React.PropTypes.object),
     doFetchAccountTransactions: PropTypes.func.isRequired,
+    doResetAccountTransactions: PropTypes.func.isRequired,
   }
   componentDidMount() {
     this.props.doFetchAccountTransactions(this.props.accountId);
@@ -22,7 +23,7 @@ class TransactionsList extends Component {
     }
   }
   componentWillUnmount() {
-    this.props.doFetchAccountTransactions(null);
+    this.props.doResetAccountTransactions();
   }
 
   logProps = () => {
@@ -63,7 +64,10 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ doFetchAccountTransactions: fetchAccountTransactions }, dispatch);
+  return bindActionCreators({
+    doFetchAccountTransactions: fetchAccountTransactions,
+    doResetAccountTransactions: resetAccountTransactions,
+  }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TransactionsList);
