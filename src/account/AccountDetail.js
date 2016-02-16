@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { IndexLink } from 'react-router';
 import FileUpload from './FileUpload.js';
 import TransactionsList from './TransactionsList.js';
+import SaveButton from './SaveButton.js';
 import styles from './Account.module.css';
 
 // PouchDB is loaded externally through a script tag in the browser
@@ -66,7 +67,7 @@ export default class AccountDetails extends Component {
             <small>{accountCompany}</small></h3>
         </div>
         <FileUpload accountId={this.props.params.id} />
-        <button onClick={this.handleSave} >Save</button>
+        <SaveButton />
         <TransactionsList accountId={this.props.params.id} />
       </div>
     );
