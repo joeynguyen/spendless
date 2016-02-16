@@ -7,6 +7,10 @@ import { saveUploadedTransactions, resetUploadedTransactions } from '../account/
 // PouchDB is loaded externally through a script tag in the browser
 const transDB = new PouchDB('transactions');
 
+// transDB.info().then(function(info) {
+//   console.log('transDB info: ', info);
+// });
+
 class SaveButton extends Component {
   static propTypes = {
     uploadedTransactions: PropTypes.arrayOf(React.PropTypes.object),
