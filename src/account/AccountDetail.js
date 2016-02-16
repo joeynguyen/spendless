@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import { IndexLink } from 'react-router';
 import FileUpload from './FileUpload.js';
 import TransactionsList from './TransactionsList.js';
@@ -13,29 +13,9 @@ import styles from './Account.module.css';
 // transDB.info().then(function(info) {
 //   console.log('transDB info: ', info);
 // });
-
-export default class AccountDetails extends Component {
-  static propTypes = {
-    params: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired,
-  }
-
-  // Save transactions uploaded from CSV to database
-  handleSave = () => {
-    // console.log('Trying to submit...');
-    // console.log(this.state.transactions);
-    // this.state.transactions.forEach(function(transaction) {
-    //   console.log(transaction);
-    //   transDB.put(transaction).then(function(result) {
-    //     console.log('Successfully posted transactions');
-    //     console.log(result);
-    //   }).catch(function(err) {
-    //     console.log(err);
-    //   });
-    // });
-  }
-
-  findFaIcon(cc) {
+const AccountDetails = ({ params, location }) => {
+  const { accountName, accountCompany, accountType } = location.query;
+  function findFaIcon(cc) {
     let iconSuffix;
     switch (cc) {
       case 'American Express':
@@ -49,27 +29,27 @@ export default class AccountDetails extends Component {
     }
     return <i className={'fa fa-lg fa-fw fa-' + iconSuffix}></i>;
   }
-
-  render() {
-    const { accountName, accountCompany, accountType } = this.props.location.query;
-    if (accountName === null) {
-      return <div>Loading...</div>;
-    }
-    let icon = '';
-    if (accountType === 'creditcard') {
-      icon = this.findFaIcon(accountCompany);
-    }
-    return (
-      <div className="col-xs-9">
-        <p><IndexLink to="/">Back to Home</IndexLink></p>
-        <div className="header">
-          <h3 className={styles.header}>{icon} {accountName} <br />
-            <small>{accountCompany}</small></h3>
-        </div>
-        <FileUpload accountId={this.props.params.id} />
-        <SaveButton />
-        <TransactionsList accountId={this.props.params.id} />
-      </div>
-    );
+  let icon = '';
+  if (accountType === 'creditcard') {
+    icon = findFaIcon(accountCompany);
   }
-}
+  return (
+    <div className="col-xs-9">
+      <p><IndexLink to="/">Back to Home</IndexLink></p>
+      <div className="header">
+        <h3 className={styles.header}>{icon} {accountName} <br />
+          <small>{accountCompany}</small></h3>
+      </div>
+      <FileUpload accountId={params.id} />
+      <SaveButton />
+      <TransactionsList accountId={params.id} />
+    </div>
+  );
+};
+
+AccountDetails.propTypes  = {
+  params: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
+};
+
+export default AccountDetails;

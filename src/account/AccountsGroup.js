@@ -23,7 +23,7 @@ const AccountsGroup = ({ title, icon, accounts }) => {
         }
       </ListGroup>
     </Panel>
-);
+  );
 };
 AccountsGroup.propTypes = {
   title: PropTypes.string.isRequired,
