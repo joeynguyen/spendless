@@ -1,12 +1,27 @@
 import React, { Component, PropTypes } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { fetchAccountTransactions } from './TransactionsActions.js';
 import TransactionsItem from './TransactionsItem.js';
 
 class TransactionsList extends Component {
   static propTypes = {
+    accountId: PropTypes.string.isRequired,
     accountTransactions: PropTypes.arrayOf(React.PropTypes.object),
     uploadedTransactions: PropTypes.arrayOf(React.PropTypes.object),
+    doFetchAccountTransactions: PropTypes.func.isRequired,
   }
+  componentDidMount() {
+    this.props.doFetchAccountTransactions(this.props.accountId);
+  }
+  componentDidUpdate(prevProps) {
+    console.log('prevProps.accountId', prevProps.accountId);
+    console.log('this.props.accountId', this.props.accountId);
+    if (this.props.accountId !== prevProps.accountId) {
+      this.props.doFetchAccountTransactions(this.props.accountId);
+    }
+  }
+
   logProps = () => {
     console.log(this.props);
   }
@@ -44,4 +59,8 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(TransactionsList);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ doFetchAccountTransactions: fetchAccountTransactions }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TransactionsList);

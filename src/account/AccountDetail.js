@@ -1,8 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { IndexLink } from 'react-router';
-import { fetchAccountTransactions } from './TransactionsActions.js';
 import FileUpload from './FileUpload.js';
 import TransactionsList from './TransactionsList.js';
 import styles from './Account.module.css';
@@ -21,18 +18,6 @@ class AccountDetails extends Component {
     params: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
     accountTransactions: PropTypes.arrayOf(React.PropTypes.object),
-    doFetchAccountTransactions: PropTypes.func.isRequired,
-  }
-
-  componentDidMount() {
-    this.props.doFetchAccountTransactions(this.props.params.id);
-  }
-  componentDidUpdate(prevProps) {
-    console.log('prevProps.params.id', prevProps.params.id);
-    console.log('this.props.params.id', this.props.params.id);
-    if (this.props.params.id !== prevProps.params.id) {
-      this.props.doFetchAccountTransactions(this.props.params.id);
-    }
   }
 
   // Save transactions uploaded from CSV to database
@@ -83,20 +68,10 @@ class AccountDetails extends Component {
         </div>
         <FileUpload onUpdate={this.onUpdate} accountId={this.props.params.id} />
         <button onClick={this.handleSave} >Save</button>
-        <TransactionsList />
+        <TransactionsList accountId={this.props.params.id} />
       </div>
     );
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    accountTransactions: state.accountTransactions
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ doFetchAccountTransactions: fetchAccountTransactions }, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(AccountDetails);
+export default AccountDetails;
