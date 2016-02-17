@@ -40,6 +40,7 @@ class SaveButton extends Component {
         onClick={this.handleSave}
         bsStyle="primary"
         bsSize="small"
+        disabled={(this.props.uploadedTransactions.length === 0)}
       >
         Save
       </Button>
