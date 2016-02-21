@@ -12,7 +12,7 @@ class TransactionsList extends Component {
     doFetchAccountTransactions: PropTypes.func.isRequired,
     doResetAccountTransactions: PropTypes.func.isRequired,
   }
-  componentDidMount() {
+  componentWillMount() {
     this.props.doFetchAccountTransactions(this.props.accountId);
   }
   componentDidUpdate(prevProps) {
