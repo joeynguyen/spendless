@@ -19,7 +19,6 @@ export function fetchAccounts() {
         'company': row.doc.company,
       };
     });
-    console.log('allAccounts: ', allAccounts);
   }).catch(function(err) {
     console.log(err);
   });

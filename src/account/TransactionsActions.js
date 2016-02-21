@@ -32,7 +32,7 @@ export function fetchAccountTransactions(accountId) {
         'transactionDate': doc.transactionDate,
       };
     });
-    console.log('allAccountTransactions: ', allAccountTransactions);
+    // console.log('allAccountTransactions: ', allAccountTransactions);
     return allAccountTransactions;
   }).catch(function(err) {
     console.log('Error while attempting to retrieve transactions!', err);

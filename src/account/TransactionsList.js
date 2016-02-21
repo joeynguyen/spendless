@@ -16,8 +16,8 @@ class TransactionsList extends Component {
     this.props.doFetchAccountTransactions(this.props.accountId);
   }
   componentDidUpdate(prevProps) {
-    console.log('prevProps.accountId', prevProps.accountId);
-    console.log('this.props.accountId', this.props.accountId);
+    // console.log('prevProps.accountId', prevProps.accountId);
+    // console.log('this.props.accountId', this.props.accountId);
     if (this.props.accountId !== prevProps.accountId) {
       this.props.doFetchAccountTransactions(this.props.accountId);
     }
@@ -30,7 +30,7 @@ class TransactionsList extends Component {
     console.log(this.props);
   }
   render() {
-    console.log('accountTransactions', this.props.accountTransactions);
+    // console.log('accountTransactions', this.props.accountTransactions);
     return (
       <div>
       <table className="table table-bordered table-hover">
