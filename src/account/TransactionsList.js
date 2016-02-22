@@ -26,9 +26,6 @@ class TransactionsList extends Component {
     this.props.doResetAccountTransactions();
   }
 
-  logProps = () => {
-    console.log(this.props);
-  }
   render() {
     // console.log('accountTransactions', this.props.accountTransactions);
     return (
@@ -55,7 +52,6 @@ class TransactionsList extends Component {
           }
         </tbody>
       </table>
-      <button onClick={this.logProps}>console.log(props)</button>
       </div>
     );
   }
