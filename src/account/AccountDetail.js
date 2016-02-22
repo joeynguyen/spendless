@@ -1,14 +1,39 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 import { IndexLink } from 'react-router';
 import FileUpload from './FileUpload.js';
 import TransactionsList from './TransactionsList.js';
 import SaveButton from './SaveButton.js';
 import styles from './Account.module.css';
 
-export default class AccountDetails extends Component {
+class AccountDetails extends Component {
   static propTypes = {
     params: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
+    route: PropTypes.object.isRequired,
+    uploadedTransactions: PropTypes.arrayOf(React.PropTypes.object),
+  }
+  static contextTypes = {
+    router: React.PropTypes.object
+  }
+  componentDidMount() {
+    this.context.router.setRouteLeaveHook(this.props.route, this.routerWillLeave);
+  }
+  componentDidUpdate(prevProps) {
+    console.log('AAAAA', this.context.router);
+    console.log('BBBBB', this);
+    if (this.props.params.id !== prevProps.params.id) {
+      this.context.router.setRouteLeaveHook(this.props.route, this.routerWillLeave);
+    }
+  }
+  routerWillLeave = (nextLocation) => {
+    console.log('nextLocation', nextLocation);
+    console.log('this.props', this.props);
+    // return false to prevent a transition w/o prompting the user,
+    // or return a string to allow the user to decide:
+    if (this.props.uploadedTransactions.length > 0) {
+      return 'Your work is not saved! Are you sure you want to leave?';
+    }
   }
 
   findFaIcon(cc) {
@@ -46,3 +71,11 @@ export default class AccountDetails extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    uploadedTransactions: state.uploadedTransactions,
+  };
+}
+
+export default connect(mapStateToProps)(AccountDetails);
