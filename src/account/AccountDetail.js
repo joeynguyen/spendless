@@ -9,6 +9,7 @@ import UnsavedWarning from './UnsavedWarning.js';
 import styles from './Account.module.css';
 import { resetUploadedTransactions } from './TransactionsActions.js';
 import { showUnsavedWarning } from './AccountsActions.js';
+import { storeNextRoutePath } from '../app/AppActions.js';
 
 class AccountDetails extends Component {
   static propTypes = {
@@ -19,20 +20,19 @@ class AccountDetails extends Component {
     doResetUploadedTransactions: PropTypes.func.isRequired,
     doShowUnsavedWarning: PropTypes.func.isRequired,
     unsavedWarningVisible: PropTypes.bool.isRequired,
+    doStoreNextRoutePath: PropTypes.func.isRequired,
+    nextRoutePath: PropTypes.string.isRequired
   }
   static contextTypes = {
     router: React.PropTypes.object
-  }
-  state = {
-    nextPath: null
   }
   componentDidMount() {
     this.context.router.setRouteLeaveHook(this.props.route, this.routerWillLeave);
   }
   componentDidUpdate(prevProps) {
-    console.log('this.context.router', this.context.router);
-    console.log('this', this);
-    console.log('prevProps', prevProps);
+    // console.log('this.context.router', this.context.router);
+    // console.log('this', this);
+    // console.log('prevProps', prevProps);
     if (this.props.params.id !== prevProps.params.id) {
       console.log('settingRouteLeaveHook!');
       this.context.router.setRouteLeaveHook(this.props.route, this.routerWillLeave);
@@ -43,12 +43,12 @@ class AccountDetails extends Component {
     console.log('this.props', this.props);
     // return false to prevent a transition w/o prompting the user,
     // or return a string to allow the user to decide:
-    if (this.props.uploadedTransactions.length > 0 && this.state.nextPath === null) {
-      // need to check for nextPath as null or else this will run again when
+    if (this.props.uploadedTransactions.length > 0 && this.props.nextRoutePath === '') {
+      // need to check for nextRoutePath as null or else this will run again when
       // handleAlertLeave() is called and returns false for changing routes with
-      // this.context.router.push(this.state.nextPath);
+      // this.context.router.push(this.props.nextRoutePath);
       this.props.doShowUnsavedWarning(true);
-      this.setState({ nextPath: nextLocation.pathname + nextLocation.search });
+      this.props.doStoreNextRoutePath(nextLocation.pathname + nextLocation.search);
       return false;
     }
   }
@@ -75,12 +75,12 @@ class AccountDetails extends Component {
   // }
   handleAlertStay = () => {
     this.props.doShowUnsavedWarning(false);
-    this.setState({ nextPath: null });
+    this.props.doStoreNextRoutePath('');
   }
   handleAlertLeave = () => {
     this.props.doResetUploadedTransactions();
-    this.context.router.push(this.state.nextPath);
-    this.setState({ nextPath: null });
+    this.context.router.push(this.props.nextRoutePath);
+    this.props.doStoreNextRoutePath('');
     this.props.doShowUnsavedWarning(false);
   }
 
@@ -111,6 +111,7 @@ function mapStateToProps(state) {
   return {
     uploadedTransactions: state.uploadedTransactions,
     unsavedWarningVisible: state.unsavedWarningVisible,
+    nextRoutePath: state.nextRoutePath,
   };
 }
 
@@ -118,6 +119,7 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     doResetUploadedTransactions: resetUploadedTransactions,
     doShowUnsavedWarning: showUnsavedWarning,
+    doStoreNextRoutePath: storeNextRoutePath
   }, dispatch);
 }
 
