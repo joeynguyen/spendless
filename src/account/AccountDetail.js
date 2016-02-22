@@ -1,37 +1,56 @@
 import React, { Component, PropTypes } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { IndexLink } from 'react-router';
 import FileUpload from './FileUpload.js';
 import TransactionsList from './TransactionsList.js';
+import SaveButton from './SaveButton.js';
+import UnsavedWarning from './UnsavedWarning.js';
 import styles from './Account.module.css';
-
-// PouchDB is loaded externally through a script tag in the browser
-// PouchDB.debug.enable('pouchdb:find')
-
-const transDB = new PouchDB('transactions');
-
-// transDB.info().then(function(info) {
-//   console.log('transDB info: ', info);
-// });
+import { resetUploadedTransactions } from './TransactionsActions.js';
+import { showUnsavedWarning } from './AccountsActions.js';
+import { storeNextRoutePath } from '../app/AppActions.js';
 
 class AccountDetails extends Component {
   static propTypes = {
-    activeAccount: PropTypes.object,
-    accountTransactions: PropTypes.arrayOf(React.PropTypes.object),
+    params: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
+    route: PropTypes.object.isRequired,
+    uploadedTransactions: PropTypes.arrayOf(React.PropTypes.object),
+    doResetUploadedTransactions: PropTypes.func.isRequired,
+    doShowUnsavedWarning: PropTypes.func.isRequired,
+    unsavedWarningVisible: PropTypes.bool.isRequired,
+    doStoreNextRoutePath: PropTypes.func.isRequired,
+    nextRoutePath: PropTypes.string.isRequired
   }
-
-  // Save transactions uploaded from CSV to database
-  handleSave = () => {
-    // console.log('Trying to submit...');
-    // console.log(this.state.transactions);
-    // this.state.transactions.forEach(function(transaction) {
-    //   console.log(transaction);
-    //   transDB.put(transaction).then(function(result) {
-    //     console.log('Successfully posted transactions');
-    //     console.log(result);
-    //   }).catch(function(err) {
-    //     console.log(err);
-    //   });
-    // });
+  static contextTypes = {
+    router: React.PropTypes.object
+  }
+  componentDidMount() {
+    this.context.router.setRouteLeaveHook(this.props.route, this.routerWillLeave);
+  }
+  componentDidUpdate(prevProps) {
+    // console.log('this.context.router', this.context.router);
+    // console.log('this', this);
+    // console.log('prevProps', prevProps);
+    if (this.props.params.id !== prevProps.params.id) {
+      console.log('settingRouteLeaveHook!');
+      this.context.router.setRouteLeaveHook(this.props.route, this.routerWillLeave);
+    }
+  }
+  routerWillLeave = (nextLocation) => {
+    console.log('nextLocation', nextLocation);
+    console.log('this.props', this.props);
+    // return false to prevent a transition w/o prompting the user,
+    // or return a string to allow the user to decide:
+    if (this.props.uploadedTransactions.length > 0 && this.props.nextRoutePath === '') {
+      // need to check for nextRoutePath as null or else this will run again when
+      // handleAlertLeave() is called and returns false for changing routes with
+      // this.context.router.push(this.props.nextRoutePath);
+      this.props.doShowUnsavedWarning(true);
+      this.props.doStoreNextRoutePath(nextLocation.pathname + nextLocation.search);
+      return false;
+    }
   }
 
   findFaIcon(cc) {
@@ -49,30 +68,40 @@ class AccountDetails extends Component {
     return <i className={'fa fa-lg fa-fw fa-' + iconSuffix}></i>;
   }
 
+  // logProps = () => {
+  //   console.log('this.props', this.props);
+  //   console.log('this.context.router', this.context.router);
+  //   console.log('this.state', this.state);
+  // }
+  handleAlertStay = () => {
+    this.props.doShowUnsavedWarning(false);
+    this.props.doStoreNextRoutePath('');
+  }
+  handleAlertLeave = () => {
+    this.props.doResetUploadedTransactions();
+    this.context.router.push(this.props.nextRoutePath);
+    this.props.doStoreNextRoutePath('');
+    this.props.doShowUnsavedWarning(false);
+  }
+
   render() {
-    if (!this.props.activeAccount) {
-      return (
-        <div className="col-xs-9">
-          <div className="header">
-            <h3>Accounts Summary</h3>
-            <p>Select an account from the sidebar to see its details.</p>
-          </div>
-        </div>
-      );
-    }
+    const { accountName, accountCompany, accountType } = this.props.location.query;
     let icon = '';
-    if (this.props.activeAccount.type === 'creditcard') {
-      icon = this.findFaIcon(this.props.activeAccount.company);
+    if (accountType === 'creditcard') {
+      icon = this.findFaIcon(accountCompany);
     }
     return (
       <div className="col-xs-9">
+        <p><IndexLink to="/">Back to Home</IndexLink></p>
         <div className="header">
-          <h3 className={styles.header}>{icon} {this.props.activeAccount.name} <br />
-            <small>{this.props.activeAccount.company}</small></h3>
+          <h3 className={styles.header}>{icon} {accountName} <br />
+            <small>{accountCompany}</small></h3>
         </div>
-        <FileUpload onUpdate={this.onUpdate} accountId={this.props.activeAccount._id} />
-        <button onClick={this.handleSave} >Save</button>
-        <TransactionsList />
+        <FileUpload accountId={this.props.params.id} />
+        <SaveButton />
+        <TransactionsList accountId={this.props.params.id} />
+        {/* <button onClick={this.logProps}>console.log(props)</button> */}
+        <UnsavedWarning show={this.props.unsavedWarningVisible} localHandleAlertStay={this.handleAlertStay} localHandleAlertLeave={this.handleAlertLeave} />
       </div>
     );
   }
@@ -80,9 +109,18 @@ class AccountDetails extends Component {
 
 function mapStateToProps(state) {
   return {
-    activeAccount: state.activeAccount,
-    accountTransactions: state.accountTransactions
+    uploadedTransactions: state.uploadedTransactions,
+    unsavedWarningVisible: state.unsavedWarningVisible,
+    nextRoutePath: state.nextRoutePath,
   };
 }
 
-export default connect(mapStateToProps)(AccountDetails);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    doResetUploadedTransactions: resetUploadedTransactions,
+    doShowUnsavedWarning: showUnsavedWarning,
+    doStoreNextRoutePath: storeNextRoutePath
+  }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AccountDetails);

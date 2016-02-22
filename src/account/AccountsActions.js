@@ -1,6 +1,7 @@
 export const FETCH_ACCOUNTS = 'FETCH_ACCOUNTS';
 export const ADD_ACCOUNT = 'ADD_ACCOUNT';
 export const ACCOUNT_SELECTED = 'ACCOUNT_SELECTED';
+export const SHOW_UNSAVED_WARNING = 'SHOW_UNSAVED_WARNING';
 
 export function fetchAccounts() {
   // PouchDB is loaded externally through a script tag in the browser
@@ -19,7 +20,6 @@ export function fetchAccounts() {
         'company': row.doc.company,
       };
     });
-    console.log('allAccounts: ', allAccounts);
   }).catch(function(err) {
     console.log(err);
   });
@@ -36,9 +36,23 @@ export function addAccount(newAccount) {
   };
 }
 
-export function selectAccount(account) {
+export function selectAccount(accountId) {
+  const db = new PouchDB('accounts');
+  const account = db.get(accountId).then((doc) => {
+    return doc;
+  }).catch(function(err) {
+    console.log(err);
+  });
+
   return {
     type: ACCOUNT_SELECTED,
     payload: account
+  };
+}
+
+export function showUnsavedWarning(show) {
+  return {
+    type: SHOW_UNSAVED_WARNING,
+    filter: show
   };
 }

@@ -10,7 +10,7 @@ class AccountContainer extends Component {
     accounts: PropTypes.array
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.doFetchAccounts();
   }
 

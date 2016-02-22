@@ -1,8 +1,10 @@
 export const FETCH_ACCOUNT_TRANSACTIONS = 'FETCH_ACCOUNT_TRANSACTIONS';
+export const RESET_ACCOUNT_TRANSACTIONS = 'RESET_ACCOUNT_TRANSACTIONS';
 export const ADD_UPLOADED_TRANSACTIONS = 'ADD_UPLOADED_TRANSACTIONS';
 export const SAVE_UPLOADED_TRANSACTIONS = 'SAVE_UPLOADED_TRANSACTIONS';
+export const RESET_UPLOADED_TRANSACTIONS = 'RESET_UPLOADED_TRANSACTIONS';
 
-export function fetchAccountTransactions(activeAccount) {
+export function fetchAccountTransactions(accountId) {
   // PouchDB is loaded externally through a script tag in the browser
   const transDB = new PouchDB('transactions');
 
@@ -16,7 +18,7 @@ export function fetchAccountTransactions(activeAccount) {
     return transDB.find({
       // using $gt: null because "$exists doesn't do what you think it does"
       // http://stackoverflow.com/questions/34366615/creating-a-usable-index-in-pouchdb-with-pouchdb-find
-      selector: { transactionDate: {'$gt': null}, accountId: activeAccount._id },
+      selector: { transactionDate: {'$gt': null}, accountId: accountId },
       fields: ['_id', '_rev', 'amount', 'category', 'description', 'transactionDate'],
       sort: [{transactionDate: 'desc'}]
     });
@@ -30,15 +32,23 @@ export function fetchAccountTransactions(activeAccount) {
         'transactionDate': doc.transactionDate,
       };
     });
-    console.log('allAccountTransactions: ', allAccountTransactions);
+    // console.log('allAccountTransactions: ', allAccountTransactions);
     return allAccountTransactions;
   }).catch(function(err) {
-    console.log('Failed to create an index!', err);
+    console.log('Error while attempting to retrieve transactions!', err);
+    return [];
   });
 
   return {
     type: FETCH_ACCOUNT_TRANSACTIONS,
     payload: payload
+  };
+}
+
+export function resetAccountTransactions() {
+  return {
+    type: RESET_ACCOUNT_TRANSACTIONS,
+    payload: []
   };
 }
 
@@ -53,5 +63,12 @@ export function saveUploadedTransactions(uploadedTransactions) {
   return {
     type: SAVE_UPLOADED_TRANSACTIONS,
     payload: uploadedTransactions
+  };
+}
+
+export function resetUploadedTransactions() {
+  return {
+    type: RESET_UPLOADED_TRANSACTIONS,
+    payload: []
   };
 }

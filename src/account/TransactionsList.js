@@ -1,17 +1,33 @@
 import React, { Component, PropTypes } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { fetchAccountTransactions, resetAccountTransactions } from './TransactionsActions.js';
 import TransactionsItem from './TransactionsItem.js';
 
 class TransactionsList extends Component {
   static propTypes = {
+    accountId: PropTypes.string.isRequired,
     accountTransactions: PropTypes.arrayOf(React.PropTypes.object),
     uploadedTransactions: PropTypes.arrayOf(React.PropTypes.object),
+    doFetchAccountTransactions: PropTypes.func.isRequired,
+    doResetAccountTransactions: PropTypes.func.isRequired,
   }
-  logProps = () => {
-    console.log(this.props);
+  componentWillMount() {
+    this.props.doFetchAccountTransactions(this.props.accountId);
   }
+  componentDidUpdate(prevProps) {
+    // console.log('prevProps.accountId', prevProps.accountId);
+    // console.log('this.props.accountId', this.props.accountId);
+    if (this.props.accountId !== prevProps.accountId) {
+      this.props.doFetchAccountTransactions(this.props.accountId);
+    }
+  }
+  componentWillUnmount() {
+    this.props.doResetAccountTransactions();
+  }
+
   render() {
-    console.log('accountTransactions', this.props.accountTransactions);
+    // console.log('accountTransactions', this.props.accountTransactions);
     return (
       <div>
       <table className="table table-bordered table-hover">
@@ -25,13 +41,17 @@ class TransactionsList extends Component {
         </thead>
         <tbody>
           {
+            this.props.uploadedTransactions.map(itemData =>
+              <TransactionsItem key={itemData._id} item={itemData} unsaved={true} />
+            )
+          }
+          {
             this.props.accountTransactions.map(itemData =>
               <TransactionsItem key={itemData._id} item={itemData} unsaved={false} />
             )
           }
         </tbody>
       </table>
-      <button onClick={this.logProps}>console.log(props)</button>
       </div>
     );
   }
@@ -44,4 +64,11 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(TransactionsList);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    doFetchAccountTransactions: fetchAccountTransactions,
+    doResetAccountTransactions: resetAccountTransactions,
+  }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TransactionsList);
