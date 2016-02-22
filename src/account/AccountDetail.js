@@ -2,12 +2,13 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { IndexLink } from 'react-router';
-import { Modal, Alert, Button } from 'react-bootstrap';
 import FileUpload from './FileUpload.js';
 import TransactionsList from './TransactionsList.js';
 import SaveButton from './SaveButton.js';
+import UnsavedWarning from './UnsavedWarning.js';
 import styles from './Account.module.css';
-import { resetUploadedTransactions } from '../account/TransactionsActions.js';
+import { resetUploadedTransactions } from './TransactionsActions.js';
+import { showUnsavedWarning } from './AccountsActions.js';
 
 class AccountDetails extends Component {
   static propTypes = {
@@ -16,12 +17,13 @@ class AccountDetails extends Component {
     route: PropTypes.object.isRequired,
     uploadedTransactions: PropTypes.arrayOf(React.PropTypes.object),
     doResetUploadedTransactions: PropTypes.func.isRequired,
+    doShowUnsavedWarning: PropTypes.func.isRequired,
+    unsavedWarningVisible: PropTypes.bool.isRequired,
   }
   static contextTypes = {
     router: React.PropTypes.object
   }
   state = {
-    showModal: false,
     nextPath: null
   }
   componentDidMount() {
@@ -45,8 +47,7 @@ class AccountDetails extends Component {
       // need to check for nextPath as null or else this will run again when
       // handleAlertLeave() is called and returns false for changing routes with
       // this.context.router.push(this.state.nextPath);
-
-      this.openAlert();
+      this.props.doShowUnsavedWarning(true);
       this.setState({ nextPath: nextLocation.pathname + nextLocation.search });
       return false;
     }
@@ -67,26 +68,20 @@ class AccountDetails extends Component {
     return <i className={'fa fa-lg fa-fw fa-' + iconSuffix}></i>;
   }
 
-  logProps = () => {
-    console.log('this.props', this.props);
-    console.log('this.context.router', this.context.router);
-    console.log('this.state', this.state);
-  }
+  // logProps = () => {
+  //   console.log('this.props', this.props);
+  //   console.log('this.context.router', this.context.router);
+  //   console.log('this.state', this.state);
+  // }
   handleAlertStay = () => {
-    this.closeAlert();
+    this.props.doShowUnsavedWarning(false);
     this.setState({ nextPath: null });
   }
   handleAlertLeave = () => {
     this.props.doResetUploadedTransactions();
     this.context.router.push(this.state.nextPath);
     this.setState({ nextPath: null });
-    this.closeAlert();
-  }
-  closeAlert = () => {
-    this.setState({ showModal: false });
-  }
-  openAlert = () => {
-    this.setState({ showModal: true });
+    this.props.doShowUnsavedWarning(false);
   }
 
   render() {
@@ -105,18 +100,8 @@ class AccountDetails extends Component {
         <FileUpload accountId={this.props.params.id} />
         <SaveButton />
         <TransactionsList accountId={this.props.params.id} />
-        <button onClick={this.logProps}>console.log(props)</button>
-        <Modal show={this.state.showModal} backdrop="static">
-          <Alert bsStyle="danger" style={{marginBottom: 0}}>
-            <h4>You have unsaved changes!</h4>
-            <p>Navigating away from this page without clicking the Save button will cause your unsaved changes to be discarded. Are you sure you want to leave this page?</p>
-            <p>
-              <Button onClick={this.handleAlertStay}>No, stay on this page</Button>
-              <span> or </span>
-              <Button onClick={this.handleAlertLeave}>Yes, discard changes</Button>
-            </p>
-          </Alert>
-        </Modal>
+        {/* <button onClick={this.logProps}>console.log(props)</button> */}
+        <UnsavedWarning show={this.props.unsavedWarningVisible} localHandleAlertStay={this.handleAlertStay} localHandleAlertLeave={this.handleAlertLeave} />
       </div>
     );
   }
@@ -125,12 +110,14 @@ class AccountDetails extends Component {
 function mapStateToProps(state) {
   return {
     uploadedTransactions: state.uploadedTransactions,
+    unsavedWarningVisible: state.unsavedWarningVisible,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    doResetUploadedTransactions: resetUploadedTransactions
+    doResetUploadedTransactions: resetUploadedTransactions,
+    doShowUnsavedWarning: showUnsavedWarning,
   }, dispatch);
 }
 
