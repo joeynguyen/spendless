@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { reduxForm } from 'redux-form';
 import { Button, ButtonInput, Collapse, Panel, Input } from 'react-bootstrap';
 import { addAccount } from '../account/AccountsActions.js';
 
@@ -9,7 +9,9 @@ const db = new PouchDB('accounts');
 
 class AddAccountContainer extends Component {
   static propTypes = {
-    doAddAccount: PropTypes.func.isRequired
+    doAddAccount: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    fields: PropTypes.object.isRequired,
   }
   state = {
     accountName: '',
@@ -22,29 +24,22 @@ class AddAccountContainer extends Component {
   toggleAddAccount = () => {
     this.setState({showAdd: !this.state.showAdd, accountName: '', accountType: '', accountCompany: ''});
   }
-  handleAccountNameChange = (e) => {
-    this.setState({accountName: e.target.value});
-  }
-  handleAccountTypeChange = (e) => {
-    if (e.target.value === 'creditcard') {
-      this.setState({showCredit: true, showBank: false, accountCompany: ''});
-    } else if (e.target.value === 'bank') {
-      this.setState({showCredit: false, showBank: true, accountCompany: ''});
-    } else {
-      this.setState({showCredit: false, showBank: false, accountCompany: ''});
-    }
-    this.setState({accountType: e.target.value});
-  }
-  handleAccountCompanyChange = (e) => {
-    this.setState({accountCompany: e.target.value});
-  }
-  handleSubmit = (e) => {
+  // handleAccountTypeChange = (e) => {
+  //   if (e.target.value === 'creditcard') {
+  //     this.setState({accountCompany: ''});
+  //   } else if (e.target.value === 'bank') {
+  //     this.setState({accountCompany: ''});
+  //   } else {
+  //     this.setState({ accountCompany: ''});
+  //   }
+  // }
+  onSubmit = (e) => {
     e.preventDefault();
     const newAccount = {
       '_id': new Date().toISOString(),
-      'name': this.state.accountName,
-      'type': this.state.accountType,
-      'company': this.state.accountCompany,
+      'name': this.props.fields.accountName.value,
+      'type': this.props.fields.accountType.value,
+      'company': this.props.fields.accountCompany.value,
     };
     const self = this;
     console.log(newAccount);
@@ -64,6 +59,11 @@ class AddAccountContainer extends Component {
     });
   }
   render() {
+    // handleSubmit and fields are from redux-form
+    // const title = this.props.fields.title;
+    // const handleSubmit = this.props.handleSubmit;
+    const { fields: { accountName, accountType, accountCompany }, handleSubmit } = this.props;
+
     let addButton = { style: 'primary', class: 'fa fa-plus', text: ' Add Account' };
     if (this.state.showAdd) {
       addButton = { style: 'danger', class: '', text: 'Cancel' };
@@ -75,23 +75,50 @@ class AddAccountContainer extends Component {
           {addButton.text}
         </Button>
         <Panel collapsible expanded={this.state.showAdd}>
-          {/* TODO: Add form validation. Don't allow 'select' value to be chosen */}
-          <form onSubmit={this.handleSubmit}>
-            <Input type="text" label="Name" placeholder="Enter a name for the account" value={this.state.accountName} onChange={this.handleAccountNameChange} />
-            <Input type="select" label="Type" placeholder="Type" value={this.state.accountType} onChange={this.handleAccountTypeChange} >
-              <option value="">select</option>
+          <form onSubmit={handleSubmit(this.onSubmit)}>
+            <Input
+              type="text"
+              label="Name"
+              placeholder="Enter a name for the account"
+              bsStyle={accountName.touched && accountName.invalid ? 'error' : ''}
+              help={accountName.touched ? accountName.error : ''}
+              {...accountName}
+            />
+            <Input
+              type="select"
+              label="Type"
+              placeholder="Type"
+              bsStyle={accountType.touched && accountType.invalid ? 'error' : ''}
+              help={accountType.touched ? accountType.error : ''}
+              {...accountType}
+            >
+              <option value="">select...</option>
               <option value="bank">Bank</option>
               <option value="creditcard">Credit Card</option>
             </Input>
 
-            <Collapse in={this.state.showBank}>
+            <Collapse in={accountType.value === 'bank'}>
               <div>
-                <Input type="text" label="Name of Institution" placeholder="Enter the name of the financial institution" value={this.state.accountCompany} onChange={this.handleAccountCompanyChange } />
+                <Input
+                  type="text"
+                  label="Name of Institution"
+                  placeholder="Enter the name of the financial institution"
+                  bsStyle={accountCompany.touched && accountCompany.invalid ? 'error' : ''}
+                  help={accountCompany.touched ? accountCompany.error : ''}
+                  {...accountCompany}
+                />
               </div>
             </Collapse>
-            <Collapse in={this.state.showCredit}>
+            <Collapse in={accountType.value === 'creditcard'}>
               <div>
-                <Input type="select" label="Credit Card Company" placeholder="Credit Card Company" value={this.state.accountCompany} onChange={this.handleAccountCompanyChange}>
+                <Input
+                  type="select"
+                  label="Credit Card Company"
+                  placeholder="Credit Card Company"
+                  bsStyle={accountCompany.touched && accountCompany.invalid ? 'error' : ''}
+                  help={accountCompany.touched ? accountCompany.error : ''}
+                  {...accountCompany}
+                >
                   <option value="">select</option>
                   <option value="Visa">Visa</option>
                   <option value="MasterCard">Mastercard</option>
@@ -107,9 +134,6 @@ class AddAccountContainer extends Component {
             <ButtonInput
               bsStyle="primary"
               type="submit"
-              disabled={!(this.state.accountName.length > 0 &&
-                          this.state.accountType.length > 0 &&
-                          this.state.accountCompany.length > 0)}
               value="Add" />
           </form>
         </Panel>
@@ -118,8 +142,31 @@ class AddAccountContainer extends Component {
   }
 }
 
+function validateForm(values) {
+  const errors = {};
+
+  if (!values.accountName) {
+    errors.accountName = 'Enter an account name';
+  }
+  if (!values.accountType) {
+    errors.accountType = 'Enter an account type';
+  }
+  if (!values.accountCompany) {
+    errors.accountCompany = 'Enter the name of the financial institution';
+  }
+
+  return errors;
+}
+
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ doAddAccount: addAccount }, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(AddAccountContainer);
+// connect: 1st argument is mapStateToProps, 2nd state is mapDispatchToProps
+// reduxForm: 1st argument is form config, 2nd is mapStateToProps, 3rd state is mapDispatchToProps
+
+export default reduxForm({
+  form: 'AddAccountForm',
+  fields: ['accountName', 'accountType', 'accountCompany'],
+  validate: validateForm
+}, null, mapDispatchToProps)(AddAccountContainer);

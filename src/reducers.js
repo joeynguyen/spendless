@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form';
 import AccountsReducer from './account/AccountsReducer.js';
 import AccountTransactionsReducer from './account/AccountTransactionsReducer.js';
 import UploadedTransactionsReducer from './account/UploadedTransactionsReducer.js';
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   showManageAccounts: ShowManageAccountsReducer,
   unsavedWarningVisible: ShowUnsavedWarningReducer,
   nextRoutePath: NextRoutePathReducer,
+  form: formReducer,
 });
 
 export default rootReducer;
