@@ -35,8 +35,7 @@ class AddAccountContainer extends Component {
   //     this.setState({ accountCompany: ''});
   //   }
   // }
-  localHandleSubmit = (e) => {
-    e.preventDefault();
+  localHandleSubmit = () => {
     const newAccount = {
       '_id': new Date().toISOString(),
       'name': this.props.fields.accountName.value,
@@ -48,12 +47,9 @@ class AddAccountContainer extends Component {
 
     // Save account to DB
     db.put(newAccount).then(function(result) {
-      console.log('Successfully added new account');
-      console.log(result);
+      console.log('Successfully added new account', result);
       // Update app state
       self.props.doAddAccount(newAccount);
-      // Reset input fields to blank
-      self.setState({showAdd: false, showBank: false, showCredit: false, accountName: '', accountType: '', accountCompany: ''});
       // TODO: Add success message after successful submit
     }).catch(function(err) {
       console.log(err);
@@ -96,6 +92,9 @@ class AddAccountContainer extends Component {
               bsStyle={accountType.touched && accountType.invalid ? 'error' : null}
               help={accountType.touched ? accountType.error : ''}
               {...accountType}
+              value={accountType.value || ''}  // required syntax for reset form to work
+                                               // undefined will not change value to first empty option
+                                               // when resetting
             >
               <option value="">select...</option>
               <option value="bank">Bank</option>
@@ -123,8 +122,11 @@ class AddAccountContainer extends Component {
                   bsStyle={accountCompany.touched && accountCompany.invalid ? 'error' : null}
                   help={accountCompany.touched ? accountCompany.error : ''}
                   {...accountCompany}
+                  value={accountCompany.value || ''} // required syntax for reset form to work
+                                                     // undefined will not change value to first empty option
+                                                     // when resetting
                 >
-                  <option value="">select</option>
+                  <option value="">select...</option>
                   <option value="Visa">Visa</option>
                   <option value="MasterCard">Mastercard</option>
                   <option value="American Express">American Express</option>
