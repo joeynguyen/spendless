@@ -11,6 +11,7 @@ class AddAccountContainer extends Component {
   static propTypes = {
     doAddAccount: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
+    resetForm: PropTypes.func.isRequired,
     fields: PropTypes.object.isRequired,
   }
   state = {
@@ -22,7 +23,7 @@ class AddAccountContainer extends Component {
     showCredit: false
   }
   toggleAddAccount = () => {
-    this.setState({showAdd: !this.state.showAdd, accountName: '', accountType: '', accountCompany: ''});
+    this.setState({showAdd: !this.state.showAdd});
   }
   // handleAccountTypeChange = (e) => {
   //   if (e.target.value === 'creditcard') {
@@ -33,7 +34,7 @@ class AddAccountContainer extends Component {
   //     this.setState({ accountCompany: ''});
   //   }
   // }
-  onSubmit = (e) => {
+  localHandleSubmit = (e) => {
     e.preventDefault();
     const newAccount = {
       '_id': new Date().toISOString(),
@@ -62,25 +63,29 @@ class AddAccountContainer extends Component {
     // handleSubmit and fields are from redux-form
     // const title = this.props.fields.title;
     // const handleSubmit = this.props.handleSubmit;
-    const { fields: { accountName, accountType, accountCompany }, handleSubmit } = this.props;
+    const { fields: { accountName, accountType, accountCompany }, handleSubmit, resetForm } = this.props;
 
+    const addButtonClick = () => {
+      this.toggleAddAccount();
+      resetForm();
+    };
     let addButton = { style: 'primary', class: 'fa fa-plus', text: ' Add Account' };
     if (this.state.showAdd) {
       addButton = { style: 'danger', class: '', text: 'Cancel' };
     }
     return (
       <div>
-        <Button onClick={this.toggleAddAccount} bsStyle={addButton.style} bsSize="large" block>
+        <Button onClick={addButtonClick} bsStyle={addButton.style} bsSize="large" block>
           <i className={addButton.class}></i>
           {addButton.text}
         </Button>
         <Panel collapsible expanded={this.state.showAdd}>
-          <form onSubmit={handleSubmit(this.onSubmit)}>
+          <form onSubmit={handleSubmit(this.localHandleSubmit)}>
             <Input
               type="text"
               label="Name"
               placeholder="Enter a name for the account"
-              bsStyle={accountName.touched && accountName.invalid ? 'error' : ''}
+              bsStyle={accountName.touched && accountName.invalid ? 'error' : null}
               help={accountName.touched ? accountName.error : ''}
               {...accountName}
             />
@@ -88,7 +93,7 @@ class AddAccountContainer extends Component {
               type="select"
               label="Type"
               placeholder="Type"
-              bsStyle={accountType.touched && accountType.invalid ? 'error' : ''}
+              bsStyle={accountType.touched && accountType.invalid ? 'error' : null}
               help={accountType.touched ? accountType.error : ''}
               {...accountType}
             >
@@ -103,7 +108,7 @@ class AddAccountContainer extends Component {
                   type="text"
                   label="Name of Institution"
                   placeholder="Enter the name of the financial institution"
-                  bsStyle={accountCompany.touched && accountCompany.invalid ? 'error' : ''}
+                  bsStyle={accountCompany.touched && accountCompany.invalid ? 'error' : null}
                   help={accountCompany.touched ? accountCompany.error : ''}
                   {...accountCompany}
                 />
@@ -115,7 +120,7 @@ class AddAccountContainer extends Component {
                   type="select"
                   label="Credit Card Company"
                   placeholder="Credit Card Company"
-                  bsStyle={accountCompany.touched && accountCompany.invalid ? 'error' : ''}
+                  bsStyle={accountCompany.touched && accountCompany.invalid ? 'error' : null}
                   help={accountCompany.touched ? accountCompany.error : ''}
                   {...accountCompany}
                 >
@@ -168,5 +173,10 @@ function mapDispatchToProps(dispatch) {
 export default reduxForm({
   form: 'AddAccountForm',
   fields: ['accountName', 'accountType', 'accountCompany'],
+  initialValues: {
+    accountName: '',
+    accountType: '',
+    accountCompany: '',
+  },
   validate: validateForm
 }, null, mapDispatchToProps)(AddAccountContainer);
