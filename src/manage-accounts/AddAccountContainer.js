@@ -13,6 +13,7 @@ class AddAccountContainer extends Component {
     handleSubmit: PropTypes.func.isRequired,
     resetForm: PropTypes.func.isRequired,
     fields: PropTypes.object.isRequired,
+    submitting: PropTypes.bool.isRequired,
   }
   state = {
     accountName: '',
@@ -60,10 +61,9 @@ class AddAccountContainer extends Component {
     });
   }
   render() {
-    // handleSubmit and fields are from redux-form
-    // const title = this.props.fields.title;
-    // const handleSubmit = this.props.handleSubmit;
-    const { fields: { accountName, accountType, accountCompany }, handleSubmit, resetForm } = this.props;
+    // handleSubmit, resetForm, and fields are from redux-form
+    // const accountName = this.props.fields.accountName;
+    const { fields: { accountName, accountType, accountCompany }, handleSubmit, resetForm, submitting } = this.props;
 
     const addButtonClick = () => {
       this.toggleAddAccount();
@@ -139,7 +139,8 @@ class AddAccountContainer extends Component {
             <ButtonInput
               bsStyle="primary"
               type="submit"
-              value="Add" />
+              disabled={submitting}
+              value="Save" />
           </form>
         </Panel>
       </div>
