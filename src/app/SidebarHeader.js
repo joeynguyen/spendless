@@ -18,7 +18,7 @@ class SidebarHeader extends Component {
           <OverlayTrigger placement="top" overlay={editTooltip}>
             <i
               id="accounts-edit"
-              onClick={() => this.props.doToggleManageAccounts(true)}
+              onClick={() => this.props.doToggleManageAccounts()}
               className={styles['accounts-edit'] + ' fa fa-fw fa-edit'}>
             </i>
           </OverlayTrigger>

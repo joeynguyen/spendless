@@ -1,10 +1,9 @@
-export const SET_WINDOW_VISIBILITY = 'SET_WINDOW_VISIBILITY';
+export const TOGGLE_MANAGE_ACCOUNTS = 'TOGGLE_MANAGE_ACCOUNTS';
 export const TOGGLE_ADD_ACCOUNT = 'TOGGLE_ADD_ACCOUNT';
 
-export function toggleManageAccounts(visibility) {
+export function toggleManageAccounts() {
   return {
-    type: SET_WINDOW_VISIBILITY,
-    filter: visibility
+    type: TOGGLE_MANAGE_ACCOUNTS
   };
 }
 

@@ -12,7 +12,7 @@ class ManageAccountsContainer extends Component {
   }
   render() {
     return (
-      <Modal show={this.props.showManageAccounts} onHide={() => this.props.doToggleManageAccounts(false)}>
+      <Modal show={this.props.showManageAccounts} onHide={() => this.props.doToggleManageAccounts()}>
         <Modal.Header closeButton>
           <Modal.Title>Manage Accounts</Modal.Title>
         </Modal.Header>
@@ -37,7 +37,7 @@ class ManageAccountsContainer extends Component {
 
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={() => this.props.doToggleManageAccounts(false)}>Close</Button>
+          <Button onClick={() => this.props.doToggleManageAccounts()}>Close</Button>
         </Modal.Footer>
       </Modal>
     );
