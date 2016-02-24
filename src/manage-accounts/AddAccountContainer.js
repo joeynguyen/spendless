@@ -3,33 +3,22 @@ import { bindActionCreators } from 'redux';
 import { reduxForm } from 'redux-form';
 import { Button, ButtonInput, Collapse, Panel, Input } from 'react-bootstrap';
 import { addAccount } from '../account/AccountsActions.js';
+import { toggleAddAccount } from './ManageAccountsActions.js';
+
 
 // PouchDB is loaded externally through a script tag in the browser
 const db = new PouchDB('accounts');
 
 class AddAccountContainer extends Component {
   static propTypes = {
+    addAccountVisible: PropTypes.bool.isRequired,
     doAddAccount: PropTypes.func.isRequired,
+    doToggleAddAccount: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     resetForm: PropTypes.func.isRequired,
     fields: PropTypes.object.isRequired,
     submitting: PropTypes.bool.isRequired,
   }
-  state = {
-    showBank: false,
-  }
-  toggleAddAccount = () => {
-    this.setState({showAdd: !this.state.showAdd});
-  }
-  // handleAccountTypeChange = (e) => {
-  //   if (e.target.value === 'creditcard') {
-  //     this.setState({accountCompany: ''});
-  //   } else if (e.target.value === 'bank') {
-  //     this.setState({accountCompany: ''});
-  //   } else {
-  //     this.setState({ accountCompany: ''});
-  //   }
-  // }
   localHandleSubmit = () => {
     const newAccount = {
       '_id': new Date().toISOString(),
@@ -57,11 +46,11 @@ class AddAccountContainer extends Component {
     const { fields: { accountName, accountType, accountCompany }, handleSubmit, resetForm, submitting } = this.props;
 
     const addButtonClick = () => {
-      this.toggleAddAccount();
+      this.props.doToggleAddAccount();
       resetForm();
     };
     let addButton = { style: 'primary', class: 'fa fa-plus', text: ' Add Account' };
-    if (this.state.showAdd) {
+    if (this.props.addAccountVisible) {
       addButton = { style: 'danger', class: '', text: 'Cancel' };
     }
     return (
@@ -70,7 +59,7 @@ class AddAccountContainer extends Component {
           <i className={addButton.class}></i>
           {addButton.text}
         </Button>
-        <Panel collapsible expanded={this.state.showAdd}>
+        <Panel collapsible expanded={this.props.addAccountVisible}>
           <form onSubmit={handleSubmit(this.localHandleSubmit)}>
             <Input
               type="text"
@@ -161,8 +150,17 @@ function validateForm(values) {
   return errors;
 }
 
+function mapStateToProps(state) {
+  return {
+    addAccountVisible: state.addAccountVisible,
+  };
+}
+
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ doAddAccount: addAccount }, dispatch);
+  return bindActionCreators({
+    doAddAccount: addAccount,
+    doToggleAddAccount: toggleAddAccount,
+  }, dispatch);
 }
 
 // connect: 1st argument is mapStateToProps, 2nd state is mapDispatchToProps
@@ -177,4 +175,4 @@ export default reduxForm({
     accountCompany: '',
   },
   validate: validateForm
-}, null, mapDispatchToProps)(AddAccountContainer);
+}, mapStateToProps, mapDispatchToProps)(AddAccountContainer);
