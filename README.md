@@ -2,7 +2,7 @@
 Personal finance tracker built using Electron, React, Redux, PouchDB, and React-Bootstrap. Compiled with Babel and bundled with Webpack.
 
 (How it currently looks. Still lots of work to be done...)
-[<img src="assets/screenshot.jog" />]
+[<img src="assets/screenshot.jpg" />]
 
 ## Install
 
