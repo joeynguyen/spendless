@@ -16,12 +16,7 @@ class AddAccountContainer extends Component {
     submitting: PropTypes.bool.isRequired,
   }
   state = {
-    accountName: '',
-    accountType: '',
-    accountCompany: '',
-    showAdd: false,
     showBank: false,
-    showCredit: false
   }
   toggleAddAccount = () => {
     this.setState({showAdd: !this.state.showAdd});

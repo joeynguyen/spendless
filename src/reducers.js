@@ -17,11 +17,16 @@ const rootReducer = combineReducers({
   nextRoutePath: NextRoutePathReducer,
   form: formReducer.plugin({
     AddAccountForm: (state, action) => {
-      console.log('actionType', action.type);
       switch (action.type) {
         case ADD_ACCOUNT:
-          console.log('returning undefined');
           return undefined;
+        case 'redux-form/CHANGE':
+          if (action.field === 'accountType') {
+            // reset accountCompany value when changing accountType value
+            // since both bank and credit cards use accountCompany
+            return {...state, accountCompany: ''};
+          }
+          return state;
         default:
           return state;
       }
