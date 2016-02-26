@@ -6,7 +6,9 @@ import { IndexLinkContainer, LinkContainer } from 'react-router-bootstrap';
 
 const styles = {
   logo: {
-    height: 80,
+    height: 70,
+    paddingTop: 10,
+    paddingBottom: 10,
   },
   logoImg: {
     display: 'inline-block'
@@ -19,7 +21,7 @@ const styles = {
     WebkitFontSmoothing: 'antialiased',
   },
   navbar: {
-    marginTop: 15
+    marginTop: 10
   }
 };
 
