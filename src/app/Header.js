@@ -43,8 +43,8 @@ const Header = () => {
           <IndexLinkContainer to="/">
             <NavItem>Overview</NavItem>
           </IndexLinkContainer>
-          <LinkContainer to="/placeholder">
-            <NavItem>Placeholder</NavItem>
+          <LinkContainer to="/help">
+            <NavItem>Help</NavItem>
           </LinkContainer>
         </Nav>
       </Navbar.Collapse>
