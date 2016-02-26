@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { IndexLink } from 'react-router';
 import FileUpload from './FileUpload.js';
 import TransactionsList from './TransactionsList.js';
 import SaveButton from './SaveButton.js';
@@ -92,7 +91,6 @@ class AccountDetails extends Component {
     }
     return (
       <div className="col-xs-9">
-        <p><IndexLink to="/">Back to Home</IndexLink></p>
         <div className="header">
           <h3 className={styles.header}>{icon} {accountName} <br />
             <small>{accountCompany}</small></h3>
