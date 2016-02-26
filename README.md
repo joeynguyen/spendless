@@ -1,5 +1,8 @@
 # spendLess
-Personal finance tracker built using Electron, React, Redux, PouchDB, and React-Bootstrap. Compiled with Babel and bundled with Webpack.
+Personal finance tool built for the following goals:
+* help users track their monthly income and expenses
+* promote awareness of spending behavior and current financial health
+* encourage users to spend less than they earn so they're able to put more money towards investments and savings, enabling them to retire comfortably and possibly even early.
 
 (How it currently looks. Still lots of work to be done...)
 <img src="assets/screenshot.jpg" />
