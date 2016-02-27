@@ -1,5 +1,5 @@
 # spendLess
-Personal finance tool built for the following goals:
+Personal finance tool built with the following goals:
 * help users track their monthly income and expenses
 * promote awareness of spending behavior and current financial health
 * encourage users to spend less than they earn so they're able to put more money towards investments and savings, enabling them to retire comfortably and possibly even early.
