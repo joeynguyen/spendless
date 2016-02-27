@@ -7,12 +7,12 @@ import AddAccountContainer from '../manage-accounts/AddAccountContainer.js';
 
 class ManageAccountsContainer extends Component {
   static propTypes = {
-    showManageAccounts: PropTypes.bool.isRequired,
+    manageAccountsVisible: PropTypes.bool.isRequired,
     doToggleManageAccounts: PropTypes.func.isRequired
   }
   render() {
     return (
-      <Modal show={this.props.showManageAccounts} onHide={() => this.props.doToggleManageAccounts()}>
+      <Modal show={this.props.manageAccountsVisible} onHide={() => this.props.doToggleManageAccounts()}>
         <Modal.Header closeButton>
           <Modal.Title>Manage Accounts</Modal.Title>
         </Modal.Header>
@@ -46,7 +46,7 @@ class ManageAccountsContainer extends Component {
 
 function mapStateToProps(state) {
   return {
-    showManageAccounts: state.showManageAccounts
+    manageAccountsVisible: state.manageAccountsVisible
   };
 }
 

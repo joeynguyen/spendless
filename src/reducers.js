@@ -3,7 +3,7 @@ import { reducer as formReducer } from 'redux-form';
 import AccountsReducer from './account/AccountsReducer.js';
 import AccountTransactionsReducer from './account/AccountTransactionsReducer.js';
 import UploadedTransactionsReducer from './account/UploadedTransactionsReducer.js';
-import ShowManageAccountsReducer from './manage-accounts/ShowManageAccountsReducer.js';
+import ManageAccountsVisibleReducer from './manage-accounts/ManageAccountsVisibleReducer.js';
 import UnsavedWarningVisibleReducer from './account/UnsavedWarningVisibleReducer.js';
 import NextRoutePathReducer from './app/NextRoutePathReducer.js';
 import AddAccountVisibleReducer from './manage-accounts/AddAccountVisibleReducer.js';
@@ -13,7 +13,7 @@ const rootReducer = combineReducers({
   accounts: AccountsReducer,
   accountTransactions: AccountTransactionsReducer,
   uploadedTransactions: UploadedTransactionsReducer,
-  showManageAccounts: ShowManageAccountsReducer,
+  manageAccountsVisible: ManageAccountsVisibleReducer,
   unsavedWarningVisible: UnsavedWarningVisibleReducer,
   addAccountVisible: AddAccountVisibleReducer,
   nextRoutePath: NextRoutePathReducer,
