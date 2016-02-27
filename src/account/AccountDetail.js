@@ -7,7 +7,7 @@ import SaveButton from './SaveButton.js';
 import UnsavedWarning from './UnsavedWarning.js';
 import styles from './Account.module.css';
 import { resetUploadedTransactions } from './TransactionsActions.js';
-import { showUnsavedWarning } from './AccountsActions.js';
+import { toggleUnsavedWarning } from './AccountsActions.js';
 import { storeNextRoutePath } from '../app/AppActions.js';
 
 class AccountDetails extends Component {
@@ -17,7 +17,7 @@ class AccountDetails extends Component {
     route: PropTypes.object.isRequired,
     uploadedTransactions: PropTypes.arrayOf(React.PropTypes.object),
     doResetUploadedTransactions: PropTypes.func.isRequired,
-    doShowUnsavedWarning: PropTypes.func.isRequired,
+    doToggleUnsavedWarning: PropTypes.func.isRequired,
     unsavedWarningVisible: PropTypes.bool.isRequired,
     doStoreNextRoutePath: PropTypes.func.isRequired,
     nextRoutePath: PropTypes.string.isRequired
@@ -46,7 +46,7 @@ class AccountDetails extends Component {
       // need to check for nextRoutePath as null or else this will run again when
       // handleAlertLeave() is called and returns false for changing routes with
       // this.context.router.push(this.props.nextRoutePath);
-      this.props.doShowUnsavedWarning(true);
+      this.props.doToggleUnsavedWarning();
       this.props.doStoreNextRoutePath(nextLocation.pathname + nextLocation.search);
       return false;
     }
@@ -73,14 +73,14 @@ class AccountDetails extends Component {
   //   console.log('this.state', this.state);
   // }
   handleAlertStay = () => {
-    this.props.doShowUnsavedWarning(false);
+    this.props.doToggleUnsavedWarning();
     this.props.doStoreNextRoutePath('');
   }
   handleAlertLeave = () => {
     this.props.doResetUploadedTransactions();
     this.context.router.push(this.props.nextRoutePath);
     this.props.doStoreNextRoutePath('');
-    this.props.doShowUnsavedWarning(false);
+    this.props.doToggleUnsavedWarning();
   }
 
   render() {
@@ -116,7 +116,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     doResetUploadedTransactions: resetUploadedTransactions,
-    doShowUnsavedWarning: showUnsavedWarning,
+    doToggleUnsavedWarning: toggleUnsavedWarning,
     doStoreNextRoutePath: storeNextRoutePath
   }, dispatch);
 }

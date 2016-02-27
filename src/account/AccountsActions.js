@@ -1,7 +1,7 @@
 export const FETCH_ACCOUNTS = 'FETCH_ACCOUNTS';
 export const ADD_ACCOUNT = 'ADD_ACCOUNT';
 export const ACCOUNT_SELECTED = 'ACCOUNT_SELECTED';
-export const SHOW_UNSAVED_WARNING = 'SHOW_UNSAVED_WARNING';
+export const TOGGLE_UNSAVED_WARNING = 'TOGGLE_UNSAVED_WARNING';
 
 export function fetchAccounts() {
   // PouchDB is loaded externally through a script tag in the browser
@@ -50,9 +50,8 @@ export function selectAccount(accountId) {
   };
 }
 
-export function showUnsavedWarning(show) {
+export function toggleUnsavedWarning() {
   return {
-    type: SHOW_UNSAVED_WARNING,
-    filter: show
+    type: TOGGLE_UNSAVED_WARNING
   };
 }
