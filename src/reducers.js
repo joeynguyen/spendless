@@ -4,7 +4,7 @@ import AccountsReducer from './account/AccountsReducer.js';
 import AccountTransactionsReducer from './account/AccountTransactionsReducer.js';
 import UploadedTransactionsReducer from './account/UploadedTransactionsReducer.js';
 import ShowManageAccountsReducer from './manage-accounts/ShowManageAccountsReducer.js';
-import ShowUnsavedWarningReducer from './account/ShowUnsavedWarningReducer.js';
+import UnsavedWarningVisibleReducer from './account/UnsavedWarningVisibleReducer.js';
 import NextRoutePathReducer from './app/NextRoutePathReducer.js';
 import AddAccountVisibleReducer from './manage-accounts/AddAccountVisibleReducer.js';
 import { ADD_ACCOUNT } from './account/AccountsActions.js';
@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
   accountTransactions: AccountTransactionsReducer,
   uploadedTransactions: UploadedTransactionsReducer,
   showManageAccounts: ShowManageAccountsReducer,
-  unsavedWarningVisible: ShowUnsavedWarningReducer,
+  unsavedWarningVisible: UnsavedWarningVisibleReducer,
   addAccountVisible: AddAccountVisibleReducer,
   nextRoutePath: NextRoutePathReducer,
   form: formReducer.plugin({
