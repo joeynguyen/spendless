@@ -5,7 +5,6 @@ import { Button, ButtonInput, Collapse, Panel, Input } from 'react-bootstrap';
 import { addAccount } from '../account/AccountsActions.js';
 import { toggleAddAccount } from './ManageAccountsActions.js';
 
-
 // PouchDB is loaded externally through a script tag in the browser
 const db = new PouchDB('accounts');
 
@@ -165,6 +164,7 @@ function mapDispatchToProps(dispatch) {
 
 // connect: 1st argument is mapStateToProps, 2nd state is mapDispatchToProps
 // reduxForm: 1st argument is form config, 2nd is mapStateToProps, 3rd state is mapDispatchToProps
+// initialValues required for resetForm
 
 export default reduxForm({
   form: 'AddAccountForm',
