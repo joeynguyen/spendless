@@ -16,7 +16,14 @@ module.exports = {
         exclude: /node_modules/
       },
     ],
+
+    // noParse: /(lie|pouchdb)\.js$/
+    noParse: /lie\.js$|\/leveldown\//
+
   },
+  entry: [
+    path.normalize('pouchdb/dist/pouchdb')
+  ],
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
@@ -30,7 +37,7 @@ module.exports = {
   externals: [
     // put your node 3rd party libraries which can't be built with webpack here (mysql, mongodb, and so on..)
     {
-      'pouchdb': 'PouchDB'
+      // 'pouchdb': 'PouchDB'
     }
   ]
 };

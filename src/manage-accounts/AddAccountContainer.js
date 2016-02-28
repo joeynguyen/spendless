@@ -1,3 +1,6 @@
+// import PouchDB from 'pouchdb';
+// import * as PouchDB from 'pouchdb';
+// import PouchdbFind from 'pouchdb-find';
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { reduxForm } from 'redux-form';
@@ -5,7 +8,8 @@ import { Button, ButtonInput, Collapse, Panel, Input } from 'react-bootstrap';
 import { addAccount } from '../account/AccountsActions.js';
 import { toggleAddAccount } from './ManageAccountsActions.js';
 
-// PouchDB is loaded externally through a script tag in the browser
+// PouchDB.plugin(PouchdbFind);
+// PouchDB.plugin(require('pouchdb-find'));
 const db = new PouchDB('accounts');
 
 class AddAccountContainer extends Component {

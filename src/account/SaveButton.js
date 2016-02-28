@@ -1,10 +1,14 @@
+// import PouchDB from 'pouchdb';
+// import PouchdbFind from 'pouchdb-find';
+// import * as PouchDB from 'pouchdb';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Button } from 'react-bootstrap';
 import { saveUploadedTransactions, resetUploadedTransactions } from '../account/TransactionsActions.js';
 
-// PouchDB is loaded externally through a script tag in the browser
+// PouchDB.plugin(PouchdbFind);
+// PouchDB.plugin(require('pouchdb-find'));
 const transDB = new PouchDB('transactions');
 
 // transDB.info().then(function(info) {

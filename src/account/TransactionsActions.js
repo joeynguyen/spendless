@@ -1,20 +1,24 @@
+// import PouchDB from 'pouchdb';
+// import PouchdbFind from 'pouchdb-find';
 export const FETCH_ACCOUNT_TRANSACTIONS = 'FETCH_ACCOUNT_TRANSACTIONS';
 export const RESET_ACCOUNT_TRANSACTIONS = 'RESET_ACCOUNT_TRANSACTIONS';
 export const ADD_UPLOADED_TRANSACTIONS = 'ADD_UPLOADED_TRANSACTIONS';
 export const SAVE_UPLOADED_TRANSACTIONS = 'SAVE_UPLOADED_TRANSACTIONS';
 export const RESET_UPLOADED_TRANSACTIONS = 'RESET_UPLOADED_TRANSACTIONS';
 
+// PouchDB.plugin(PouchdbFind);
+// PouchDB.plugin(require('pouchdb-find'));
+
 export function fetchAccountTransactions(accountId) {
-  // PouchDB is loaded externally through a script tag in the browser
   const transDB = new PouchDB('transactions');
   const remoteCouch = 'http://127.0.0.1:5984/transactions';
   const syncDB = () => {
     transDB.sync(remoteCouch, {live: false})
       .on('complete', function(success) {
-        console.log('PouchDB-Server sync success :', success);
+        console.log('pouchdb-server sync success :', success);
       })
       .on('error', function(err) {
-        console.log('PouchDB-Server sync error :', err);
+        console.log('pouchdb-server sync error :', err);
       });
   };
   syncDB();
