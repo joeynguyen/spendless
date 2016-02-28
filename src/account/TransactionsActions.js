@@ -7,9 +7,20 @@ export const RESET_UPLOADED_TRANSACTIONS = 'RESET_UPLOADED_TRANSACTIONS';
 export function fetchAccountTransactions(accountId) {
   // PouchDB is loaded externally through a script tag in the browser
   const transDB = new PouchDB('transactions');
+  const remoteCouch = 'http://127.0.0.1:5984/transactions';
+  const syncDB = () => {
+    transDB.sync(remoteCouch, {live: false})
+      .on('complete', function(success) {
+        console.log('PouchDB-Server sync success :', success);
+      })
+      .on('error', function(err) {
+        console.log('PouchDB-Server sync error :', err);
+      });
+  };
+  syncDB();
 
   // Show the current list of accounts by reading them from the database
-  const payload = transDB.createIndex({
+  const accountTransactions = transDB.createIndex({
     index: {
       fields: ['transactionDate', 'accountId']
     }
@@ -41,7 +52,7 @@ export function fetchAccountTransactions(accountId) {
 
   return {
     type: FETCH_ACCOUNT_TRANSACTIONS,
-    payload: payload
+    payload: accountTransactions
   };
 }
 
