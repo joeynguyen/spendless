@@ -11,3 +11,8 @@ node_modules/
 *.swo
 .DS_Store
 .sass-cache
+
+# PouchDB files
+log.txt
+/data/
+config.json
