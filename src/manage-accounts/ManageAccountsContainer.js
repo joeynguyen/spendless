@@ -4,13 +4,17 @@ import { bindActionCreators } from 'redux';
 import { Modal, Button } from 'react-bootstrap';
 import { toggleManageAccounts } from '../manage-accounts/ManageAccountsActions.js';
 import AddAccountContainer from '../manage-accounts/AddAccountContainer.js';
+import AccountsList from './AccountsList.js';
 
 class ManageAccountsContainer extends Component {
   static propTypes = {
     manageAccountsVisible: PropTypes.bool.isRequired,
-    doToggleManageAccounts: PropTypes.func.isRequired
+    doToggleManageAccounts: PropTypes.func.isRequired,
+    accounts: PropTypes.array.isRequired,
   }
   render() {
+    const ccAccounts = this.props.accounts.filter(account => account.type === 'creditcard');
+    const bankAccounts = this.props.accounts.filter(account => account.type === 'bank');
     return (
       <Modal show={this.props.manageAccountsVisible} onHide={() => this.props.doToggleManageAccounts()}>
         <Modal.Header closeButton>
@@ -23,14 +27,14 @@ class ManageAccountsContainer extends Component {
               <hr />
               {/* Use state to display 'No accounts' */}
               {/* TODO: Show all accounts in this window */}
-              <p>No accounts found.</p>
+              <AccountsList accounts={this.props.accounts} />
             </div>
 
             <div className="col-xs-4">
               <ul>
                 {/* TODO: Dynamically show number of accounts */}
-                <li>1 Checking accounts</li>
-                <li>2 Credit card accounts</li>
+                <li>{bankAccounts.length} Bank accounts</li>
+                <li>{ccAccounts.length} Credit card accounts</li>
               </ul>
             </div>
           </div>
@@ -46,7 +50,8 @@ class ManageAccountsContainer extends Component {
 
 function mapStateToProps(state) {
   return {
-    manageAccountsVisible: state.manageAccountsVisible
+    manageAccountsVisible: state.manageAccountsVisible,
+    accounts: state.accounts,
   };
 }
 
