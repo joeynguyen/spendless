@@ -1,18 +1,15 @@
 import React, { PropTypes } from 'react';
-import { Well } from 'react-bootstrap';
+import AccountsListItem from './AccountsListItem.js';
 
 const AccountsList = ({ accounts }) => {
   return (
     <div>
     {
-    accounts.map(function(account) {
-      return (
-        <Well bsSize="small" key={account._id}>
-          <h4>{account.name}</h4>
-          <p>{account.type === 'bank' ? 'Bank' : 'Credit Card'} - {account.company}</p>
-        </Well>
-      );
-    })
+      accounts.map(function(account) {
+        return (
+          <AccountsListItem account={account} key={account._id} />
+        );
+      })
     }
     </div>
   );
