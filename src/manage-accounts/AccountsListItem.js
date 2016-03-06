@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { Well, Collapse } from 'react-bootstrap';
+import {reduxForm} from 'redux-form';
+import { Well, Collapse, Input } from 'react-bootstrap';
 // import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
 // import { fetchAccounts } from './AccountsActions.js';
@@ -7,13 +8,15 @@ import { Well, Collapse } from 'react-bootstrap';
 class AccountsListItem extends Component {
   static propTypes = {
     account: PropTypes.object.isRequired,
+    fields: PropTypes.object.isRequired,
   }
   state = {
     settingsVisible: false,
   }
   toggleSettings = () => {
     this.setState({ settingsVisible: !this.state.settingsVisible });
-    console.log(this.state.settingsVisible);
+    console.log('settingsVisible', this.state.settingsVisible);
+    console.log('props', this.props);
   }
 
   render() {
@@ -22,6 +25,7 @@ class AccountsListItem extends Component {
         cursor: 'pointer',
       }
     };
+    const { fields: { accountName, accountType, accountCompany },  } = this.props;
 
     return (
       <Well bsSize="small" key={this.props.account._id}>
@@ -30,9 +34,50 @@ class AccountsListItem extends Component {
         <p>{this.props.account.type === 'bank' ? 'Bank' : 'Credit Card'} - {this.props.account.company}</p>
         <Collapse in={this.state.settingsVisible}>
           <div>
-            <hr />
-            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-            Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+            <form>
+              <Input
+                type="text"
+                label="Name"
+                {...accountName}
+              />
+              <Input
+                type="select"
+                label="Type"
+                {...accountType}
+              >
+                <option value="">select...</option>
+                <option value="bank">Bank</option>
+                <option value="creditcard">Credit Card</option>
+              </Input>
+              <Collapse in={accountType.value === 'bank'}>
+                <div>
+                  <Input
+                    type="text"
+                    label="Name of Institution"
+                    {...accountCompany}
+                  />
+                </div>
+              </Collapse>
+              <Collapse in={accountType.value === 'creditcard'}>
+                <div>
+                  <Input
+                    type="select"
+                    label="Credit Card Company"
+                    {...accountCompany}
+                  >
+                    <option value="">select...</option>
+                    <option value="Visa">Visa</option>
+                    <option value="MasterCard">Mastercard</option>
+                    <option value="American Express">American Express</option>
+                    <option value="Discover">Discover</option>
+                    <option value="Diners Club">Diners Club</option>
+                    <option value="JCB">JCB</option>
+                    <option value="Other">Other</option>
+                  </Input>
+                </div>
+              </Collapse>
+
+            </form>
           </div>
         </Collapse>
       </Well>
@@ -40,4 +85,9 @@ class AccountsListItem extends Component {
   }
 }
 
-export default AccountsListItem;
+export default reduxForm(
+  {
+    form: 'accountInfo',
+    fields: ['accountName', 'accountType', 'accountCompany'],
+  }
+)(AccountsListItem);

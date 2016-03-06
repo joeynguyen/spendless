@@ -6,8 +6,15 @@ const AccountsList = ({ accounts }) => {
     <div>
     {
       accounts.map(function(account) {
+        const formInitialValues = {
+          initialValues: {
+            accountName: account.name,
+            accountType: account.type,
+            accountCompany: account.company,
+          }
+        };
         return (
-          <AccountsListItem account={account} key={account._id} />
+          <AccountsListItem {...formInitialValues} account={account} key={account._id} formKey={account._id} />
         );
       })
     }
