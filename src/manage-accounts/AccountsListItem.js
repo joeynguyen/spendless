@@ -9,14 +9,10 @@ class AccountsListItem extends Component {
   static propTypes = {
     account: PropTypes.object.isRequired,
     fields: PropTypes.object.isRequired,
+    resetForm: PropTypes.func.isRequired,
   }
   state = {
     settingsVisible: false,
-  }
-  toggleSettings = () => {
-    this.setState({ settingsVisible: !this.state.settingsVisible });
-    console.log('settingsVisible', this.state.settingsVisible);
-    console.log('props', this.props);
   }
 
   render() {
@@ -25,11 +21,16 @@ class AccountsListItem extends Component {
         cursor: 'pointer',
       }
     };
-    const { fields: { accountName, accountType, accountCompany },  } = this.props;
+    const { fields: { accountName, accountType, accountCompany }, resetForm } = this.props;
+
+    const toggleSettings = () => {
+      this.setState({ settingsVisible: !this.state.settingsVisible });
+      resetForm();
+    };
 
     return (
       <Well bsSize="small" key={this.props.account._id}>
-        <i className="fa fa-lg fa-fw fa-cog pull-right" style={styles.removeIcon} onClick={this.toggleSettings} ></i>
+        <i className="fa fa-lg fa-fw fa-cog pull-right" style={styles.removeIcon} onClick={toggleSettings} ></i>
         <h4>{this.props.account.name}</h4>
         <p>{this.props.account.type === 'bank' ? 'Bank' : 'Credit Card'} - {this.props.account.company}</p>
         <Collapse in={this.state.settingsVisible}>
@@ -87,7 +88,7 @@ class AccountsListItem extends Component {
 
 export default reduxForm(
   {
-    form: 'accountInfo',
+    form: 'EditAccount',
     fields: ['accountName', 'accountType', 'accountCompany'],
   }
 )(AccountsListItem);

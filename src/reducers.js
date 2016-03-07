@@ -21,18 +21,36 @@ const rootReducer = combineReducers({
     AddAccountForm: (state, action) => {
       switch (action.type) {
         case ADD_ACCOUNT:
+          // reset the form input values when an account is being added
           return undefined;
         case 'redux-form/CHANGE':
-          if (action.field === 'accountType') {
+          if (action.field === 'accountType' && action.form === 'AddAccountForm') {
+            const newState = Object.assign({}, state);
             // reset accountCompany value when changing accountType value
             // since both bank and credit cards use accountCompany
-            return {...state, accountCompany: ''};
+            newState.accountCompany.value = '';
+            return newState;
           }
           return state;
         default:
           return state;
       }
-    }
+    },
+    EditAccount: (state, action) => {
+      switch (action.type) {
+        case 'redux-form/CHANGE':
+          if (action.field === 'accountType' && action.form === 'EditAccount') {
+            const newState = Object.assign({}, state);
+            // reset accountCompany value when changing accountType value
+            // since both bank and credit cards use accountCompany
+            newState[action.key].accountCompany.value = '';
+            return newState;
+          }
+          return state;
+        default:
+          return state;
+      }
+    },
   }),
 });
 
