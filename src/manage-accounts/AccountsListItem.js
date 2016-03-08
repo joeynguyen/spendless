@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import {reduxForm} from 'redux-form';
-import { Well, Collapse, Input } from 'react-bootstrap';
+import { Well, Collapse, Input, Button } from 'react-bootstrap';
 // import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
 // import { fetchAccounts } from './AccountsActions.js';
@@ -13,6 +13,8 @@ class AccountsListItem extends Component {
   }
   state = {
     settingsVisible: false,
+    confirmDeleteVisible: false,
+    confirmDeleteText: '',
   }
 
   render() {
@@ -26,6 +28,12 @@ class AccountsListItem extends Component {
     const toggleSettings = () => {
       this.setState({ settingsVisible: !this.state.settingsVisible });
       resetForm();
+    };
+    const toggleConfirmDelete = () => {
+      this.setState({ confirmDeleteVisible: !this.state.confirmDeleteVisible });
+    };
+    const handleConfirmDeleteText = (e) => {
+      this.setState({ confirmDeleteText: e.target.value });
     };
 
     return (
@@ -77,7 +85,38 @@ class AccountsListItem extends Component {
                   </Input>
                 </div>
               </Collapse>
-
+              <Button
+                className="pull-right"
+                disabled={this.state.confirmDeleteVisible}
+                onClick={toggleConfirmDelete}
+                bsStyle="danger"
+              >Delete</Button>
+              <div className="clearfix"></div>
+              <Collapse in={this.state.confirmDeleteVisible}>
+                <div>
+                  <hr />
+                  <p>Type DELETE into this box to confirm</p>
+                  <div className="row">
+                    <div className="col-xs-6">
+                      <Input
+                        type="text"
+                        value={this.state.confirmDeleteText}
+                        onChange={handleConfirmDeleteText}
+                        placeholder="DELETE" />
+                    </div>
+                    <div className="col-xs-6">
+                      <Button
+                        disabled={this.state.confirmDeleteText !== 'DELETE'}
+                        bsStyle="success"
+                      >Confirm</Button>
+                      {' '}
+                      <Button
+                        onClick={toggleConfirmDelete}
+                      >Cancel</Button>
+                    </div>
+                  </div>
+                </div>
+              </Collapse>
             </form>
           </div>
         </Collapse>
