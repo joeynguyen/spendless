@@ -1,11 +1,18 @@
-import { FETCH_ACCOUNTS, ADD_ACCOUNT } from './AccountsActions.js';
+import { FETCH_ACCOUNTS, ADD_ACCOUNT, DELETE_ACCOUNT } from './AccountsActions.js';
 
 export default function(state = [], action) {
   switch (action.type) {
     case FETCH_ACCOUNTS:
       return action.payload;
     case ADD_ACCOUNT:
-      return state.concat(action.payload);
+      return state.concat(action.data);
+    case DELETE_ACCOUNT:
+      const deletedAccountObj = state.find(item => item._id === action.data);
+      const deletedAccountIndex = state.indexOf(deletedAccountObj);
+      return [
+        ...state.slice(0, deletedAccountIndex),
+        ...state.slice(deletedAccountIndex + 1),
+      ];
     default:
       return state;
   }

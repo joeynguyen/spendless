@@ -1,15 +1,16 @@
 import React, { Component, PropTypes } from 'react';
 import {reduxForm} from 'redux-form';
 import { Well, Collapse, Input, Button } from 'react-bootstrap';
+import { bindActionCreators } from 'redux';
+import { deleteAccount } from '../account/AccountsActions.js';
 // import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
-// import { fetchAccounts } from './AccountsActions.js';
 
 class AccountsListItem extends Component {
   static propTypes = {
     account: PropTypes.object.isRequired,
     fields: PropTypes.object.isRequired,
     resetForm: PropTypes.func.isRequired,
+    doDeleteAccount: PropTypes.func.isRequired,
   }
   state = {
     settingsVisible: false,
@@ -107,6 +108,7 @@ class AccountsListItem extends Component {
                     <div className="col-xs-6">
                       <Button
                         disabled={this.state.confirmDeleteText !== 'DELETE'}
+                        onClick={() => this.props.doDeleteAccount(this.props.account._id)}
                         bsStyle="success"
                       >Confirm</Button>
                       {' '}
@@ -125,9 +127,17 @@ class AccountsListItem extends Component {
   }
 }
 
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    doDeleteAccount: deleteAccount,
+  }, dispatch);
+}
+
 export default reduxForm(
   {
     form: 'EditAccount',
     fields: ['accountName', 'accountType', 'accountCompany'],
-  }
+  },
+  null,
+  mapDispatchToProps
 )(AccountsListItem);
