@@ -27,6 +27,7 @@ export function fetchAccounts() {
     return result.rows.map((row) => {
       return {
         '_id': row.doc._id,
+        '_rev': row.doc._rev,
         'name': row.doc.name,
         'type': row.doc.type,
         'company': row.doc.company,

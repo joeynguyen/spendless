@@ -5,6 +5,9 @@ import { bindActionCreators } from 'redux';
 import { deleteAccount } from '../account/AccountsActions.js';
 // import { connect } from 'react-redux';
 
+// PouchDB is loaded externally through a script tag in the browser
+const db = new PouchDB('accounts');
+
 class AccountsListItem extends Component {
   static propTypes = {
     account: PropTypes.object.isRequired,
@@ -35,6 +38,21 @@ class AccountsListItem extends Component {
     };
     const handleConfirmDeleteText = (e) => {
       this.setState({ confirmDeleteText: e.target.value });
+    };
+    const handleDeleteAccount = (accountToDelete) => {
+      const self = this;
+      console.log('accountToDelete', accountToDelete);
+
+      // Remove account from DB
+      db.remove(accountToDelete).then(function(result) {
+        console.log('Successfully deleted account', result);
+        // Update Redux state
+        self.props.doDeleteAccount(accountToDelete._id);
+        // TODO: Add success message after successful delete
+      }).catch(function(err) {
+        console.log(err);
+        // TODO: Add error message after delete fail
+      });
     };
 
     return (
@@ -108,7 +126,7 @@ class AccountsListItem extends Component {
                     <div className="col-xs-6">
                       <Button
                         disabled={this.state.confirmDeleteText !== 'DELETE'}
-                        onClick={() => this.props.doDeleteAccount(this.props.account._id)}
+                        onClick={() => handleDeleteAccount(this.props.account)}
                         bsStyle="success"
                       >Confirm</Button>
                       {' '}
