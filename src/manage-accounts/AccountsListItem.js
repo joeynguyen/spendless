@@ -14,6 +14,7 @@ class AccountsListItem extends Component {
     fields: PropTypes.object.isRequired,
     resetForm: PropTypes.func.isRequired,
     doDeleteAccount: PropTypes.func.isRequired,
+    pristine: PropTypes.bool.isRequired,
   }
   state = {
     settingsVisible: false,
@@ -38,6 +39,9 @@ class AccountsListItem extends Component {
     };
     const handleConfirmDeleteText = (e) => {
       this.setState({ confirmDeleteText: e.target.value });
+    };
+    const handleUpdateAccount = () => {
+      console.log(this.props);
     };
     const handleDeleteAccount = (accountToDelete) => {
       const self = this;
@@ -104,6 +108,15 @@ class AccountsListItem extends Component {
                   </Input>
                 </div>
               </Collapse>
+              <Button
+                disabled={this.props.pristine}
+                onClick={handleUpdateAccount}
+                bsStyle="success"
+              >Update</Button>
+              {' '}
+              <Button
+                onClick={toggleSettings}
+              >Cancel</Button>
               <Button
                 className="pull-right"
                 disabled={this.state.confirmDeleteVisible}
