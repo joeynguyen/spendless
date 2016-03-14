@@ -42,13 +42,21 @@ class AccountsListItem extends Component {
       this.setState({ confirmDeleteText: e.target.value });
     };
     const handleUpdateAccount = (accountToUpdate) => {
-      // const self = this;
+      const self = this;
       const newAccountObj = Object.assign({}, accountToUpdate, {
         name: this.props.fields.accountName.value,
         type: this.props.fields.accountType.value,
         company: this.props.fields.accountCompany.value,
       });
-      this.props.doUpdateAccount(newAccountObj);
+      db.put(newAccountObj).then(function(result) {
+        console.log('Successfully updated account', result);
+        // Update Redux state
+        self.props.doUpdateAccount(newAccountObj);
+        // TODO: Add success message after successful update
+      }).catch(function(err) {
+        console.log(err);
+        // TODO: Add error message after update fail
+      });
     };
     const handleDeleteAccount = (accountToDelete) => {
       const self = this;
