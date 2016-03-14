@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import {reduxForm} from 'redux-form';
 import { Well, Collapse, Input, Button } from 'react-bootstrap';
 import { bindActionCreators } from 'redux';
-import { deleteAccount } from '../account/AccountsActions.js';
+import { deleteAccount, updateAccount } from '../account/AccountsActions.js';
 // import { connect } from 'react-redux';
 
 // PouchDB is loaded externally through a script tag in the browser
@@ -14,6 +14,7 @@ class AccountsListItem extends Component {
     fields: PropTypes.object.isRequired,
     resetForm: PropTypes.func.isRequired,
     doDeleteAccount: PropTypes.func.isRequired,
+    doUpdateAccount: PropTypes.func.isRequired,
     pristine: PropTypes.bool.isRequired,
   }
   state = {
@@ -40,12 +41,17 @@ class AccountsListItem extends Component {
     const handleConfirmDeleteText = (e) => {
       this.setState({ confirmDeleteText: e.target.value });
     };
-    const handleUpdateAccount = () => {
-      console.log(this.props);
+    const handleUpdateAccount = (accountToUpdate) => {
+      // const self = this;
+      const newAccountObj = Object.assign({}, accountToUpdate, {
+        name: this.props.fields.accountName.value,
+        type: this.props.fields.accountType.value,
+        company: this.props.fields.accountCompany.value,
+      });
+      this.props.doUpdateAccount(newAccountObj);
     };
     const handleDeleteAccount = (accountToDelete) => {
       const self = this;
-      console.log('accountToDelete', accountToDelete);
 
       // Remove account from DB
       db.remove(accountToDelete).then(function(result) {
@@ -110,7 +116,7 @@ class AccountsListItem extends Component {
               </Collapse>
               <Button
                 disabled={this.props.pristine}
-                onClick={handleUpdateAccount}
+                onClick={() => handleUpdateAccount(this.props.account)}
                 bsStyle="success"
               >Update</Button>
               {' '}
@@ -161,6 +167,7 @@ class AccountsListItem extends Component {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     doDeleteAccount: deleteAccount,
+    doUpdateAccount: updateAccount,
   }, dispatch);
 }
 

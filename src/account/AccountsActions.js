@@ -1,8 +1,9 @@
 export const FETCH_ACCOUNTS = 'FETCH_ACCOUNTS';
 export const ADD_ACCOUNT = 'ADD_ACCOUNT';
+export const UPDATE_ACCOUNT = 'UPDATE_ACCOUNT';
+export const DELETE_ACCOUNT = 'DELETE_ACCOUNT';
 export const ACCOUNT_SELECTED = 'ACCOUNT_SELECTED';
 export const TOGGLE_UNSAVED_WARNING = 'TOGGLE_UNSAVED_WARNING';
-export const DELETE_ACCOUNT = 'DELETE_ACCOUNT';
 
 export function fetchAccounts() {
   // PouchDB is loaded externally through a script tag in the browser
@@ -42,17 +43,24 @@ export function fetchAccounts() {
   };
 }
 
-
 export function addAccount(newAccount) {
   return {
     type: ADD_ACCOUNT,
     data: newAccount
   };
 }
+
 export function deleteAccount(deletedAccount) {
   return {
     type: DELETE_ACCOUNT,
     data: deletedAccount
+  };
+}
+
+export function updateAccount(updatedAccount) {
+  return {
+    type: UPDATE_ACCOUNT,
+    data: updatedAccount
   };
 }
 
