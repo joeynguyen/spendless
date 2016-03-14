@@ -1,6 +1,8 @@
 import { FETCH_ACCOUNTS, ADD_ACCOUNT, UPDATE_ACCOUNT, DELETE_ACCOUNT } from './AccountsActions.js';
 
 export default function(state = [], action) {
+  console.log('action received', action);
+
   switch (action.type) {
     case FETCH_ACCOUNTS:
       return action.payload;
