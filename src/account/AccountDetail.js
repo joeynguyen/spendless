@@ -82,7 +82,7 @@ class AccountDetails extends Component {
 
   render() {
     if (this.props.accounts.length < 1) {
-      return <div>Loading...</div>;
+      return <div><p className="text-center"><i className="fa fa-cog fa-spin fa-3x"></i></p></div>;
     }
     const activeAccount = this.props.accounts.find(account => account._id === this.props.params.id);
     let icon = '';
