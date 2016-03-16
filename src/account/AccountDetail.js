@@ -12,8 +12,8 @@ import { storeNextRoutePath } from '../app/AppActions.js';
 
 class AccountDetails extends Component {
   static propTypes = {
+    accounts: PropTypes.arrayOf(React.PropTypes.object),
     params: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired,
     route: PropTypes.object.isRequired,
     uploadedTransactions: PropTypes.arrayOf(React.PropTypes.object),
     doResetUploadedTransactions: PropTypes.func.isRequired,
@@ -29,9 +29,6 @@ class AccountDetails extends Component {
     this.context.router.setRouteLeaveHook(this.props.route, this.routerWillLeave);
   }
   componentDidUpdate(prevProps) {
-    // console.log('this.context.router', this.context.router);
-    // console.log('this', this);
-    // console.log('prevProps', prevProps);
     if (this.props.params.id !== prevProps.params.id) {
       console.log('settingRouteLeaveHook!');
       this.context.router.setRouteLeaveHook(this.props.route, this.routerWillLeave);
@@ -84,16 +81,19 @@ class AccountDetails extends Component {
   }
 
   render() {
-    const { accountName, accountCompany, accountType } = this.props.location.query;
+    if (this.props.accounts.length < 1) {
+      return <div>Loading...</div>;
+    }
+    const activeAccount = this.props.accounts.find(account => account._id === this.props.params.id);
     let icon = '';
-    if (accountType === 'creditcard') {
-      icon = this.findFaIcon(accountCompany);
+    if (activeAccount.type === 'creditcard') {
+      icon = this.findFaIcon(activeAccount.company);
     }
     return (
       <div className="col-xs-9">
         <div className="header">
-          <h3 className={styles.header}>{icon} {accountName} <br />
-            <small>{accountCompany}</small></h3>
+          <h3 className={styles.header}>{icon} {activeAccount.name} <br />
+            <small>{activeAccount.company}</small></h3>
         </div>
         <FileUpload accountId={this.props.params.id} />
         <SaveButton />
@@ -107,6 +107,7 @@ class AccountDetails extends Component {
 
 function mapStateToProps(state) {
   return {
+    accounts: state.accounts,
     uploadedTransactions: state.uploadedTransactions,
     unsavedWarningVisible: state.unsavedWarningVisible,
     nextRoutePath: state.nextRoutePath,

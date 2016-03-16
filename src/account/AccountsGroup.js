@@ -15,7 +15,7 @@ const AccountsGroup = ({ title, icon, accounts }) => {
         {
           accounts.map(function(account) {
             return (
-              <LinkContainer to={{ pathname: `account/${account._id}`, query: { accountName: account.name, accountType: account.type, accountCompany: account.company } }} key={account._id}>
+              <LinkContainer to={`account/${account._id}`} key={account._id}>
                 <ListGroupItem>{account.name}</ListGroupItem>
               </LinkContainer>
             );
