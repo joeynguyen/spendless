@@ -5,19 +5,20 @@ export const DELETE_ACCOUNT = 'DELETE_ACCOUNT';
 // export const ACCOUNT_SELECTED = 'ACCOUNT_SELECTED';
 export const TOGGLE_UNSAVED_WARNING = 'TOGGLE_UNSAVED_WARNING';
 
+// PouchDB is loaded externally through a script tag in the browser
+const db = new PouchDB('accounts');
+const remoteCouch = 'http://127.0.0.1:5984/accounts';
+const syncDB = () => {
+  db.sync(remoteCouch, {live: false})
+    .on('complete', function(success) {
+      console.log('PouchDB-Server accounts database sync success :', success);
+    })
+    .on('error', function(err) {
+      console.log('PouchDB-Server accounts database sync error :', err);
+    });
+};
+
 export function fetchAccounts() {
-  // PouchDB is loaded externally through a script tag in the browser
-  const db = new PouchDB('accounts');
-  const remoteCouch = 'http://127.0.0.1:5984/accounts';
-  const syncDB = () => {
-    db.sync(remoteCouch, {live: false})
-      .on('complete', function(success) {
-        console.log('PouchDB-Server sync success :', success);
-      })
-      .on('error', function(err) {
-        console.log('PouchDB-Server sync error :', err);
-      });
-  };
   syncDB();
 
   // Show the current list of accounts by reading them from the database

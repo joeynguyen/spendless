@@ -4,19 +4,20 @@ export const ADD_UPLOADED_TRANSACTIONS = 'ADD_UPLOADED_TRANSACTIONS';
 export const SAVE_UPLOADED_TRANSACTIONS = 'SAVE_UPLOADED_TRANSACTIONS';
 export const RESET_UPLOADED_TRANSACTIONS = 'RESET_UPLOADED_TRANSACTIONS';
 
+// PouchDB is loaded externally through a script tag in the browser
+const transDB = new PouchDB('transactions');
+const remoteCouch = 'http://127.0.0.1:5984/transactions';
+const syncDB = () => {
+  transDB.sync(remoteCouch, {live: false})
+    .on('complete', function(success) {
+      console.log('PouchDB-Server transactions database sync success :', success);
+    })
+    .on('error', function(err) {
+      console.log('PouchDB-Server transactions database sync error :', err);
+    });
+};
+
 export function fetchAccountTransactions(accountId) {
-  // PouchDB is loaded externally through a script tag in the browser
-  const transDB = new PouchDB('transactions');
-  const remoteCouch = 'http://127.0.0.1:5984/transactions';
-  const syncDB = () => {
-    transDB.sync(remoteCouch, {live: false})
-      .on('complete', function(success) {
-        console.log('PouchDB-Server sync success :', success);
-      })
-      .on('error', function(err) {
-        console.log('PouchDB-Server sync error :', err);
-      });
-  };
   syncDB();
 
   // Show the current list of accounts by reading them from the database
