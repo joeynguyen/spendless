@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import {reduxForm} from 'redux-form';
 import { Well, Collapse, Input, Button } from 'react-bootstrap';
 import { bindActionCreators } from 'redux';
-import { deleteAccount, updateAccount } from '../account/AccountsActions.js';
+import { deleteAccount, updateAccount, fetchAccounts } from '../account/AccountsActions.js';
 // import { connect } from 'react-redux';
 
 // PouchDB is loaded externally through a script tag in the browser
@@ -14,6 +14,7 @@ class AccountsListItem extends Component {
     fields: PropTypes.object.isRequired,
     resetForm: PropTypes.func.isRequired,
     doDeleteAccount: PropTypes.func.isRequired,
+    doFetchAccounts: PropTypes.func.isRequired,
     doUpdateAccount: PropTypes.func.isRequired,
     pristine: PropTypes.bool.isRequired,
   }
@@ -52,7 +53,12 @@ class AccountsListItem extends Component {
         console.log('Successfully updated account', result);
         // Update Redux state
         self.props.doUpdateAccount(newAccountObj);
+        self.setState({ settingsVisible: !self.state.settingsVisible });
         // TODO: Add success message after successful update
+      }).then(function() {
+        // Update accounts with latest _rev data from PouchDB or else we won't
+        // be able to update the same account again without refreshing the app
+        self.props.doFetchAccounts();
       }).catch(function(err) {
         console.log(err);
         // TODO: Add error message after update fail
@@ -175,6 +181,7 @@ class AccountsListItem extends Component {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     doDeleteAccount: deleteAccount,
+    doFetchAccounts: fetchAccounts,
     doUpdateAccount: updateAccount,
   }, dispatch);
 }
