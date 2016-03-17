@@ -13,6 +13,7 @@ class ManageAccountsContainer extends Component {
     accounts: PropTypes.array.isRequired,
   }
   render() {
+    console.log(this.props);
     const ccAccounts = this.props.accounts.filter(account => account.type === 'creditcard');
     const bankAccounts = this.props.accounts.filter(account => account.type === 'bank');
     return (

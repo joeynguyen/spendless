@@ -3,6 +3,21 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { fetchAccountTransactions, resetAccountTransactions } from './TransactionsActions.js';
 import TransactionsItem from './TransactionsItem.js';
+import Table from 'react-toolbox/lib/table';
+
+const UserModel = {
+  name: {type: String},
+  twitter: {type: String},
+  birthdate: {type: Date},
+  cats: {type: Number},
+  dogs: {type: Number},
+  active: {type: Boolean}
+};
+
+const users = [
+  {name: 'Javi Jimenez', twitter: '@soyjavi', birthdate: new Date(1980, 3, 11), cats: 1},
+  {name: 'Javi Velasco', twitter: '@javivelasco', birthdate: new Date(1987, 1, 1), dogs: 1, active: true}
+];
 
 class TransactionsList extends Component {
   static propTypes = {
@@ -11,6 +26,15 @@ class TransactionsList extends Component {
     uploadedTransactions: PropTypes.arrayOf(React.PropTypes.object),
     doFetchAccountTransactions: PropTypes.func.isRequired,
     doResetAccountTransactions: PropTypes.func.isRequired,
+  }
+  state = { selected: [], source: users }
+  handleChange = (row, key, value) => {
+    const source = this.state.source;
+    source[row][key] = value;
+    this.setState({source});
+  }
+  handleSelect = (selected) => {
+    this.setState({selected});
   }
   componentWillMount() {
     this.props.doFetchAccountTransactions(this.props.accountId);
@@ -30,6 +54,14 @@ class TransactionsList extends Component {
     // console.log('accountTransactions', this.props.accountTransactions);
     return (
       <div>
+      <Table
+        model={UserModel}
+        onChange={this.handleChange}
+        onSelect={this.handleSelect}
+        selectable
+        selected={this.state.selected}
+        source={this.state.source}
+      />
       <table className="table table-bordered table-hover">
         <thead>
           <tr>

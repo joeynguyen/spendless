@@ -17,18 +17,15 @@ config.entry = [
 ];
 
 config.output.publicPath = 'http://localhost:3000/dist/';
-
+config.resolve = {
+  extensions: ['', '.jsx', '.scss', '.js', '.json']
+};
 config.module.loaders.push({
-  test: /^((?!\.module).)*\.css$/,
+  test: /(\.scss|\.css)$/,
   loaders: [
     'style-loader',
-    'css-loader'
-  ]
-}, {
-  test: /\.module\.css$/,
-  loaders: [
-    'style-loader',
-    'css-loader?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!'
+    'css-loader?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!',
+    'sass-loader?sourceMap'
   ]
 });
 
