@@ -1,5 +1,4 @@
 export const FETCH_ACCOUNTS = 'FETCH_ACCOUNTS';
-export const ADD_ACCOUNT = 'ADD_ACCOUNT';
 export const UPDATE_ACCOUNT = 'UPDATE_ACCOUNT';
 export const DELETE_ACCOUNT = 'DELETE_ACCOUNT';
 // export const ACCOUNT_SELECTED = 'ACCOUNT_SELECTED';
@@ -41,13 +40,6 @@ export function fetchAccounts() {
   return {
     type: FETCH_ACCOUNTS,
     payload: allAccounts
-  };
-}
-
-export function addAccount(newAccount) {
-  return {
-    type: ADD_ACCOUNT,
-    data: newAccount
   };
 }
 
