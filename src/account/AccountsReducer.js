@@ -1,4 +1,4 @@
-import { FETCH_ACCOUNTS, UPDATE_ACCOUNT, DELETE_ACCOUNT } from './AccountsActions.js';
+import { FETCH_ACCOUNTS, UPDATE_ACCOUNTS, DELETE_ACCOUNT } from './AccountsActions.js';
 
 export default function(state = [], action) {
   console.log('action received', action);
@@ -6,7 +6,7 @@ export default function(state = [], action) {
   switch (action.type) {
     case FETCH_ACCOUNTS:
       return action.payload;
-    case UPDATE_ACCOUNT:
+    case UPDATE_ACCOUNTS:
       const updatedAccountObj = state.find(item => item._id === action.data._id);
       // Adding new account
       if (!updatedAccountObj) {

@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { reduxForm } from 'redux-form';
 import { Button, ButtonInput, Collapse, Panel, Input } from 'react-bootstrap';
+import { resetAddAccountForm } from '../account/AccountsActions.js';
 import { toggleAddAccount } from './ManageAccountsActions.js';
 
 // PouchDB is loaded externally through a script tag in the browser
@@ -10,6 +11,7 @@ const db = new PouchDB('accounts');
 class AddAccountContainer extends Component {
   static propTypes = {
     addAccountVisible: PropTypes.bool.isRequired,
+    doResetAddAccountForm: PropTypes.func.isRequired,
     doToggleAddAccount: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     resetForm: PropTypes.func.isRequired,
@@ -23,10 +25,13 @@ class AddAccountContainer extends Component {
       'type': this.props.fields.accountType.value,
       'company': this.props.fields.accountCompany.value,
     };
+    const self = this;
 
     // Save account to DB
     db.put(newAccount).then(function(result) {
       console.log('Successfully added new account', result);
+      // Reset AddAccountForm fields
+      self.props.doResetAddAccountForm();
       // TODO: Add success message after successful submit
     }).catch(function(err) {
         console.log('Error trying to add account', err);
@@ -151,6 +156,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
+    doResetAddAccountForm: resetAddAccountForm,
     doToggleAddAccount: toggleAddAccount,
   }, dispatch);
 }

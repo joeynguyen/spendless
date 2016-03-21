@@ -1,5 +1,6 @@
 export const FETCH_ACCOUNTS = 'FETCH_ACCOUNTS';
-export const UPDATE_ACCOUNT = 'UPDATE_ACCOUNT';
+export const RESET_ADD_ACCOUNT_FORM = 'RESET_ADD_ACCOUNT_FORM';
+export const UPDATE_ACCOUNTS = 'UPDATE_ACCOUNTS';
 export const DELETE_ACCOUNT = 'DELETE_ACCOUNT';
 // export const ACCOUNT_SELECTED = 'ACCOUNT_SELECTED';
 export const TOGGLE_UNSAVED_WARNING = 'TOGGLE_UNSAVED_WARNING';
@@ -43,6 +44,12 @@ export function fetchAccounts() {
   };
 }
 
+export function resetAddAccountForm() {
+  return {
+    type: RESET_ADD_ACCOUNT_FORM
+  };
+}
+
 export function deleteAccount(deletedAccount) {
   return {
     type: DELETE_ACCOUNT,
@@ -50,10 +57,10 @@ export function deleteAccount(deletedAccount) {
   };
 }
 
-export function updateAccount(updatedAccount) {
+export function updateAccounts(accountData) {
   return {
-    type: UPDATE_ACCOUNT,
-    data: updatedAccount
+    type: UPDATE_ACCOUNTS,
+    data: accountData
   };
 }
 
