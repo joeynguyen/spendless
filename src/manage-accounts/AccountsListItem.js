@@ -29,8 +29,10 @@ class AccountsListItem extends Component {
     const { fields: { accountName, accountType, accountCompany }, resetForm } = this.props;
 
     const toggleSettings = () => {
+      if (this.state.settingsVisible) {
+        resetForm();
+      }
       this.setState({ settingsVisible: !this.state.settingsVisible });
-      resetForm();
     };
     const toggleConfirmDelete = () => {
       this.setState({ confirmDeleteVisible: !this.state.confirmDeleteVisible });
