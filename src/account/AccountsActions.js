@@ -50,10 +50,10 @@ export function resetAddAccountForm() {
   };
 }
 
-export function deleteAccount(deletedAccount) {
+export function deleteAccount(accountId) {
   return {
     type: DELETE_ACCOUNT,
-    data: deletedAccount
+    data: accountId
   };
 }
 
