@@ -10,6 +10,11 @@ export default function(state = [], action) {
       return state.concat(action.data);
     case UPDATE_ACCOUNT:
       const updatedAccountObj = state.find(item => item._id === action.data._id);
+      // Adding new account
+      if (!updatedAccountObj) {
+        return state.concat(action.data);
+      }
+      // Updating existing account
       const updatedAccountIndex = state.indexOf(updatedAccountObj);
       return [
         ...state.slice(0, updatedAccountIndex),
