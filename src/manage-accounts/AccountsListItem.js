@@ -13,7 +13,6 @@ class AccountsListItem extends Component {
     account: PropTypes.object.isRequired,
     fields: PropTypes.object.isRequired,
     resetForm: PropTypes.func.isRequired,
-    doDeleteAccount: PropTypes.func.isRequired,
     doFetchAccounts: PropTypes.func.isRequired,
     doUpdateAccount: PropTypes.func.isRequired,
     pristine: PropTypes.bool.isRequired,
@@ -65,13 +64,9 @@ class AccountsListItem extends Component {
       });
     };
     const handleDeleteAccount = (accountToDelete) => {
-      const self = this;
-
       // Remove account from DB
       db.remove(accountToDelete).then(function(result) {
         console.log('Successfully deleted account', result);
-        // Update Redux state
-        self.props.doDeleteAccount(accountToDelete._id);
         // TODO: Add success message after successful delete
       }).catch(function(err) {
         console.log(err);
@@ -180,7 +175,6 @@ class AccountsListItem extends Component {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    doDeleteAccount: deleteAccount,
     doFetchAccounts: fetchAccounts,
     doUpdateAccount: updateAccount,
   }, dispatch);
