@@ -51,6 +51,7 @@ export function resetAddAccountForm() {
 }
 
 export function deleteAccount(accountId) {
+  syncDB();
   return {
     type: DELETE_ACCOUNT,
     data: accountId
@@ -58,6 +59,7 @@ export function deleteAccount(accountId) {
 }
 
 export function updateAccounts(accountData) {
+  syncDB();
   return {
     type: UPDATE_ACCOUNTS,
     data: accountData
