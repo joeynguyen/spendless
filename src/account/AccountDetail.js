@@ -84,6 +84,16 @@ class AccountDetails extends Component {
       return <div><p className="text-center"><i className="fa fa-cog fa-spin fa-3x"></i></p></div>;
     }
     const activeAccount = this.props.accounts.find(account => account._id === this.props.params.id);
+    if (!activeAccount) {
+      return (
+        <div className="col-xs-9">
+          <div className="header">
+            <h3 className={styles.header}>Error: Account Doesn't Exist</h3>
+          </div>
+          <p>Uh oh. Looks like the account you're looking for doesn't exist. It may have been deleted. Please click on one of the ones in the left sidebar to get details on a different account.</p>
+        </div>
+      );
+    }
     let icon = '';
     if (activeAccount.type === 'creditcard') {
       icon = this.findFaIcon(activeAccount.company);
