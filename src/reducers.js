@@ -7,7 +7,7 @@ import ManageAccountsVisibleReducer from './manage-accounts/ManageAccountsVisibl
 import UnsavedWarningVisibleReducer from './account/UnsavedWarningVisibleReducer.js';
 import NextRoutePathReducer from './app/NextRoutePathReducer.js';
 import AddAccountVisibleReducer from './manage-accounts/AddAccountVisibleReducer.js';
-import { ADD_ACCOUNT } from './account/AccountsActions.js';
+import { UPDATE_ACCOUNT } from './account/AccountsActions.js';
 
 const rootReducer = combineReducers({
   accounts: AccountsReducer,
@@ -20,7 +20,7 @@ const rootReducer = combineReducers({
   form: formReducer.plugin({
     AddAccountForm: (state, action) => {
       switch (action.type) {
-        case ADD_ACCOUNT:
+        case UPDATE_ACCOUNT:
           // reset the form input values when an account is being added
           return undefined;
         case 'redux-form/CHANGE':
