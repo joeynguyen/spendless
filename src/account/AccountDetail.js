@@ -30,21 +30,18 @@ class AccountDetails extends Component {
   }
   componentDidUpdate(prevProps) {
     if (this.props.params.id !== prevProps.params.id) {
-      console.log('settingRouteLeaveHook!');
       this.context.router.setRouteLeaveHook(this.props.route, this.routerWillLeave);
     }
   }
   routerWillLeave = (nextLocation) => {
-    console.log('nextLocation', nextLocation);
-    console.log('this.props', this.props);
-    // return false to prevent a transition w/o prompting the user,
-    // or return a string to allow the user to decide:
     if (this.props.uploadedTransactions.length > 0 && this.props.nextRoutePath === '') {
-      // need to check for nextRoutePath as null or else this will run again when
+      // need to check for nextRoutePath as empty string or else this will run again when
       // handleAlertLeave() is called and returns false for changing routes with
       // this.context.router.push(this.props.nextRoutePath);
       this.props.doToggleUnsavedWarning();
+      // store nextRoutePath for use with this.context.router.push later
       this.props.doStoreNextRoutePath(nextLocation.pathname + nextLocation.search);
+      // return false to prevent a transition
       return false;
     }
   }
@@ -71,11 +68,13 @@ class AccountDetails extends Component {
   // }
   handleAlertStay = () => {
     this.props.doToggleUnsavedWarning();
+    // reset nextRoutePath prop
     this.props.doStoreNextRoutePath('');
   }
   handleAlertLeave = () => {
     this.props.doResetUploadedTransactions();
     this.context.router.push(this.props.nextRoutePath);
+    // reset nextRoutePath prop
     this.props.doStoreNextRoutePath('');
     this.props.doToggleUnsavedWarning();
   }
