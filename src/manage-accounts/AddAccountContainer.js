@@ -3,20 +3,20 @@ import { bindActionCreators } from 'redux';
 import { reduxForm } from 'redux-form';
 import { Button, ButtonInput, Collapse, Panel, Input } from 'react-bootstrap';
 import { resetAddAccountForm } from '../account/AccountsActions.js';
-import { toggleAddAccount } from './ManageAccountsActions.js';
 
 // PouchDB is loaded externally through a script tag in the browser
 const db = new PouchDB('accounts');
 
 class AddAccountContainer extends Component {
   static propTypes = {
-    addAccountVisible: PropTypes.bool.isRequired,
     doResetAddAccountForm: PropTypes.func.isRequired,
-    doToggleAddAccount: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     resetForm: PropTypes.func.isRequired,
     fields: PropTypes.object.isRequired,
     submitting: PropTypes.bool.isRequired,
+  }
+  state = {
+    addAccountVisible: false
   }
   localHandleSubmit = () => {
     const newAccount = {
@@ -44,11 +44,11 @@ class AddAccountContainer extends Component {
     const { fields: { accountName, accountType, accountCompany }, handleSubmit, resetForm, submitting } = this.props;
 
     const addButtonClick = () => {
-      this.props.doToggleAddAccount();
+      this.setState({ addAccountVisible: !this.state.addAccountVisible });
       resetForm();
     };
     let addButton = { style: 'primary', class: 'fa fa-plus', text: ' Add Account' };
-    if (this.props.addAccountVisible) {
+    if (this.state.addAccountVisible) {
       addButton = { style: 'danger', class: '', text: 'Cancel' };
     }
     return (
@@ -57,7 +57,7 @@ class AddAccountContainer extends Component {
           <i className={addButton.class}></i>
           {addButton.text}
         </Button>
-        <Panel collapsible expanded={this.props.addAccountVisible}>
+        <Panel collapsible expanded={this.state.addAccountVisible}>
           <form onSubmit={handleSubmit(this.localHandleSubmit)}>
             <Input
               type="text"
@@ -157,7 +157,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     doResetAddAccountForm: resetAddAccountForm,
-    doToggleAddAccount: toggleAddAccount,
   }, dispatch);
 }
 
