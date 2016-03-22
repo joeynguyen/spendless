@@ -1,8 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import {reduxForm} from 'redux-form';
-import { Well, Collapse, Input, Button } from 'react-bootstrap';
-import { bindActionCreators } from 'redux';
-// import { connect } from 'react-redux';
+import { reduxForm } from 'redux-form';
+import { Well, Collapse, Input, Button, Alert } from 'react-bootstrap';
 
 // PouchDB is loaded externally through a script tag in the browser
 const db = new PouchDB('accounts');
@@ -16,8 +14,15 @@ class AccountsListItem extends Component {
   }
   state = {
     settingsVisible: false,
+    alertVisible: false,
     confirmDeleteVisible: false,
     confirmDeleteText: '',
+  }
+  handleAlertDismiss = () => {
+    this.setState({alertVisible: false});
+  }
+  handleAlertShow = () => {
+    this.setState({alertVisible: true});
   }
 
   render() {
@@ -47,10 +52,10 @@ class AccountsListItem extends Component {
         type: this.props.fields.accountType.value,
         company: this.props.fields.accountCompany.value,
       });
+      // Update account in DB
       db.put(newAccountObj).then(function(result) {
         console.log('Successfully updated account', result);
-        self.setState({ settingsVisible: !self.state.settingsVisible });
-        // TODO: Add success message after successful update
+        self.handleAlertShow();
       }).catch(function(err) {
         console.log(err);
         // TODO: Add error message after update fail
@@ -66,6 +71,18 @@ class AccountsListItem extends Component {
         // TODO: Add error message after delete fail
       });
     };
+    let alertMessage;
+
+    if (this.state.alertVisible) {
+      alertMessage = (
+        <div>
+          <br />
+          <Alert bsStyle="success" onDismiss={this.handleAlertDismiss} dismissAfter={2000}>
+            <p>Account updated successfully!</p>
+          </Alert>
+        </div>
+      );
+    }
 
     return (
       <Well bsSize="small" key={this.props.account._id}>
@@ -159,6 +176,7 @@ class AccountsListItem extends Component {
                 </div>
               </Collapse>
             </form>
+            { alertMessage }
           </div>
         </Collapse>
       </Well>
