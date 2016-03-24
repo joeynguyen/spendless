@@ -1,22 +1,20 @@
 import React, { Component, PropTypes } from 'react';
-import { bindActionCreators } from 'redux';
 import { reduxForm } from 'redux-form';
-import { Button, ButtonInput, Collapse, Panel, Input } from 'react-bootstrap';
-import { resetAddAccountForm } from '../account/AccountsActions.js';
+import { Button, ButtonInput, Collapse, Panel, Input, Alert } from 'react-bootstrap';
 
 // PouchDB is loaded externally through a script tag in the browser
 const db = new PouchDB('accounts');
 
 class AddAccountContainer extends Component {
   static propTypes = {
-    doResetAddAccountForm: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     resetForm: PropTypes.func.isRequired,
     fields: PropTypes.object.isRequired,
     submitting: PropTypes.bool.isRequired,
   }
   state = {
-    addAccountVisible: false
+    addAccountVisible: false,
+    alertVisible: false
   }
   localHandleSubmit = () => {
     const newAccount = {
@@ -31,10 +29,11 @@ class AddAccountContainer extends Component {
     db.put(newAccount).then(function(result) {
       console.log('Successfully added new account', result);
       // Reset AddAccountForm fields
-      self.props.doResetAddAccountForm();
+      self.props.resetForm();
+      self.setState({alertVisible: true});
       // TODO: Add success message after successful submit
     }).catch(function(err) {
-        console.log('Error trying to add account', err);
+      console.log('Error trying to add account', err);
       // TODO: Add error message after submit fail
     });
   }
@@ -50,6 +49,17 @@ class AddAccountContainer extends Component {
     let addButton = { style: 'primary', class: 'fa fa-plus', text: ' Add Account' };
     if (this.state.addAccountVisible) {
       addButton = { style: 'danger', class: '', text: 'Cancel' };
+    }
+    let alertMessage;
+    if (this.state.alertVisible) {
+      alertMessage = (
+        <div>
+          <br />
+          <Alert bsStyle="success" onDismiss={() => this.setState({alertVisible: false})} dismissAfter={2000}>
+            <p>Account added!</p>
+          </Alert>
+        </div>
+      );
     }
     return (
       <div>
@@ -125,6 +135,7 @@ class AddAccountContainer extends Component {
               type="submit"
               disabled={submitting}
               value="Save" />
+            { alertMessage }
           </form>
         </Panel>
       </div>
@@ -154,12 +165,6 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    doResetAddAccountForm: resetAddAccountForm,
-  }, dispatch);
-}
-
 // connect: 1st argument is mapStateToProps, 2nd state is mapDispatchToProps
 // reduxForm: 1st argument is form config, 2nd is mapStateToProps, 3rd state is mapDispatchToProps
 // initialValues required for resetForm
@@ -173,4 +178,4 @@ export default reduxForm({
     accountCompany: '',
   },
   validate: validateForm
-}, mapStateToProps, mapDispatchToProps)(AddAccountContainer);
+}, mapStateToProps)(AddAccountContainer);

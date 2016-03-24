@@ -8,7 +8,6 @@ import AccountDeletedConfirmVisibleReducer from './manage-accounts/AccountDelete
 import AccountDeletedNameReducer from './manage-accounts/AccountDeletedNameReducer.js';
 import UnsavedWarningVisibleReducer from './account/UnsavedWarningVisibleReducer.js';
 import NextRoutePathReducer from './app/NextRoutePathReducer.js';
-import { RESET_ADD_ACCOUNT_FORM } from './account/AccountsActions.js';
 
 const rootReducer = combineReducers({
   accounts: AccountsReducer,
@@ -22,9 +21,6 @@ const rootReducer = combineReducers({
   form: formReducer.plugin({
     AddAccountForm: (state, action) => {
       switch (action.type) {
-        case RESET_ADD_ACCOUNT_FORM:
-          // reset the form input values when an account is being added
-          return undefined;
         case 'redux-form/CHANGE':
           if (action.field === 'accountType' && action.form === 'AddAccountForm') {
             const newState = Object.assign({}, state);
