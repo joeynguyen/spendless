@@ -16,6 +16,10 @@ class AddAccountContainer extends Component {
     addAccountVisible: false,
     alertVisible: false
   }
+  addButtonClick = () => {
+    this.setState({ addAccountVisible: !this.state.addAccountVisible });
+    this.props.resetForm();
+  }
   localHandleSubmit = () => {
     const newAccount = {
       '_id': new Date().toISOString(),
@@ -38,14 +42,10 @@ class AddAccountContainer extends Component {
     });
   }
   render() {
-    // handleSubmit, resetForm, and fields are from redux-form
+    // handleSubmit and fields are from redux-form
     // const accountName = this.props.fields.accountName;
-    const { fields: { accountName, accountType, accountCompany }, handleSubmit, resetForm, submitting } = this.props;
+    const { fields: { accountName, accountType, accountCompany }, handleSubmit } = this.props;
 
-    const addButtonClick = () => {
-      this.setState({ addAccountVisible: !this.state.addAccountVisible });
-      resetForm();
-    };
     let addButton = { style: 'primary', class: 'fa fa-plus', text: ' Add Account' };
     if (this.state.addAccountVisible) {
       addButton = { style: 'danger', class: '', text: 'Cancel' };
@@ -63,7 +63,7 @@ class AddAccountContainer extends Component {
     }
     return (
       <div>
-        <Button onClick={addButtonClick} bsStyle={addButton.style} bsSize="large" block>
+        <Button onClick={this.addButtonClick} bsStyle={addButton.style} bsSize="large" block>
           <i className={addButton.class}></i>
           {addButton.text}
         </Button>
@@ -133,7 +133,7 @@ class AddAccountContainer extends Component {
             <ButtonInput
               bsStyle="primary"
               type="submit"
-              disabled={submitting}
+              disabled={this.props.submitting}
               value="Save" />
             { alertMessage }
           </form>
