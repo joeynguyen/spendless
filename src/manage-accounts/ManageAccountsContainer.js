@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { Modal, Button } from 'react-bootstrap';
 import { toggleManageAccounts } from '../manage-accounts/ManageAccountsActions.js';
 import AddAccountContainer from '../manage-accounts/AddAccountContainer.js';
+import AccountDeletedConfirmModal from '../manage-accounts/AccountDeletedConfirmModal.js';
 import AccountsList from './AccountsList.js';
 
 class ManageAccountsContainer extends Component {
@@ -16,17 +17,19 @@ class ManageAccountsContainer extends Component {
     const ccAccounts = this.props.accounts.filter(account => account.type === 'creditcard');
     const bankAccounts = this.props.accounts.filter(account => account.type === 'bank');
     return (
-      <Modal show={this.props.manageAccountsVisible} onHide={() => this.props.doToggleManageAccounts()}>
+      <Modal
+        show={this.props.manageAccountsVisible}
+        onHide={() => this.props.doToggleManageAccounts()}
+      >
         <Modal.Header closeButton>
           <Modal.Title>Manage Accounts</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <AccountDeletedConfirmModal />
           <div className="row">
             <div className="col-xs-8">
               <AddAccountContainer />
               <hr />
-              {/* Use state to display 'No accounts' */}
-              {/* TODO: Show all accounts in this window */}
               <AccountsList accounts={this.props.accounts} />
             </div>
 
@@ -56,7 +59,9 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ doToggleManageAccounts: toggleManageAccounts }, dispatch);
+  return bindActionCreators({
+    doToggleManageAccounts: toggleManageAccounts,
+  }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManageAccountsContainer);

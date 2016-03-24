@@ -2,3 +2,8 @@
 .sidebar .panel-title > a:focus {
   text-decoration: none;
 }
+
+/* for React-Bootstrap Modal to work with nested modals */
+.modal {
+  z-index: 1040;
+}
