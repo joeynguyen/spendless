@@ -6,6 +6,7 @@ import { toggleAccountDeletedConfirm } from '../manage-accounts/ManageAccountsAc
 
 class AccountDeletedConfirmModal extends Component {
   static propTypes = {
+    accountDeletedName: PropTypes.string.isRequired,
     accountDeletedConfirmVisible: PropTypes.bool.isRequired,
     doToggleAccountDeletedConfirm: PropTypes.func.isRequired,
   }
@@ -21,8 +22,8 @@ class AccountDeletedConfirmModal extends Component {
           aria-labelledby="contained-modal-title"
         >
           <Alert bsStyle="success" style={{marginBottom: 0}}>
-            <h4>Account deleted</h4>
-            <p>Account has been deleted</p>
+            <h4>Account Deleted</h4>
+            <p>{this.props.accountDeletedName} has been deleted</p>
             <p><Button onClick={this.close}>Close</Button></p>
           </Alert>
         </Modal>
@@ -33,6 +34,7 @@ class AccountDeletedConfirmModal extends Component {
 function mapStateToProps(state) {
   return {
     accountDeletedConfirmVisible: state.accountDeletedConfirmVisible,
+    accountDeletedName: state.accountDeletedName,
   };
 }
 

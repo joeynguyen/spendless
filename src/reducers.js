@@ -5,6 +5,7 @@ import AccountTransactionsReducer from './account/AccountTransactionsReducer.js'
 import UploadedTransactionsReducer from './account/UploadedTransactionsReducer.js';
 import ManageAccountsVisibleReducer from './manage-accounts/ManageAccountsVisibleReducer.js';
 import AccountDeletedConfirmVisible from './manage-accounts/AccountDeletedConfirmVisible.js';
+import AccountDeletedNameReducer from './manage-accounts/AccountDeletedNameReducer.js';
 import UnsavedWarningVisibleReducer from './account/UnsavedWarningVisibleReducer.js';
 import NextRoutePathReducer from './app/NextRoutePathReducer.js';
 import { RESET_ADD_ACCOUNT_FORM } from './account/AccountsActions.js';
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   uploadedTransactions: UploadedTransactionsReducer,
   manageAccountsVisible: ManageAccountsVisibleReducer,
   accountDeletedConfirmVisible: AccountDeletedConfirmVisible,
+  accountDeletedName: AccountDeletedNameReducer,
   unsavedWarningVisible: UnsavedWarningVisibleReducer,
   nextRoutePath: NextRoutePathReducer,
   form: formReducer.plugin({

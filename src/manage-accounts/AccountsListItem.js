@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import { bindActionCreators } from 'redux';
 import { Well, Collapse, Input, Button, Alert } from 'react-bootstrap';
-import { toggleAccountDeletedConfirm } from '../manage-accounts/ManageAccountsActions.js';
+import { toggleAccountDeletedConfirm, storeDeletedAccountName } from '../manage-accounts/ManageAccountsActions.js';
 
 // PouchDB is loaded externally through a script tag in the browser
 const db = new PouchDB('accounts');
@@ -14,6 +14,7 @@ class AccountsListItem extends Component {
     resetForm: PropTypes.func.isRequired,
     pristine: PropTypes.bool.isRequired,
     doToggleAccountDeletedConfirm: PropTypes.func.isRequired,
+    doStoreDeletedAccountName: PropTypes.func.isRequired,
   }
   state = {
     settingsVisible: false,
@@ -54,6 +55,8 @@ class AccountsListItem extends Component {
     // Remove account from DB
     db.remove(accountToDelete).then(function(result) {
       console.log('Successfully deleted account', result);
+      self.props.doStoreDeletedAccountName(accountToDelete.name);
+    }).then(function() {
       self.props.doToggleAccountDeletedConfirm();
     }).catch(function(err) {
       console.log('Error trying to delete account', err);
@@ -184,6 +187,7 @@ class AccountsListItem extends Component {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     doToggleAccountDeletedConfirm: toggleAccountDeletedConfirm,
+    doStoreDeletedAccountName: storeDeletedAccountName,
   }, dispatch);
 }
 
