@@ -19,10 +19,10 @@ const rootReducer = combineReducers({
   unsavedWarningVisible: UnsavedWarningVisibleReducer,
   nextRoutePath: NextRoutePathReducer,
   form: formReducer.plugin({
-    AddAccountForm: (state, action) => {
+    AddAccount: (state, action) => {
       switch (action.type) {
         case 'redux-form/CHANGE':
-          if (action.field === 'accountType' && action.form === 'AddAccountForm') {
+          if (action.field === 'accountType' && action.form === 'AddAccount') {
             const newState = Object.assign({}, state);
             // reset accountCompany value when changing accountType value
             // since both bank and credit cards use accountCompany
