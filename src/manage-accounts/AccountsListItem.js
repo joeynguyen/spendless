@@ -18,13 +18,28 @@ export default class AccountsListItem extends Component {
         cursor: 'pointer',
       }
     };
-    const formInitialValues = {
-      initialValues: {
-        accountName: this.props.account.name,
-        accountType: this.props.account.type,
-        accountCompany: this.props.account.company,
-      }
-    };
+    let editAccountForm;
+    if (this.state.settingsVisible) {
+      const formInitialValues = {
+        initialValues: {
+          accountName: this.props.account.name,
+          accountType: this.props.account.type,
+          accountCompany: this.props.account.company,
+        }
+      };
+      // adding EditAccount form this way so that the component will mount and
+      // unmount, resetting the form fields in doing so
+      // also, this speeds up loading the modal because redux-form isn't initialized
+      // for every account form on load. Only initializes when account is toggled
+      editAccountForm = (
+                        <EditAccountFormContainer
+                          {...formInitialValues}
+                          account={this.props.account}
+                          formKey={this.props.account._id}
+                          toggleSettings={this.toggleSettings}
+                        />
+                        );
+    }
 
     return (
       <Well bsSize="small" key={this.props.account._id}>
@@ -33,12 +48,7 @@ export default class AccountsListItem extends Component {
         <p>{this.props.account.type === 'bank' ? 'Bank' : 'Credit Card'} - {this.props.account.company}</p>
         <Collapse in={this.state.settingsVisible}>
           <div>
-            <EditAccountFormContainer
-              {...formInitialValues}
-              account={this.props.account}
-              formKey={this.props.account._id}
-              toggleSettings={this.toggleSettings}
-            />
+            { editAccountForm }
           </div>
         </Collapse>
       </Well>
