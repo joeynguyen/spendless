@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Panel } from 'react-bootstrap';
-import AddAccountForm from './AddAccountForm';
+import AddAccountFormContainer from './AddAccountFormContainer.js';
 
 export default class AddAccountContainer extends Component {
   state = {
@@ -16,7 +16,7 @@ export default class AddAccountContainer extends Component {
       addButton = { style: 'danger', class: '', text: 'Cancel' };
       // adding AddAccountForm this way so that the component will mount and
       // unmount, resetting the form fields in doing so
-      accountForm = <AddAccountForm />;
+      accountForm = <AddAccountFormContainer />;
     }
     return (
       <div>
