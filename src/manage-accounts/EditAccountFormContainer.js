@@ -82,93 +82,91 @@ class EditAccountFormContainer extends Component {
       );
     }
     return (
-      <div>
-        <form>
-          <Input
-            type="text"
-            label="Name"
-            {...accountName}
-          />
-          <Input
-            type="select"
-            label="Type"
-            {...accountType}
-          >
-            <option value="">select...</option>
-            <option value="bank">Bank</option>
-            <option value="creditcard">Credit Card</option>
-          </Input>
-          <Collapse in={accountType.value === 'bank'}>
-            <div>
-              <Input
-                type="text"
-                label="Name of Institution"
-                {...accountCompany}
-              />
-            </div>
-          </Collapse>
-          <Collapse in={accountType.value === 'creditcard'}>
-            <div>
-              <Input
-                type="select"
-                label="Credit Card Company"
-                {...accountCompany}
-              >
-                <option value="">select...</option>
-                <option value="Visa">Visa</option>
-                <option value="MasterCard">Mastercard</option>
-                <option value="American Express">American Express</option>
-                <option value="Discover">Discover</option>
-                <option value="Diners Club">Diners Club</option>
-                <option value="JCB">JCB</option>
-                <option value="Other">Other</option>
-              </Input>
-            </div>
-          </Collapse>
-          <Button
-            disabled={this.props.pristine}
-            onClick={() => this.handleUpdateAccount(this.props.account)}
-            bsStyle="success"
-          >Update</Button>
-          {' '}
-          <Button
-            onClick={this.props.toggleSettings}
-          >Cancel</Button>
-          <Button
-            className="pull-right"
-            disabled={this.state.confirmDeleteVisible}
-            onClick={this.toggleConfirmDelete}
-            bsStyle="danger"
-          >Delete</Button>
-          { alertMessage }
-          <Collapse in={this.state.confirmDeleteVisible}>
-            <div>
-              <hr />
-              <p>Type DELETE into this box to confirm</p>
-              <div className="row">
-                <div className="col-xs-6">
-                  <Input
-                    type="text"
-                    value={this.state.confirmDeleteText}
-                    onChange={this.handleConfirmDeleteText}
-                    placeholder="DELETE" />
-                </div>
-                <div className="col-xs-6">
-                  <Button
-                    disabled={this.state.confirmDeleteText !== 'DELETE'}
-                    onClick={() => this.handleDeleteAccount(this.props.account)}
-                    bsStyle="success"
-                  >Confirm</Button>
-                  {' '}
-                  <Button
-                    onClick={this.toggleConfirmDelete}
-                  >Cancel</Button>
-                </div>
+      <form>
+        <Input
+          type="text"
+          label="Name"
+          {...accountName}
+        />
+        <Input
+          type="select"
+          label="Type"
+          {...accountType}
+        >
+          <option value="">select...</option>
+          <option value="bank">Bank</option>
+          <option value="creditcard">Credit Card</option>
+        </Input>
+        <Collapse in={accountType.value === 'bank'}>
+          <div>
+            <Input
+              type="text"
+              label="Name of Institution"
+              {...accountCompany}
+            />
+          </div>
+        </Collapse>
+        <Collapse in={accountType.value === 'creditcard'}>
+          <div>
+            <Input
+              type="select"
+              label="Credit Card Company"
+              {...accountCompany}
+            >
+              <option value="">select...</option>
+              <option value="Visa">Visa</option>
+              <option value="MasterCard">Mastercard</option>
+              <option value="American Express">American Express</option>
+              <option value="Discover">Discover</option>
+              <option value="Diners Club">Diners Club</option>
+              <option value="JCB">JCB</option>
+              <option value="Other">Other</option>
+            </Input>
+          </div>
+        </Collapse>
+        <Button
+          disabled={this.props.pristine}
+          onClick={() => this.handleUpdateAccount(this.props.account)}
+          bsStyle="success"
+        >Update</Button>
+        {' '}
+        <Button
+          onClick={this.props.toggleSettings}
+        >Cancel</Button>
+        <Button
+          className="pull-right"
+          disabled={this.state.confirmDeleteVisible}
+          onClick={this.toggleConfirmDelete}
+          bsStyle="danger"
+        >Delete</Button>
+        { alertMessage }
+        <Collapse in={this.state.confirmDeleteVisible}>
+          <div>
+            <hr />
+            <p>Type DELETE into this box to confirm</p>
+            <div className="row">
+              <div className="col-xs-6">
+                <Input
+                  type="text"
+                  value={this.state.confirmDeleteText}
+                  onChange={this.handleConfirmDeleteText}
+                  placeholder="DELETE" />
+              </div>
+              <div className="col-xs-6">
+                <Button
+                  disabled={this.state.confirmDeleteText !== 'DELETE'}
+                  onClick={() => this.handleDeleteAccount(this.props.account)}
+                  bsStyle="success"
+                >Confirm</Button>
+                {' '}
+                <Button
+                  onClick={this.toggleConfirmDelete}
+                >Cancel</Button>
               </div>
             </div>
-          </Collapse>
-        </form>
-      </div>
+          </div>
+        </Collapse>
+      </form>
     );
   }
 }
