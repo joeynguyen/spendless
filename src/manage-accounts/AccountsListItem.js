@@ -16,6 +16,7 @@ export default class AccountsListItem extends Component {
     const styles = {
       removeIcon: {
         cursor: 'pointer',
+        marginTop: 10,
       }
     };
     let editAccountForm;
@@ -32,13 +33,13 @@ export default class AccountsListItem extends Component {
       // also, this speeds up loading the modal because redux-form isn't initialized
       // for every account form on load. Only initializes when account is toggled
       editAccountForm = (
-                        <EditAccountFormContainer
-                          {...formInitialValues}
-                          account={this.props.account}
-                          formKey={this.props.account._id}
-                          toggleSettings={this.toggleSettings}
-                        />
-                        );
+        <EditAccountFormContainer
+          {...formInitialValues}
+          account={this.props.account}
+          formKey={this.props.account._id}
+          toggleSettings={this.toggleSettings}
+        />
+      );
     }
 
     return (

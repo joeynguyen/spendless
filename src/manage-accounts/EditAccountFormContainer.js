@@ -51,12 +51,9 @@ class EditAccountFormContainer extends Component {
 
     if (this.state.alertVisible) {
       alertMessage = (
-        <div>
-          <br />
-          <Alert bsStyle="success" onDismiss={this.hideAlert} dismissAfter={2000}>
-            <p>Account updated successfully!</p>
-          </Alert>
-        </div>
+        <Alert bsStyle="success" onDismiss={this.hideAlert} dismissAfter={2000}>
+          <p>Account updated successfully!</p>
+        </Alert>
       );
     }
     return (

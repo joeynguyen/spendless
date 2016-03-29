@@ -63,7 +63,6 @@ class DeleteAccountFormContainer extends Component {
               groupClassName="horizontal-button-group"
               buttonAfter={cancelButton}
               type="submit"
-              standalone
               value="Confirm" />
           </div>
         </div>
