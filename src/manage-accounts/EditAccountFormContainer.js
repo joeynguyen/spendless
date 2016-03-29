@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
-import { bindActionCreators } from 'redux';
 import { Collapse, Input, Button, Alert } from 'react-bootstrap';
-import { toggleAccountDeletedConfirm, storeDeletedAccountName } from '../manage-accounts/ManageAccountsActions.js';
+import DeleteAccountFormContainer from './DeleteAccountFormContainer.js';
 
 // PouchDB is loaded externally through a script tag in the browser
 const db = new PouchDB('accounts');
@@ -14,14 +13,11 @@ class EditAccountFormContainer extends Component {
     fields: PropTypes.object.isRequired,
     resetForm: PropTypes.func.isRequired,
     pristine: PropTypes.bool.isRequired,
-    doToggleAccountDeletedConfirm: PropTypes.func.isRequired,
-    doStoreDeletedAccountName: PropTypes.func.isRequired,
   }
 
   state = {
     alertVisible: false,
     confirmDeleteVisible: false,
-    confirmDeleteText: '',
   }
 
   hideAlert = () => {
@@ -30,10 +26,6 @@ class EditAccountFormContainer extends Component {
 
   toggleConfirmDelete = () => {
     this.setState({ confirmDeleteVisible: !this.state.confirmDeleteVisible });
-  }
-
-  handleConfirmDeleteText = (e) => {
-    this.setState({ confirmDeleteText: e.target.value });
   }
 
   handleUpdateAccount = (accountToUpdate) => {
@@ -50,20 +42,6 @@ class EditAccountFormContainer extends Component {
     }).catch(function(err) {
       console.log(err);
       // TODO: Add error message after update fail
-    });
-  }
-
-  handleDeleteAccount = (accountToDelete) => {
-    const self = this;
-    // Remove account from DB
-    db.remove(accountToDelete).then(function(result) {
-      console.log('Successfully deleted account', result);
-      self.props.doStoreDeletedAccountName(accountToDelete.name);
-    }).then(function() {
-      self.props.doToggleAccountDeletedConfirm();
-    }).catch(function(err) {
-      console.log('Error trying to delete account', err);
-      // TODO: Add error message after delete fail
     });
   }
 
@@ -142,28 +120,10 @@ class EditAccountFormContainer extends Component {
         { alertMessage }
         <Collapse in={this.state.confirmDeleteVisible}>
           <div>
-            <hr />
-            <p>Type DELETE into this box to confirm</p>
-            <div className="row">
-              <div className="col-xs-6">
-                <Input
-                  type="text"
-                  value={this.state.confirmDeleteText}
-                  onChange={this.handleConfirmDeleteText}
-                  placeholder="DELETE" />
-              </div>
-              <div className="col-xs-6">
-                <Button
-                  disabled={this.state.confirmDeleteText !== 'DELETE'}
-                  onClick={() => this.handleDeleteAccount(this.props.account)}
-                  bsStyle="success"
-                >Confirm</Button>
-                {' '}
-                <Button
-                  onClick={this.toggleConfirmDelete}
-                >Cancel</Button>
-              </div>
-            </div>
+            <DeleteAccountFormContainer
+              account={this.props.account}
+              toggleConfirmDelete={this.toggleConfirmDelete}
+            />
           </div>
         </Collapse>
       </form>
@@ -171,18 +131,9 @@ class EditAccountFormContainer extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    doToggleAccountDeletedConfirm: toggleAccountDeletedConfirm,
-    doStoreDeletedAccountName: storeDeletedAccountName,
-  }, dispatch);
-}
-
 export default reduxForm(
   {
     form: 'EditAccount',
     fields: ['accountName', 'accountType', 'accountCompany'],
   },
-  null,
-  mapDispatchToProps
 )(EditAccountFormContainer);
