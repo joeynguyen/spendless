@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
-import { Collapse, Input, Button, Alert } from 'react-bootstrap';
+import { Collapse, Alert } from 'react-bootstrap';
+import EditAccountForm from './EditAccountForm.js';
 import DeleteAccountFormContainer from './DeleteAccountFormContainer.js';
 
 // PouchDB is loaded externally through a script tag in the browser
@@ -28,9 +29,9 @@ class EditAccountFormContainer extends Component {
     this.setState({ confirmDeleteVisible: !this.state.confirmDeleteVisible });
   }
 
-  handleUpdateAccount = (accountToUpdate) => {
+  handleUpdateAccount = () => {
     const self = this;
-    const newAccountObj = Object.assign({}, accountToUpdate, {
+    const newAccountObj = Object.assign({}, this.props.account, {
       name: this.props.fields.accountName.value,
       type: this.props.fields.accountType.value,
       company: this.props.fields.accountCompany.value,
@@ -46,7 +47,6 @@ class EditAccountFormContainer extends Component {
   }
 
   render() {
-    const { fields: { accountName, accountType, accountCompany } } = this.props;
     let alertMessage;
 
     if (this.state.alertVisible) {
@@ -61,64 +61,14 @@ class EditAccountFormContainer extends Component {
     }
     return (
       <div>
-        <form>
-          <Input
-            type="text"
-            label="Name"
-            {...accountName}
-          />
-          <Input
-            type="select"
-            label="Type"
-            {...accountType}
-          >
-            <option value="">select...</option>
-            <option value="bank">Bank</option>
-            <option value="creditcard">Credit Card</option>
-          </Input>
-          <Collapse in={accountType.value === 'bank'}>
-            <div>
-              <Input
-                type="text"
-                label="Name of Institution"
-                {...accountCompany}
-              />
-            </div>
-          </Collapse>
-          <Collapse in={accountType.value === 'creditcard'}>
-            <div>
-              <Input
-                type="select"
-                label="Credit Card Company"
-                {...accountCompany}
-              >
-                <option value="">select...</option>
-                <option value="Visa">Visa</option>
-                <option value="MasterCard">Mastercard</option>
-                <option value="American Express">American Express</option>
-                <option value="Discover">Discover</option>
-                <option value="Diners Club">Diners Club</option>
-                <option value="JCB">JCB</option>
-                <option value="Other">Other</option>
-              </Input>
-            </div>
-          </Collapse>
-          <Button
-            disabled={this.props.pristine}
-            onClick={() => this.handleUpdateAccount(this.props.account)}
-            bsStyle="success"
-          >Update</Button>
-          {' '}
-          <Button
-            onClick={this.props.toggleSettings}
-          >Cancel</Button>
-          <Button
-            className="pull-right"
-            disabled={this.state.confirmDeleteVisible}
-            onClick={this.toggleConfirmDelete}
-            bsStyle="danger"
-          >Delete</Button>
-        </form>
+        <EditAccountForm
+          fields={this.props.fields}
+          pristine={this.props.pristine}
+          toggleSettings={this.props.toggleSettings}
+          confirmDeleteVisible={this.state.confirmDeleteVisible}
+          toggleConfirmDelete={this.toggleConfirmDelete}
+          handleUpdateAccount={this.handleUpdateAccount}
+        />
         { alertMessage }
         <Collapse in={this.state.confirmDeleteVisible}>
           <div>
