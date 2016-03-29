@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Input, Button } from 'react-bootstrap';
+import { Input, Button, ButtonInput } from 'react-bootstrap';
 import { toggleAccountDeletedConfirm, storeDeletedAccountName } from '../manage-accounts/ManageAccountsActions.js';
 
 // PouchDB is loaded externally through a script tag in the browser
@@ -23,12 +23,13 @@ class DeleteAccountFormContainer extends Component {
     this.setState({ confirmDeleteText: e.target.value });
   }
 
-  handleDeleteAccount = (accountToDelete) => {
+  handleDeleteAccount = (e) => {
+    e.preventDefault();
     const self = this;
     // Remove account from DB
-    db.remove(accountToDelete).then(function(result) {
+    db.remove(this.props.account).then(function(result) {
       console.log('Successfully deleted account', result);
-      self.props.doStoreDeletedAccountName(accountToDelete.name);
+      self.props.doStoreDeletedAccountName(self.props.account.name);
     }).then(function() {
       self.props.doToggleAccountDeletedConfirm();
     }).catch(function(err) {
@@ -38,8 +39,13 @@ class DeleteAccountFormContainer extends Component {
   }
 
   render() {
+    const cancelButton = (
+      <Button
+        onClick={this.props.toggleConfirmDelete}
+      >Cancel</Button>
+    );
     return (
-      <div>
+      <form onSubmit={this.handleDeleteAccount}>
         <hr />
         <p>Type DELETE into this box to confirm</p>
         <div className="row">
@@ -51,18 +57,17 @@ class DeleteAccountFormContainer extends Component {
               placeholder="DELETE" />
           </div>
           <div className="col-xs-6">
-            <Button
+            <ButtonInput
               disabled={this.state.confirmDeleteText !== 'DELETE'}
-              onClick={() => this.handleDeleteAccount(this.props.account)}
               bsStyle="success"
-            >Confirm</Button>
-            {' '}
-            <Button
-              onClick={this.props.toggleConfirmDelete}
-            >Cancel</Button>
+              groupClassName="horizontal-button-group"
+              buttonAfter={cancelButton}
+              type="submit"
+              standalone
+              value="Confirm" />
           </div>
         </div>
-      </div>
+      </form>
     );
   }
 }

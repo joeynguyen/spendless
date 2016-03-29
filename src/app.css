@@ -7,3 +7,6 @@
 .modal {
   z-index: 1040;
 }
+.horizontal-button-group .input-group-btn:last-child > .btn {
+  border-radius: 4px;
+}
