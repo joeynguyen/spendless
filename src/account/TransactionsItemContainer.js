@@ -5,7 +5,7 @@ import TransactionsItem from './TransactionsItem.js';
 
 class TransactionsItemContainer extends Component {
   static propTypes = {
-    item: PropTypes.object.isRequired,
+    transaction: PropTypes.object.isRequired,
     unsaved: PropTypes.bool.isRequired,
   }
   render() {
