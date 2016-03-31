@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { fetchAccountTransactions, resetAccountTransactions } from './TransactionsActions.js';
-import TransactionsItem from './TransactionsItem.js';
+import TransactionsItemContainer from './TransactionsItemContainer.js';
 
 class TransactionsList extends Component {
   static propTypes = {
@@ -27,7 +27,6 @@ class TransactionsList extends Component {
   }
 
   render() {
-    // console.log('accountTransactions', this.props.accountTransactions);
     return (
       <div>
       <table className="table table-bordered table-hover">
@@ -42,12 +41,12 @@ class TransactionsList extends Component {
         <tbody>
           {
             this.props.uploadedTransactions.map(itemData =>
-              <TransactionsItem key={itemData._id} item={itemData} unsaved={true} />
+              <TransactionsItemContainer key={itemData._id} item={itemData} unsaved={true} />
             )
           }
           {
             this.props.accountTransactions.map(itemData =>
-              <TransactionsItem key={itemData._id} item={itemData} unsaved={false} />
+              <TransactionsItemContainer key={itemData._id} item={itemData} unsaved={false} />
             )
           }
         </tbody>
