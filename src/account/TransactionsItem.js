@@ -11,7 +11,7 @@ const TransactionsItem = ({ transaction, unsaved }) => {
       <td>{transaction.transactionDate}</td>
       <td>{transaction.description}</td>
       <td>{transaction.category}</td>
-      <td>{transaction.amount}</td>
+      <td>{Number(transaction.amount).toLocaleString('en-US', { style: 'currency', currency: 'USD'})}</td>
     </tr>
   );
 };
