@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 
-
 const TransactionsItem = ({ transaction, unsaved }) => {
   let rowStyle = {};
   if (unsaved) {
@@ -12,6 +11,7 @@ const TransactionsItem = ({ transaction, unsaved }) => {
       <td>{transaction.description}</td>
       <td>{transaction.category}</td>
       <td>{Number(transaction.amount).toLocaleString('en-US', { style: 'currency', currency: 'USD'})}</td>
+      <td><i className="fa fa-fw fa-lg fa-pencil"></i></td>
     </tr>
   );
 };

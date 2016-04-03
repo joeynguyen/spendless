@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { fetchAccountTransactions, resetAccountTransactions } from './TransactionsActions.js';
 import TransactionsItemContainer from './TransactionsItemContainer.js';
+import styles from './Transactions.module.css';
 
 class TransactionsList extends Component {
   static propTypes = {
@@ -29,7 +30,7 @@ class TransactionsList extends Component {
   render() {
     return (
       <div>
-      <table className="table table-bordered table-hover">
+      <table className={styles['transactions-table'] + ' transactions-table table table-hover'}>
         <thead>
           <tr>
             <th>Date</th>
