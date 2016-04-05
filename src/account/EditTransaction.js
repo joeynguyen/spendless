@@ -1,15 +1,18 @@
 import React, { PropTypes } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
-const EditTransaction = ({ activeTransaction, editTransactionVisible, doToggleEditTransaction }) => {
-  console.log('activeTransaction', activeTransaction);
+const EditTransaction = ({ activeTransaction, editTransactionVisible, doToggleEditTransaction, doSelectActiveTransaction }) => {
   if (!activeTransaction) {
     return <div>Loading</div>;
   }
+  const handleCloseModal = function() {
+    doToggleEditTransaction();
+    doSelectActiveTransaction();
+  };
   return (
     <Modal
       show={editTransactionVisible}
-      onHide={doToggleEditTransaction}
+      onHide={handleCloseModal}
     >
       <Modal.Header closeButton>
         <Modal.Title>Edit Transaction</Modal.Title>
@@ -26,7 +29,7 @@ const EditTransaction = ({ activeTransaction, editTransactionVisible, doToggleEd
 
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={doToggleEditTransaction}>Close</Button>
+        <Button onClick={handleCloseModal}>Close</Button>
       </Modal.Footer>
     </Modal>
   );
@@ -35,6 +38,7 @@ EditTransaction.propTypes = {
   activeTransaction: PropTypes.object,
   editTransactionVisible: PropTypes.bool.isRequired,
   doToggleEditTransaction: PropTypes.func.isRequired,
+  doSelectActiveTransaction: PropTypes.func.isRequired,
 };
 
 export default EditTransaction;

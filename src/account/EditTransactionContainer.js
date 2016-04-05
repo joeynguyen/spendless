@@ -3,13 +3,14 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import EditTransaction from './EditTransaction.js';
-import { toggleEditTransaction } from './TransactionsActions.js';
+import { toggleEditTransaction, selectActiveTransaction } from './TransactionsActions.js';
 
 class EditTransactionContainer extends Component {
   static propTypes = {
     activeTransaction: PropTypes.object,
     editTransactionVisible: PropTypes.bool.isRequired,
     doToggleEditTransaction: PropTypes.func.isRequired,
+    doSelectActiveTransaction: PropTypes.func.isRequired,
   }
   render() {
     return (
@@ -29,6 +30,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     doToggleEditTransaction: toggleEditTransaction,
+    doSelectActiveTransaction: selectActiveTransaction,
   }, dispatch);
 }
 

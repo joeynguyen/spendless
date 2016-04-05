@@ -94,7 +94,7 @@ export function toggleEditTransaction() {
   };
 }
 
-export function selectActiveTransaction(transaction) {
+export function selectActiveTransaction(transaction = null) {
   return {
     type: SELECT_ACTIVE_TRANSACTION,
     data: transaction
