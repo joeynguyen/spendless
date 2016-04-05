@@ -4,7 +4,7 @@ import AccountsReducer from './account/AccountsReducer.js';
 import AccountTransactionsReducer from './account/AccountTransactionsReducer.js';
 import UploadedTransactionsReducer from './account/UploadedTransactionsReducer.js';
 import ManageAccountsVisibleReducer from './manage-accounts/ManageAccountsVisibleReducer.js';
-import EditAccountVisibleReducer from './account/EditAccountVisibleReducer.js';
+import EditTransactionVisibleReducer from './account/EditTransactionVisibleReducer.js';
 import AccountDeletedConfirmVisibleReducer from './manage-accounts/AccountDeletedConfirmVisibleReducer.js';
 import AccountDeletedNameReducer from './manage-accounts/AccountDeletedNameReducer.js';
 import UnsavedWarningVisibleReducer from './account/UnsavedWarningVisibleReducer.js';
@@ -15,7 +15,7 @@ const rootReducer = combineReducers({
   accountTransactions: AccountTransactionsReducer,
   uploadedTransactions: UploadedTransactionsReducer,
   manageAccountsVisible: ManageAccountsVisibleReducer,
-  editTransactionVisible: EditAccountVisibleReducer,
+  editTransactionVisible: EditTransactionVisibleReducer,
   accountDeletedConfirmVisible: AccountDeletedConfirmVisibleReducer,
   accountDeletedName: AccountDeletedNameReducer,
   unsavedWarningVisible: UnsavedWarningVisibleReducer,
