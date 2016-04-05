@@ -10,6 +10,7 @@ class TransactionsList extends Component {
   static propTypes = {
     accountId: PropTypes.string.isRequired,
     accountTransactions: PropTypes.arrayOf(React.PropTypes.object),
+    editTransactionVisible: PropTypes.bool.isRequired,
     uploadedTransactions: PropTypes.arrayOf(React.PropTypes.object),
     doFetchAccountTransactions: PropTypes.func.isRequired,
     doResetAccountTransactions: PropTypes.func.isRequired,
@@ -29,6 +30,10 @@ class TransactionsList extends Component {
   }
 
   render() {
+    let editTransactionContainer;
+    if (this.props.editTransactionVisible) {
+      editTransactionContainer = (<EditTransactionContainer />);
+    }
     return (
       <div>
       <table className={styles['transactions-table'] + ' transactions-table table table-hover'}>
@@ -53,7 +58,7 @@ class TransactionsList extends Component {
           }
         </tbody>
       </table>
-      <EditTransactionContainer />
+      { editTransactionContainer }
       </div>
     );
   }
@@ -62,6 +67,7 @@ class TransactionsList extends Component {
 function mapStateToProps(state) {
   return {
     accountTransactions: state.accountTransactions,
+    editTransactionVisible: state.editTransactionVisible,
     uploadedTransactions: state.uploadedTransactions,
   };
 }

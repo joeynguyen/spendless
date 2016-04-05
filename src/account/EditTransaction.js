@@ -3,6 +3,9 @@ import { Modal, Button } from 'react-bootstrap';
 
 const EditTransaction = ({ activeTransaction, editTransactionVisible, doToggleEditTransaction }) => {
   console.log('activeTransaction', activeTransaction);
+  if (!activeTransaction) {
+    return <div>Loading</div>;
+  }
   return (
     <Modal
       show={editTransactionVisible}
