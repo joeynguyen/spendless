@@ -1,14 +1,14 @@
 .transactions-table td:last-child {
-  visibility: hidden;
   background: white;
   border: 0;
-}
-.transactions-table tr:hover td:last-child {
-  visibility: visible;
 }
 .transactions-table td:last-child i {
   cursor: pointer;
   text-align: center;
+  visibility: hidden;
+}
+.transactions-table tr:hover td:last-child i {
+  visibility: visible;
 }
 .transactions-table td:last-child i:hover {
   color: #337ab7;
