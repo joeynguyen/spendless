@@ -107,7 +107,6 @@ class AccountDetails extends Component {
         <FileUpload accountId={this.props.params.id} />
         <SaveButton />
         <TransactionsList accountId={this.props.params.id} />
-        {/* <button onClick={this.logProps}>console.log(props)</button> */}
         <UnsavedWarning show={this.props.unsavedWarningVisible} localHandleAlertStay={this.handleAlertStay} localHandleAlertLeave={this.handleAlertLeave} />
       </div>
     );

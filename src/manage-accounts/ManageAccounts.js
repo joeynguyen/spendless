@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import AddAccountContainer from '../manage-accounts/AddAccountContainer.js';
-import AccountDeletedConfirmModal from '../manage-accounts/AccountDeletedConfirmModal.js';
+import AddAccountContainer from './AddAccountContainer.js';
+import AccountDeletedConfirmModal from './AccountDeletedConfirmModal.js';
 import AccountsList from './AccountsList.js';
 
 const ManageAccounts = ({ manageAccountsVisible, doToggleManageAccounts, accounts }) => {

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { toggleManageAccounts } from '../manage-accounts/ManageAccountsActions.js';
+import { toggleManageAccounts } from './ManageAccountsActions.js';
 import ManageAccounts from './ManageAccounts.js';
 
 class ManageAccountsContainer extends Component {
