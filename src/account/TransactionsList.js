@@ -29,7 +29,6 @@ class TransactionsList extends Component {
 
   render() {
     return (
-      <div>
       <table className={styles['transactions-table'] + ' transactions-table table table-hover'}>
         <thead>
           <tr>
@@ -42,7 +41,7 @@ class TransactionsList extends Component {
         <tbody>
           {
             this.props.uploadedTransactions.map(itemData =>
-              <TransactionsItemContainer key={itemData._id} transaction={itemData} unsaved={true} />
+              <TransactionsItemContainer key={itemData._id} transaction={itemData} unsaved />
             )
           }
           {
@@ -52,7 +51,6 @@ class TransactionsList extends Component {
           }
         </tbody>
       </table>
-      </div>
     );
   }
 }
