@@ -5,6 +5,7 @@ const TransactionsItem = ({ transaction, unsaved, doToggleEditTransaction, doSel
     doToggleEditTransaction();
     doSelectActiveTransaction(transaction);
   };
+  const transactionAmount = Number(transaction.amount).toLocaleString('en-US', { style: 'currency', currency: 'USD'});
   let rowStyle = {};
   if (unsaved) {
     rowStyle = {backgroundColor: 'yellow'};
@@ -14,7 +15,7 @@ const TransactionsItem = ({ transaction, unsaved, doToggleEditTransaction, doSel
       <td>{transaction.transactionDate}</td>
       <td>{transaction.description}</td>
       <td>{transaction.category}</td>
-      <td>{Number(transaction.amount).toLocaleString('en-US', { style: 'currency', currency: 'USD'})}</td>
+      <td>{transactionAmount}</td>
       <td><i className="fa fa-fw fa-lg fa-pencil" onClick={handleEditClick}></i></td>
     </tr>
   );
