@@ -4,6 +4,7 @@ export const ADD_UPLOADED_TRANSACTIONS = 'ADD_UPLOADED_TRANSACTIONS';
 export const SAVE_UPLOADED_TRANSACTIONS = 'SAVE_UPLOADED_TRANSACTIONS';
 export const RESET_UPLOADED_TRANSACTIONS = 'RESET_UPLOADED_TRANSACTIONS';
 export const TOGGLE_EDIT_TRANSACTION = 'TOGGLE_EDIT_TRANSACTION';
+export const SELECT_ACTIVE_TRANSACTION = 'SELECT_ACTIVE_TRANSACTION';
 
 // PouchDB is loaded externally through a script tag in the browser
 const transDB = new PouchDB('transactions');
@@ -39,6 +40,7 @@ export function fetchAccountTransactions(accountId) {
     const allAccountTransactions = result.docs.map(function(doc) {
       return {
         '_id': doc._id,
+        '_rev': doc._rev,
         'amount': doc.amount,
         'category': doc.category,
         'description': doc.description,
@@ -89,5 +91,12 @@ export function resetUploadedTransactions() {
 export function toggleEditTransaction() {
   return {
     type: TOGGLE_EDIT_TRANSACTION
+  };
+}
+
+export function selectActiveTransaction(transaction) {
+  return {
+    type: SELECT_ACTIVE_TRANSACTION,
+    data: transaction
   };
 }

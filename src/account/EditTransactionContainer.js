@@ -11,7 +11,6 @@ class EditTransactionContainer extends Component {
     doToggleEditTransaction: PropTypes.func.isRequired,
   }
   render() {
-    console.log('EditTransactionContainer props', this.props);
     return (
       <EditTransaction
         editTransactionVisible={this.props.editTransactionVisible}
