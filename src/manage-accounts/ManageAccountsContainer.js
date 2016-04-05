@@ -1,11 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Modal, Button } from 'react-bootstrap';
 import { toggleManageAccounts } from '../manage-accounts/ManageAccountsActions.js';
-import AddAccountContainer from '../manage-accounts/AddAccountContainer.js';
-import AccountDeletedConfirmModal from '../manage-accounts/AccountDeletedConfirmModal.js';
-import AccountsList from './AccountsList.js';
+import ManageAccounts from './ManageAccounts.js';
 
 class ManageAccountsContainer extends Component {
   static propTypes = {
@@ -14,39 +11,8 @@ class ManageAccountsContainer extends Component {
     accounts: PropTypes.array.isRequired,
   }
   render() {
-    const ccAccounts = this.props.accounts.filter(account => account.type === 'creditcard');
-    const bankAccounts = this.props.accounts.filter(account => account.type === 'bank');
     return (
-      <Modal
-        show={this.props.manageAccountsVisible}
-        onHide={() => this.props.doToggleManageAccounts()}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Manage Accounts</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <AccountDeletedConfirmModal />
-          <div className="row">
-            <div className="col-xs-8">
-              <AddAccountContainer />
-              <hr />
-              <AccountsList accounts={this.props.accounts} />
-            </div>
-
-            <div className="col-xs-4">
-              <ul>
-                {/* TODO: Dynamically show number of accounts */}
-                <li>{bankAccounts.length} Bank accounts</li>
-                <li>{ccAccounts.length} Credit card accounts</li>
-              </ul>
-            </div>
-          </div>
-
-        </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={() => this.props.doToggleManageAccounts()}>Close</Button>
-        </Modal.Footer>
-      </Modal>
+      <ManageAccounts {...this.props} />
     );
   }
 }
