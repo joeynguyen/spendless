@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
-const EditTransaction = ({ editTransactionVisible, doToggleEditTransaction }) => {
+const EditTransaction = ({ activeTransaction, editTransactionVisible, doToggleEditTransaction }) => {
+  console.log('activeTransaction', activeTransaction);
   return (
     <Modal
       show={editTransactionVisible}
@@ -13,6 +14,10 @@ const EditTransaction = ({ editTransactionVisible, doToggleEditTransaction }) =>
       <Modal.Body>
         <div className="row">
           <div className="col-xs-12">
+            <p>Description: {activeTransaction.description}</p>
+            <p>Date: {activeTransaction.transactionDate}</p>
+            <p>Amount: {activeTransaction.amount}</p>
+            <p>Category: {activeTransaction.category}</p>
           </div>
         </div>
 
@@ -24,6 +29,7 @@ const EditTransaction = ({ editTransactionVisible, doToggleEditTransaction }) =>
   );
 };
 EditTransaction.propTypes = {
+  activeTransaction: PropTypes.object,
   editTransactionVisible: PropTypes.bool.isRequired,
   doToggleEditTransaction: PropTypes.func.isRequired,
 };

@@ -7,15 +7,13 @@ import { toggleEditTransaction } from './TransactionsActions.js';
 
 class EditTransactionContainer extends Component {
   static propTypes = {
+    activeTransaction: PropTypes.object,
     editTransactionVisible: PropTypes.bool.isRequired,
     doToggleEditTransaction: PropTypes.func.isRequired,
   }
   render() {
     return (
-      <EditTransaction
-        editTransactionVisible={this.props.editTransactionVisible}
-        doToggleEditTransaction={this.props.doToggleEditTransaction}
-      />
+      <EditTransaction {...this.props} />
     );
   }
 }
@@ -24,6 +22,7 @@ class EditTransactionContainer extends Component {
 function mapStateToProps(state) {
   return {
     editTransactionVisible: state.editTransactionVisible,
+    activeTransaction: state.activeTransaction,
   };
 }
 
