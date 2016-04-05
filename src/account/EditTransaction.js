@@ -24,6 +24,8 @@ const EditTransaction = ({ editTransactionVisible, doToggleEditTransaction }) =>
   );
 };
 EditTransaction.propTypes = {
+  editTransactionVisible: PropTypes.bool.isRequired,
+  doToggleEditTransaction: PropTypes.func.isRequired,
 };
 
 export default EditTransaction;

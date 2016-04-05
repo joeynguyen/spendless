@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-const TransactionsItem = ({ transaction, unsaved }) => {
+const TransactionsItem = ({ transaction, unsaved, doToggleEditTransaction }) => {
   let rowStyle = {};
   if (unsaved) {
     rowStyle = {backgroundColor: 'yellow'};
@@ -11,7 +11,7 @@ const TransactionsItem = ({ transaction, unsaved }) => {
       <td>{transaction.description}</td>
       <td>{transaction.category}</td>
       <td>{Number(transaction.amount).toLocaleString('en-US', { style: 'currency', currency: 'USD'})}</td>
-      <td><i className="fa fa-fw fa-lg fa-pencil"></i></td>
+      <td><i className="fa fa-fw fa-lg fa-pencil" onClick={doToggleEditTransaction}></i></td>
     </tr>
   );
 };
