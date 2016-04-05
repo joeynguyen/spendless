@@ -3,6 +3,7 @@ export const RESET_ACCOUNT_TRANSACTIONS = 'RESET_ACCOUNT_TRANSACTIONS';
 export const ADD_UPLOADED_TRANSACTIONS = 'ADD_UPLOADED_TRANSACTIONS';
 export const SAVE_UPLOADED_TRANSACTIONS = 'SAVE_UPLOADED_TRANSACTIONS';
 export const RESET_UPLOADED_TRANSACTIONS = 'RESET_UPLOADED_TRANSACTIONS';
+export const TOGGLE_EDIT_TRANSACTION = 'TOGGLE_EDIT_TRANSACTION';
 
 // PouchDB is loaded externally through a script tag in the browser
 const transDB = new PouchDB('transactions');
@@ -82,5 +83,11 @@ export function resetUploadedTransactions() {
   return {
     type: RESET_UPLOADED_TRANSACTIONS,
     payload: []
+  };
+}
+
+export function toggleEditTransaction() {
+  return {
+    type: TOGGLE_EDIT_TRANSACTION
   };
 }

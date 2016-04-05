@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { fetchAccountTransactions, resetAccountTransactions } from './TransactionsActions.js';
 import TransactionsItemContainer from './TransactionsItemContainer.js';
+import EditTransactionContainer from './EditTransactionContainer.js';
 import styles from './Transactions.module.css';
 
 class TransactionsList extends Component {
@@ -29,6 +30,7 @@ class TransactionsList extends Component {
 
   render() {
     return (
+      <div>
       <table className={styles['transactions-table'] + ' transactions-table table table-hover'}>
         <thead>
           <tr>
@@ -51,6 +53,8 @@ class TransactionsList extends Component {
           }
         </tbody>
       </table>
+      <EditTransactionContainer />
+      </div>
     );
   }
 }
