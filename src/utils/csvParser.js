@@ -48,7 +48,7 @@ export default function parseCSV(selectedFile, accountId) {
               // TODO: Change hard-coded values in key:value pair
               '_id': new Date().toISOString() + i,
               'accountId': accountId,
-              'amount': newTransObj.Amount,
+              'amount': Number(newTransObj.Amount).toFixed(2),
               'category': newTransObj.Category,
               'description': newTransObj.Description,
               'transactionDate': newTransObj['Trans. Date']
