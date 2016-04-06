@@ -7,7 +7,6 @@ import { toggleEditTransaction, selectActiveTransaction } from './TransactionsAc
 
 class EditTransactionContainer extends Component {
   static propTypes = {
-    activeTransaction: PropTypes.object,
     editTransactionVisible: PropTypes.bool.isRequired,
     doToggleEditTransaction: PropTypes.func.isRequired,
     doSelectActiveTransaction: PropTypes.func.isRequired,
@@ -20,15 +19,17 @@ class EditTransactionContainer extends Component {
 }
 
 function mapStateToProps(state) {
-  const date = moment(state.activeTransaction.transactionDate, 'MM-DD-YYYY').format('YYYY-MM-DD');
+  let { transactionDate, description, category, amount } = state.activeTransaction;
+  // date has to be in this format for input[type="date"] to read it
+  transactionDate = moment(transactionDate, 'MM-DD-YYYY').format('YYYY-MM-DD');
+  amount = Number(amount).toFixed(2);
   return {
     editTransactionVisible: state.editTransactionVisible,
-    activeTransaction: state.activeTransaction,
     initialValues: {
-      date: date,
-      description: state.activeTransaction.description,
-      category: state.activeTransaction.category,
-      amount: state.activeTransaction.amount,
+      date: transactionDate,
+      description: description,
+      category: category,
+      amount: amount,
     },
   };
 }

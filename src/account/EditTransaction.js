@@ -1,10 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Modal, Button, Input } from 'react-bootstrap';
 
-const EditTransaction = ({ activeTransaction, editTransactionVisible, doToggleEditTransaction, doSelectActiveTransaction, fields }) => {
-  if (!activeTransaction) {
-    return <div>Loading</div>;
-  }
+const EditTransaction = ({ editTransactionVisible, doToggleEditTransaction, doSelectActiveTransaction, fields }) => {
   const { date, description, category, amount } = fields;
   const handleCloseModal = function() {
     doToggleEditTransaction();
@@ -38,13 +35,10 @@ const EditTransaction = ({ activeTransaction, editTransactionVisible, doToggleEd
             />
             <Input
               type="number"
+              addonBefore="$"
               label="Amount"
               {...amount}
             />
-            <p>Description: {activeTransaction.description}</p>
-            <p>Date: {activeTransaction.transactionDate}</p>
-            <p>Amount: {activeTransaction.amount}</p>
-            <p>Category: {activeTransaction.category}</p>
           </div>
         </div>
 
@@ -56,10 +50,10 @@ const EditTransaction = ({ activeTransaction, editTransactionVisible, doToggleEd
   );
 };
 EditTransaction.propTypes = {
-  activeTransaction: PropTypes.object,
   editTransactionVisible: PropTypes.bool.isRequired,
   doToggleEditTransaction: PropTypes.func.isRequired,
   doSelectActiveTransaction: PropTypes.func.isRequired,
+  fields: PropTypes.object.isRequired,
 };
 
 export default EditTransaction;
