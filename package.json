@@ -80,6 +80,7 @@
   "dependencies": {
     "bootstrap": "^3.3.6",
     "font-awesome": "^4.5.0",
+    "moment": "^2.12.0",
     "pouchdb": "^5.1.0",
     "pouchdb-find": "^0.8.0",
     "react": "^0.14.7",

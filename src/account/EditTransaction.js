@@ -1,10 +1,11 @@
 import React, { PropTypes } from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button, Input } from 'react-bootstrap';
 
-const EditTransaction = ({ activeTransaction, editTransactionVisible, doToggleEditTransaction, doSelectActiveTransaction }) => {
+const EditTransaction = ({ activeTransaction, editTransactionVisible, doToggleEditTransaction, doSelectActiveTransaction, fields }) => {
   if (!activeTransaction) {
     return <div>Loading</div>;
   }
+  const { date, description, category, amount } = fields;
   const handleCloseModal = function() {
     doToggleEditTransaction();
     doSelectActiveTransaction();
@@ -20,6 +21,26 @@ const EditTransaction = ({ activeTransaction, editTransactionVisible, doToggleEd
       <Modal.Body>
         <div className="row">
           <div className="col-xs-12">
+            <Input
+              type="text"
+              label="Description"
+              {...description}
+            />
+            <Input
+              type="date"
+              label="Date"
+              {...date}
+            />
+            <Input
+              type="text"
+              label="Category"
+              {...category}
+            />
+            <Input
+              type="number"
+              label="Amount"
+              {...amount}
+            />
             <p>Description: {activeTransaction.description}</p>
             <p>Date: {activeTransaction.transactionDate}</p>
             <p>Amount: {activeTransaction.amount}</p>
