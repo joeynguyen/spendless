@@ -13,12 +13,6 @@ export default class AccountsListItem extends Component {
     this.setState({ settingsVisible: !this.state.settingsVisible });
   }
   render() {
-    const styles = {
-      removeIcon: {
-        cursor: 'pointer',
-        marginTop: 10,
-      }
-    };
     let editAccountForm;
     if (this.state.settingsVisible) {
       const formInitialValues = {
@@ -44,7 +38,9 @@ export default class AccountsListItem extends Component {
 
     return (
       <Well bsSize="small" key={this.props.account._id}>
-        <i className="fa fa-lg fa-fw fa-cog pull-right" style={styles.removeIcon} onClick={this.toggleSettings} ></i>
+        <div className={(this.state.settingsVisible ? 'expanded' : '') + ' toggle-account-setting-icon'}>
+          <i className="fa fa-lg fa-lg fa-fw fa-cog pull-right" onClick={this.toggleSettings} ></i>
+        </div>
         <h4>{this.props.account.name}</h4>
         <p>{this.props.account.type === 'bank' ? 'Bank' : 'Credit Card'} - {this.props.account.company}</p>
         <Collapse in={this.state.settingsVisible}>

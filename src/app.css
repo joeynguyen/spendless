@@ -10,3 +10,20 @@
 .horizontal-button-group .input-group-btn:last-child > .btn {
   border-radius: 4px;
 }
+/* Adding style here because CSS modules can't target child class names */
+.toggle-account-setting-icon i {
+  cursor: pointer;
+  margin-top: 10px;
+  animation: unRoll .1s 3;
+}
+.toggle-account-setting-icon.expanded i {
+  animation: roll .1s 3;
+}
+@keyframes roll {
+  from { transform: rotate(0); }
+  to { transform: rotate(30deg); }
+}
+@keyframes unRoll {
+  from { transform: rotate(0); }
+  to { transform: rotate(-30deg); }
+}
