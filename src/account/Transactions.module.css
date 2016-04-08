@@ -1,4 +1,4 @@
-.transactions-table td:nth-child(5) {
+.transactions-table td:nth-last-child(2) {
   background: white;
   border: 0;
   text-align: right;
@@ -9,18 +9,18 @@
   text-align: left;
 }
 
-.transactions-table td:nth-child(5) i,
+.transactions-table td:nth-last-child(2) i,
 .transactions-table td:last-child i {
   cursor: pointer;
   visibility: hidden;
 }
 
-.transactions-table tr:hover td:nth-child(5) i,
+.transactions-table tr:hover td:nth-last-child(2) i,
 .transactions-table tr:hover td:last-child i {
   visibility: visible;
 }
 
-.transactions-table td:nth-child(5) i:hover {
+.transactions-table td:nth-last-child(2) i:hover {
   color: #337ab7;
 }
 .transactions-table td:last-child i:hover {

@@ -43,6 +43,7 @@ class TransactionsList extends Component {
             <th>Description</th>
             <th>Category</th>
             <th>Amount</th>
+            <th>Notes</th>
           </tr>
         </thead>
         <tbody>
