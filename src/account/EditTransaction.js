@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Modal, Button, Input } from 'react-bootstrap';
 
-const EditTransaction = ({ editTransactionVisible, doToggleEditTransaction, doSelectActiveTransaction, fields }) => {
+const EditTransaction = ({ editTransactionVisible, doToggleEditTransaction, doSelectActiveTransaction, fields, pristine }) => {
   const { date, description, category, amount } = fields;
   const handleCloseModal = function() {
     doToggleEditTransaction();
@@ -44,7 +44,12 @@ const EditTransaction = ({ editTransactionVisible, doToggleEditTransaction, doSe
 
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={handleCloseModal}>Close</Button>
+        <Button
+          disabled={pristine}
+          bsStyle="success"
+        >Update</Button>
+        {' '}
+        <Button onClick={handleCloseModal}>Cancel</Button>
       </Modal.Footer>
     </Modal>
   );

@@ -10,10 +10,19 @@ class EditTransactionContainer extends Component {
     editTransactionVisible: PropTypes.bool.isRequired,
     doToggleEditTransaction: PropTypes.func.isRequired,
     doSelectActiveTransaction: PropTypes.func.isRequired,
+    fields: PropTypes.object.isRequired,
+    pristine: PropTypes.bool.isRequired,
   }
+
   render() {
     return (
-      <EditTransaction {...this.props} />
+      <EditTransaction
+        editTransactionVisible={this.props.editTransactionVisible}
+        doToggleEditTransaction={this.props.doToggleEditTransaction}
+        doSelectActiveTransaction={this.props.doSelectActiveTransaction}
+        fields={this.props.fields}
+        pristine={this.props.pristine}
+      />
     );
   }
 }
