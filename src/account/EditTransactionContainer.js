@@ -28,7 +28,7 @@ class EditTransactionContainer extends Component {
 }
 
 function mapStateToProps(state) {
-  let { date, description, category, amount } = state.activeTransaction;
+  let { date, description, category, amount, notes } = state.activeTransaction;
   // date has to be in this format for input[type="date"] to read it
   date = moment(date, 'MM-DD-YYYY').format('YYYY-MM-DD');
   amount = Number(amount).toFixed(2);
@@ -39,6 +39,7 @@ function mapStateToProps(state) {
       description: description,
       category: category,
       amount: amount,
+      notes: notes,
     },
   };
 }
@@ -53,7 +54,7 @@ function mapDispatchToProps(dispatch) {
 export default reduxForm(
   {
     form: 'EditTransaction',
-    fields: ['date', 'description', 'category', 'amount'],
+    fields: ['date', 'description', 'category', 'amount', 'notes'],
   },
   mapStateToProps,
   mapDispatchToProps

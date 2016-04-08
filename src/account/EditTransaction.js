@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { Modal, Button, Input } from 'react-bootstrap';
 
 const EditTransaction = ({ editTransactionVisible, doToggleEditTransaction, doSelectActiveTransaction, fields, pristine }) => {
-  const { date, description, category, amount } = fields;
+  const { date, description, category, amount, notes } = fields;
   const handleCloseModal = function() {
     doToggleEditTransaction();
     doSelectActiveTransaction();
@@ -38,6 +38,12 @@ const EditTransaction = ({ editTransactionVisible, doToggleEditTransaction, doSe
               addonBefore="$"
               label="Amount"
               {...amount}
+            />
+            <Input
+              type="textarea"
+              label="Notes"
+              placeholder="Add notes for this transaction"
+              {...notes}
             />
           </div>
         </div>
