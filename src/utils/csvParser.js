@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export default function parseCSV(selectedFile, accountId) {
   return new Promise(function(resolve) {
     const fileReader = new FileReader();
@@ -43,15 +45,16 @@ export default function parseCSV(selectedFile, accountId) {
             headerRowArray.forEach(function(item, j) {
               newTransObj[headerRowArray[j]] = transaction[j];
             });
+            // date has to be in this format for input[type="date"] to read it
+            const dateFormatted = moment(newTransObj['Trans. Date'], 'MM-DD-YYYY').format('YYYY-MM-DD');
             return {
               // included 'i' index to prevent duplicate _id error
-              // TODO: Change hard-coded values in key:value pair
               '_id': new Date().toISOString() + i,
               'accountId': accountId,
-              'amount': Number(newTransObj.Amount).toFixed(2),
+              'amount': Number(newTransObj.Amount).toFixed(2), // 2 decimal places for US Currency
               'category': newTransObj.Category,
               'description': newTransObj.Description,
-              'date': newTransObj['Trans. Date'],
+              'date': dateFormatted,
               'notes': '',
             };
           });

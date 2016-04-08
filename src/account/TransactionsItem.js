@@ -1,10 +1,12 @@
 import React, { PropTypes } from 'react';
+import moment from 'moment';
 
 const TransactionsItem = ({ transaction, unsaved, doToggleEditTransaction, doSelectActiveTransaction }) => {
   const handleEditClick = function() {
     doToggleEditTransaction();
     doSelectActiveTransaction(transaction);
   };
+  const dateFormatted = moment(transaction.date, 'YYYY-MM-DD').format('MM/DD/YYYY');
   // use this code if this app ever supports international currency
   // const transactionAmount = Number(transaction.amount).toLocaleString('en-US', { style: 'currency', currency: 'USD'});
   let rowStyle = {};
@@ -17,7 +19,7 @@ const TransactionsItem = ({ transaction, unsaved, doToggleEditTransaction, doSel
   }
   return (
     <tr style={rowStyle}>
-      <td>{transaction.date}</td>
+      <td>{dateFormatted}</td>
       <td>{transaction.description}</td>
       <td>{transaction.category}</td>
       <td>${transaction.amount}</td>
