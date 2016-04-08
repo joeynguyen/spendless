@@ -51,7 +51,7 @@ export default function parseCSV(selectedFile, accountId) {
               'amount': Number(newTransObj.Amount).toFixed(2),
               'category': newTransObj.Category,
               'description': newTransObj.Description,
-              'transactionDate': newTransObj['Trans. Date']
+              'date': newTransObj['Trans. Date']
             };
           });
         console.log('newTransactions: ', newTransactions);

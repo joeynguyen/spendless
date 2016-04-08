@@ -25,16 +25,16 @@ export function fetchAccountTransactions(accountId) {
   // Show the current list of accounts by reading them from the database
   const accountTransactions = transDB.createIndex({
     index: {
-      fields: ['transactionDate', 'accountId']
+      fields: ['date', 'accountId']
     }
   }).then(() => {
     // console.log('Successfully created an index!', result);
     return transDB.find({
       // using $gt: null because "$exists doesn't do what you think it does"
       // http://stackoverflow.com/questions/34366615/creating-a-usable-index-in-pouchdb-with-pouchdb-find
-      selector: { transactionDate: {'$gt': null}, accountId: accountId },
-      fields: ['_id', '_rev', 'amount', 'category', 'description', 'transactionDate'],
-      sort: [{transactionDate: 'desc'}]
+      selector: { date: {'$gt': null}, accountId: accountId },
+      fields: ['_id', '_rev', 'amount', 'category', 'description', 'date'],
+      sort: [{date: 'desc'}]
     });
   }).then((result) => {
     const allAccountTransactions = result.docs.map(function(doc) {
@@ -44,7 +44,7 @@ export function fetchAccountTransactions(accountId) {
         'amount': doc.amount,
         'category': doc.category,
         'description': doc.description,
-        'transactionDate': doc.transactionDate,
+        'date': doc.date,
       };
     });
     // console.log('allAccountTransactions: ', allAccountTransactions);

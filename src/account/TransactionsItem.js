@@ -12,7 +12,7 @@ const TransactionsItem = ({ transaction, unsaved, doToggleEditTransaction, doSel
   }
   return (
     <tr style={rowStyle}>
-      <td>{transaction.transactionDate}</td>
+      <td>{transaction.date}</td>
       <td>{transaction.description}</td>
       <td>{transaction.category}</td>
       <td>{transactionAmount}</td>

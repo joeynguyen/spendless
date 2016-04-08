@@ -28,14 +28,14 @@ class EditTransactionContainer extends Component {
 }
 
 function mapStateToProps(state) {
-  let { transactionDate, description, category, amount } = state.activeTransaction;
+  let { date, description, category, amount } = state.activeTransaction;
   // date has to be in this format for input[type="date"] to read it
-  transactionDate = moment(transactionDate, 'MM-DD-YYYY').format('YYYY-MM-DD');
+  date = moment(date, 'MM-DD-YYYY').format('YYYY-MM-DD');
   amount = Number(amount).toFixed(2);
   return {
     editTransactionVisible: state.editTransactionVisible,
     initialValues: {
-      date: transactionDate,
+      date: date,
       description: description,
       category: category,
       amount: amount,
