@@ -21,10 +21,6 @@ class EditTransactionContainer extends Component {
     alertVisible: false,
   }
 
-  hideAlert = () => {
-    this.setState({alertVisible: false});
-  }
-
   handleUpdateTransaction = () => {
     const self = this;
     const newTransactionObj = Object.assign({}, this.props.activeTransaction, {
@@ -52,7 +48,6 @@ class EditTransactionContainer extends Component {
         doSelectActiveTransaction={this.props.doSelectActiveTransaction}
         fields={this.props.fields}
         pristine={this.props.pristine}
-        hideAlert={this.hideAlert}
         alertVisible={this.state.alertVisible}
         handleUpdateTransaction={this.handleUpdateTransaction}
       />

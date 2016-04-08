@@ -8,7 +8,6 @@ const EditTransaction = (props) => {
     doSelectActiveTransaction,
     pristine,
     alertVisible,
-    hideAlert,
     handleUpdateTransaction,
   } = props;
   const { date, description, category, amount, notes } = props.fields;
@@ -20,7 +19,7 @@ const EditTransaction = (props) => {
 
   if (alertVisible) {
     alertMessage = (
-      <Alert bsStyle="success" onDismiss={hideAlert} dismissAfter={2000}>
+      <Alert bsStyle="success" onDismiss={handleCloseModal} dismissAfter={2000}>
         <p>Account updated successfully!</p>
       </Alert>
     );
@@ -68,13 +67,15 @@ const EditTransaction = (props) => {
 
       </Modal.Body>
       <Modal.Footer>
-        <Button
-          disabled={pristine}
-          onClick={handleUpdateTransaction}
-          bsStyle="success"
-        >Update</Button>
-        {' '}
-        <Button onClick={handleCloseModal}>Cancel</Button>
+        <div className="form-group">
+          <Button
+            disabled={pristine}
+            onClick={handleUpdateTransaction}
+            bsStyle="success"
+          >Update</Button>
+          {' '}
+          <Button onClick={handleCloseModal}>Cancel</Button>
+        </div>
         { alertMessage }
       </Modal.Footer>
     </Modal>
