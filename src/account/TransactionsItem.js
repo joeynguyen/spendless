@@ -17,6 +17,7 @@ const TransactionsItem = ({ transaction, unsaved, doToggleEditTransaction, doSel
       <td>{transaction.category}</td>
       <td>{transactionAmount}</td>
       <td><i className="fa fa-fw fa-lg fa-pencil" onClick={handleEditClick}></i></td>
+      <td><i className="fa fa-fw fa-lg fa-remove" ></i></td>
     </tr>
   );
 };
