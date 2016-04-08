@@ -1,12 +1,30 @@
 import React, { PropTypes } from 'react';
-import { Modal, Button, Input } from 'react-bootstrap';
+import { Modal, Button, Input, Alert } from 'react-bootstrap';
 
-const EditTransaction = ({ editTransactionVisible, doToggleEditTransaction, doSelectActiveTransaction, fields, pristine }) => {
-  const { date, description, category, amount, notes } = fields;
+const EditTransaction = (props) => {
+  const {
+    editTransactionVisible,
+    doToggleEditTransaction,
+    doSelectActiveTransaction,
+    pristine,
+    alertVisible,
+    hideAlert,
+    handleUpdateTransaction,
+  } = props;
+  const { date, description, category, amount, notes } = props.fields;
   const handleCloseModal = function() {
     doToggleEditTransaction();
     doSelectActiveTransaction();
   };
+  let alertMessage;
+
+  if (alertVisible) {
+    alertMessage = (
+      <Alert bsStyle="success" onDismiss={hideAlert} dismissAfter={2000}>
+        <p>Account updated successfully!</p>
+      </Alert>
+    );
+  }
   return (
     <Modal
       show={editTransactionVisible}
@@ -52,10 +70,12 @@ const EditTransaction = ({ editTransactionVisible, doToggleEditTransaction, doSe
       <Modal.Footer>
         <Button
           disabled={pristine}
+          onClick={handleUpdateTransaction}
           bsStyle="success"
         >Update</Button>
         {' '}
         <Button onClick={handleCloseModal}>Cancel</Button>
+        { alertMessage }
       </Modal.Footer>
     </Modal>
   );
