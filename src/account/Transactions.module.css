@@ -9,9 +9,12 @@
   text-align: left;
 }
 
+.transactions-table td i {
+  cursor: pointer;
+}
+
 .transactions-table td:nth-last-child(2) i,
 .transactions-table td:last-child i {
-  cursor: pointer;
   visibility: hidden;
 }
 
@@ -20,9 +23,12 @@
   visibility: visible;
 }
 
+.transactions-table td:last-child i:hover {
+  color: #c9302c;
+}
 .transactions-table td:nth-last-child(2) i:hover {
   color: #337ab7;
 }
-.transactions-table td:last-child i:hover {
-  color: #c9302c;
+.transactions-table td:nth-last-child(3) i:hover {
+  color: #f0ad4e;
 }
