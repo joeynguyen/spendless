@@ -13,7 +13,12 @@ class TransactionsItemContainer extends Component {
   }
   render() {
     return (
-      <TransactionsItem {...this.props} />
+      <TransactionsItem
+        transaction={this.props.transaction}
+        unsaved={this.props.unsaved}
+        doToggleEditTransaction={this.props.doToggleEditTransaction}
+        doSelectActiveTransaction={this.props.doSelectActiveTransaction}
+      />
     );
   }
 }
