@@ -33,7 +33,7 @@ export function fetchAccountTransactions(accountId) {
       // using $gt: null because "$exists doesn't do what you think it does"
       // http://stackoverflow.com/questions/34366615/creating-a-usable-index-in-pouchdb-with-pouchdb-find
       selector: { date: {'$gt': null}, accountId: accountId },
-      fields: ['_id', '_rev', 'amount', 'category', 'description', 'date', 'notes'],
+      fields: ['_id', '_rev', 'accountId', 'amount', 'category', 'description', 'date', 'notes'],
       sort: [{date: 'desc'}]
     });
   }).then((result) => {
@@ -41,6 +41,7 @@ export function fetchAccountTransactions(accountId) {
       return {
         '_id': doc._id,
         '_rev': doc._rev,
+        'accountId': doc.accountId,
         'amount': doc.amount,
         'category': doc.category,
         'description': doc.description,
