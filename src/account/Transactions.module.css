@@ -1,3 +1,6 @@
+.transactions-table td:nth-child(5) {
+  text-align: center;
+}
 .transactions-table td:nth-child(6) {
   background: white;
   border: 0;
