@@ -1,11 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import FileUpload from './FileUpload.js';
-import TransactionsList from './TransactionsList.js';
-import SaveButton from './SaveButton.js';
-import UnsavedWarning from './UnsavedWarning.js';
-import styles from './Account.module.css';
 import { resetUploadedTransactions } from './TransactionsActions.js';
 import { toggleUnsavedWarning } from './AccountsActions.js';
 import { storeNextRoutePath } from '../app/AppActions.js';
