@@ -34,8 +34,7 @@ class EditTransactionContainer extends Component {
     // Update account in DB
     db.put(newTransactionObj).then(function(result) {
       console.log('Successfully updated transaction', result);
-      self.setState({alertVisible: true});
-      self.props.doUpdateAccountTransactions(newTransactionObj);
+      self.setState({alertVisible: true}); // will autohide based on dismissAfter attr of Alert component
     }).catch(function(err) {
       console.log(err);
       // TODO: Add error message after update fail
