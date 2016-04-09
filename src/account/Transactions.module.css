@@ -1,12 +1,12 @@
-.transactions-table td:nth-child(5) {
+.transactions-table td:nth-child(6) {
   text-align: center;
 }
-.transactions-table td:nth-child(6) {
+.transactions-table td:nth-child(7) {
   background: white;
   border: 0;
   text-align: right;
 }
-.transactions-table td:nth-child(7) {
+.transactions-table td:nth-child(8) {
   background: white;
   border: 0;
   text-align: left;
@@ -16,22 +16,22 @@
   cursor: pointer;
 }
 
-.transactions-table td:nth-child(6) i,
-.transactions-table td:nth-child(7) i {
+.transactions-table td:nth-child(7) i,
+.transactions-table td:nth-child(8) i {
   visibility: hidden;
 }
 
-.transactions-table tr:hover td:nth-child(6) i,
-.transactions-table tr:hover td:nth-child(7) i {
+.transactions-table tr:hover td:nth-child(7) i,
+.transactions-table tr:hover td:nth-child(8) i {
   visibility: visible;
 }
 
-.transactions-table td:nth-child(5) i:hover {
+.transactions-table td:nth-child(6) i:hover {
   color: #f0ad4e;
 }
-.transactions-table td:nth-child(6) i:hover {
+.transactions-table td:nth-child(7) i:hover {
   color: #337ab7;
 }
-.transactions-table td:nth-child(7) i:hover {
+.transactions-table td:nth-child(8) i:hover {
   color: #c9302c;
 }

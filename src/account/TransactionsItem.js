@@ -30,6 +30,7 @@ const TransactionsItem = ({ handleDeleteTransactions, transaction, unsaved, doTo
   }
   return (
     <tr style={rowStyle}>
+      <td><input type="checkbox" /></td>
       <td>{dateFormatted}</td>
       <td>{transaction.description}</td>
       <td>{transaction.category}</td>

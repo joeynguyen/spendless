@@ -39,6 +39,7 @@ class TransactionsList extends Component {
       <table className={styles['transactions-table'] + ' transactions-table table table-hover'}>
         <thead>
           <tr>
+            <th><input type="checkbox" /></th>
             <th>Date</th>
             <th>Description</th>
             <th>Category</th>
