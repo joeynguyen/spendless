@@ -36,31 +36,31 @@ class TransactionsList extends Component {
     }
     return (
       <div>
-      <table className={styles['transactions-table'] + ' transactions-table table table-hover'}>
-        <thead>
-          <tr>
-            <th><input type="checkbox" /></th>
-            <th>Date</th>
-            <th>Description</th>
-            <th>Category</th>
-            <th>Amount</th>
-            <th>Notes</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            this.props.uploadedTransactions.map(itemData =>
-              <TransactionsItemContainer key={itemData._id} transaction={itemData} unsaved />
-            )
-          }
-          {
-            this.props.accountTransactions.map(itemData =>
-              <TransactionsItemContainer key={itemData._id} transaction={itemData} unsaved={false} />
-            )
-          }
-        </tbody>
-      </table>
-      { editTransactionContainer }
+        <table className={styles['transactions-table'] + ' transactions-table table table-hover'}>
+          <thead>
+            <tr>
+              <th><input type="checkbox" /></th>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Category</th>
+              <th>Amount</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              this.props.uploadedTransactions.map(itemData =>
+                <TransactionsItemContainer key={itemData._id} transaction={itemData} unsaved />
+              )
+            }
+            {
+              this.props.accountTransactions.map(itemData =>
+                <TransactionsItemContainer key={itemData._id} transaction={itemData} unsaved={false} />
+              )
+            }
+          </tbody>
+        </table>
+        { editTransactionContainer }
       </div>
     );
   }
