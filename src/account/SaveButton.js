@@ -19,20 +19,20 @@ class SaveButton extends Component {
   }
   // Save transactions uploaded from CSV to database
   handleSave = () => {
-    const self = this;
     console.log('Trying to submit...');
     console.log(this.props.uploadedTransactions);
-    this.props.uploadedTransactions.forEach(function(transaction) {
-      console.log(transaction);
-      transDB.put(transaction).then(function(result) {
-        console.log('Successfully posted transactions');
-        console.log(result);
-        self.props.doUpdateAccountTransactions(transaction);
+    transDB
+      .bulkDocs(this.props.uploadedTransactions)
+      .then(() => {
+        // Update UI with new saved transactions
+        this.props.doUpdateAccountTransactions(this.props.uploadedTransactions);
+      })
+      .then(() => {
+        // Remove unsaved transactions from UI
+        this.props.doResetUploadedTransactions();
       }).catch(function(err) {
         console.log(err);
       });
-    });
-    this.props.doResetUploadedTransactions();
   }
   render() {
     return (

@@ -7,7 +7,21 @@ export default function(state = [], action) {
     case RESET_ACCOUNT_TRANSACTIONS:
       return action.payload;
     case UPDATE_ACCOUNT_TRANSACTIONS:
-      return state.concat(action.payload);
+      // TODO: Handle bulk updating
+      // Adding new bulk transactions
+      if (Array.isArray(action.payload)) {
+        return state.concat(action.payload);
+      }
+
+      // Updating single existing transaction
+      const updatedTransactionObj = state.find(item => item._id === action.payload._id);
+      const updatedTransactionIndex = state.indexOf(updatedTransactionObj);
+      return [
+        ...state.slice(0, updatedTransactionIndex),
+        action.payload,
+        ...state.slice(updatedTransactionIndex + 1),
+      ];
+      // TODO: Handle adding single transaction
     default:
       return state;
   }
