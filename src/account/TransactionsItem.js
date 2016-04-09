@@ -11,17 +11,14 @@ const TransactionsItem = ({ handleDeleteTransactions, transaction, unsaved, doTo
   // use this code if this app ever supports international currency
   // const transactionAmount = Number(transaction.amount).toLocaleString('en-US', { style: 'currency', currency: 'USD'});
   let rowStyle;
-  let manageButtons;
+  let editButton;
+  let deleteButton;
   if (unsaved) {
     rowStyle = {backgroundColor: 'yellow'};
   } else {
     // don't show for uploaded/unsaved transactions
-    manageButtons = (
-      <div>
-        <td><i className="fa fa-fw fa-lg fa-pencil" onClick={handleEditClick}></i></td>
-        <td><i className="fa fa-fw fa-lg fa-remove" onClick={handleDeleteTransactions}></i></td>
-      </div>
-    );
+    editButton = <td><i className="fa fa-fw fa-lg fa-pencil" onClick={handleEditClick}></i></td>;
+    deleteButton = <td><i className="fa fa-fw fa-lg fa-remove" onClick={handleDeleteTransactions}></i></td>;
   }
   let note;
   if (transaction.notes !== '') {
@@ -38,7 +35,8 @@ const TransactionsItem = ({ handleDeleteTransactions, transaction, unsaved, doTo
       <td>{transaction.category}</td>
       <td>${transaction.amount}</td>
       <td>{note}</td>
-      { manageButtons }
+      { editButton }
+      { deleteButton }
     </tr>
   );
 };
