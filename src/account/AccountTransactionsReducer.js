@@ -23,7 +23,7 @@ export default function(state = [], action) {
       ];
       // TODO: Handle adding single transaction
     case DELETE_ACCOUNT_TRANSACTIONS:
-      const deletedTransactionObj = state.find(item => item._id === action.data);
+      const deletedTransactionObj = state.find(item => item._id === action.payload);
       const deletedTransactionIndex = state.indexOf(deletedTransactionObj);
       return [
         ...state.slice(0, deletedTransactionIndex),

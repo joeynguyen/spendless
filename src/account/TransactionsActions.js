@@ -81,7 +81,7 @@ export function deleteAccountTransactions(transactions) {
   syncDB();
   return {
     type: DELETE_ACCOUNT_TRANSACTIONS,
-    data: transactions
+    payload: transactions
   };
 }
 
