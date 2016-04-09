@@ -1,7 +1,7 @@
 export const FETCH_ACCOUNT_TRANSACTIONS = 'FETCH_ACCOUNT_TRANSACTIONS';
 export const RESET_ACCOUNT_TRANSACTIONS = 'RESET_ACCOUNT_TRANSACTIONS';
 export const ADD_UPLOADED_TRANSACTIONS = 'ADD_UPLOADED_TRANSACTIONS';
-export const SAVE_UPLOADED_TRANSACTIONS = 'SAVE_UPLOADED_TRANSACTIONS';
+export const UPDATE_ACCOUNT_TRANSACTIONS = 'UPDATE_ACCOUNT_TRANSACTIONS';
 export const RESET_UPLOADED_TRANSACTIONS = 'RESET_UPLOADED_TRANSACTIONS';
 export const TOGGLE_EDIT_TRANSACTION = 'TOGGLE_EDIT_TRANSACTION';
 export const SELECT_ACTIVE_TRANSACTION = 'SELECT_ACTIVE_TRANSACTION';
@@ -76,9 +76,9 @@ export function addUploadedTransactions(uploadedTransactions) {
   };
 }
 
-export function saveUploadedTransactions(uploadedTransactions) {
+export function updateAccountTransactions(uploadedTransactions) {
   return {
-    type: SAVE_UPLOADED_TRANSACTIONS,
+    type: UPDATE_ACCOUNT_TRANSACTIONS,
     payload: uploadedTransactions
   };
 }

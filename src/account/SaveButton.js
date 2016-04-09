@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Button } from 'react-bootstrap';
-import { saveUploadedTransactions, resetUploadedTransactions } from '../account/TransactionsActions.js';
+import { updateAccountTransactions, resetUploadedTransactions } from '../account/TransactionsActions.js';
 
 // PouchDB is loaded externally through a script tag in the browser
 const transDB = new PouchDB('transactions');
@@ -14,7 +14,7 @@ const transDB = new PouchDB('transactions');
 class SaveButton extends Component {
   static propTypes = {
     uploadedTransactions: PropTypes.arrayOf(React.PropTypes.object),
-    doSaveUploadedTransactions: PropTypes.func.isRequired,
+    doUpdateAccountTransactions: PropTypes.func.isRequired,
     doResetUploadedTransactions: PropTypes.func.isRequired,
   }
   // Save transactions uploaded from CSV to database
@@ -27,7 +27,7 @@ class SaveButton extends Component {
       transDB.put(transaction).then(function(result) {
         console.log('Successfully posted transactions');
         console.log(result);
-        self.props.doSaveUploadedTransactions(transaction);
+        self.props.doUpdateAccountTransactions(transaction);
       }).catch(function(err) {
         console.log(err);
       });
@@ -56,7 +56,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    doSaveUploadedTransactions: saveUploadedTransactions,
+    doUpdateAccountTransactions: updateAccountTransactions,
     doResetUploadedTransactions: resetUploadedTransactions
   }, dispatch);
 }
