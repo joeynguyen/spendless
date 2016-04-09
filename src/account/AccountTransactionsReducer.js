@@ -1,4 +1,4 @@
-import { FETCH_ACCOUNT_TRANSACTIONS, RESET_ACCOUNT_TRANSACTIONS, UPDATE_ACCOUNT_TRANSACTIONS } from './TransactionsActions.js';
+import { FETCH_ACCOUNT_TRANSACTIONS, RESET_ACCOUNT_TRANSACTIONS, UPDATE_ACCOUNT_TRANSACTIONS, DELETE_ACCOUNT_TRANSACTIONS } from './TransactionsActions.js';
 
 export default function(state = [], action) {
   switch (action.type) {
@@ -22,6 +22,13 @@ export default function(state = [], action) {
         ...state.slice(updatedTransactionIndex + 1),
       ];
       // TODO: Handle adding single transaction
+    case DELETE_ACCOUNT_TRANSACTIONS:
+      const deletedTransactionObj = state.find(item => item._id === action.data);
+      const deletedTransactionIndex = state.indexOf(deletedTransactionObj);
+      return [
+        ...state.slice(0, deletedTransactionIndex),
+        ...state.slice(deletedTransactionIndex + 1),
+      ];
     default:
       return state;
   }

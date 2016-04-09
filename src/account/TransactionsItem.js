@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import moment from 'moment';
 
-const TransactionsItem = ({ transaction, unsaved, doToggleEditTransaction, doSelectActiveTransaction }) => {
+const TransactionsItem = ({ handleDeleteTransactions, transaction, unsaved, doToggleEditTransaction, doSelectActiveTransaction }) => {
   const handleEditClick = function() {
     doToggleEditTransaction();
     doSelectActiveTransaction(transaction);
@@ -19,7 +19,7 @@ const TransactionsItem = ({ transaction, unsaved, doToggleEditTransaction, doSel
     manageButtons = (
       <div>
         <td><i className="fa fa-fw fa-lg fa-pencil" onClick={handleEditClick}></i></td>
-        <td><i className="fa fa-fw fa-lg fa-remove" ></i></td>
+        <td><i className="fa fa-fw fa-lg fa-remove" onClick={handleDeleteTransactions}></i></td>
       </div>
     );
   }
@@ -43,6 +43,7 @@ const TransactionsItem = ({ transaction, unsaved, doToggleEditTransaction, doSel
   );
 };
 TransactionsItem.propTypes = {
+  handleDeleteTransactions: PropTypes.func.isRequired,
   transaction: PropTypes.object.isRequired,
   unsaved: PropTypes.bool.isRequired,
   doToggleEditTransaction: PropTypes.func.isRequired,

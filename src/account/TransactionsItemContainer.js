@@ -11,6 +11,16 @@ class TransactionsItemContainer extends Component {
     doToggleEditTransaction: PropTypes.func.isRequired,
     doSelectActiveTransaction: PropTypes.func.isRequired,
   }
+  handleDeleteTransactions = () => {
+    // PouchDB is loaded externally through a script tag in the browser
+    const db = new PouchDB('transactions');
+    const deletedTransaction = Object.assign({}, this.props.transaction, {_deleted: true});
+
+    db.bulkDocs([].concat(deletedTransaction))
+      .catch(function(err) {
+        console.log(err);
+      });
+  }
   render() {
     return (
       <TransactionsItem
@@ -18,6 +28,7 @@ class TransactionsItemContainer extends Component {
         unsaved={this.props.unsaved}
         doToggleEditTransaction={this.props.doToggleEditTransaction}
         doSelectActiveTransaction={this.props.doSelectActiveTransaction}
+        handleDeleteTransactions={this.handleDeleteTransactions}
       />
     );
   }

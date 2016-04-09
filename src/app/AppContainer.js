@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { updateAccounts, deleteAccount } from '../account/AccountsActions.js';
-import { updateAccountTransactions } from '../account/TransactionsActions.js';
+import { deleteAccountTransactions, updateAccountTransactions } from '../account/TransactionsActions.js';
 import PouchDBChanges from 'react-pouchdb-changes';
 import App from './App.js';
 
@@ -12,6 +12,7 @@ class AppContainer extends Component {
     doUpdateAccounts: PropTypes.func.isRequired,
     doDeleteAccount: PropTypes.func.isRequired,
     doUpdateAccountTransactions: PropTypes.func.isRequired,
+    doDeleteAccountTransactions: PropTypes.func.isRequired,
   }
   handleChange = (change) => {
     if (change.deleted) {
@@ -24,12 +25,11 @@ class AppContainer extends Component {
   }
   handleTransactionsChange = (change) => {
     console.log('handleTransactionsChange', change);
-    // if (change.deleted) {
-    //   this.props.doDeleteAccount(change.id);
-    // } else { // updated/inserted
-    //   this.props.doUpdateAccounts(change.doc);
-    // }
-    this.props.doUpdateAccountTransactions(change.doc);
+    if (change.deleted) {
+      this.props.doDeleteAccountTransactions(change.id);
+    } else { // updated/inserted
+      this.props.doUpdateAccountTransactions(change.doc);
+    }
   }
   render() {
     return (
@@ -56,6 +56,7 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     doUpdateAccounts: updateAccounts,
     doDeleteAccount: deleteAccount,
+    doDeleteAccountTransactions: deleteAccountTransactions,
     doUpdateAccountTransactions: updateAccountTransactions,
   }, dispatch);
 }

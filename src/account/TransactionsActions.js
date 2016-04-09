@@ -1,6 +1,7 @@
 export const FETCH_ACCOUNT_TRANSACTIONS = 'FETCH_ACCOUNT_TRANSACTIONS';
 export const RESET_ACCOUNT_TRANSACTIONS = 'RESET_ACCOUNT_TRANSACTIONS';
 export const ADD_UPLOADED_TRANSACTIONS = 'ADD_UPLOADED_TRANSACTIONS';
+export const DELETE_ACCOUNT_TRANSACTIONS = 'DELETE_ACCOUNT_TRANSACTIONS';
 export const UPDATE_ACCOUNT_TRANSACTIONS = 'UPDATE_ACCOUNT_TRANSACTIONS';
 export const RESET_UPLOADED_TRANSACTIONS = 'RESET_UPLOADED_TRANSACTIONS';
 export const TOGGLE_EDIT_TRANSACTION = 'TOGGLE_EDIT_TRANSACTION';
@@ -73,6 +74,14 @@ export function addUploadedTransactions(uploadedTransactions) {
   return {
     type: ADD_UPLOADED_TRANSACTIONS,
     payload: uploadedTransactions
+  };
+}
+
+export function deleteAccountTransactions(transactions) {
+  syncDB();
+  return {
+    type: DELETE_ACCOUNT_TRANSACTIONS,
+    data: transactions
   };
 }
 
