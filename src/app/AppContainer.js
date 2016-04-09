@@ -27,7 +27,7 @@ class AppContainer extends Component {
     console.log('handleTransactionsChange', change);
     if (change.doc.language === 'query') {
       // if just fetching account transactions, do nothing here
-      // fetching is handled in TransactionsList component
+      // fetching is handled in TransactionsListContainer component
     } else if (change.deleted) {
       this.props.doDeleteAccountTransactions(change.id);
     } else { // updated/inserted

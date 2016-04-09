@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import FileUpload from './FileUpload.js';
-import TransactionsList from './TransactionsList.js';
+import TransactionsListContainer from './TransactionsListContainer.js';
 import SaveButton from './SaveButton.js';
 import UnsavedWarning from './UnsavedWarning.js';
 import styles from './Account.module.css';
@@ -48,7 +48,7 @@ const AccountDetails = ({ accounts, params, unsavedWarningVisible, handleAlertSt
       </div>
       <FileUpload accountId={params.id} />
       <SaveButton />
-      <TransactionsList accountId={params.id} />
+      <TransactionsListContainer accountId={params.id} />
       <UnsavedWarning show={unsavedWarningVisible} localHandleAlertStay={handleAlertStay} localHandleAlertLeave={handleAlertLeave} />
     </div>
   );
