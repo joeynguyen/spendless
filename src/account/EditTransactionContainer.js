@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import { bindActionCreators } from 'redux';
 import EditTransaction from './EditTransaction.js';
-import { toggleEditTransaction, selectActiveTransaction, updateAccountTransactions } from './TransactionsActions.js';
+import { toggleEditTransaction, selectActiveTransaction } from './TransactionsActions.js';
 
 // PouchDB is loaded externally through a script tag in the browser
 const db = new PouchDB('transactions');
@@ -13,7 +13,6 @@ class EditTransactionContainer extends Component {
     editTransactionVisible: PropTypes.bool.isRequired,
     doToggleEditTransaction: PropTypes.func.isRequired,
     doSelectActiveTransaction: PropTypes.func.isRequired,
-    doUpdateAccountTransactions: PropTypes.func.isRequired,
     fields: PropTypes.object.isRequired,
     pristine: PropTypes.bool.isRequired,
   }
@@ -75,7 +74,6 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     doToggleEditTransaction: toggleEditTransaction,
     doSelectActiveTransaction: selectActiveTransaction,
-    doUpdateAccountTransactions: updateAccountTransactions,
   }, dispatch);
 }
 
