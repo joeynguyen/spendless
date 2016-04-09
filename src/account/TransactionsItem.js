@@ -10,9 +10,18 @@ const TransactionsItem = ({ transaction, unsaved, doToggleEditTransaction, doSel
   const dateFormatted = moment(transaction.date, 'YYYY-MM-DD').format('MM/DD/YYYY');
   // use this code if this app ever supports international currency
   // const transactionAmount = Number(transaction.amount).toLocaleString('en-US', { style: 'currency', currency: 'USD'});
-  let rowStyle = {};
+  let rowStyle;
+  let manageButtons;
   if (unsaved) {
     rowStyle = {backgroundColor: 'yellow'};
+  } else {
+    // don't show for uploaded/unsaved transactions
+    manageButtons = (
+      <div>
+        <td><i className="fa fa-fw fa-lg fa-pencil" onClick={handleEditClick}></i></td>
+        <td><i className="fa fa-fw fa-lg fa-remove" ></i></td>
+      </div>
+    );
   }
   let note;
   if (transaction.notes !== '') {
@@ -29,8 +38,7 @@ const TransactionsItem = ({ transaction, unsaved, doToggleEditTransaction, doSel
       <td>{transaction.category}</td>
       <td>${transaction.amount}</td>
       <td>{note}</td>
-      <td><i className="fa fa-fw fa-lg fa-pencil" onClick={handleEditClick}></i></td>
-      <td><i className="fa fa-fw fa-lg fa-remove" ></i></td>
+      { manageButtons }
     </tr>
   );
 };
