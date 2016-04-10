@@ -11,12 +11,14 @@ const TransactionsItem = ({ handleDeleteTransactions, transaction, unsaved, doTo
   // use this code if this app ever supports international currency
   // const transactionAmount = Number(transaction.amount).toLocaleString('en-US', { style: 'currency', currency: 'USD'});
   let rowStyle;
+  let selectCheckbox;
   let editButton;
   let deleteButton;
   if (unsaved) {
     rowStyle = {backgroundColor: 'yellow'};
   } else {
     // don't show for uploaded/unsaved transactions
+    selectCheckbox = <input type="checkbox" />;
     editButton = <td><i className="fa fa-fw fa-lg fa-pencil" onClick={handleEditClick}></i></td>;
     deleteButton = <td><i className="fa fa-fw fa-lg fa-remove" onClick={handleDeleteTransactions}></i></td>;
   }
@@ -30,7 +32,7 @@ const TransactionsItem = ({ handleDeleteTransactions, transaction, unsaved, doTo
   }
   return (
     <tr style={rowStyle}>
-      <td><input type="checkbox" /></td>
+      <td>{selectCheckbox}</td>
       <td>{dateFormatted}</td>
       <td>{transaction.description}</td>
       <td>{transaction.category}</td>
