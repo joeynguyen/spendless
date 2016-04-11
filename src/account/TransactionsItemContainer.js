@@ -24,10 +24,8 @@ class TransactionsItemContainer extends Component {
   render() {
     return (
       <TransactionsItem
-        transaction={this.props.transaction}
-        unsaved={this.props.unsaved}
-        doToggleEditTransaction={this.props.doToggleEditTransaction}
-        doSelectActiveTransaction={this.props.doSelectActiveTransaction}
+        /* pass all props including redux-form field props */
+        {...this.props}
         handleDeleteTransactions={this.handleDeleteTransactions}
       />
     );

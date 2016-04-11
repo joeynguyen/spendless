@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import moment from 'moment';
 
-const TransactionsItem = ({ handleDeleteTransactions, transaction, unsaved, doToggleEditTransaction, doSelectActiveTransaction }) => {
+const TransactionsItem = ({ handleDeleteTransactions, transaction, unsaved, doToggleEditTransaction, doSelectActiveTransaction, ...reduxFormCheckbox }) => {
   const handleEditClick = function() {
     doToggleEditTransaction();
     doSelectActiveTransaction(transaction);
@@ -18,7 +18,7 @@ const TransactionsItem = ({ handleDeleteTransactions, transaction, unsaved, doTo
     rowStyle = {backgroundColor: 'yellow'};
   } else {
     // don't show for uploaded/unsaved transactions
-    selectCheckbox = <input type="checkbox" />;
+    selectCheckbox = <input type="checkbox" {...reduxFormCheckbox} />;
     editButton = <td><i className="fa fa-fw fa-lg fa-pencil" onClick={handleEditClick}></i></td>;
     deleteButton = <td><i className="fa fa-fw fa-lg fa-remove" onClick={handleDeleteTransactions}></i></td>;
   }
