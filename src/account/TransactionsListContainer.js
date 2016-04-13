@@ -12,7 +12,6 @@ class TransactionListContainer extends Component {
     uploadedTransactions: PropTypes.arrayOf(React.PropTypes.object),
     doFetchAccountTransactions: PropTypes.func.isRequired,
     doResetAccountTransactions: PropTypes.func.isRequired,
-    manageTransactionsListForm: PropTypes.object.isRequired,
   }
   componentWillMount() {
     this.props.doFetchAccountTransactions(this.props.accountId);
@@ -29,7 +28,6 @@ class TransactionListContainer extends Component {
   }
 
   render() {
-    console.log('manageTransactionsListForm', this.props.manageTransactionsListForm);
     return (
       <TransactionsList
         editTransactionVisible={this.props.editTransactionVisible}
@@ -49,7 +47,6 @@ function mapStateToProps(state) {
     accountTransactions: state.accountTransactions,
     editTransactionVisible: state.editTransactionVisible,
     uploadedTransactions: state.uploadedTransactions,
-    manageTransactionsListForm: state.form.ManageTransactionsList,
   };
 }
 
