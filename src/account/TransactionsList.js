@@ -9,7 +9,7 @@ class TransactionsList extends Component {
     editTransactionVisible: PropTypes.bool.isRequired,
     accountTransactions: PropTypes.arrayOf(React.PropTypes.object),
     uploadedTransactions: PropTypes.arrayOf(React.PropTypes.object),
-    fields: PropTypes.arrayOf(React.PropTypes.object),
+    fields: PropTypes.object.isRequired,
   }
 
   render() {
