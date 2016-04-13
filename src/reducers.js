@@ -53,6 +53,7 @@ const rootReducer = combineReducers({
           return state;
       }
     },
+    ManageTransactionsList: state => state,
   }),
 });
 
