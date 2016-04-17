@@ -38,7 +38,7 @@ class TransactionsList extends Component {
             }
             {
               this.props.accountTransactions.map(itemData =>
-                <TransactionsItemContainer key={itemData._id} transaction={itemData} {...this.props.fields[itemData._rev]} unsaved={false} />
+                <TransactionsItemContainer key={itemData._id} transaction={itemData} {...this.props.fields[itemData._id]} unsaved={false} />
               )
             }
           </tbody>

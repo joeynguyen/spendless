@@ -33,10 +33,7 @@ class TransactionListContainer extends Component {
         editTransactionVisible={this.props.editTransactionVisible}
         uploadedTransactions={this.props.uploadedTransactions}
         accountTransactions={this.props.accountTransactions}
-        /* Using _rev instead of _id because reduxForm has an
-          issue accepting a format like 2016-04-09T05:13:15.063Z6
-          because it thinks the content after  the period (.) is a property */
-        fields={this.props.accountTransactions.map(transaction => transaction._rev)}
+        fields={this.props.accountTransactions.map(transaction => transaction._id)}
       />
     );
   }

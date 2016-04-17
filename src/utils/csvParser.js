@@ -48,8 +48,10 @@ export default function parseCSV(selectedFile, accountId) {
             // date has to be in this format for input[type="date"] to read it
             const dateFormatted = moment(newTransObj['Trans. Date'], 'MM-DD-YYYY').format('YYYY-MM-DD');
             return {
-              // included 'i' index to prevent duplicate _id error
-              '_id': new Date().toISOString() + i,
+              // included 'i' index to prevent duplicate _id error but still
+              // preserve valid date format in case we need to use it later
+              // PouchDB requires that _id must be a string type
+              '_id': (new Date().getTime() + i).toString(),
               'accountId': accountId,
               'amount': Number(newTransObj.Amount).toFixed(2), // 2 decimal places for US Currency
               'category': newTransObj.Category,
