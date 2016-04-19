@@ -28,12 +28,21 @@ class TransactionListContainer extends Component {
   }
 
   render() {
+    const formCheckboxValues = this.props.accountTransactions.reduce((previousValue, currentValue) =>
+      Object.assign(previousValue, {[currentValue._id.toString()]: false})
+    , {});
+    console.log('formCheckboxValues', formCheckboxValues);
+    const formInitialValues = {
+      initialValues: formCheckboxValues
+    };
+    console.log('formInitialValues', formInitialValues);
     return (
       <TransactionsList
         editTransactionVisible={this.props.editTransactionVisible}
         uploadedTransactions={this.props.uploadedTransactions}
         accountTransactions={this.props.accountTransactions}
         fields={this.props.accountTransactions.map(transaction => transaction._id)}
+        {...formInitialValues}
       />
     );
   }

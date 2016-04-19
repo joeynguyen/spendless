@@ -6,6 +6,7 @@ import { Button } from 'react-bootstrap';
 
 class DeleteTransactionsButton extends Component {
   static propTypes = {
+    accountTransactions: PropTypes.arrayOf(React.PropTypes.object),
     manageTransactionsListForm: PropTypes.object.isRequired,
   }
   // Save transactions uploaded from CSV to database
@@ -16,15 +17,12 @@ class DeleteTransactionsButton extends Component {
 
     console.log('Trying to delete...');
     console.log('manageTransactionsListForm', manageTransactionsListForm);
-    Object.keys(manageTransactionsListForm).forEach(item => {
-      if (manageTransactionsListForm[item] !== undefined && manageTransactionsListForm[item]._isFieldValue) {
-        console.log('key ', item, ': ', manageTransactionsListForm[item]);
-      }
+    const selectedTransactionsIds = Object.keys(manageTransactionsListForm).filter(item => {
+      const currentKey = manageTransactionsListForm[item];
+      return (currentKey !== undefined && currentKey._isFieldValue && currentKey.value ? item : '');
     });
-    const selectedTransactions = Object.keys(manageTransactionsListForm).filter(item => {
-      if (manageTransactionsListForm[item] !== undefined && manageTransactionsListForm[item]._isFieldValue) {
-        return item;
-      }
+    const selectedTransactions = selectedTransactionsIds.map(id => {
+      return this.props.accountTransactions.find(transaction => transaction._id === id);
     });
     console.log('selectedTransactions', selectedTransactions);
     // db
@@ -41,7 +39,6 @@ class DeleteTransactionsButton extends Component {
     //   });
   }
   render() {
-    console.log('manageTransactionsListForm', this.props.manageTransactionsListForm);
     return (
       <Button
         onClick={this.handleDelete}
@@ -57,6 +54,7 @@ class DeleteTransactionsButton extends Component {
 
 function mapStateToProps(state) {
   return {
+    accountTransactions: state.accountTransactions,
     manageTransactionsListForm: state.form.ManageTransactionsList,
   };
 }
