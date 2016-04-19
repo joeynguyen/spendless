@@ -10,6 +10,7 @@ import AccountDeletedConfirmVisibleReducer from './manage-accounts/AccountDelete
 import AccountDeletedNameReducer from './manage-accounts/AccountDeletedNameReducer.js';
 import UnsavedWarningVisibleReducer from './account/UnsavedWarningVisibleReducer.js';
 import NextRoutePathReducer from './app/NextRoutePathReducer.js';
+import { RESET_CURRENT_TRANSACTIONS } from './account/TransactionsActions.js';
 
 const rootReducer = combineReducers({
   accounts: AccountsReducer,
@@ -53,7 +54,24 @@ const rootReducer = combineReducers({
           return state;
       }
     },
-    ManageTransactionsList: state => state,
+    ManageTransactionsList: (state, action) => {
+      switch (action.type) {
+        case RESET_CURRENT_TRANSACTIONS:
+          // Identify transaction ids on currently displayed account
+          const currentTransactionIds = Object.keys(state).filter(item => {
+            const currentKey = state[item];
+            return (currentKey !== undefined && currentKey._isFieldValue);
+          });
+          const stateCopy = Object.assign({}, state);
+          // Remove currentTransactionIds from ManageTransactionsList stateCopy
+          currentTransactionIds.forEach(item => {
+            delete stateCopy[item];
+          });
+          return stateCopy;
+        default:
+          return state;
+      }
+    },
   }),
 });
 

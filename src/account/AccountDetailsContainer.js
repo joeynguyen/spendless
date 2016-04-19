@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { resetUploadedTransactions } from './TransactionsActions.js';
+import { resetUploadedTransactions, resetCurrentTransactions } from './TransactionsActions.js';
 import { toggleUnsavedWarning } from './AccountsActions.js';
 import { storeNextRoutePath } from '../app/AppActions.js';
 import AccountDetails from './AccountDetail.js';
@@ -13,6 +13,7 @@ class AccountDetailsContainer extends Component {
     route: PropTypes.object.isRequired,
     uploadedTransactions: PropTypes.arrayOf(React.PropTypes.object),
     doResetUploadedTransactions: PropTypes.func.isRequired,
+    doResetCurrentTransactions: PropTypes.func.isRequired,
     doToggleUnsavedWarning: PropTypes.func.isRequired,
     unsavedWarningVisible: PropTypes.bool.isRequired,
     doStoreNextRoutePath: PropTypes.func.isRequired,
@@ -27,6 +28,7 @@ class AccountDetailsContainer extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.params.id !== prevProps.params.id) {
       this.context.router.setRouteLeaveHook(this.props.route, this.routerWillLeave);
+      this.props.doResetCurrentTransactions();
     }
   }
   routerWillLeave = (nextLocation) => {
@@ -95,6 +97,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     doResetUploadedTransactions: resetUploadedTransactions,
+    doResetCurrentTransactions: resetCurrentTransactions,
     doToggleUnsavedWarning: toggleUnsavedWarning,
     doStoreNextRoutePath: storeNextRoutePath
   }, dispatch);
