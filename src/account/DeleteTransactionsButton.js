@@ -16,27 +16,22 @@ class DeleteTransactionsButton extends Component {
     const { manageTransactionsListForm } = this.props;
 
     console.log('Trying to delete...');
-    console.log('manageTransactionsListForm', manageTransactionsListForm);
     const selectedTransactionsIds = Object.keys(manageTransactionsListForm).filter(item => {
       const currentKey = manageTransactionsListForm[item];
-      return (currentKey !== undefined && currentKey._isFieldValue && currentKey.value ? item : '');
+      return (currentKey !== undefined && currentKey._isFieldValue && currentKey.value);
     });
     const selectedTransactions = selectedTransactionsIds.map(id => {
+      // find transaction objects that correspond to each selected id
       return this.props.accountTransactions.find(transaction => transaction._id === id);
+    }).map(item => {
+      // mark transaction as ready for deletion
+      return Object.assign({}, item, {_deleted: true});
     });
-    console.log('selectedTransactions', selectedTransactions);
-    // db
-    //   .bulkDocs(this.props.uploadedTransactions)
-    //   .then(() => {
-    //     // Update UI with new saved transactions
-    //     this.props.doUpdateAccountTransactions(this.props.uploadedTransactions);
-    //   })
-    //   .then(() => {
-    //     // Remove unsaved transactions from UI
-    //     this.props.doResetUploadedTransactions();
-    //   }).catch(function(err) {
-    //     console.log(err);
-    //   });
+
+    db.bulkDocs(selectedTransactions)
+      .catch(function(err) {
+        console.log(err);
+      });
   }
   render() {
     return (
