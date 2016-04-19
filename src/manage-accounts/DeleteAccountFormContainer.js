@@ -25,17 +25,19 @@ class DeleteAccountFormContainer extends Component {
 
   handleDeleteAccount = (e) => {
     e.preventDefault();
-    const self = this;
     // Remove account from DB
-    db.remove(this.props.account).then(function(result) {
-      console.log('Successfully deleted account', result);
-      self.props.doStoreDeletedAccountName(self.props.account.name);
-    }).then(function() {
-      self.props.doToggleAccountDeletedConfirm();
-    }).catch(function(err) {
-      console.log('Error trying to delete account', err);
-      // TODO: Add error message after delete fail
-    });
+    db.remove(this.props.account)
+      .then(result => {
+        console.log('Successfully deleted account', result);
+        this.props.doStoreDeletedAccountName(this.props.account.name);
+      })
+      .then(() => {
+        this.props.doToggleAccountDeletedConfirm();
+      })
+      .catch(err => {
+        console.log('Error trying to delete account', err);
+        // TODO: Add error message after delete fail
+      });
   }
 
   render() {
