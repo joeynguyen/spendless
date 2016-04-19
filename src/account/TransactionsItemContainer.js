@@ -14,11 +14,14 @@ class TransactionsItemContainer extends Component {
   handleDeleteTransactions = () => {
     // PouchDB is loaded externally through a script tag in the browser
     const db = new PouchDB('transactions');
-    const deletedTransaction = Object.assign({}, this.props.transaction, {_deleted: true});
 
-    db.bulkDocs([].concat(deletedTransaction))
+    db.remove(this.props.transaction)
+      .then(function(result) {
+        console.log('Successfully deleted transaction', result);
+      })
       .catch(function(err) {
-        console.log(err);
+        console.log('Error trying to delete transaction', err);
+        // TODO: Add error message after delete fail
       });
   }
   render() {
