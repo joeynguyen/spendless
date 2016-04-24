@@ -20,7 +20,7 @@ const EditTransaction = (props) => {
   if (alertVisible) {
     alertMessage = (
       <Alert bsStyle="success" onDismiss={handleCloseModal} dismissAfter={2000}>
-        <p>Account updated successfully!</p>
+        <p>Transaction updated successfully!</p>
       </Alert>
     );
   }

@@ -8,6 +8,7 @@ class TransactionListContainer extends Component {
   static propTypes = {
     accountId: PropTypes.string.isRequired,
     accountTransactions: PropTypes.arrayOf(React.PropTypes.object),
+    addTransactionVisible: PropTypes.bool.isRequired,
     editTransactionVisible: PropTypes.bool.isRequired,
     uploadedTransactions: PropTypes.arrayOf(React.PropTypes.object),
     doFetchAccountTransactions: PropTypes.func.isRequired,
@@ -38,6 +39,7 @@ class TransactionListContainer extends Component {
     console.log('formInitialValues', formInitialValues);
     return (
       <TransactionsList
+        addTransactionVisible={this.props.addTransactionVisible}
         editTransactionVisible={this.props.editTransactionVisible}
         uploadedTransactions={this.props.uploadedTransactions}
         accountTransactions={this.props.accountTransactions}
@@ -51,6 +53,7 @@ class TransactionListContainer extends Component {
 function mapStateToProps(state) {
   return {
     accountTransactions: state.accountTransactions,
+    addTransactionVisible: state.addTransactionVisible,
     editTransactionVisible: state.editTransactionVisible,
     uploadedTransactions: state.uploadedTransactions,
   };

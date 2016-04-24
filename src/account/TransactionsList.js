@@ -2,10 +2,12 @@ import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import TransactionsItemContainer from './TransactionsItemContainer.js';
 import EditTransactionContainer from './EditTransactionContainer.js';
+import AddTransactionContainer from './AddTransactionContainer.js';
 import styles from './Transactions.module.css';
 
 class TransactionsList extends Component {
   static propTypes = {
+    addTransactionVisible: PropTypes.bool.isRequired,
     editTransactionVisible: PropTypes.bool.isRequired,
     accountTransactions: PropTypes.arrayOf(React.PropTypes.object),
     uploadedTransactions: PropTypes.arrayOf(React.PropTypes.object),
@@ -14,8 +16,12 @@ class TransactionsList extends Component {
 
   render() {
     let editTransactionContainer;
+    let addTransactionContainer;
     if (this.props.editTransactionVisible) {
       editTransactionContainer = (<EditTransactionContainer />);
+    }
+    if (this.props.addTransactionVisible) {
+      addTransactionContainer = (<AddTransactionContainer />);
     }
     return (
       <div>
@@ -43,6 +49,7 @@ class TransactionsList extends Component {
             }
           </tbody>
         </table>
+        { addTransactionContainer }
         { editTransactionContainer }
       </div>
     );
