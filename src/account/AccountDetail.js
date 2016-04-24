@@ -3,6 +3,7 @@ import FileUpload from './FileUpload.js';
 import TransactionsListContainer from './TransactionsListContainer.js';
 import SaveButton from './SaveButton.js';
 import DeleteTransactionsButton from './DeleteTransactionsButton.js';
+import AddTransactionButton from './AddTransactionButton.js';
 import UnsavedWarning from './UnsavedWarning.js';
 import styles from './Account.module.css';
 
@@ -51,6 +52,8 @@ const AccountDetails = ({ accounts, params, unsavedWarningVisible, handleAlertSt
       <SaveButton />
       {' '}
       <DeleteTransactionsButton />
+      <br />
+      <AddTransactionButton />
       <TransactionsListContainer accountId={params.id} />
       <UnsavedWarning show={unsavedWarningVisible} localHandleAlertStay={handleAlertStay} localHandleAlertLeave={handleAlertLeave} />
     </div>
