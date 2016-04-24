@@ -50,7 +50,7 @@ const EditAccountForm = ({ fields, pristine, toggleSettings, toggleConfirmDelete
         <Button
           disabled={pristine}
           onClick={handleUpdateAccount}
-          bsStyle="success"
+          bsStyle="primary"
         >Update</Button>
         {' '}
         <Button

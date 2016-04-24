@@ -61,7 +61,7 @@ class DeleteAccountFormContainer extends Component {
           <div className="col-xs-6">
             <ButtonInput
               disabled={this.state.confirmDeleteText !== 'DELETE'}
-              bsStyle="success"
+              bsStyle="primary"
               groupClassName="horizontal-button-group"
               buttonAfter={cancelButton}
               type="submit"
