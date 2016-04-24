@@ -17,7 +17,7 @@ const AddTransaction = (props) => {
 
   if (alertVisible) {
     alertMessage = (
-      <Alert bsStyle="success" onDismiss={handleCloseModal} dismissAfter={2000}>
+      <Alert bsStyle="success" onDismiss={handleCloseModal} dismissAfter={1500}>
         <p>Transaction added successfully!</p>
       </Alert>
     );

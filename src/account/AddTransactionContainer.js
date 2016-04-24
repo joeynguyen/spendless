@@ -21,6 +21,8 @@ class AddTransactionContainer extends Component {
   handleSaveTransaction = () => {
     // PouchDB is loaded externally through a script tag in the browser
     const db = new PouchDB('transactions');
+    const notesValue = (this.props.fields.notes.value !== undefined) ? this.props.fields.notes.value : '';
+
     const newTransactionObj = {
       _id: (new Date().getTime()).toString(),
       accountId: this.props.accountId,
@@ -28,18 +30,17 @@ class AddTransactionContainer extends Component {
       category: this.props.fields.category.value,
       date: this.props.fields.date.value,
       description: this.props.fields.description.value,
-      notes: this.props.fields.notes.value,
+      notes: notesValue,
     };
-    console.log('newTransactionObj', newTransactionObj);
 
     // Add account to DB
-    // db.put(newTransactionObj).then(result => {
-    //   console.log('Successfully added transaction', result);
-    //   this.setState({alertVisible: true}); // will autohide based on dismissAfter attr of Alert component
-    // }).catch(err => {
-    //   console.log(err);
-    //   // TODO: Add error message if add fails
-    // });
+    db.put(newTransactionObj).then(result => {
+      console.log('Successfully added transaction', result);
+      this.setState({alertVisible: true}); // will autohide based on dismissAfter attr of Alert component
+    }).catch(err => {
+      console.log(err);
+      // TODO: Add error message if add fails
+    });
   }
 
   render() {
