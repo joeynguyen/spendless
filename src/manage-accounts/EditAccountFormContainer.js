@@ -30,17 +30,16 @@ class EditAccountFormContainer extends Component {
   }
 
   handleUpdateAccount = () => {
-    const self = this;
     const newAccountObj = Object.assign({}, this.props.account, {
       name: this.props.fields.accountName.value,
       type: this.props.fields.accountType.value,
       company: this.props.fields.accountCompany.value,
     });
     // Update account in DB
-    db.put(newAccountObj).then(function(result) {
+    db.put(newAccountObj).then(result => {
       console.log('Successfully updated account', result);
-      self.setState({alertVisible: true});
-    }).catch(function(err) {
+      this.setState({alertVisible: true});
+    }).catch(err => {
       console.log(err);
       // TODO: Add error message after update fail
     });

@@ -25,16 +25,15 @@ class AddAccountFormContainer extends Component {
       'type': this.props.fields.accountType.value,
       'company': this.props.fields.accountCompany.value,
     };
-    const self = this;
 
     // Save account to DB
-    db.put(newAccount).then(function(result) {
+    db.put(newAccount).then(result => {
       console.log('Successfully added new account', result);
       // Reset AddAccount form fields
-      self.props.resetForm();
-      self.setState({alertVisible: true});
+      this.props.resetForm();
+      this.setState({alertVisible: true});
       // TODO: Add success message after successful submit
-    }).catch(function(err) {
+    }).catch(err => {
       console.log('Error trying to add account', err);
       // TODO: Add error message after submit fail
     });
