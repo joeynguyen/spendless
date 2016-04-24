@@ -26,7 +26,7 @@ class AddTransactionContainer extends Component {
     const newTransactionObj = {
       _id: (new Date().getTime()).toString(),
       accountId: this.props.accountId,
-      amount: this.props.fields.amount.value,
+      amount: Number(this.props.fields.amount.value).toFixed(2),
       category: this.props.fields.category.value,
       date: this.props.fields.date.value,
       description: this.props.fields.description.value,

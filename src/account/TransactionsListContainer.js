@@ -32,11 +32,9 @@ class TransactionListContainer extends Component {
     const formCheckboxValues = this.props.accountTransactions.reduce((previousValue, currentValue) =>
       Object.assign(previousValue, {[currentValue._id.toString()]: false})
     , {});
-    console.log('formCheckboxValues', formCheckboxValues);
     const formInitialValues = {
       initialValues: formCheckboxValues
     };
-    console.log('formInitialValues', formInitialValues);
     return (
       <TransactionsList
         accountId={this.props.accountId}

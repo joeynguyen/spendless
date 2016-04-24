@@ -87,10 +87,11 @@ export function deleteAccountTransactions(transactions) {
   };
 }
 
-export function updateAccountTransactions(uploadedTransactions) {
+export function updateAccountTransactions(transactions) {
+  syncDB();
   return {
     type: UPDATE_ACCOUNT_TRANSACTIONS,
-    payload: uploadedTransactions
+    payload: transactions
   };
 }
 
