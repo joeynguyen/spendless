@@ -27,6 +27,7 @@ const EditTransaction = (props) => {
   return (
     <Modal
       show={editTransactionVisible}
+      backdrop="static"
       onHide={handleCloseModal}
     >
       <Modal.Header closeButton>

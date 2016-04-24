@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Modal, Button, Input, Alert } from 'react-bootstrap';
+import { Modal, Button, ButtonInput, Input, Alert } from 'react-bootstrap';
 
 const AddTransaction = (props) => {
   const {
@@ -7,7 +7,7 @@ const AddTransaction = (props) => {
     doToggleAddTransaction,
     pristine,
     alertVisible,
-    handleSaveTransaction,
+    doSubmit,
   } = props;
   const { date, description, category, amount, notes } = props.fields;
   const handleCloseModal = function() {
@@ -25,8 +25,10 @@ const AddTransaction = (props) => {
   return (
     <Modal
       show={addTransactionVisible}
+      backdrop="static"
       onHide={handleCloseModal}
     >
+      <form onSubmit={doSubmit}>
       <Modal.Header closeButton>
         <Modal.Title>Add Transaction</Modal.Title>
       </Modal.Header>
@@ -36,22 +38,30 @@ const AddTransaction = (props) => {
             <Input
               type="text"
               label="Description"
+              bsStyle={description.touched && description.invalid ? 'error' : null}
+              help={description.touched ? description.error : ''}
               {...description}
             />
             <Input
               type="date"
               label="Date"
+              bsStyle={date.touched && date.invalid ? 'error' : null}
+              help={date.touched ? date.error : ''}
               {...date}
             />
             <Input
               type="text"
               label="Category"
+              bsStyle={category.touched && category.invalid ? 'error' : null}
+              help={category.touched ? category.error : ''}
               {...category}
             />
             <Input
               type="number"
               addonBefore="$"
               label="Amount"
+              bsStyle={amount.touched && amount.invalid ? 'error' : null}
+              help={amount.touched ? amount.error : ''}
               {...amount}
             />
             <Input
@@ -66,16 +76,17 @@ const AddTransaction = (props) => {
       </Modal.Body>
       <Modal.Footer>
         <div className="form-group">
-          <Button
-            disabled={pristine}
-            onClick={handleSaveTransaction}
+          <ButtonInput
             bsStyle="primary"
-          >Save</Button>
+            type="submit"
+            disabled={pristine}
+            value="Save" />
           {' '}
           <Button onClick={handleCloseModal}>Cancel</Button>
         </div>
         { alertMessage }
       </Modal.Footer>
+      </form>
     </Modal>
   );
 };

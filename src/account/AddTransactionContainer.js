@@ -10,6 +10,7 @@ class AddTransactionContainer extends Component {
     addTransactionVisible: PropTypes.bool.isRequired,
     doToggleAddTransaction: PropTypes.func.isRequired,
     fields: PropTypes.object.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
     pristine: PropTypes.bool.isRequired,
   }
 
@@ -30,6 +31,7 @@ class AddTransactionContainer extends Component {
       notes: this.props.fields.notes.value,
     };
     console.log('newTransactionObj', newTransactionObj);
+
     // Add account to DB
     // db.put(newTransactionObj).then(result => {
     //   console.log('Successfully added transaction', result);
@@ -41,6 +43,7 @@ class AddTransactionContainer extends Component {
   }
 
   render() {
+    const reduxFormHandleSubmit = this.props.handleSubmit(this.handleSaveTransaction);
     return (
       <AddTransaction
         addTransactionVisible={this.props.addTransactionVisible}
@@ -48,10 +51,29 @@ class AddTransactionContainer extends Component {
         fields={this.props.fields}
         pristine={this.props.pristine}
         alertVisible={this.state.alertVisible}
-        handleSaveTransaction={this.handleSaveTransaction}
+        doSubmit={reduxFormHandleSubmit}
       />
     );
   }
+}
+
+function validateForm(values) {
+  const errors = {};
+
+  if (!values.date) {
+    errors.date = 'Enter a date';
+  }
+  if (!values.description) {
+    errors.description = 'Enter a description';
+  }
+  if (!values.category) {
+    errors.category = 'Enter a category';
+  }
+  if (!values.amount) {
+    errors.amount = 'Enter an amount';
+  }
+
+  return errors;
 }
 
 function mapStateToProps(state) {
@@ -70,6 +92,7 @@ export default reduxForm(
   {
     form: 'AddTransaction',
     fields: ['date', 'description', 'category', 'amount', 'notes'],
+    validate: validateForm,
   },
   mapStateToProps,
   mapDispatchToProps
