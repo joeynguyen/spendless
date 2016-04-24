@@ -6,6 +6,7 @@ import { toggleAddTransaction } from './TransactionsActions.js';
 
 class AddTransactionContainer extends Component {
   static propTypes = {
+    accountId: PropTypes.string.isRequired,
     addTransactionVisible: PropTypes.bool.isRequired,
     doToggleAddTransaction: PropTypes.func.isRequired,
     fields: PropTypes.object.isRequired,
@@ -20,6 +21,8 @@ class AddTransactionContainer extends Component {
     // PouchDB is loaded externally through a script tag in the browser
     const db = new PouchDB('transactions');
     const newTransactionObj = {
+      _id: (new Date().getTime()).toString(),
+      accountId: this.props.accountId,
       amount: this.props.fields.amount.value,
       category: this.props.fields.category.value,
       date: this.props.fields.date.value,

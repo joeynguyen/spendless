@@ -7,6 +7,7 @@ import styles from './Transactions.module.css';
 
 class TransactionsList extends Component {
   static propTypes = {
+    accountId: PropTypes.string.isRequired,
     addTransactionVisible: PropTypes.bool.isRequired,
     editTransactionVisible: PropTypes.bool.isRequired,
     accountTransactions: PropTypes.arrayOf(React.PropTypes.object),
@@ -21,7 +22,7 @@ class TransactionsList extends Component {
       editTransactionContainer = (<EditTransactionContainer />);
     }
     if (this.props.addTransactionVisible) {
-      addTransactionContainer = (<AddTransactionContainer />);
+      addTransactionContainer = (<AddTransactionContainer accountId={this.props.accountId} />);
     }
     return (
       <div>

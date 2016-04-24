@@ -39,6 +39,7 @@ class TransactionListContainer extends Component {
     console.log('formInitialValues', formInitialValues);
     return (
       <TransactionsList
+        accountId={this.props.accountId}
         addTransactionVisible={this.props.addTransactionVisible}
         editTransactionVisible={this.props.editTransactionVisible}
         uploadedTransactions={this.props.uploadedTransactions}
