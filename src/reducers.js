@@ -5,6 +5,7 @@ import AccountTransactionsReducer from './account/AccountTransactionsReducer.js'
 import UploadedTransactionsReducer from './account/UploadedTransactionsReducer.js';
 import ManageAccountsVisibleReducer from './manage-accounts/ManageAccountsVisibleReducer.js';
 import EditTransactionVisibleReducer from './account/EditTransactionVisibleReducer.js';
+import AddTransactionVisibleReducer from './account/AddTransactionVisibleReducer.js';
 import ActiveTransactionReducer from './account/ActiveTransactionReducer.js';
 import AccountDeletedConfirmVisibleReducer from './manage-accounts/AccountDeletedConfirmVisibleReducer.js';
 import AccountDeletedNameReducer from './manage-accounts/AccountDeletedNameReducer.js';
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   activeTransaction: ActiveTransactionReducer,
   uploadedTransactions: UploadedTransactionsReducer,
   manageAccountsVisible: ManageAccountsVisibleReducer,
+  addTransactionVisible: AddTransactionVisibleReducer,
   editTransactionVisible: EditTransactionVisibleReducer,
   accountDeletedConfirmVisible: AccountDeletedConfirmVisibleReducer,
   accountDeletedName: AccountDeletedNameReducer,

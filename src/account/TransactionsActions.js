@@ -6,6 +6,7 @@ export const UPDATE_ACCOUNT_TRANSACTIONS = 'UPDATE_ACCOUNT_TRANSACTIONS';
 export const RESET_UPLOADED_TRANSACTIONS = 'RESET_UPLOADED_TRANSACTIONS';
 export const RESET_CURRENT_TRANSACTIONS = 'RESET_CURRENT_TRANSACTIONS';
 export const TOGGLE_EDIT_TRANSACTION = 'TOGGLE_EDIT_TRANSACTION';
+export const TOGGLE_ADD_TRANSACTION = 'TOGGLE_ADD_TRANSACTION';
 export const SELECT_ACTIVE_TRANSACTION = 'SELECT_ACTIVE_TRANSACTION';
 
 // PouchDB is loaded externally through a script tag in the browser
@@ -109,6 +110,12 @@ export function resetCurrentTransactions() {
 export function toggleEditTransaction() {
   return {
     type: TOGGLE_EDIT_TRANSACTION
+  };
+}
+
+export function toggleAddTransaction() {
+  return {
+    type: TOGGLE_ADD_TRANSACTION
   };
 }
 
