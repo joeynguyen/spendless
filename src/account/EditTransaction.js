@@ -71,7 +71,7 @@ const EditTransaction = (props) => {
           <Button
             disabled={pristine}
             onClick={handleUpdateTransaction}
-            bsStyle="success"
+            bsStyle="primary"
           >Update</Button>
           {' '}
           <Button onClick={handleCloseModal}>Cancel</Button>

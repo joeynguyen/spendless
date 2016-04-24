@@ -22,7 +22,6 @@ class EditTransactionContainer extends Component {
   }
 
   handleUpdateTransaction = () => {
-    const self = this;
     const newTransactionObj = Object.assign({}, this.props.activeTransaction, {
       amount: this.props.fields.amount.value,
       category: this.props.fields.category.value,
@@ -31,10 +30,10 @@ class EditTransactionContainer extends Component {
       notes: this.props.fields.notes.value,
     });
     // Update account in DB
-    db.put(newTransactionObj).then(function(result) {
+    db.put(newTransactionObj).then(result => {
       console.log('Successfully updated transaction', result);
-      self.setState({alertVisible: true}); // will autohide based on dismissAfter attr of Alert component
-    }).catch(function(err) {
+      this.setState({alertVisible: true}); // will autohide based on dismissAfter attr of Alert component
+    }).catch(err => {
       console.log(err);
       // TODO: Add error message after update fail
     });
