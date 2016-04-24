@@ -15,17 +15,16 @@ class DeleteTransactionsButton extends Component {
     const db = new PouchDB('transactions');
     const { manageTransactionsListForm } = this.props;
 
-    console.log('Trying to delete...');
+    // find Ids of each selected transaction
     const selectedTransactionsIds = Object.keys(manageTransactionsListForm).filter(item => {
       const currentKey = manageTransactionsListForm[item];
       return (currentKey !== undefined && currentKey._isFieldValue && currentKey.value);
     });
     const selectedTransactions = selectedTransactionsIds.map(id => {
       // find transaction objects that correspond to each selected id
-      return this.props.accountTransactions.find(transaction => transaction._id === id);
-    }).map(item => {
-      // mark transaction as ready for deletion
-      return Object.assign({}, item, {_deleted: true});
+      const transactionObject = this.props.accountTransactions.find(transaction => transaction._id === id);
+      // mark transaction object as ready for deletion
+      return Object.assign({}, transactionObject, {_deleted: true});
     });
 
     db.bulkDocs(selectedTransactions)
