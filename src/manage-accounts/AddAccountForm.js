@@ -3,14 +3,13 @@ import { ButtonInput, Collapse, Input, Alert } from 'react-bootstrap';
 
 const AddAccountForm = ({ hideAlert, alertVisible, doSubmit, fields, submitting }) => {
   // handleSubmit and fields are from redux-form
-  // const accountName = this.props.fields.accountName;
   const { accountName, accountType, accountCompany } = fields;
   let alertMessage;
   if (alertVisible) {
     alertMessage = (
       <div>
         <br />
-        <Alert bsStyle="success" onDismiss={hideAlert} dismissAfter={2000}>
+        <Alert bsStyle="success" onDismiss={hideAlert} dismissAfter={1500}>
           <span>Account added!</span>
         </Alert>
       </div>
