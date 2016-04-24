@@ -37,7 +37,7 @@ class SaveButton extends Component {
         bsSize="small"
         disabled={(this.props.uploadedTransactions.length === 0)}
       >
-        Save
+        Save Uploaded Transactions
       </Button>
     );
   }

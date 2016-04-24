@@ -1,8 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
 import { Button } from 'react-bootstrap';
-// import { updateAccountTransactions, resetUploadedTransactions } from '../account/TransactionsActions.js';
 
 class DeleteTransactionsButton extends Component {
   static propTypes = {
@@ -40,7 +38,7 @@ class DeleteTransactionsButton extends Component {
         bsSize="small"
         /* disabled={(this.props.uploadedTransactions.length === 0)} */
       >
-        Delete
+        Delete Selected Transactions
       </Button>
     );
   }
@@ -53,12 +51,4 @@ function mapStateToProps(state) {
   };
 }
 
-// function mapDispatchToProps(dispatch) {
-//   return bindActionCreators({
-//     doUpdateAccountTransactions: updateAccountTransactions,
-//     doResetUploadedTransactions: resetUploadedTransactions
-//   }, dispatch);
-// }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(DeleteTransactionsButton);
 export default connect(mapStateToProps)(DeleteTransactionsButton);
