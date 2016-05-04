@@ -24,9 +24,16 @@ npm run hot-server
 npm run start-hot
 ```
 
+## Sync accounts/transactions data
+Sync with a local PouchDB server to more easily see what's in your database. Navigate to http://127.0.0.1:5984/_utils after running the following command in a separate terminal window:
+
+```bash
+npm run db-server
+```
+
 ## Use
 
-Test the CSV parsing function by uploading one of the sample CSV files found inside the assets directory.
+Test the CSV upload functionality by uploading one of the sample CSV files found inside the assets directory. (Currently only supports Discover credit card CSVs. More financial institutions will be supported in the future.)
 
 *Note: requires a node version >= 4 and an npm version >= 2.*
 
