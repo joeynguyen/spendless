@@ -2,7 +2,6 @@
 'use strict';
 
 import webpack from 'webpack';
-import webpackTargetElectronRenderer from 'webpack-target-electron-renderer';
 import baseConfig from './webpack.config.base';
 
 const config = Object.create(baseConfig);
@@ -43,6 +42,6 @@ config.plugins.push(
   })
 );
 
-config.target = webpackTargetElectronRenderer(config);
+config.target = 'electron-renderer';
 
 module.exports = config;

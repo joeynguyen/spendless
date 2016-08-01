@@ -9,9 +9,10 @@ import reducers from './reducers.js';
 import './app.css';
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
+const store = createStoreWithMiddleware(reducers, window.devToolsExtension && window.devToolsExtension());
 
 render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
+  <Provider store={store}>
     <Router history={hashHistory}>
       {routes}
     </Router>

@@ -9,6 +9,26 @@ const BrowserWindow = electron.BrowserWindow; // Module to create native browser
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow = null;
 
+if (process.env.NODE_ENV === 'development') {
+  require('electron-debug')(); // eslint-disable-line global-require
+}
+
+const installExtensions = async () => {
+  if (process.env.NODE_ENV === 'development') {
+    const installer = require('electron-devtools-installer'); // eslint-disable-line global-require
+    const extensions = [
+      'REACT_DEVELOPER_TOOLS',
+      'REDUX_DEVTOOLS'
+    ];
+    const forceDownload = !!process.env.UPGRADE_EXTENSIONS;
+    for (const name of extensions) {
+      try {
+        await installer.default(installer[name], forceDownload);
+      } catch (e) {console.log(e);} // eslint-disable-line
+    }
+  }
+};
+
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
   // On OS X it is common for applications and their menu bar
@@ -20,7 +40,9 @@ app.on('window-all-closed', () => {
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
-app.on('ready', () => {
+app.on('ready', async () => {
+  await installExtensions();
+
   // Create the browser window.
   mainWindow = new BrowserWindow({width: 1200, height: 800});
 

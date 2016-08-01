@@ -1,7 +1,34 @@
-// only ES5 is allowed in this file
-require('babel-register');
+import path from 'path';
+import express from 'express';
+import webpack from 'webpack';
+import webpackMiddleware from 'webpack-dev-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
+import config from './webpack.config.development.js';
 
-// other babel configuration, if necessary
+const app = express();
+const compiler = webpack(config);
 
-// load your app
-const server = require('./devServer.js');
+const PORT = 3000;
+
+app.use(webpackMiddleware(compiler, {
+  publicPath: config.output.publicPath,
+  stats: {
+    colors: true
+  }
+}));
+
+app.use(webpackHotMiddleware(compiler));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'src', 'hot-dev-app.html'));
+});
+
+app.listen(PORT, 'localhost', err => {
+  if (err) {
+    console.log(err);
+    return;
+  }
+
+  console.log(`Listening at http://localhost:${PORT}`);
+});
+
