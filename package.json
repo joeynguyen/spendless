@@ -8,7 +8,8 @@
     "hot-server": "node -r babel-register server.js",
     "start": "cross-env NODE_ENV=production electron ./",
     "start-hot": "cross-env HOT=1 NODE_ENV=development electron -r babel-register -r babel-polyfill ./main",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha --reporter spec tools/testSetup.js \"src/**/*.test.js\"",
+    "test:watch": "npm run test -- --watch",
     "dev": "concurrently --kill-others \"npm run hot-server\" \"npm run start-hot\""
   },
   "repository": {
@@ -52,11 +53,13 @@
     "electron-debug": "^1.0.1",
     "electron-devtools-installer": "^2.0.0",
     "electron-prebuilt": "^1.2.8",
+    "enzyme": "^2.2.0",
     "eslint": "^1.10.3",
     "eslint-plugin-babel": "^3.0.0",
     "eslint-plugin-react": "^3.11.3",
     "expect": "^1.20.2",
     "express": "^4.13.3",
+    "jsdom": "^8.5.0",
     "json-loader": "^0.5.4",
     "mocha": "^2.5.3",
     "react-addons-test-utils": "^15.1.0",
