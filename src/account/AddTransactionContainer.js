@@ -1,3 +1,4 @@
+import PouchDB from 'pouchdb';
 import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import { bindActionCreators } from 'redux';

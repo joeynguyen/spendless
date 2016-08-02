@@ -1,3 +1,4 @@
+import PouchDB from 'pouchdb';
 export const FETCH_ACCOUNTS = 'FETCH_ACCOUNTS';
 export const UPDATE_ACCOUNTS = 'UPDATE_ACCOUNTS';
 export const DELETE_ACCOUNT = 'DELETE_ACCOUNT';

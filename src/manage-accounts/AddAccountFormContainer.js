@@ -1,3 +1,4 @@
+import PouchDB from 'pouchdb';
 import React, { Component, PropTypes } from 'react';
 import AddAccountForm from './AddAccountForm.js';
 import { reduxForm } from 'redux-form';
