@@ -40,4 +40,3 @@ describe('AccountsList', () => {
     expect(wrapper.find(AccountsListItem).length).toBe(3);
   });
 });
-
