@@ -48,15 +48,18 @@ const EditAccountForm = ({ fields, pristine, toggleSettings, toggleConfirmDelete
       </Collapse>
       <div className="form-group">
         <Button
+          name="update"
           disabled={pristine}
           onClick={handleUpdateAccount}
           bsStyle="primary"
         >Update</Button>
         {' '}
         <Button
+          name="cancel"
           onClick={toggleSettings}
         >Cancel</Button>
         <Button
+          name="delete-toggle"
           className="pull-right"
           disabled={confirmDeleteVisible}
           onClick={toggleConfirmDelete}
