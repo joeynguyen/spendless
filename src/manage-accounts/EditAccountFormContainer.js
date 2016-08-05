@@ -26,7 +26,9 @@ class EditAccountFormContainer extends Component {
     this.setState({ confirmDeleteVisible: !this.state.confirmDeleteVisible });
   }
 
-  handleUpdateAccount = () => {
+  handleUpdateAccount = (e) => {
+    e.preventDefault();
+
     const newAccountObj = Object.assign({}, this.props.account, {
       name: this.props.fields.accountName.value,
       type: this.props.fields.accountType.value,

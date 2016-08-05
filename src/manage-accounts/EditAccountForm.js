@@ -4,7 +4,7 @@ import { Collapse, Input, Button } from 'react-bootstrap';
 const EditAccountForm = ({ fields, pristine, toggleSettings, toggleConfirmDelete, confirmDeleteVisible, handleUpdateAccount }) => {
   const { accountName, accountType, accountCompany } = fields;
   return (
-    <form>
+    <form onSubmit={handleUpdateAccount}>
       <Input
         type="text"
         label="Name"
@@ -49,8 +49,8 @@ const EditAccountForm = ({ fields, pristine, toggleSettings, toggleConfirmDelete
       <div className="form-group">
         <Button
           name="update"
+          type="submit"
           disabled={pristine}
-          onClick={handleUpdateAccount}
           bsStyle="primary"
         >Update</Button>
         {' '}
