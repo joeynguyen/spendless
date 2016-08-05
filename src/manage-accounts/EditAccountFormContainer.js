@@ -1,7 +1,8 @@
 import PouchDB from 'pouchdb';
 import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
-import { Collapse, Alert } from 'react-bootstrap';
+import { Collapse } from 'react-bootstrap';
+import toastr from 'toastr';
 import EditAccountForm from './EditAccountForm.js';
 import DeleteAccountFormContainer from './DeleteAccountFormContainer.js';
 
@@ -18,12 +19,7 @@ class EditAccountFormContainer extends Component {
   }
 
   state = {
-    alertVisible: false,
     confirmDeleteVisible: false,
-  }
-
-  hideAlert = () => {
-    this.setState({alertVisible: false});
   }
 
   toggleConfirmDelete = () => {
@@ -39,7 +35,7 @@ class EditAccountFormContainer extends Component {
     // Update account in DB
     db.put(newAccountObj).then(result => {
       console.log('Successfully updated account', result);
-      this.setState({alertVisible: true});
+      toastr.success('Account saved', null, {timeOut: 1500});
     }).catch(err => {
       console.log(err);
       // TODO: Add error message after update fail
@@ -47,15 +43,6 @@ class EditAccountFormContainer extends Component {
   }
 
   render() {
-    let alertMessage;
-
-    if (this.state.alertVisible) {
-      alertMessage = (
-        <Alert bsStyle="success" onDismiss={this.hideAlert} dismissAfter={1500}>
-          <p>Account updated successfully!</p>
-        </Alert>
-      );
-    }
     return (
       <div>
         <EditAccountForm
@@ -66,7 +53,6 @@ class EditAccountFormContainer extends Component {
           toggleConfirmDelete={this.toggleConfirmDelete}
           handleUpdateAccount={this.handleUpdateAccount}
         />
-        { alertMessage }
         <Collapse in={this.state.confirmDeleteVisible}>
           <div>
             <DeleteAccountFormContainer
