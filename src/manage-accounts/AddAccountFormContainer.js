@@ -1,5 +1,6 @@
 import PouchDB from 'pouchdb';
 import React, { Component, PropTypes } from 'react';
+import toastr from 'toastr';
 import AddAccountForm from './AddAccountForm.js';
 import { reduxForm } from 'redux-form';
 
@@ -12,12 +13,6 @@ class AddAccountFormContainer extends Component {
     resetForm: PropTypes.func.isRequired,
     fields: PropTypes.object.isRequired,
     submitting: PropTypes.bool.isRequired,
-  }
-  state = {
-    alertVisible: false
-  }
-  hideAlert = () => {
-    this.setState({alertVisible: false});
   }
   localHandleSubmit = () => {
     const newAccount = {
@@ -32,10 +27,11 @@ class AddAccountFormContainer extends Component {
       console.log('Successfully added new account', result);
       // Reset AddAccount form fields
       this.props.resetForm();
-      this.setState({alertVisible: true});
+      toastr.success('Account added', null, {timeOut: 1500});
       // TODO: Add success message after successful submit
     }).catch(err => {
       console.log('Error trying to add account', err);
+      toastr.error('Restart the application and retry', 'Error adding account', {timeOut: 1500});
       // TODO: Add error message after submit fail
     });
   }
@@ -43,8 +39,6 @@ class AddAccountFormContainer extends Component {
     const reduxFormHandleSubmit = this.props.handleSubmit(this.localHandleSubmit);
     return (
       <AddAccountForm
-        alertVisible={this.state.alertVisible}
-        hideAlert={this.hideAlert}
         fields={this.props.fields}
         doSubmit={reduxFormHandleSubmit}
         submitting={this.props.submitting}

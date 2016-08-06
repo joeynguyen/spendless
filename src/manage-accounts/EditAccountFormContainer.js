@@ -37,9 +37,10 @@ class EditAccountFormContainer extends Component {
     // Update account in DB
     db.put(newAccountObj).then(result => {
       console.log('Successfully updated account', result);
-      toastr.success('Account saved', null, {timeOut: 1500});
+      toastr.success('Account updated', null, {timeOut: 1500});
     }).catch(err => {
       console.log(err);
+      toastr.error('Restart the application and retry', 'Error updating account', {timeOut: 1500});
       // TODO: Add error message after update fail
     });
   }

@@ -1,20 +1,9 @@
 import React, { PropTypes } from 'react';
-import { ButtonInput, Collapse, Input, Alert } from 'react-bootstrap';
+import { ButtonInput, Collapse, Input } from 'react-bootstrap';
 
-const AddAccountForm = ({ hideAlert, alertVisible, doSubmit, fields, submitting }) => {
+const AddAccountForm = ({ doSubmit, fields, submitting }) => {
   // handleSubmit and fields are from redux-form
   const { accountName, accountType, accountCompany } = fields;
-  let alertMessage;
-  if (alertVisible) {
-    alertMessage = (
-      <div>
-        <br />
-        <Alert bsStyle="success" onDismiss={hideAlert} dismissAfter={1500}>
-          <span>Account added!</span>
-        </Alert>
-      </div>
-    );
-  }
 
   return (
     <form onSubmit={doSubmit}>
@@ -84,14 +73,11 @@ const AddAccountForm = ({ hideAlert, alertVisible, doSubmit, fields, submitting 
         type="submit"
         disabled={submitting}
         value="Save" />
-      { alertMessage }
     </form>
   );
 };
 
 AddAccountForm.propTypes = {
-  hideAlert: PropTypes.func.isRequired,
-  alertVisible: PropTypes.bool.isRequired,
   doSubmit: PropTypes.func.isRequired,
   fields: PropTypes.object.isRequired,
   submitting: PropTypes.bool.isRequired,
