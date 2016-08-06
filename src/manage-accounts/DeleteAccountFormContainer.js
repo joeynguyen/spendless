@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Input, Button, ButtonInput } from 'react-bootstrap';
-import { toggleAccountDeletedConfirm, storeDeletedAccountName } from '../manage-accounts/ManageAccountsActions.js';
+import toastr from 'toastr';
 
 // PouchDB is loaded externally through a script tag in the browser
 const db = new PouchDB('accounts');
@@ -12,8 +12,6 @@ class DeleteAccountFormContainer extends Component {
   static propTypes = {
     account: PropTypes.object.isRequired,
     toggleConfirmDelete: PropTypes.func.isRequired,
-    doToggleAccountDeletedConfirm: PropTypes.func.isRequired,
-    doStoreDeletedAccountName: PropTypes.func.isRequired,
   }
 
   state = {
@@ -30,13 +28,11 @@ class DeleteAccountFormContainer extends Component {
     db.remove(this.props.account)
       .then(result => {
         console.log('Successfully deleted account', result);
-        this.props.doStoreDeletedAccountName(this.props.account.name);
-      })
-      .then(() => {
-        this.props.doToggleAccountDeletedConfirm();
+        toastr.success(this.props.account.name + ' deleted', null, {timeOut: 1500});
       })
       .catch(err => {
         console.log('Error trying to delete account', err);
+        toastr.error('Restart the application and retry', 'Error deleting account', {timeOut: 1500});
         // TODO: Add error message after delete fail
       });
   }
@@ -74,11 +70,4 @@ class DeleteAccountFormContainer extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    doToggleAccountDeletedConfirm: toggleAccountDeletedConfirm,
-    doStoreDeletedAccountName: storeDeletedAccountName,
-  }, dispatch);
-}
-
-export default connect(null, mapDispatchToProps)(DeleteAccountFormContainer);
+export default DeleteAccountFormContainer;

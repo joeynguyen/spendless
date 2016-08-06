@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import AddAccountContainer from './AddAccountContainer.js';
-import AccountDeletedConfirmModal from './AccountDeletedConfirmModal.js';
 import AccountsList from './AccountsList.js';
 
 const ManageAccounts = ({ manageAccountsVisible, doToggleManageAccounts, accounts }) => {
@@ -16,7 +15,6 @@ const ManageAccounts = ({ manageAccountsVisible, doToggleManageAccounts, account
         <Modal.Title>Manage Accounts</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <AccountDeletedConfirmModal />
         <div className="row">
           <div className="col-xs-8">
             <AddAccountContainer />

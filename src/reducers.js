@@ -7,8 +7,6 @@ import ManageAccountsVisibleReducer from './manage-accounts/ManageAccountsVisibl
 import EditTransactionVisibleReducer from './account/EditTransactionVisibleReducer.js';
 import AddTransactionVisibleReducer from './account/AddTransactionVisibleReducer.js';
 import ActiveTransactionReducer from './account/ActiveTransactionReducer.js';
-import AccountDeletedConfirmVisibleReducer from './manage-accounts/AccountDeletedConfirmVisibleReducer.js';
-import AccountDeletedNameReducer from './manage-accounts/AccountDeletedNameReducer.js';
 import UnsavedWarningVisibleReducer from './account/UnsavedWarningVisibleReducer.js';
 import NextRoutePathReducer from './app/NextRoutePathReducer.js';
 import { RESET_CURRENT_TRANSACTIONS } from './account/TransactionsActions.js';
@@ -21,8 +19,6 @@ const rootReducer = combineReducers({
   manageAccountsVisible: ManageAccountsVisibleReducer,
   addTransactionVisible: AddTransactionVisibleReducer,
   editTransactionVisible: EditTransactionVisibleReducer,
-  accountDeletedConfirmVisible: AccountDeletedConfirmVisibleReducer,
-  accountDeletedName: AccountDeletedNameReducer,
   unsavedWarningVisible: UnsavedWarningVisibleReducer,
   nextRoutePath: NextRoutePathReducer,
   form: formReducer.plugin({
