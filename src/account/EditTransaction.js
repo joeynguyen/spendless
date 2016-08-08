@@ -12,6 +12,7 @@ const EditTransaction = (props) => {
   const { date, description, category, amount, notes } = props.fields;
   const handleCloseModal = function() {
     doToggleEditTransaction();
+    // reset current transaction being edited to null
     doSelectActiveTransaction();
   };
 
@@ -44,6 +45,7 @@ const EditTransaction = (props) => {
             />
             <Input
               type="number"
+              step="0.01"
               addonBefore="$"
               label="Amount"
               {...amount}

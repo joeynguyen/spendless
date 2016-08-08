@@ -50,6 +50,7 @@ const AddTransaction = (props) => {
               />
               <Input
                 type="number"
+                step="0.01"
                 addonBefore="$"
                 label="Amount"
                 bsStyle={amount.touched && amount.invalid ? 'error' : null}
@@ -68,11 +69,11 @@ const AddTransaction = (props) => {
 
         <Modal.Footer>
           <div className="form-group">
-            <ButtonInput
+            <Button
               bsStyle="primary"
               type="submit"
               disabled={pristine}
-              value="Save" />
+            >Save</Button>
             {' '}
             <Button onClick={handleCloseModal}>Cancel</Button>
           </div>

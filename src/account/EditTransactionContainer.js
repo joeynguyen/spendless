@@ -21,7 +21,7 @@ class EditTransactionContainer extends Component {
 
   handleUpdateTransaction = () => {
     const newTransactionObj = Object.assign({}, this.props.activeTransaction, {
-      amount: this.props.fields.amount.value,
+      amount: Number(this.props.fields.amount.value).toFixed(2),
       category: this.props.fields.category.value,
       date: this.props.fields.date.value,
       description: this.props.fields.description.value,
@@ -31,6 +31,7 @@ class EditTransactionContainer extends Component {
     db.put(newTransactionObj).then(result => {
       console.log('Successfully updated transaction', result);
       toastr.success('Transaction updated', null, {timeOut: 1500});
+      this.props.doToggleEditTransaction();
     }).catch(err => {
       console.log(err);
       toastr.error('Restart the application and retry', 'Error updating transaction', {timeOut: 1500});

@@ -37,6 +37,7 @@ class AddTransactionContainer extends Component {
     db.put(newTransactionObj).then(result => {
       console.log('Successfully added transaction', result);
       toastr.success('Transaction added', null, {timeOut: 1500});
+      this.props.doToggleAddTransaction();
     }).catch(err => {
       console.log(err);
       toastr.error('Restart the application and retry', 'Error adding transaction', {timeOut: 1500});
