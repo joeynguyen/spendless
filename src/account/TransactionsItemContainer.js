@@ -7,6 +7,7 @@ import { toggleEditTransaction, selectActiveTransaction } from './TransactionsAc
 
 class TransactionsItemContainer extends Component {
   static propTypes = {
+    field: PropTypes.object.isRequired,
     transaction: PropTypes.object.isRequired,
     unsaved: PropTypes.bool.isRequired,
     doToggleEditTransaction: PropTypes.func.isRequired,
@@ -28,8 +29,11 @@ class TransactionsItemContainer extends Component {
   render() {
     return (
       <TransactionsItem
-        /* pass all props including redux-form field props */
-        {...this.props}
+        reduxFormCheckbox={this.props.field}
+        transaction={this.props.transaction}
+        doToggleEditTransaction={this.props.doToggleEditTransaction}
+        doSelectActiveTransaction={this.props.doSelectActiveTransaction}
+        unsaved={this.props.unsaved}
         handleDeleteTransactions={this.handleDeleteTransactions}
       />
     );
