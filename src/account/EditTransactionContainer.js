@@ -16,6 +16,7 @@ class EditTransactionContainer extends Component {
     doToggleEditTransaction: PropTypes.func.isRequired,
     doSelectActiveTransaction: PropTypes.func.isRequired,
     fields: PropTypes.object.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
     pristine: PropTypes.bool.isRequired,
   }
 
@@ -40,6 +41,7 @@ class EditTransactionContainer extends Component {
   }
 
   render() {
+    const reduxFormHandleSubmit = this.props.handleSubmit(this.handleUpdateTransaction);
     return (
       <EditTransaction
         editTransactionVisible={this.props.editTransactionVisible}
@@ -47,7 +49,7 @@ class EditTransactionContainer extends Component {
         doSelectActiveTransaction={this.props.doSelectActiveTransaction}
         fields={this.props.fields}
         pristine={this.props.pristine}
-        handleUpdateTransaction={this.handleUpdateTransaction}
+        doSubmit={reduxFormHandleSubmit}
       />
     );
   }

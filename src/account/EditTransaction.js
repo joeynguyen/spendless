@@ -7,7 +7,7 @@ const EditTransaction = (props) => {
     doToggleEditTransaction,
     doSelectActiveTransaction,
     pristine,
-    handleUpdateTransaction,
+    doSubmit,
   } = props;
   const { date, description, category, amount, notes } = props.fields;
   const handleCloseModal = function() {
@@ -22,6 +22,7 @@ const EditTransaction = (props) => {
       backdrop="static"
       onHide={handleCloseModal}
     >
+      <form onSubmit={doSubmit}>
       <Modal.Header closeButton>
         <Modal.Title>Edit Transaction</Modal.Title>
       </Modal.Header>
@@ -63,14 +64,15 @@ const EditTransaction = (props) => {
       <Modal.Footer>
         <div className="form-group">
           <Button
+            type="submit"
             disabled={pristine}
-            onClick={handleUpdateTransaction}
             bsStyle="primary"
           >Update</Button>
           {' '}
           <Button onClick={handleCloseModal}>Cancel</Button>
         </div>
       </Modal.Footer>
+      </form>
     </Modal>
   );
 };
