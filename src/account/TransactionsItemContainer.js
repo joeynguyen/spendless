@@ -2,6 +2,7 @@ import PouchDB from 'pouchdb';
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import toastr from 'toastr';
 import TransactionsItem from './TransactionsItem.js';
 import { toggleEditTransaction, selectActiveTransaction } from './TransactionsActions.js';
 
@@ -20,9 +21,11 @@ class TransactionsItemContainer extends Component {
     db.remove(this.props.transaction)
       .then(function(result) {
         console.log('Successfully deleted transaction', result);
+        toastr.success('Transaction deleted', null, {timeOut: 1500});
       })
       .catch(function(err) {
         console.log('Error trying to delete transaction', err);
+        toastr.error('Restart the application and retry', 'Error deleting transaction', {timeOut: 1500});
         // TODO: Add error message after delete fail
       });
   }
