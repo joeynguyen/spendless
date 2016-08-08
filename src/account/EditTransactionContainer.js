@@ -2,6 +2,7 @@ import PouchDB from 'pouchdb';
 import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import { bindActionCreators } from 'redux';
+import toastr from 'toastr';
 import EditTransaction from './EditTransaction.js';
 import { toggleEditTransaction, selectActiveTransaction } from './TransactionsActions.js';
 
@@ -18,10 +19,6 @@ class EditTransactionContainer extends Component {
     pristine: PropTypes.bool.isRequired,
   }
 
-  state = {
-    alertVisible: false,
-  }
-
   handleUpdateTransaction = () => {
     const newTransactionObj = Object.assign({}, this.props.activeTransaction, {
       amount: this.props.fields.amount.value,
@@ -33,9 +30,10 @@ class EditTransactionContainer extends Component {
     // Update account in DB
     db.put(newTransactionObj).then(result => {
       console.log('Successfully updated transaction', result);
-      this.setState({alertVisible: true}); // will autohide based on dismissAfter attr of Alert component
+      toastr.success('Transaction updated', null, {timeOut: 1500});
     }).catch(err => {
       console.log(err);
+      toastr.error('Restart the application and retry', 'Error updating transaction', {timeOut: 1500});
       // TODO: Add error message after update fail
     });
   }
@@ -48,7 +46,6 @@ class EditTransactionContainer extends Component {
         doSelectActiveTransaction={this.props.doSelectActiveTransaction}
         fields={this.props.fields}
         pristine={this.props.pristine}
-        alertVisible={this.state.alertVisible}
         handleUpdateTransaction={this.handleUpdateTransaction}
       />
     );

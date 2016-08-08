@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Modal, Button, Input, Alert } from 'react-bootstrap';
+import { Modal, Button, Input } from 'react-bootstrap';
 
 const EditTransaction = (props) => {
   const {
@@ -7,7 +7,6 @@ const EditTransaction = (props) => {
     doToggleEditTransaction,
     doSelectActiveTransaction,
     pristine,
-    alertVisible,
     handleUpdateTransaction,
   } = props;
   const { date, description, category, amount, notes } = props.fields;
@@ -15,15 +14,7 @@ const EditTransaction = (props) => {
     doToggleEditTransaction();
     doSelectActiveTransaction();
   };
-  let alertMessage;
 
-  if (alertVisible) {
-    alertMessage = (
-      <Alert bsStyle="success" onDismiss={handleCloseModal} dismissAfter={1500}>
-        <p>Transaction updated successfully!</p>
-      </Alert>
-    );
-  }
   return (
     <Modal
       show={editTransactionVisible}
@@ -77,7 +68,6 @@ const EditTransaction = (props) => {
           {' '}
           <Button onClick={handleCloseModal}>Cancel</Button>
         </div>
-        { alertMessage }
       </Modal.Footer>
     </Modal>
   );

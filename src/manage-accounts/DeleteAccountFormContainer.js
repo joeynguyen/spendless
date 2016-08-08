@@ -1,7 +1,5 @@
 import PouchDB from 'pouchdb';
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { Input, Button, ButtonInput } from 'react-bootstrap';
 import toastr from 'toastr';
 
