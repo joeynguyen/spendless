@@ -2,6 +2,7 @@ import PouchDB from 'pouchdb';
 import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import { bindActionCreators } from 'redux';
+import toastr from 'toastr';
 import AddTransaction from './AddTransaction.js';
 import { toggleAddTransaction } from './TransactionsActions.js';
 
@@ -15,11 +16,8 @@ class AddTransactionContainer extends Component {
     pristine: PropTypes.bool.isRequired,
   }
 
-  state = {
-    alertVisible: false,
-  }
-
   handleSaveTransaction = () => {
+    console.log('submitting add transaction');
     // PouchDB is loaded externally through a script tag in the browser
     const db = new PouchDB('transactions');
     const notesValue = (this.props.fields.notes.value !== undefined) ? this.props.fields.notes.value : '';
@@ -33,13 +31,15 @@ class AddTransactionContainer extends Component {
       description: this.props.fields.description.value,
       notes: notesValue,
     };
+    console.log(newTransactionObj);
 
     // Add account to DB
     db.put(newTransactionObj).then(result => {
       console.log('Successfully added transaction', result);
-      this.setState({alertVisible: true}); // will autohide based on dismissAfter attr of Alert component
+      toastr.success('Transaction added', null, {timeOut: 1500});
     }).catch(err => {
       console.log(err);
+      toastr.error('Restart the application and retry', 'Error adding transaction', {timeOut: 1500});
       // TODO: Add error message if add fails
     });
   }
@@ -52,7 +52,6 @@ class AddTransactionContainer extends Component {
         doToggleAddTransaction={this.props.doToggleAddTransaction}
         fields={this.props.fields}
         pristine={this.props.pristine}
-        alertVisible={this.state.alertVisible}
         doSubmit={reduxFormHandleSubmit}
       />
     );

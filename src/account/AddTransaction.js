@@ -1,27 +1,18 @@
 import React, { PropTypes } from 'react';
-import { Modal, Button, ButtonInput, Input, Alert } from 'react-bootstrap';
+import { Modal, Button, ButtonInput, Input } from 'react-bootstrap';
 
 const AddTransaction = (props) => {
   const {
     addTransactionVisible,
     doToggleAddTransaction,
     pristine,
-    alertVisible,
     doSubmit,
   } = props;
   const { date, description, category, amount, notes } = props.fields;
   const handleCloseModal = function() {
     doToggleAddTransaction();
   };
-  let alertMessage;
 
-  if (alertVisible) {
-    alertMessage = (
-      <Alert bsStyle="success" onDismiss={handleCloseModal} dismissAfter={1500}>
-        <p>Transaction added successfully!</p>
-      </Alert>
-    );
-  }
   return (
     <Modal
       show={addTransactionVisible}
@@ -85,7 +76,6 @@ const AddTransaction = (props) => {
             {' '}
             <Button onClick={handleCloseModal}>Cancel</Button>
           </div>
-          { alertMessage }
         </Modal.Footer>
       </form>
     </Modal>
