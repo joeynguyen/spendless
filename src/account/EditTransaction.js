@@ -23,55 +23,55 @@ const EditTransaction = (props) => {
       onHide={handleCloseModal}
     >
       <form onSubmit={doSubmit}>
-      <Modal.Header closeButton>
-        <Modal.Title>Edit Transaction</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <div className="row">
-          <div className="col-xs-12">
-            <Input
-              type="text"
-              label="Description"
-              {...description}
-            />
-            <Input
-              type="date"
-              label="Date"
-              {...date}
-            />
-            <Input
-              type="text"
-              label="Category"
-              {...category}
-            />
-            <Input
-              type="number"
-              step="0.01"
-              addonBefore="$"
-              label="Amount"
-              {...amount}
-            />
-            <Input
-              type="textarea"
-              label="Notes"
-              placeholder="Add notes for this transaction"
-              {...notes}
-            />
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Transaction</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="row">
+            <div className="col-xs-12">
+              <Input
+                type="text"
+                label="Description"
+                {...description}
+              />
+              <Input
+                type="date"
+                label="Date"
+                {...date}
+              />
+              <Input
+                type="text"
+                label="Category"
+                {...category}
+              />
+              <Input
+                type="number"
+                step="0.01"
+                addonBefore="$"
+                label="Amount"
+                {...amount}
+              />
+              <Input
+                type="textarea"
+                label="Notes"
+                placeholder="Add notes for this transaction"
+                {...notes}
+              />
+            </div>
           </div>
-        </div>
 
-      </Modal.Body>
-      <Modal.Footer>
-        <div className="form-group">
-          <Button
-            type="submit"
-            disabled={pristine}
-            bsStyle="primary"
-          >Update</Button>
-          {' '}
-          <Button onClick={handleCloseModal}>Cancel</Button>
-        </div>
-      </Modal.Footer>
+        </Modal.Body>
+        <Modal.Footer>
+          <div className="form-group">
+            <Button
+              type="submit"
+              disabled={pristine}
+              bsStyle="primary"
+            >Update</Button>
+            {' '}
+            <Button onClick={handleCloseModal}>Cancel</Button>
+          </div>
+        </Modal.Footer>
       </form>
     </Modal>
   );
