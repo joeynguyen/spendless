@@ -1,14 +1,17 @@
 import PouchDB from 'pouchdb';
 import React, { Component, PropTypes } from 'react';
+import { bindActionCreators } from 'redux';
 import toastr from 'toastr';
 import AddAccountForm from './AddAccountForm.js';
 import { reduxForm } from 'redux-form';
+import { saveAccount } from '../account/AccountsActions.js';
 
 // PouchDB is loaded externally through a script tag in the browser
 const db = new PouchDB('accounts');
 
 class AddAccountFormContainer extends Component {
   static propTypes = {
+    doSaveAccount: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     resetForm: PropTypes.func.isRequired,
     fields: PropTypes.object.isRequired,
@@ -22,18 +25,17 @@ class AddAccountFormContainer extends Component {
       'company': this.props.fields.accountCompany.value,
     };
 
-    // Save account to DB
-    db.put(newAccount).then(result => {
-      console.log('Successfully added new account', result);
-      // Reset AddAccount form fields
-      this.props.resetForm();
-      toastr.success('Account added', null, {timeOut: 1500});
-      // TODO: Add success message after successful submit
-    }).catch(err => {
-      console.log('Error trying to add account', err);
-      toastr.error('Restart the application and retry', 'Error adding account', {timeOut: 1500});
-      // TODO: Add error message after submit fail
-    });
+    this.props.doSaveAccount(newAccount)
+      .then(result => {
+        console.log('Successfully added new account', result);
+        toastr.success(result.name + ' account added', null, {timeOut: 1500});
+        // Reset AddAccount form fields
+        this.props.resetForm();
+      })
+      .catch(error => {
+        console.log('Error trying to add account', error);
+        toastr.error('Restart the application and retry', 'Error adding account', {timeOut: 1500});
+      });
   }
   render() {
     const reduxFormHandleSubmit = this.props.handleSubmit(this.localHandleSubmit);
@@ -63,16 +65,26 @@ function validateForm(values) {
   return errors;
 }
 
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    doSaveAccount: saveAccount,
+  }, dispatch);
+}
+
 // connect: 1st argument is mapStateToProps, 2nd state is mapDispatchToProps
 // reduxForm: 1st argument is form config, 2nd is mapStateToProps, 3rd state is mapDispatchToProps
 // initialValues required for resetForm
-export default reduxForm({
-  form: 'AddAccount',
-  fields: ['accountName', 'accountType', 'accountCompany'],
-  initialValues: {
-    accountName: '',
-    accountType: '',
-    accountCompany: '',
+export default reduxForm(
+  {
+    form: 'AddAccount',
+    fields: ['accountName', 'accountType', 'accountCompany'],
+    initialValues: {
+      accountName: '',
+      accountType: '',
+      accountCompany: '',
+    },
+    validate: validateForm
   },
-  validate: validateForm
-})(AddAccountFormContainer);
+  null,
+  mapDispatchToProps
+)(AddAccountFormContainer);

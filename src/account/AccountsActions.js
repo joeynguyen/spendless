@@ -1,5 +1,6 @@
 import PouchDB from 'pouchdb';
-export const FETCH_ACCOUNTS = 'FETCH_ACCOUNTS';
+import AccountsApi from '../api/accountsApi';
+export const LOAD_ACCOUNTS_SUCCESS = 'LOAD_ACCOUNTS_SUCCESS';
 export const UPDATE_ACCOUNTS = 'UPDATE_ACCOUNTS';
 export const DELETE_ACCOUNT = 'DELETE_ACCOUNT';
 export const TOGGLE_UNSAVED_WARNING = 'TOGGLE_UNSAVED_WARNING';
@@ -17,29 +18,12 @@ const syncDB = () => {
     });
 };
 
-export function fetchAccounts() {
+export function loadAccountsSuccess(accounts) {
   syncDB();
-
-  // Show the current list of accounts by reading them from the database
-  const allAccounts = db.allDocs({
-    include_docs: true,
-    descending: true,
-  }).then((result) => {
-    return result.rows.map((row) => {
-      return {
-        '_id': row.doc._id,
-        '_rev': row.doc._rev,
-        'name': row.doc.name,
-        'type': row.doc.type,
-        'company': row.doc.company,
-      };
-    });
-  }).catch(function(err) {
-    console.log(err);
-  });
+  // Load in UI the current list of accounts
   return {
-    type: FETCH_ACCOUNTS,
-    payload: allAccounts
+    type: LOAD_ACCOUNTS_SUCCESS,
+    payload: accounts
   };
 }
 
@@ -51,6 +35,8 @@ export function deleteAccount(accountId) {
   };
 }
 
+// TODO: change updateAccounts to updateAccountsSuccess
+// can we remove the 'export'? is it only being used in this file?
 export function updateAccounts(accountData) {
   syncDB();
   return {
@@ -62,5 +48,27 @@ export function updateAccounts(accountData) {
 export function toggleUnsavedWarning() {
   return {
     type: TOGGLE_UNSAVED_WARNING
+  };
+}
+
+export function saveAccount(account) {
+  return function(dispatch) {
+    return AccountsApi.saveAccountToDB(account).then(savedAccount => {
+      dispatch(updateAccounts(savedAccount));
+      // pass account object back to invoker's success method
+      return savedAccount;
+    }).catch(error => {
+      throw error;
+    });
+  };
+}
+
+export function getAccounts() {
+  return function(dispatch) {
+    return AccountsApi.getAccountsFromDB().then(accounts => {
+      dispatch(loadAccountsSuccess(accounts));
+    }).catch(error => {
+      throw error;
+    });
   };
 }

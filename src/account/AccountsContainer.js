@@ -2,16 +2,16 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import AccountsGroup from './AccountsGroup.js';
-import { fetchAccounts } from './AccountsActions.js';
+import { getAccounts } from './AccountsActions.js';
 
 class AccountContainer extends Component {
   static propTypes = {
-    doFetchAccounts: PropTypes.func.isRequired,
+    doGetAccounts: PropTypes.func.isRequired,
     accounts: PropTypes.array
   }
 
   componentWillMount() {
-    this.props.doFetchAccounts();
+    this.props.doGetAccounts();
   }
 
   render() {
@@ -39,7 +39,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ doFetchAccounts: fetchAccounts }, dispatch);
+  return bindActionCreators({ doGetAccounts: getAccounts }, dispatch);
 }
 
 // Promote AccountContainer from a Component to a Container, a

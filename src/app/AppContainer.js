@@ -20,7 +20,7 @@ class AppContainer extends Component {
       this.props.doDeleteAccount(change.id);
     } else { // updated/inserted
       // Update Redux state
-      this.props.doUpdateAccounts(change.doc);
+      // this.props.doUpdateAccounts(change.doc);
     }
   }
   handleTransactionsChange = (change) => {
