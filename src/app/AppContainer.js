@@ -10,14 +10,14 @@ class AppContainer extends Component {
   static propTypes = {
     children: PropTypes.element.isRequired,
     doUpdateAccounts: PropTypes.func.isRequired,
-    doDeleteAccount: PropTypes.func.isRequired,
+    // doDeleteAccount: PropTypes.func.isRequired,
     doUpdateAccountTransactions: PropTypes.func.isRequired,
     doDeleteAccountTransactions: PropTypes.func.isRequired,
   }
   handleChange = (change) => {
     if (change.deleted) {
       // Update Redux state
-      this.props.doDeleteAccount(change.id);
+      // this.props.doDeleteAccount(change.id);
     } else { // updated/inserted
       // Update Redux state
       // this.props.doUpdateAccounts(change.doc);
@@ -58,7 +58,7 @@ class AppContainer extends Component {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     doUpdateAccounts: updateAccounts,
-    doDeleteAccount: deleteAccount,
+    // doDeleteAccount: deleteAccount,
     doDeleteAccountTransactions: deleteAccountTransactions,
     doUpdateAccountTransactions: updateAccountTransactions,
   }, dispatch);

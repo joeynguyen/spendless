@@ -6,9 +6,6 @@ import AddAccountForm from './AddAccountForm.js';
 import { reduxForm } from 'redux-form';
 import { saveAccount } from '../account/AccountsActions.js';
 
-// PouchDB is loaded externally through a script tag in the browser
-const db = new PouchDB('accounts');
-
 class AddAccountFormContainer extends Component {
   static propTypes = {
     doSaveAccount: PropTypes.func.isRequired,

@@ -1,15 +1,15 @@
-import PouchDB from 'pouchdb';
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Input, Button, ButtonInput } from 'react-bootstrap';
 import toastr from 'toastr';
-
-// PouchDB is loaded externally through a script tag in the browser
-const db = new PouchDB('accounts');
+import { deleteAccount } from '../account/AccountsActions.js';
 
 class DeleteAccountFormContainer extends Component {
   static propTypes = {
     account: PropTypes.object.isRequired,
     toggleConfirmDelete: PropTypes.func.isRequired,
+    doDeleteAccount: PropTypes.func.isRequired,
   }
 
   state = {
@@ -22,16 +22,16 @@ class DeleteAccountFormContainer extends Component {
 
   handleDeleteAccount = (e) => {
     e.preventDefault();
+    const accountName = this.props.account.name;
     // Remove account from DB
-    db.remove(this.props.account)
+    this.props.doDeleteAccount(this.props.account)
       .then(result => {
         console.log('Successfully deleted account', result);
-        toastr.success(this.props.account.name + ' deleted', null, {timeOut: 1500});
+        toastr.success(accountName + ' deleted', null, {timeOut: 1500});
       })
-      .catch(err => {
-        console.log('Error trying to delete account', err);
+      .catch(error => {
+        console.log('Error trying to delete account', error);
         toastr.error('Restart the application and retry', 'Error deleting account', {timeOut: 1500});
-        // TODO: Add error message after delete fail
       });
   }
 
@@ -68,4 +68,10 @@ class DeleteAccountFormContainer extends Component {
   }
 }
 
-export default DeleteAccountFormContainer;
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    doDeleteAccount: deleteAccount,
+  }, dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(DeleteAccountFormContainer);

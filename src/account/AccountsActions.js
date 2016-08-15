@@ -27,7 +27,7 @@ export function loadAccountsSuccess(accounts) {
   };
 }
 
-export function deleteAccount(accountId) {
+export function removeAccount(accountId) {
   syncDB();
   return {
     type: DELETE_ACCOUNT,
@@ -68,6 +68,20 @@ export function getAccounts() {
     return AccountsApi.getAccountsFromDB().then(accounts => {
       dispatch(loadAccountsSuccess(accounts));
     }).catch(error => {
+      throw error;
+    });
+  };
+}
+
+export function deleteAccount(account) {
+  return function(dispatch) {
+    return AccountsApi.deleteAccountFromDB(account).then(deletedAccount => {
+      console.log('deleteAccount success', deletedAccount);
+      dispatch(removeAccount(deletedAccount.id));
+      // pass deleted account object back to invoker's success method
+      return deletedAccount;
+    }).catch(error => {
+      console.log('deleteAccount error', error);
       throw error;
     });
   };
