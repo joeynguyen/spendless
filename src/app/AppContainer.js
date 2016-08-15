@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { updateAccounts, deleteAccount } from '../account/AccountsActions.js';
 import { deleteAccountTransactions, updateAccountTransactions } from '../account/TransactionsActions.js';
 import PouchDBChanges from 'react-pouchdb-changes';
 import App from './App.js';
@@ -9,19 +8,8 @@ import App from './App.js';
 class AppContainer extends Component {
   static propTypes = {
     children: PropTypes.element.isRequired,
-    doUpdateAccounts: PropTypes.func.isRequired,
-    // doDeleteAccount: PropTypes.func.isRequired,
     doUpdateAccountTransactions: PropTypes.func.isRequired,
     doDeleteAccountTransactions: PropTypes.func.isRequired,
-  }
-  handleChange = (change) => {
-    if (change.deleted) {
-      // Update Redux state
-      // this.props.doDeleteAccount(change.id);
-    } else { // updated/inserted
-      // Update Redux state
-      // this.props.doUpdateAccounts(change.doc);
-    }
   }
   handleTransactionsChange = (change) => {
     console.log('handleTransactionsChange', change);
@@ -37,19 +25,12 @@ class AppContainer extends Component {
   render() {
     return (
       <PouchDBChanges
-        dbUrl="accounts"
+        dbUrl="transactions"
         changesOpts={{since: 'now', live: true, include_docs: true}}
-        onChange={change => this.handleChange(change)}
+        onChange={change => this.handleTransactionsChange(change)}
         onError={err => console.log(err)}
       >
-        <PouchDBChanges
-          dbUrl="transactions"
-          changesOpts={{since: 'now', live: true, include_docs: true}}
-          onChange={change => this.handleTransactionsChange(change)}
-          onError={err => console.log(err)}
-        >
-          <App children={this.props.children} />
-        </PouchDBChanges>
+        <App children={this.props.children} />
       </PouchDBChanges>
     );
   }
@@ -57,8 +38,6 @@ class AppContainer extends Component {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    doUpdateAccounts: updateAccounts,
-    // doDeleteAccount: deleteAccount,
     doDeleteAccountTransactions: deleteAccountTransactions,
     doUpdateAccountTransactions: updateAccountTransactions,
   }, dispatch);

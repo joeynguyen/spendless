@@ -27,22 +27,6 @@ class AccountsApi {
     });
   }
 
-  // static handleUpdateAccount(account, fields) {
-  //   const newAccountObj = Object.assign({}, account, {
-  //     name: fields.accountName.value,
-  //     type: fields.accountType.value,
-  //     company: fields.accountCompany.value,
-  //   });
-  //   // Update account in DB
-  //   db.put(newAccountObj).then(result => {
-  //     console.log('Successfully updated account', result);
-  //     // this.setState({alertVisible: true});
-  //   }).catch(err => {
-  //     console.log(err);
-  //     // TODO: Add error message after update fail
-  //   });
-  // }
-
   static saveAccountToDB(account) {
     return new Promise((resolve, reject) => {
       db.put(account).then(result => {

@@ -17,7 +17,7 @@ function syncDB() {
     .on('error', function(err) {
       console.log('PouchDB-Server accounts database sync error :', err);
     });
-};
+}
 
 function loadAccountsSuccess(accounts) {
   // Load in UI the current list of accounts
