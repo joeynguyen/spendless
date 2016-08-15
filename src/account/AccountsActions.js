@@ -8,7 +8,8 @@ export const TOGGLE_UNSAVED_WARNING = 'TOGGLE_UNSAVED_WARNING';
 // PouchDB is loaded externally through a script tag in the browser
 const db = new PouchDB('accounts');
 const remoteCouch = 'http://127.0.0.1:5984/accounts';
-const syncDB = () => {
+
+function syncDB() {
   db.sync(remoteCouch, {live: false})
     .on('complete', function(success) {
       console.log('PouchDB-Server accounts database sync success :', success);
@@ -18,7 +19,7 @@ const syncDB = () => {
     });
 };
 
-export function loadAccountsSuccess(accounts) {
+function loadAccountsSuccess(accounts) {
   // Load in UI the current list of accounts
   return {
     type: LOAD_ACCOUNTS_SUCCESS,
@@ -27,7 +28,6 @@ export function loadAccountsSuccess(accounts) {
 }
 
 // TODO: change removeAccount to removeAccount like Pluralsight tutorial?
-// can we remove the 'export'? is it only being used in this file?
 function removeAccount(accountId) {
   return {
     type: REMOVE_ACCOUNT,
@@ -36,8 +36,7 @@ function removeAccount(accountId) {
 }
 
 // TODO: change updateAccounts to updateAccountsSuccess like Pluralsight tutorial?
-// can we remove the 'export'? is it only being used in this file?
-export function updateAccounts(accountData) {
+function updateAccounts(accountData) {
   return {
     type: UPDATE_ACCOUNTS,
     data: accountData
