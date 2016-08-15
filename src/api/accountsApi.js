@@ -63,20 +63,12 @@ class AccountsApi {
     return new Promise((resolve, reject) => {
       db.remove(account)
         .then(doc => {
-          console.log('deleteAccountFromDB', doc);
           resolve(doc);
         })
         .catch(err => {
           console.log('deleteAccountFromDB error', err);
           reject(err);
         });
-      // setTimeout(() => {
-      //   const indexOfAccountToDelete = accounts.findIndex(account => {
-      //     account.accountId == accountId;
-      //   });
-      //   accounts.splice(indexOfAccountToDelete, 1);
-      //   resolve();
-      // }, delay);
     });
   }
 }

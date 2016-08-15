@@ -2,7 +2,7 @@ import PouchDB from 'pouchdb';
 import AccountsApi from '../api/accountsApi';
 export const LOAD_ACCOUNTS_SUCCESS = 'LOAD_ACCOUNTS_SUCCESS';
 export const UPDATE_ACCOUNTS = 'UPDATE_ACCOUNTS';
-export const DELETE_ACCOUNT = 'DELETE_ACCOUNT';
+export const REMOVE_ACCOUNT = 'REMOVE_ACCOUNT';
 export const TOGGLE_UNSAVED_WARNING = 'TOGGLE_UNSAVED_WARNING';
 
 // PouchDB is loaded externally through a script tag in the browser
@@ -19,7 +19,6 @@ const syncDB = () => {
 };
 
 export function loadAccountsSuccess(accounts) {
-  syncDB();
   // Load in UI the current list of accounts
   return {
     type: LOAD_ACCOUNTS_SUCCESS,
@@ -27,18 +26,18 @@ export function loadAccountsSuccess(accounts) {
   };
 }
 
-export function removeAccount(accountId) {
-  syncDB();
+// TODO: change removeAccount to removeAccount like Pluralsight tutorial?
+// can we remove the 'export'? is it only being used in this file?
+function removeAccount(accountId) {
   return {
-    type: DELETE_ACCOUNT,
+    type: REMOVE_ACCOUNT,
     data: accountId
   };
 }
 
-// TODO: change updateAccounts to updateAccountsSuccess
+// TODO: change updateAccounts to updateAccountsSuccess like Pluralsight tutorial?
 // can we remove the 'export'? is it only being used in this file?
 export function updateAccounts(accountData) {
-  syncDB();
   return {
     type: UPDATE_ACCOUNTS,
     data: accountData
@@ -55,6 +54,7 @@ export function saveAccount(account) {
   return function(dispatch) {
     return AccountsApi.saveAccountToDB(account).then(savedAccount => {
       dispatch(updateAccounts(savedAccount));
+      syncDB();
       // pass account object back to invoker's success method
       return savedAccount;
     }).catch(error => {
@@ -67,6 +67,7 @@ export function getAccounts() {
   return function(dispatch) {
     return AccountsApi.getAccountsFromDB().then(accounts => {
       dispatch(loadAccountsSuccess(accounts));
+      syncDB();
     }).catch(error => {
       throw error;
     });
@@ -76,8 +77,8 @@ export function getAccounts() {
 export function deleteAccount(account) {
   return function(dispatch) {
     return AccountsApi.deleteAccountFromDB(account).then(deletedAccount => {
-      console.log('deleteAccount success', deletedAccount);
       dispatch(removeAccount(deletedAccount.id));
+      syncDB();
       // pass deleted account object back to invoker's success method
       return deletedAccount;
     }).catch(error => {

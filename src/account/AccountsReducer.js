@@ -1,4 +1,4 @@
-import { LOAD_ACCOUNTS_SUCCESS, UPDATE_ACCOUNTS, DELETE_ACCOUNT } from './AccountsActions.js';
+import { LOAD_ACCOUNTS_SUCCESS, UPDATE_ACCOUNTS, REMOVE_ACCOUNT } from './AccountsActions.js';
 
 export default function(state = [], action) {
   console.log('action received', action);
@@ -19,9 +19,8 @@ export default function(state = [], action) {
         action.data,
         ...state.slice(updatedAccountIndex + 1),
       ];
-    case DELETE_ACCOUNT:
-      const deletedAccountObj = state.find(item => item._id === action.data);
-      const deletedAccountIndex = state.indexOf(deletedAccountObj);
+    case REMOVE_ACCOUNT:
+      const deletedAccountIndex = state.findIndex(item => item._id === action.data);
       return [
         ...state.slice(0, deletedAccountIndex),
         ...state.slice(deletedAccountIndex + 1),
