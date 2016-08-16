@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { fetchAccountTransactions, resetAccountTransactions } from './TransactionsActions.js';
+import { getAccountTransactions, resetAccountTransactions } from './TransactionsActions.js';
 import TransactionsList from './TransactionsList.js';
 
 class TransactionListContainer extends Component {
@@ -11,17 +11,17 @@ class TransactionListContainer extends Component {
     addTransactionVisible: PropTypes.bool.isRequired,
     editTransactionVisible: PropTypes.bool.isRequired,
     uploadedTransactions: PropTypes.arrayOf(React.PropTypes.object),
-    doFetchAccountTransactions: PropTypes.func.isRequired,
+    doGetAccountTransactions: PropTypes.func.isRequired,
     doResetAccountTransactions: PropTypes.func.isRequired,
   }
   componentWillMount() {
-    this.props.doFetchAccountTransactions(this.props.accountId);
+    this.props.doGetAccountTransactions(this.props.accountId);
   }
   componentDidUpdate(prevProps) {
     // console.log('prevProps.accountId', prevProps.accountId);
     // console.log('this.props.accountId', this.props.accountId);
     if (this.props.accountId !== prevProps.accountId) {
-      this.props.doFetchAccountTransactions(this.props.accountId);
+      this.props.doGetAccountTransactions(this.props.accountId);
     }
   }
   componentWillUnmount() {
@@ -60,7 +60,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    doFetchAccountTransactions: fetchAccountTransactions,
+    doGetAccountTransactions: getAccountTransactions,
     doResetAccountTransactions: resetAccountTransactions,
   }, dispatch);
 }

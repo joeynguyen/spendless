@@ -1,5 +1,7 @@
 import PouchDB from 'pouchdb';
-export const FETCH_ACCOUNT_TRANSACTIONS = 'FETCH_ACCOUNT_TRANSACTIONS';
+import TransactionsApi from '../api/transactionsApi';
+
+export const LOAD_ACCOUNT_TRANSACTIONS = 'LOAD_ACCOUNT_TRANSACTIONS';
 export const RESET_ACCOUNT_TRANSACTIONS = 'RESET_ACCOUNT_TRANSACTIONS';
 export const ADD_UPLOADED_TRANSACTIONS = 'ADD_UPLOADED_TRANSACTIONS';
 export const DELETE_ACCOUNT_TRANSACTIONS = 'DELETE_ACCOUNT_TRANSACTIONS';
@@ -23,46 +25,22 @@ const syncDB = () => {
     });
 };
 
-export function fetchAccountTransactions(accountId) {
-  syncDB();
-
-  // Show the current list of accounts by reading them from the database
-  const accountTransactions = transDB.createIndex({
-    index: {
-      fields: ['date', 'accountId']
-    }
-  }).then(() => {
-    // console.log('Successfully created an index!', result);
-    return transDB.find({
-      // using $gt: null because "$exists doesn't do what you think it does"
-      // http://stackoverflow.com/questions/34366615/creating-a-usable-index-in-pouchdb-with-pouchdb-find
-      selector: { date: {'$gt': null}, accountId: accountId },
-      fields: ['_id', '_rev', 'accountId', 'amount', 'category', 'description', 'date', 'notes'],
-      sort: [{date: 'desc'}]
-    });
-  }).then((result) => {
-    const allAccountTransactions = result.docs.map(function(doc) {
-      return {
-        '_id': doc._id,
-        '_rev': doc._rev,
-        'accountId': doc.accountId,
-        'amount': doc.amount,
-        'category': doc.category,
-        'description': doc.description,
-        'date': doc.date,
-        'notes': doc.notes,
-      };
-    });
-    // console.log('allAccountTransactions: ', allAccountTransactions);
-    return allAccountTransactions;
-  }).catch(function(err) {
-    console.log('Error while attempting to retrieve transactions!', err);
-    return [];
-  });
-
+function loadAccountTransactions(accountTransactions) {
+  // Load in UI the current list of accounts
   return {
-    type: FETCH_ACCOUNT_TRANSACTIONS,
+    type: LOAD_ACCOUNT_TRANSACTIONS,
     payload: accountTransactions
+  };
+}
+
+export function getAccountTransactions(accountId) {
+  return function(dispatch) {
+    return TransactionsApi.getAccountTransactionsFromDB(accountId).then(transactions => {
+      dispatch(loadAccountTransactions(transactions));
+    }).catch(error => {
+      console.log('getAccountTransactions error', error);
+      throw error;
+    });
   };
 }
 

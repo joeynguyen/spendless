@@ -8,10 +8,12 @@ export default function(state = [], action) {
       return action.payload;
     case UPDATE_ACCOUNTS:
       const updatedAccountIndex = state.findIndex(item => item._id === action.data._id);
+
       // Add new account if account doesn't already exist
       if (updatedAccountIndex < 0) {
         return state.concat(action.data);
       }
+
       // Update existing account
       return [
         ...state.slice(0, updatedAccountIndex),
