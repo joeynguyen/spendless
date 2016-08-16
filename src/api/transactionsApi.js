@@ -52,6 +52,26 @@ class TransactionsApi {
       });
     });
   }
+
+  static saveTransactionsToDB(transactions) {
+    return new Promise((resolve, reject) => {
+      if (Array.isArray(transactions)) {
+      } else {
+        db.put(transactions).then(savedTransaction => {
+          db.get(savedTransaction.id).then(doc => {
+            syncDB();
+            resolve(doc);
+          }).catch(function(err) {
+            console.log('saveAccountToDB GET error', err);
+            reject(err);
+          });
+        }).catch(err => {
+          console.log('saveTransactionsToDB PUT error', err);
+          reject(err);
+        });
+      }
+    });
+  }
 }
 
 export default TransactionsApi;

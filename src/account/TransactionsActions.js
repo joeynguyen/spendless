@@ -33,10 +33,30 @@ function loadAccountTransactions(accountTransactions) {
   };
 }
 
+function updateAccountTransactions(transactions) {
+  return {
+    type: UPDATE_ACCOUNT_TRANSACTIONS,
+    payload: transactions
+  };
+}
+
 export function getAccountTransactions(accountId) {
   return function(dispatch) {
     return TransactionsApi.getAccountTransactionsFromDB(accountId).then(transactions => {
       dispatch(loadAccountTransactions(transactions));
+    }).catch(error => {
+      console.log('getAccountTransactions error', error);
+      throw error;
+    });
+  };
+}
+
+export function saveTransactions(transactions) {
+  return function(dispatch) {
+    return TransactionsApi.saveTransactionsToDB(transactions).then(savedTransactions => {
+      dispatch(updateAccountTransactions(savedTransactions));
+      // pass transaction object back to invoker's success method
+      return savedTransactions;
     }).catch(error => {
       console.log('getAccountTransactions error', error);
       throw error;
@@ -62,14 +82,6 @@ export function deleteAccountTransactions(transactions) {
   syncDB();
   return {
     type: DELETE_ACCOUNT_TRANSACTIONS,
-    payload: transactions
-  };
-}
-
-export function updateAccountTransactions(transactions) {
-  syncDB();
-  return {
-    type: UPDATE_ACCOUNT_TRANSACTIONS,
     payload: transactions
   };
 }
