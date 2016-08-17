@@ -53,6 +53,27 @@ class EditTransactionContainer extends Component {
   }
 }
 
+function validateForm(values) {
+  const errors = {};
+
+  if (!values.date) {
+    errors.date = 'Enter a date';
+  }
+  if (!values.description) {
+    errors.description = 'Enter a description';
+  }
+  if (!values.category) {
+    errors.category = 'Enter a category';
+  }
+  if (!values.amount) {
+    errors.amount = 'Enter an amount';
+  } else if (values.amount && values.amount.indexOf('.') > -1 && values.amount.split('.')[1].length > 2) {
+    errors.amount = 'Enter an amount with 2 or less decimal places';
+  }
+
+  return errors;
+}
+
 function mapStateToProps(state) {
   const { date, description, category, amount, notes } = state.activeTransaction;
   return {
@@ -80,6 +101,7 @@ export default reduxForm(
   {
     form: 'EditTransaction',
     fields: ['date', 'description', 'category', 'amount', 'notes'],
+    validate: validateForm,
   },
   mapStateToProps,
   mapDispatchToProps
