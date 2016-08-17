@@ -72,6 +72,21 @@ class TransactionsApi {
       }
     });
   }
+
+  static deleteTransactionsFromDB(transactions) {
+    return new Promise((resolve, reject) => {
+      if (Array.isArray(transactions)) {
+      } else {
+        db.remove(transactions).then(deletedTransaction => {
+          syncDB();
+          resolve(deletedTransaction);
+        }).catch(err => {
+          console.log('deleteTransactionsFromDB DELETE error', err);
+          reject(err);
+        });
+      }
+    });
+  }
 }
 
 export default TransactionsApi;

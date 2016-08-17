@@ -1,4 +1,4 @@
-import { LOAD_ACCOUNT_TRANSACTIONS, RESET_ACCOUNT_TRANSACTIONS, UPDATE_ACCOUNT_TRANSACTIONS, DELETE_ACCOUNT_TRANSACTIONS } from './TransactionsActions.js';
+import { LOAD_ACCOUNT_TRANSACTIONS, RESET_ACCOUNT_TRANSACTIONS, UPDATE_ACCOUNT_TRANSACTIONS, REMOVE_ACCOUNT_TRANSACTIONS } from './TransactionsActions.js';
 
 export default function(state = [], action) {
   switch (action.type) {
@@ -21,7 +21,7 @@ export default function(state = [], action) {
         action.payload,
         ...state.slice(updatedTransactionIndex + 1),
       ];
-    case DELETE_ACCOUNT_TRANSACTIONS:
+    case REMOVE_ACCOUNT_TRANSACTIONS:
       const deletedTransactionObj = state.find(item => item._id === action.payload);
       const deletedTransactionIndex = state.indexOf(deletedTransactionObj);
       return [

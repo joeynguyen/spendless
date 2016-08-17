@@ -1,14 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { deleteAccountTransactions } from '../account/TransactionsActions.js';
 import PouchDBChanges from 'react-pouchdb-changes';
 import App from './App.js';
 
 class AppContainer extends Component {
   static propTypes = {
     children: PropTypes.element.isRequired,
-    doDeleteAccountTransactions: PropTypes.func.isRequired,
   }
   handleTransactionsChange = (change) => {
     console.log('handleTransactionsChange', change);
@@ -16,7 +14,7 @@ class AppContainer extends Component {
       // if just fetching account transactions, do nothing here
       // fetching is handled in TransactionsListContainer component
     } else if (change.deleted) {
-      this.props.doDeleteAccountTransactions(change.id);
+      // this.props.doDeleteAccountTransactions(change.id);
     } else { // updated/inserted
       // this.props.doUpdateAccountTransactions(change.doc);
     }
@@ -37,7 +35,6 @@ class AppContainer extends Component {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    doDeleteAccountTransactions: deleteAccountTransactions,
   }, dispatch);
 }
 

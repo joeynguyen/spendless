@@ -1,24 +1,21 @@
-import PouchDB from 'pouchdb';
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import toastr from 'toastr';
 import TransactionsItem from './TransactionsItem.js';
-import { toggleEditTransaction, selectActiveTransaction } from './TransactionsActions.js';
+import { deleteAccountTransactions, toggleEditTransaction, selectActiveTransaction } from './TransactionsActions.js';
 
 class TransactionsItemContainer extends Component {
   static propTypes = {
     field: PropTypes.object.isRequired,
     transaction: PropTypes.object.isRequired,
     unsaved: PropTypes.bool.isRequired,
+    doDeleteAccountTransactions: PropTypes.func.isRequired,
     doToggleEditTransaction: PropTypes.func.isRequired,
     doSelectActiveTransaction: PropTypes.func.isRequired,
   }
   handleDeleteTransactions = () => {
-    // PouchDB is loaded externally through a script tag in the browser
-    const db = new PouchDB('transactions');
-
-    db.remove(this.props.transaction)
+    this.props.doDeleteAccountTransactions(this.props.transaction)
       .then(function(result) {
         console.log('Successfully deleted transaction', result);
         toastr.success('Transaction deleted', null, {timeOut: 1500});
@@ -45,6 +42,7 @@ class TransactionsItemContainer extends Component {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
+    doDeleteAccountTransactions: deleteAccountTransactions,
     doToggleEditTransaction: toggleEditTransaction,
     doSelectActiveTransaction: selectActiveTransaction,
   }, dispatch);

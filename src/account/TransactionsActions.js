@@ -1,29 +1,15 @@
-import PouchDB from 'pouchdb';
 import TransactionsApi from '../api/transactionsApi';
 
 export const LOAD_ACCOUNT_TRANSACTIONS = 'LOAD_ACCOUNT_TRANSACTIONS';
 export const RESET_ACCOUNT_TRANSACTIONS = 'RESET_ACCOUNT_TRANSACTIONS';
 export const ADD_UPLOADED_TRANSACTIONS = 'ADD_UPLOADED_TRANSACTIONS';
-export const DELETE_ACCOUNT_TRANSACTIONS = 'DELETE_ACCOUNT_TRANSACTIONS';
+export const REMOVE_ACCOUNT_TRANSACTIONS = 'REMOVE_ACCOUNT_TRANSACTIONS';
 export const UPDATE_ACCOUNT_TRANSACTIONS = 'UPDATE_ACCOUNT_TRANSACTIONS';
 export const RESET_UPLOADED_TRANSACTIONS = 'RESET_UPLOADED_TRANSACTIONS';
 export const RESET_CURRENT_TRANSACTIONS = 'RESET_CURRENT_TRANSACTIONS';
 export const TOGGLE_EDIT_TRANSACTION = 'TOGGLE_EDIT_TRANSACTION';
 export const TOGGLE_ADD_TRANSACTION = 'TOGGLE_ADD_TRANSACTION';
 export const SELECT_ACTIVE_TRANSACTION = 'SELECT_ACTIVE_TRANSACTION';
-
-// PouchDB is loaded externally through a script tag in the browser
-const transDB = new PouchDB('transactions');
-const remoteCouch = 'http://127.0.0.1:5984/transactions';
-const syncDB = () => {
-  transDB.sync(remoteCouch, {live: false})
-    .on('complete', function(success) {
-      console.log('PouchDB-Server transactions database sync success :', success);
-    })
-    .on('error', function(err) {
-      console.log('PouchDB-Server transactions database sync error :', err);
-    });
-};
 
 function loadAccountTransactions(accountTransactions) {
   // Load in UI the current list of accounts
@@ -78,11 +64,23 @@ export function addUploadedTransactions(uploadedTransactions) {
   };
 }
 
-export function deleteAccountTransactions(transactions) {
-  syncDB();
+function removeAccountTransactions(transactions) {
   return {
-    type: DELETE_ACCOUNT_TRANSACTIONS,
+    type: REMOVE_ACCOUNT_TRANSACTIONS,
     payload: transactions
+  };
+}
+
+export function deleteAccountTransactions(transactions) {
+  return function(dispatch) {
+    return TransactionsApi.deleteTransactionsFromDB(transactions).then(deletedTransactions => {
+      dispatch(removeAccountTransactions(deletedTransactions.id));
+      // pass deleted account object back to invoker's success method
+      return deletedTransactions;
+    }).catch(error => {
+      console.log('deleteAccountTransactions error', error);
+      throw error;
+    });
   };
 }
 
