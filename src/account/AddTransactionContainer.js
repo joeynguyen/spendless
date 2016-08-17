@@ -69,6 +69,8 @@ function validateForm(values) {
   }
   if (!values.amount) {
     errors.amount = 'Enter an amount';
+  } else if (values.amount && values.amount.indexOf('.') > -1 && values.amount.split('.')[1].length > 2) {
+    errors.amount = 'Enter an amount with 2 or less decimal places';
   }
 
   return errors;
