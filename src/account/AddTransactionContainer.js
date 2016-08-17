@@ -27,7 +27,6 @@ class AddTransactionContainer extends Component {
       description: this.props.fields.description.value,
       notes: notesValue,
     };
-    console.log(newTransactionObj);
 
     // Add account to DB
     this.props.doSaveTransactions(newTransactionObj)
