@@ -56,7 +56,27 @@ class TransactionsApi {
   static saveTransactionsToDB(transactions) {
     return new Promise((resolve, reject) => {
       if (Array.isArray(transactions)) {
+        // handle saving multiple transactions
+        db.bulkDocs(transactions)
+          .then(savedTransactions => {
+            const newTransactionsKeys = savedTransactions.map(transaction => transaction.id);
+            // GET newly saved transactions from DB
+            db.allDocs({
+              include_docs: true,
+              keys: newTransactionsKeys,
+            }).then(newTransactions => {
+              syncDB();
+              resolve(newTransactions.rows.map(newTransaction => newTransaction.doc));
+            }).catch(err => {
+              console.log('saveTransactionsToDB bulk save GET error', err);
+              reject(err);
+            });
+          }).catch(function(err) {
+            console.log('saveTransactionsToDB bulk save PUT error', err);
+            reject(err);
+          });
       } else {
+        // handle saving single transaction
         db.put(transactions).then(savedTransaction => {
           db.get(savedTransaction.id).then(doc => {
             syncDB();

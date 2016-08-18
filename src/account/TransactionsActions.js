@@ -44,7 +44,7 @@ export function saveTransactions(transactions) {
       // pass transaction object back to invoker's success method
       return savedTransactions;
     }).catch(error => {
-      console.log('getAccountTransactions error', error);
+      console.log('saveTransactions error', error);
       throw error;
     });
   };
