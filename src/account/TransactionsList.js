@@ -16,6 +16,9 @@ class TransactionsList extends Component {
   }
 
   render() {
+    // create placeholder object that fulfills component prop requirements
+    // but doesn't actually have a functional value for uploaded transactions
+    const fieldPropPlaceholder = { defaultChecked: '', defaultValue: '', checked: false };
     let editTransactionContainer;
     let addTransactionContainer;
     if (this.props.editTransactionVisible) {
@@ -40,7 +43,7 @@ class TransactionsList extends Component {
           <tbody>
             {
               this.props.uploadedTransactions.map(itemData =>
-                <TransactionsItemContainer key={itemData._id} transaction={itemData} unsaved />
+                <TransactionsItemContainer key={itemData._id} transaction={itemData} field={fieldPropPlaceholder} unsaved />
               )
             }
             {

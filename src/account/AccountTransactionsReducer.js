@@ -1,33 +1,39 @@
-import { FETCH_ACCOUNT_TRANSACTIONS, RESET_ACCOUNT_TRANSACTIONS, UPDATE_ACCOUNT_TRANSACTIONS, DELETE_ACCOUNT_TRANSACTIONS } from './TransactionsActions.js';
+import { LOAD_ACCOUNT_TRANSACTIONS, RESET_ACCOUNT_TRANSACTIONS, UPDATE_ACCOUNT_TRANSACTIONS, REMOVE_ACCOUNT_TRANSACTIONS } from './TransactionsActions.js';
 
 export default function(state = [], action) {
   switch (action.type) {
-    case FETCH_ACCOUNT_TRANSACTIONS:
+    case LOAD_ACCOUNT_TRANSACTIONS:
       return action.payload;
     case RESET_ACCOUNT_TRANSACTIONS:
       return action.payload;
     case UPDATE_ACCOUNT_TRANSACTIONS:
-      const updatedTransactionObj = state.find(item => item._id === action.payload._id);
+      const updatedTransactionIndex = state.findIndex(item => item._id === action.payload._id);
 
       // Adding new transaction(s)
-      if (updatedTransactionObj === undefined) {
+      if (updatedTransactionIndex < 0) {
         return state.concat(action.payload);
       }
 
       // Updating existing transaction
-      const updatedTransactionIndex = state.indexOf(updatedTransactionObj);
       return [
         ...state.slice(0, updatedTransactionIndex),
         action.payload,
         ...state.slice(updatedTransactionIndex + 1),
       ];
-    case DELETE_ACCOUNT_TRANSACTIONS:
-      const deletedTransactionObj = state.find(item => item._id === action.payload);
-      const deletedTransactionIndex = state.indexOf(deletedTransactionObj);
+    case REMOVE_ACCOUNT_TRANSACTIONS:
+      // handle bulk delete
+      if (Array.isArray(action.payload)) {
+        // get transactions that aren't part of the deleted group
+        return state.filter(item => action.payload.indexOf(item._id) < 0);
+      }
+
+      // handle single delete
+      const deletedTransactionIndex = state.findIndex(item => item._id === action.payload.id);
       return [
         ...state.slice(0, deletedTransactionIndex),
         ...state.slice(deletedTransactionIndex + 1),
       ];
+
     default:
       return state;
   }

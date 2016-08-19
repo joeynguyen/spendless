@@ -32,16 +32,22 @@ const EditTransaction = (props) => {
               <Input
                 type="text"
                 label="Description"
+                bsStyle={description.touched && description.invalid ? 'error' : null}
+                help={description.touched ? description.error : ''}
                 {...description}
               />
               <Input
                 type="date"
                 label="Date"
+                bsStyle={date.touched && date.invalid ? 'error' : null}
+                help={date.touched ? date.error : ''}
                 {...date}
               />
               <Input
                 type="text"
                 label="Category"
+                bsStyle={category.touched && category.invalid ? 'error' : null}
+                help={category.touched ? category.error : ''}
                 {...category}
               />
               <Input
@@ -49,6 +55,8 @@ const EditTransaction = (props) => {
                 step="0.01"
                 addonBefore="$"
                 label="Amount"
+                bsStyle={amount.touched && amount.invalid ? 'error' : null}
+                help={amount.touched ? amount.error : ''}
                 {...amount}
               />
               <Input
@@ -59,8 +67,8 @@ const EditTransaction = (props) => {
               />
             </div>
           </div>
-
         </Modal.Body>
+
         <Modal.Footer>
           <div className="form-group">
             <Button

@@ -1,13 +1,11 @@
-import PouchDB from 'pouchdb';
 import React, { Component, PropTypes } from 'react';
+import { bindActionCreators } from 'redux';
 import { reduxForm } from 'redux-form';
 import { Collapse } from 'react-bootstrap';
 import toastr from 'toastr';
 import EditAccountForm from './EditAccountForm.js';
 import DeleteAccountFormContainer from './DeleteAccountFormContainer.js';
-
-// PouchDB is loaded externally through a script tag in the browser
-const db = new PouchDB('accounts');
+import { saveAccount } from '../account/AccountsActions.js';
 
 class EditAccountFormContainer extends Component {
   static propTypes = {
@@ -16,6 +14,7 @@ class EditAccountFormContainer extends Component {
     fields: PropTypes.object.isRequired,
     resetForm: PropTypes.func.isRequired,
     pristine: PropTypes.bool.isRequired,
+    doSaveAccount: PropTypes.func.isRequired,
   }
 
   state = {
@@ -35,14 +34,15 @@ class EditAccountFormContainer extends Component {
       company: this.props.fields.accountCompany.value,
     });
     // Update account in DB
-    db.put(newAccountObj).then(result => {
-      console.log('Successfully updated account', result);
-      toastr.success('Account updated', null, {timeOut: 1500});
-    }).catch(err => {
-      console.log(err);
-      toastr.error('Restart the application and retry', 'Error updating account', {timeOut: 1500});
-      // TODO: Add error message after update fail
-    });
+    this.props.doSaveAccount(newAccountObj)
+      .then(result => {
+        console.log('Successfully updated account', result);
+        toastr.success(result.name + ' account updated', null, {timeOut: 1500});
+      })
+      .catch(error => {
+        console.log('Error trying to update account', error);
+        toastr.error('Restart the application and retry', 'Error updating account', {timeOut: 1500});
+      });
   }
 
   render() {
@@ -69,9 +69,17 @@ class EditAccountFormContainer extends Component {
   }
 }
 
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    doSaveAccount: saveAccount,
+  }, dispatch);
+}
+
 export default reduxForm(
   {
     form: 'EditAccount',
     fields: ['accountName', 'accountType', 'accountCompany'],
   },
+  null,
+  mapDispatchToProps
 )(EditAccountFormContainer);

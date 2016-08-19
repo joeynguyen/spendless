@@ -1,58 +1,28 @@
-import PouchDB from 'pouchdb';
-export const FETCH_ACCOUNTS = 'FETCH_ACCOUNTS';
+import AccountsApi from '../api/accountsApi';
+
+export const LOAD_ACCOUNTS_SUCCESS = 'LOAD_ACCOUNTS_SUCCESS';
 export const UPDATE_ACCOUNTS = 'UPDATE_ACCOUNTS';
-export const DELETE_ACCOUNT = 'DELETE_ACCOUNT';
+export const REMOVE_ACCOUNT = 'REMOVE_ACCOUNT';
 export const TOGGLE_UNSAVED_WARNING = 'TOGGLE_UNSAVED_WARNING';
 
-// PouchDB is loaded externally through a script tag in the browser
-const db = new PouchDB('accounts');
-const remoteCouch = 'http://127.0.0.1:5984/accounts';
-const syncDB = () => {
-  db.sync(remoteCouch, {live: false})
-    .on('complete', function(success) {
-      console.log('PouchDB-Server accounts database sync success :', success);
-    })
-    .on('error', function(err) {
-      console.log('PouchDB-Server accounts database sync error :', err);
-    });
-};
-
-export function fetchAccounts() {
-  syncDB();
-
-  // Show the current list of accounts by reading them from the database
-  const allAccounts = db.allDocs({
-    include_docs: true,
-    descending: true,
-  }).then((result) => {
-    return result.rows.map((row) => {
-      return {
-        '_id': row.doc._id,
-        '_rev': row.doc._rev,
-        'name': row.doc.name,
-        'type': row.doc.type,
-        'company': row.doc.company,
-      };
-    });
-  }).catch(function(err) {
-    console.log(err);
-  });
+function loadAccountsSuccess(accounts) {
+  // Load in UI the current list of accounts
   return {
-    type: FETCH_ACCOUNTS,
-    payload: allAccounts
+    type: LOAD_ACCOUNTS_SUCCESS,
+    payload: accounts
   };
 }
 
-export function deleteAccount(accountId) {
-  syncDB();
+// TODO: change removeAccount to removeAccount like Pluralsight tutorial?
+function removeAccount(accountId) {
   return {
-    type: DELETE_ACCOUNT,
+    type: REMOVE_ACCOUNT,
     data: accountId
   };
 }
 
-export function updateAccounts(accountData) {
-  syncDB();
+// TODO: change updateAccounts to updateAccountsSuccess like Pluralsight tutorial?
+function updateAccounts(accountData) {
   return {
     type: UPDATE_ACCOUNTS,
     data: accountData
@@ -62,5 +32,40 @@ export function updateAccounts(accountData) {
 export function toggleUnsavedWarning() {
   return {
     type: TOGGLE_UNSAVED_WARNING
+  };
+}
+
+export function saveAccount(account) {
+  return function(dispatch) {
+    return AccountsApi.saveAccountToDB(account).then(savedAccount => {
+      dispatch(updateAccounts(savedAccount));
+      // pass account object back to invoker's success method
+      return savedAccount;
+    }).catch(error => {
+      throw error;
+    });
+  };
+}
+
+export function getAccounts() {
+  return function(dispatch) {
+    return AccountsApi.getAccountsFromDB().then(accounts => {
+      dispatch(loadAccountsSuccess(accounts));
+    }).catch(error => {
+      throw error;
+    });
+  };
+}
+
+export function deleteAccount(account) {
+  return function(dispatch) {
+    return AccountsApi.deleteAccountFromDB(account).then(deletedAccount => {
+      dispatch(removeAccount(deletedAccount.id));
+      // pass deleted account object back to invoker's success method
+      return deletedAccount;
+    }).catch(error => {
+      console.log('deleteAccount error', error);
+      throw error;
+    });
   };
 }

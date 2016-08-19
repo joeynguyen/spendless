@@ -1,33 +1,27 @@
-import PouchDB from 'pouchdb';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import toastr from 'toastr';
 import { Button } from 'react-bootstrap';
-import { resetUploadedTransactions } from '../account/TransactionsActions.js';
-
-// PouchDB is loaded externally through a script tag in the browser
-const transDB = new PouchDB('transactions');
-
-// transDB.info().then(function(info) {
-//   console.log('transDB info: ', info);
-// });
+import { saveTransactions, resetUploadedTransactions } from '../account/TransactionsActions.js';
 
 class SaveButton extends Component {
   static propTypes = {
     uploadedTransactions: PropTypes.arrayOf(React.PropTypes.object),
     doResetUploadedTransactions: PropTypes.func.isRequired,
+    doSaveTransactions: PropTypes.func.isRequired,
   }
   // Save transactions uploaded from CSV to database
   handleSave = () => {
-    console.log('Trying to submit...');
-    console.log(this.props.uploadedTransactions);
-    transDB
-      .bulkDocs(this.props.uploadedTransactions)
-      .then(() => {
+    this.props.doSaveTransactions(this.props.uploadedTransactions)
+      .then(result => {
+        console.log('Successfully added transactions', result);
+        toastr.success('Transactions added', null, {timeOut: 1500});
         // Remove unsaved transactions from UI
         this.props.doResetUploadedTransactions();
       }).catch(function(err) {
         console.log(err);
+        toastr.error('Restart the application and retry', 'Error adding transactions', {timeOut: 1500});
       });
   }
   render() {
@@ -52,7 +46,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    doResetUploadedTransactions: resetUploadedTransactions
+    doResetUploadedTransactions: resetUploadedTransactions,
+    doSaveTransactions: saveTransactions,
   }, dispatch);
 }
 

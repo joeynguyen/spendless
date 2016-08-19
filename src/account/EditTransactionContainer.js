@@ -1,18 +1,15 @@
-import PouchDB from 'pouchdb';
 import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import { bindActionCreators } from 'redux';
 import toastr from 'toastr';
 import EditTransaction from './EditTransaction.js';
-import { toggleEditTransaction, selectActiveTransaction } from './TransactionsActions.js';
-
-// PouchDB is loaded externally through a script tag in the browser
-const db = new PouchDB('transactions');
+import { saveTransactions, toggleEditTransaction, selectActiveTransaction } from './TransactionsActions.js';
 
 class EditTransactionContainer extends Component {
   static propTypes = {
     activeTransaction: PropTypes.object.isRequired,
     editTransactionVisible: PropTypes.bool.isRequired,
+    doSaveTransactions: PropTypes.func.isRequired,
     doToggleEditTransaction: PropTypes.func.isRequired,
     doSelectActiveTransaction: PropTypes.func.isRequired,
     fields: PropTypes.object.isRequired,
@@ -28,16 +25,17 @@ class EditTransactionContainer extends Component {
       description: this.props.fields.description.value,
       notes: this.props.fields.notes.value,
     });
+
     // Update account in DB
-    db.put(newTransactionObj).then(result => {
-      console.log('Successfully updated transaction', result);
-      toastr.success('Transaction updated', null, {timeOut: 1500});
-      this.props.doToggleEditTransaction();
-    }).catch(err => {
-      console.log(err);
-      toastr.error('Restart the application and retry', 'Error updating transaction', {timeOut: 1500});
-      // TODO: Add error message after update fail
-    });
+    this.props.doSaveTransactions(newTransactionObj)
+      .then(result => {
+        console.log('Successfully updated transaction', result);
+        toastr.success('Transaction updated', null, {timeOut: 1500});
+        this.props.doToggleEditTransaction();
+      }).catch(err => {
+        console.log(err);
+        toastr.error('Restart the application and retry', 'Error updating transaction', {timeOut: 1500});
+      });
   }
 
   render() {
@@ -53,6 +51,27 @@ class EditTransactionContainer extends Component {
       />
     );
   }
+}
+
+function validateForm(values) {
+  const errors = {};
+
+  if (!values.date) {
+    errors.date = 'Enter a date';
+  }
+  if (!values.description) {
+    errors.description = 'Enter a description';
+  }
+  if (!values.category) {
+    errors.category = 'Enter a category';
+  }
+  if (!values.amount) {
+    errors.amount = 'Enter an amount';
+  } else if (values.amount && values.amount.indexOf('.') > -1 && values.amount.split('.')[1].length > 2) {
+    errors.amount = 'Enter an amount with 2 or less decimal places';
+  }
+
+  return errors;
 }
 
 function mapStateToProps(state) {
@@ -72,6 +91,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
+    doSaveTransactions: saveTransactions,
     doToggleEditTransaction: toggleEditTransaction,
     doSelectActiveTransaction: selectActiveTransaction,
   }, dispatch);
@@ -81,6 +101,7 @@ export default reduxForm(
   {
     form: 'EditTransaction',
     fields: ['date', 'description', 'category', 'amount', 'notes'],
+    validate: validateForm,
   },
   mapStateToProps,
   mapDispatchToProps

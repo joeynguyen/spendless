@@ -2,13 +2,13 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import ReduxPromise from 'redux-promise';
+import thunk from 'redux-thunk';
 import { Router, hashHistory } from 'react-router';
 import routes from './routes.js';
 import reducers from './reducers.js';
 import './app.css';
 
-const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
+const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const store = createStoreWithMiddleware(reducers, window.devToolsExtension && window.devToolsExtension());
 
 render(
