@@ -1,7 +1,7 @@
 import moment from 'moment';
 
 export default function parseCSV(selectedFile, accountId) {
-  return new Promise(function(resolve) {
+  return new Promise((resolve, reject) => {
     const fileReader = new FileReader();
     let newTransactions;
     fileReader.readAsText(selectedFile);
@@ -20,12 +20,12 @@ export default function parseCSV(selectedFile, accountId) {
       if (headerRow === undefined) {
         // TODO: Prompt user to add a header row to the CSV file
         console.log('Unable to find a header row in the CSV file');
+        reject();
       } else {
         const headerRowArray = headerRow
           .replace(/"/g, '')
           .trim()
           .split(',');
-        console.log('headerRowArray: ', headerRowArray);
 
         // TODO: Handle transaction descriptions that have commas, tokenize quotes or replace commas inside quotes with dashes?
         // See file VISA_561_010115_113015.CSV
@@ -37,7 +37,6 @@ export default function parseCSV(selectedFile, accountId) {
             .trim()
             .split(',')
           );
-        console.log('transactionRowsArray: ', transactionRowsArray);
 
         newTransactions = transactionRowsArray
           .map(function(transaction, i) {
@@ -60,7 +59,6 @@ export default function parseCSV(selectedFile, accountId) {
               'notes': '',
             };
           });
-        console.log('newTransactions: ', newTransactions);
       }
       resolve(newTransactions);
     };

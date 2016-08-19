@@ -23,13 +23,11 @@ class AddAccountFormContainer extends Component {
 
     this.props.doSaveAccount(newAccount)
       .then(result => {
-        console.log('Successfully added new account', result);
         toastr.success(result.name + ' account added', null, {timeOut: 1500});
         // Reset AddAccount form fields
         this.props.resetForm();
       })
-      .catch(error => {
-        console.log('Error trying to add account', error);
+      .catch(() => {
         toastr.error('Restart the application and retry', 'Error adding account', {timeOut: 1500});
       });
   }

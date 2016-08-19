@@ -18,8 +18,6 @@ class TransactionListContainer extends Component {
     this.props.doGetAccountTransactions(this.props.accountId);
   }
   componentDidUpdate(prevProps) {
-    // console.log('prevProps.accountId', prevProps.accountId);
-    // console.log('this.props.accountId', this.props.accountId);
     if (this.props.accountId !== prevProps.accountId) {
       this.props.doGetAccountTransactions(this.props.accountId);
     }

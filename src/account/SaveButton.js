@@ -14,13 +14,10 @@ class SaveButton extends Component {
   // Save transactions uploaded from CSV to database
   handleSave = () => {
     this.props.doSaveTransactions(this.props.uploadedTransactions)
-      .then(result => {
-        console.log('Successfully added transactions', result);
-        toastr.success('Transactions added', null, {timeOut: 1500});
+      .then(() => {
         // Remove unsaved transactions from UI
         this.props.doResetUploadedTransactions();
-      }).catch(function(err) {
-        console.log(err);
+      }).catch(() => {
         toastr.error('Restart the application and retry', 'Error adding transactions', {timeOut: 1500});
       });
   }

@@ -36,11 +36,9 @@ class EditAccountFormContainer extends Component {
     // Update account in DB
     this.props.doSaveAccount(newAccountObj)
       .then(result => {
-        console.log('Successfully updated account', result);
         toastr.success(result.name + ' account updated', null, {timeOut: 1500});
       })
-      .catch(error => {
-        console.log('Error trying to update account', error);
+      .catch(() => {
         toastr.error('Restart the application and retry', 'Error updating account', {timeOut: 1500});
       });
   }

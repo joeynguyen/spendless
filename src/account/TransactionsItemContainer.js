@@ -16,14 +16,11 @@ class TransactionsItemContainer extends Component {
   }
   handleDeleteTransactions = () => {
     this.props.doDeleteAccountTransactions(this.props.transaction)
-      .then(function(result) {
-        console.log('Successfully deleted transaction', result);
+      .then(() => {
         toastr.success('Transaction deleted', null, {timeOut: 1500});
       })
-      .catch(function(err) {
-        console.log('Error trying to delete transaction', err);
+      .catch(() => {
         toastr.error('Restart the application and retry', 'Error deleting transaction', {timeOut: 1500});
-        // TODO: Add error message after delete fail
       });
   }
   render() {

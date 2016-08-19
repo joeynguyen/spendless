@@ -9,7 +9,6 @@ class AddTransactionButton extends Component {
     doToggleAddTransaction: PropTypes.func.isRequired,
   }
   handleAddButtonClick = () => {
-    console.log('handleAddButtonClick');
     this.props.doToggleAddTransaction();
   }
   render() {

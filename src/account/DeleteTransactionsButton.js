@@ -28,11 +28,9 @@ class DeleteTransactionsButton extends Component {
     });
 
     this.props.doDeleteAccountTransactions(selectedTransactions)
-      .then(result => {
-        console.log('Successfully deleted transactions', result);
+      .then(() => {
         toastr.success('Transactions deleted', null, {timeOut: 1500});
-      }).catch(err => {
-        console.log(err);
+      }).catch(() => {
         toastr.error('Restart the application and retry', 'Error deleting transactions', {timeOut: 1500});
       });
   }

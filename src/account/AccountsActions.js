@@ -5,8 +5,8 @@ export const UPDATE_ACCOUNTS = 'UPDATE_ACCOUNTS';
 export const REMOVE_ACCOUNT = 'REMOVE_ACCOUNT';
 export const TOGGLE_UNSAVED_WARNING = 'TOGGLE_UNSAVED_WARNING';
 
+// Load in UI the current list of accounts
 function loadAccountsSuccess(accounts) {
-  // Load in UI the current list of accounts
   return {
     type: LOAD_ACCOUNTS_SUCCESS,
     payload: accounts
@@ -42,6 +42,7 @@ export function saveAccount(account) {
       // pass account object back to invoker's success method
       return savedAccount;
     }).catch(error => {
+      console.log('saveAccounts error', error);
       throw error;
     });
   };
@@ -52,6 +53,7 @@ export function getAccounts() {
     return AccountsApi.getAccountsFromDB().then(accounts => {
       dispatch(loadAccountsSuccess(accounts));
     }).catch(error => {
+      console.log('getAccounts error', error);
       throw error;
     });
   };

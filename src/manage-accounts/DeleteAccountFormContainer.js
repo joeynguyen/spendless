@@ -25,12 +25,10 @@ class DeleteAccountFormContainer extends Component {
     const accountName = this.props.account.name;
     // Remove account from DB
     this.props.doDeleteAccount(this.props.account)
-      .then(result => {
-        console.log('Successfully deleted account', result);
+      .then(() => {
         toastr.success(accountName + ' deleted', null, {timeOut: 1500});
       })
-      .catch(error => {
-        console.log('Error trying to delete account', error);
+      .catch(() => {
         toastr.error('Restart the application and retry', 'Error deleting account', {timeOut: 1500});
       });
   }

@@ -28,12 +28,10 @@ class EditTransactionContainer extends Component {
 
     // Update account in DB
     this.props.doSaveTransactions(newTransactionObj)
-      .then(result => {
-        console.log('Successfully updated transaction', result);
+      .then(() => {
         toastr.success('Transaction updated', null, {timeOut: 1500});
         this.props.doToggleEditTransaction();
-      }).catch(err => {
-        console.log(err);
+      }).catch(() => {
         toastr.error('Restart the application and retry', 'Error updating transaction', {timeOut: 1500});
       });
   }
