@@ -96,6 +96,14 @@ class TransactionsApi {
   static deleteTransactionsFromDB(transactions) {
     return new Promise((resolve, reject) => {
       if (Array.isArray(transactions)) {
+        db.bulkDocs(transactions)
+          .then(deletedTransactions => {
+            // return IDs of deleted transactions
+            resolve(deletedTransactions.map(transaction => transaction.id));
+          }).catch(function(err) {
+            console.log('deleteTransactionsFromDB bulk delete PUT error', err);
+            reject(err);
+          });
       } else {
         db.remove(transactions).then(deletedTransaction => {
           syncDB();
