@@ -21,12 +21,19 @@ export default function(state = [], action) {
         ...state.slice(updatedTransactionIndex + 1),
       ];
     case REMOVE_ACCOUNT_TRANSACTIONS:
-      const deletedTransactionIndex = state.findIndex(item => item._id === action.payload);
+      // handle bulk delete
+      if (Array.isArray(action.payload)) {
+        // get transactions that aren't part of the deleted group
+        return state.filter(item => action.payload.indexOf(item._id) < 0);
+      }
 
+      // handle single delete
+      const deletedTransactionIndex = state.findIndex(item => item._id === action.payload.id);
       return [
         ...state.slice(0, deletedTransactionIndex),
         ...state.slice(deletedTransactionIndex + 1),
       ];
+
     default:
       return state;
   }

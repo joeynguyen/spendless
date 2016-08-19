@@ -74,7 +74,7 @@ function removeAccountTransactions(transactions) {
 export function deleteAccountTransactions(transactions) {
   return function(dispatch) {
     return TransactionsApi.deleteTransactionsFromDB(transactions).then(deletedTransactions => {
-      dispatch(removeAccountTransactions(deletedTransactions.id));
+      dispatch(removeAccountTransactions(deletedTransactions));
       // pass deleted account object back to invoker's success method
       return deletedTransactions;
     }).catch(error => {
