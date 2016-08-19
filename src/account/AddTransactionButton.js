@@ -1,20 +1,17 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { toggleAddTransaction } from './TransactionsActions.js';
 import { Button } from 'react-bootstrap';
+import * as transactionsActions from './TransactionsActions.js';
 
 class AddTransactionButton extends Component {
   static propTypes = {
-    doToggleAddTransaction: PropTypes.func.isRequired,
-  }
-  handleAddButtonClick = () => {
-    this.props.doToggleAddTransaction();
+    actions: PropTypes.object.isRequired,
   }
   render() {
     return (
       <Button
-        onClick={this.handleAddButtonClick}
+        onClick={this.props.actions.toggleAddTransaction}
         bsStyle="default"
         bsSize="small"
         /* disabled={(this.props.uploadedTransactions.length === 0)} */
@@ -26,9 +23,9 @@ class AddTransactionButton extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    doToggleAddTransaction: toggleAddTransaction,
-  }, dispatch);
+  return {
+    actions: bindActionCreators(transactionsActions, dispatch)
+  };
 }
 
 export default connect(null, mapDispatchToProps)(AddTransactionButton);

@@ -1,23 +1,15 @@
 import React, { PropTypes } from 'react';
-import { Modal, Button, ButtonInput, Input } from 'react-bootstrap';
+import { Modal, Button, Input } from 'react-bootstrap';
 
 const AddTransaction = (props) => {
-  const {
-    addTransactionVisible,
-    doToggleAddTransaction,
-    pristine,
-    doSubmit,
-  } = props;
+  const { addTransactionVisible, toggleAddTransaction, pristine, doSubmit } = props;
   const { date, description, category, amount, notes } = props.fields;
-  const handleCloseModal = function() {
-    doToggleAddTransaction();
-  };
 
   return (
     <Modal
       show={addTransactionVisible}
       backdrop="static"
-      onHide={handleCloseModal}
+      onHide={toggleAddTransaction}
     >
       <form onSubmit={doSubmit}>
         <Modal.Header closeButton>
@@ -75,7 +67,7 @@ const AddTransaction = (props) => {
               disabled={pristine}
             >Save</Button>
             {' '}
-            <Button onClick={handleCloseModal}>Cancel</Button>
+            <Button onClick={toggleAddTransaction}>Cancel</Button>
           </div>
         </Modal.Footer>
       </form>
@@ -84,8 +76,10 @@ const AddTransaction = (props) => {
 };
 AddTransaction.propTypes = {
   addTransactionVisible: PropTypes.bool.isRequired,
-  doToggleAddTransaction: PropTypes.func.isRequired,
+  toggleAddTransaction: PropTypes.func.isRequired,
   fields: PropTypes.object.isRequired,
+  pristine: PropTypes.bool.isRequired,
+  doSubmit: PropTypes.func.isRequired,
 };
 
 export default AddTransaction;

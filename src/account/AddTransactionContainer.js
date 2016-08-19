@@ -3,14 +3,13 @@ import { reduxForm } from 'redux-form';
 import { bindActionCreators } from 'redux';
 import toastr from 'toastr';
 import AddTransaction from './AddTransaction.js';
-import { saveTransactions, toggleAddTransaction } from './TransactionsActions.js';
+import * as transactionsActions from './TransactionsActions.js';
 
 class AddTransactionContainer extends Component {
   static propTypes = {
+    actions: PropTypes.object.isRequired,
     accountId: PropTypes.string.isRequired,
     addTransactionVisible: PropTypes.bool.isRequired,
-    doToggleAddTransaction: PropTypes.func.isRequired,
-    doSaveTransactions: PropTypes.func.isRequired,
     fields: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     pristine: PropTypes.bool.isRequired,
@@ -29,10 +28,10 @@ class AddTransactionContainer extends Component {
     };
 
     // Add account to DB
-    this.props.doSaveTransactions(newTransactionObj)
+    this.props.actions.saveTransactions(newTransactionObj)
       .then(() => {
         toastr.success('Transaction added', null, {timeOut: 1500});
-        this.props.doToggleAddTransaction();
+        this.props.actions.toggleAddTransaction();
       }).catch(() => {
         toastr.error('Restart the application and retry', 'Error adding transaction', {timeOut: 1500});
       });
@@ -43,7 +42,7 @@ class AddTransactionContainer extends Component {
     return (
       <AddTransaction
         addTransactionVisible={this.props.addTransactionVisible}
-        doToggleAddTransaction={this.props.doToggleAddTransaction}
+        toggleAddTransaction={this.props.actions.toggleAddTransaction}
         fields={this.props.fields}
         pristine={this.props.pristine}
         doSubmit={reduxFormHandleSubmit}
@@ -80,10 +79,9 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    doToggleAddTransaction: toggleAddTransaction,
-    doSaveTransactions: saveTransactions,
-  }, dispatch);
+  return {
+    actions: bindActionCreators(transactionsActions, dispatch)
+  };
 }
 
 export default reduxForm(
