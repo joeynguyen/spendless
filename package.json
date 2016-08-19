@@ -67,6 +67,7 @@
     "react-transform-hmr": "^1.0.1",
     "redbox-react": "^1.2.0",
     "redux-immutable-state-invariant": "^1.2.3",
+    "redux-logger": "^2.6.1",
     "rimraf": "^2.4.3",
     "style-loader": "^0.13.0",
     "webpack": "^1.13.1",
@@ -85,14 +86,12 @@
     "react": "^15.1.0",
     "react-bootstrap": "^0.28.5",
     "react-dom": "^15.1.0",
-    "react-pouchdb-changes": "^0.1.1",
     "react-redux": "^4.4.5",
     "react-router": "^2.6.0",
     "react-router-bootstrap": "^0.23.1",
     "react-router-redux": "^4.0.4",
     "redux": "^3.5.2",
     "redux-form": "^4.2.0",
-    "redux-promise": "^0.5.1",
     "redux-thunk": "^2.0.1",
     "toastr": "^2.1.2"
   }

@@ -1,19 +1,18 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
 import { Router, hashHistory } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
+import configureStore from './store/configureStore.js';
 import routes from './routes.js';
-import reducers from './reducers.js';
 import './app.css';
 
-const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
-const store = createStoreWithMiddleware(reducers, window.devToolsExtension && window.devToolsExtension());
+const store = configureStore();
+const history = syncHistoryWithStore(hashHistory, store);
 
 render(
   <Provider store={store}>
-    <Router history={hashHistory}>
+    <Router history={history}>
       {routes}
     </Router>
   </Provider>,

@@ -1,8 +1,6 @@
 import { LOAD_ACCOUNTS_SUCCESS, UPDATE_ACCOUNTS, REMOVE_ACCOUNT } from './AccountsActions.js';
 
 export default function(state = [], action) {
-  console.log('action received', action);
-
   switch (action.type) {
     case LOAD_ACCOUNTS_SUCCESS:
       return action.payload;

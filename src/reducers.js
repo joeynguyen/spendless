@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
+import { routerReducer as routing } from 'react-router-redux';
 import AccountsReducer from './account/AccountsReducer.js';
 import AccountTransactionsReducer from './account/AccountTransactionsReducer.js';
 import UploadedTransactionsReducer from './account/UploadedTransactionsReducer.js';
@@ -12,6 +13,7 @@ import NextRoutePathReducer from './app/NextRoutePathReducer.js';
 import { RESET_CURRENT_TRANSACTIONS } from './account/TransactionsActions.js';
 
 const rootReducer = combineReducers({
+  routing: routing,
   accounts: AccountsReducer,
   accountTransactions: AccountTransactionsReducer,
   activeTransaction: ActiveTransactionReducer,
