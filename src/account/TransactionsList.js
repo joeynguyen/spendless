@@ -1,67 +1,42 @@
-import React, { Component, PropTypes } from 'react';
-import { reduxForm } from 'redux-form';
+import React, { PropTypes } from 'react';
 import TransactionsItemContainer from './TransactionsItemContainer.js';
-import EditTransactionContainer from './EditTransactionContainer.js';
-import AddTransactionContainer from './AddTransactionContainer.js';
 import styles from './Transactions.module.css';
 
-class TransactionsList extends Component {
-  static propTypes = {
-    accountId: PropTypes.string.isRequired,
-    addTransactionVisible: PropTypes.bool.isRequired,
-    editTransactionVisible: PropTypes.bool.isRequired,
-    accountTransactions: PropTypes.arrayOf(React.PropTypes.object),
-    uploadedTransactions: PropTypes.arrayOf(React.PropTypes.object),
-    fields: PropTypes.object.isRequired,
-  }
+const TransactionsList = ({ accountTransactions, fields, uploadedTransactions }) => {
+  const fieldPropPlaceholder = { defaultChecked: '', defaultValue: '', checked: false };
 
-  render() {
-    // create placeholder object that fulfills component prop requirements
-    // but doesn't actually have a functional value for uploaded transactions
-    const fieldPropPlaceholder = { defaultChecked: '', defaultValue: '', checked: false };
-    let editTransactionContainer;
-    let addTransactionContainer;
-    if (this.props.editTransactionVisible) {
-      editTransactionContainer = (<EditTransactionContainer />);
-    }
-    if (this.props.addTransactionVisible) {
-      addTransactionContainer = (<AddTransactionContainer accountId={this.props.accountId} />);
-    }
-    return (
-      <div>
-        <table className={styles['transactions-table'] + ' transactions-table table table-hover'}>
-          <thead>
-            <tr>
-              <th><input type="checkbox" /></th>
-              <th>Date</th>
-              <th>Description</th>
-              <th>Category</th>
-              <th>Amount</th>
-              <th>Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              this.props.uploadedTransactions.map(itemData =>
-                <TransactionsItemContainer key={itemData._id} transaction={itemData} field={fieldPropPlaceholder} unsaved />
-              )
-            }
-            {
-              this.props.accountTransactions.map(itemData =>
-                <TransactionsItemContainer key={itemData._id} transaction={itemData} field={this.props.fields[itemData._id]} unsaved={false} />
-              )
-            }
-          </tbody>
-        </table>
-        { addTransactionContainer }
-        { editTransactionContainer }
-      </div>
-    );
-  }
-}
+  return (
+    <table className={styles['transactions-table'] + ' transactions-table table table-hover'}>
+      <thead>
+        <tr>
+          <th><input type="checkbox" /></th>
+          <th>Date</th>
+          <th>Description</th>
+          <th>Category</th>
+          <th>Amount</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          uploadedTransactions.map(itemData =>
+            <TransactionsItemContainer key={itemData._id} transaction={itemData} field={fieldPropPlaceholder} unsaved />
+          )
+        }
+        {
+          accountTransactions.map(itemData =>
+            <TransactionsItemContainer key={itemData._id} transaction={itemData} field={fields[itemData._id]} unsaved={false} />
+          )
+        }
+      </tbody>
+    </table>
+  );
+};
 
-export default reduxForm(
-  {
-    form: 'ManageTransactionsList',
-  },
-)(TransactionsList);
+TransactionsList.propTypes = {
+  uploadedTransactions: PropTypes.arrayOf(React.PropTypes.object),
+  accountTransactions: PropTypes.arrayOf(React.PropTypes.object),
+  fields: PropTypes.object.isRequired,
+};
+
+export default TransactionsList;

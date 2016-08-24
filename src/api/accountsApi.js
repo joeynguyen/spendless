@@ -34,6 +34,7 @@ class AccountsApi {
           })
         );
       }).catch(function(err) {
+        console.log('getAccountsFromDB GET error', err);
         reject(err);
       });
     });

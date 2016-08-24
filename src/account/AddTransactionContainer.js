@@ -8,7 +8,7 @@ import * as transactionsActions from './TransactionsActions.js';
 class AddTransactionContainer extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
-    accountId: PropTypes.string.isRequired,
+    activeAccountId: PropTypes.string.isRequired,
     addTransactionVisible: PropTypes.bool.isRequired,
     fields: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired,
@@ -19,7 +19,7 @@ class AddTransactionContainer extends Component {
     const notesValue = (this.props.fields.notes.value !== undefined) ? this.props.fields.notes.value : '';
     const newTransactionObj = {
       _id: new Date().getTime().toString(),
-      accountId: this.props.accountId,
+      accountId: this.props.activeAccountId,
       amount: Number(this.props.fields.amount.value).toFixed(2),
       category: this.props.fields.category.value,
       date: this.props.fields.date.value,

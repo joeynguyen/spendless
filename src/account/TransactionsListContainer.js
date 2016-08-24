@@ -2,45 +2,47 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getAccountTransactions, resetAccountTransactions } from './TransactionsActions.js';
-import TransactionsList from './TransactionsList.js';
+import TransactionsListFormContainer from './TransactionsListFormContainer.js';
 
 class TransactionListContainer extends Component {
   static propTypes = {
-    accountId: PropTypes.string.isRequired,
+    activeAccountId: PropTypes.string.isRequired,
     accountTransactions: PropTypes.arrayOf(React.PropTypes.object),
-    addTransactionVisible: PropTypes.bool.isRequired,
-    editTransactionVisible: PropTypes.bool.isRequired,
-    uploadedTransactions: PropTypes.arrayOf(React.PropTypes.object),
     doGetAccountTransactions: PropTypes.func.isRequired,
     doResetAccountTransactions: PropTypes.func.isRequired,
   }
-  componentWillMount() {
-    this.props.doGetAccountTransactions(this.props.accountId);
+
+  componentDidMount() {
+    this.props.doGetAccountTransactions(this.props.activeAccountId);
   }
+
   componentDidUpdate(prevProps) {
-    if (this.props.accountId !== prevProps.accountId) {
-      this.props.doGetAccountTransactions(this.props.accountId);
+    if (this.props.activeAccountId !== prevProps.activeAccountId) {
+      this.props.doGetAccountTransactions(this.props.activeAccountId);
     }
   }
+
   componentWillUnmount() {
     this.props.doResetAccountTransactions();
   }
 
   render() {
-    const formCheckboxValues = this.props.accountTransactions.reduce((previousValue, currentValue) =>
-      Object.assign(previousValue, {[currentValue._id.toString()]: false})
-    , {});
+    // create an initialValues prop to pass to component that uses redux-form
+    // need to do this so that these key value pairs are in state when form is initialized
+    // set the checkboxes to not be checked by default
+    const formCheckboxInitialValues = this.props.accountTransactions.reduce((previousValue, currentValue) => {
+      return Object.assign(previousValue, {[currentValue._id.toString()]: false});
+    }, {});
     const formInitialValues = {
-      initialValues: formCheckboxValues
+      initialValues: formCheckboxInitialValues
     };
+    const fields = this.props.accountTransactions.map(transaction => transaction._id);
+
     return (
-      <TransactionsList
-        accountId={this.props.accountId}
-        addTransactionVisible={this.props.addTransactionVisible}
-        editTransactionVisible={this.props.editTransactionVisible}
-        uploadedTransactions={this.props.uploadedTransactions}
+      <TransactionsListFormContainer
         accountTransactions={this.props.accountTransactions}
-        fields={this.props.accountTransactions.map(transaction => transaction._id)}
+        activeAccountId={this.props.activeAccountId}
+        fields={fields}
         {...formInitialValues}
       />
     );
@@ -50,9 +52,6 @@ class TransactionListContainer extends Component {
 function mapStateToProps(state) {
   return {
     accountTransactions: state.accountTransactions,
-    addTransactionVisible: state.addTransactionVisible,
-    editTransactionVisible: state.editTransactionVisible,
-    uploadedTransactions: state.uploadedTransactions,
   };
 }
 
