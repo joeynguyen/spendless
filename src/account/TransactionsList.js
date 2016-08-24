@@ -3,6 +3,8 @@ import TransactionsItemContainer from './TransactionsItemContainer.js';
 import styles from './Transactions.module.css';
 
 const TransactionsList = ({ accountTransactions, fields, uploadedTransactions }) => {
+  // create placeholder object that fulfills component prop requirements
+  // but doesn't actually have a functional value for uploaded transactions
   const fieldPropPlaceholder = { defaultChecked: '', defaultValue: '', checked: false };
 
   return (

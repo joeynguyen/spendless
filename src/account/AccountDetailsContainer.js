@@ -5,10 +5,14 @@ import { resetUploadedTransactions, resetCurrentTransactions } from './Transacti
 import { toggleUnsavedWarning } from './AccountsActions.js';
 import { storeNextRoutePath } from '../app/AppActions.js';
 import AccountDetails from './AccountDetail.js';
+import EditTransactionContainer from './EditTransactionContainer.js';
+import AddTransactionContainer from './AddTransactionContainer.js';
 
 class AccountDetailsContainer extends Component {
   static propTypes = {
     accounts: PropTypes.arrayOf(React.PropTypes.object),
+    addTransactionVisible: PropTypes.bool.isRequired,
+    editTransactionVisible: PropTypes.bool.isRequired,
     params: PropTypes.object.isRequired,
     route: PropTypes.object.isRequired,
     uploadedTransactions: PropTypes.arrayOf(React.PropTypes.object),
@@ -74,14 +78,20 @@ class AccountDetailsContainer extends Component {
   }
 
   render() {
+    const editTransactionContainer = this.props.editTransactionVisible ? <EditTransactionContainer /> : null;
+    const addTransactionContainer = this.props.addTransactionVisible ? <AddTransactionContainer activeAccountId={this.props.params.id} /> : null;
     return (
-      <AccountDetails
-        accounts={this.props.accounts}
-        handleAlertStay={this.handleAlertStay}
-        handleAlertLeave={this.handleAlertLeave}
-        params={this.props.params}
-        unsavedWarningVisible={this.props.unsavedWarningVisible}
-      />
+      <div>
+        <AccountDetails
+          accounts={this.props.accounts}
+          handleAlertStay={this.handleAlertStay}
+          handleAlertLeave={this.handleAlertLeave}
+          params={this.props.params}
+          unsavedWarningVisible={this.props.unsavedWarningVisible}
+        />
+        { addTransactionContainer }
+        { editTransactionContainer }
+      </div>
     );
   }
 }
@@ -89,6 +99,8 @@ class AccountDetailsContainer extends Component {
 function mapStateToProps(state) {
   return {
     accounts: state.accounts,
+    addTransactionVisible: state.addTransactionVisible,
+    editTransactionVisible: state.editTransactionVisible,
     uploadedTransactions: state.uploadedTransactions,
     unsavedWarningVisible: state.unsavedWarningVisible,
     nextRoutePath: state.nextRoutePath,
