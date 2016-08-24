@@ -1,29 +1,28 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getAccountTransactions, resetAccountTransactions } from './TransactionsActions.js';
+import * as transactionsActions from './TransactionsActions.js';
 import TransactionsListFormContainer from './TransactionsListFormContainer.js';
 
 class TransactionListContainer extends Component {
   static propTypes = {
     activeAccountId: PropTypes.string.isRequired,
     accountTransactions: PropTypes.arrayOf(React.PropTypes.object),
-    doGetAccountTransactions: PropTypes.func.isRequired,
-    doResetAccountTransactions: PropTypes.func.isRequired,
+    actions: PropTypes.object.isRequired,
   }
 
   componentDidMount() {
-    this.props.doGetAccountTransactions(this.props.activeAccountId);
+    this.props.actions.getAccountTransactions(this.props.activeAccountId);
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.activeAccountId !== prevProps.activeAccountId) {
-      this.props.doGetAccountTransactions(this.props.activeAccountId);
+      this.props.actions.getAccountTransactions(this.props.activeAccountId);
     }
   }
 
   componentWillUnmount() {
-    this.props.doResetAccountTransactions();
+    this.props.actions.resetAccountTransactions();
   }
 
   render() {
@@ -56,10 +55,9 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    doGetAccountTransactions: getAccountTransactions,
-    doResetAccountTransactions: resetAccountTransactions,
-  }, dispatch);
+  return {
+    actions: bindActionCreators(transactionsActions, dispatch)
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TransactionListContainer);

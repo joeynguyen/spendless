@@ -3,19 +3,17 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import toastr from 'toastr';
 import TransactionsItem from './TransactionsItem.js';
-import { deleteAccountTransactions, toggleEditTransaction, selectActiveTransaction } from './TransactionsActions.js';
+import * as transactionsActions from './TransactionsActions.js';
 
 class TransactionsItemContainer extends Component {
   static propTypes = {
     field: PropTypes.object.isRequired,
     transaction: PropTypes.object.isRequired,
     unsaved: PropTypes.bool.isRequired,
-    doDeleteAccountTransactions: PropTypes.func.isRequired,
-    doToggleEditTransaction: PropTypes.func.isRequired,
-    doSelectActiveTransaction: PropTypes.func.isRequired,
+    actions: PropTypes.object.isRequired,
   }
   handleDeleteTransactions = () => {
-    this.props.doDeleteAccountTransactions(this.props.transaction)
+    this.props.actions.deleteAccountTransactions(this.props.transaction)
       .then(() => {
         toastr.success('Transaction deleted', null, {timeOut: 1500});
       })
@@ -28,8 +26,8 @@ class TransactionsItemContainer extends Component {
       <TransactionsItem
         reduxFormCheckbox={this.props.field}
         transaction={this.props.transaction}
-        doToggleEditTransaction={this.props.doToggleEditTransaction}
-        doSelectActiveTransaction={this.props.doSelectActiveTransaction}
+        toggleEditTransaction={this.props.actions.toggleEditTransaction}
+        selectActiveTransaction={this.props.actions.selectActiveTransaction}
         unsaved={this.props.unsaved}
         handleDeleteTransactions={this.handleDeleteTransactions}
       />
@@ -38,11 +36,9 @@ class TransactionsItemContainer extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    doDeleteAccountTransactions: deleteAccountTransactions,
-    doToggleEditTransaction: toggleEditTransaction,
-    doSelectActiveTransaction: selectActiveTransaction,
-  }, dispatch);
+  return {
+    actions: bindActionCreators(transactionsActions, dispatch)
+  };
 }
 
 export default connect(null, mapDispatchToProps)(TransactionsItemContainer);
