@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import parseCSV from '../utils/csvParser.js';
-import { addUploadedTransactions } from './TransactionsActions.js';
+import * as transactionsActions from './TransactionsActions.js';
 
 class FileUpload extends Component {
   static propTypes = {
     accountId: PropTypes.string.isRequired,
-    doAddUploadedTransactions: PropTypes.func.isRequired,
+    actions: PropTypes.object.isRequired,
   }
   handleFile = () => {
     // using a ref String attribute is a legacy approach ??
@@ -17,7 +17,7 @@ class FileUpload extends Component {
     // https://facebook.github.io/react/docs/top-level-api.html#reactdom.finddomnode
     const selectedFile = ReactDOM.findDOMNode(this.refs.csv).files[0];
     const newTransactions = parseCSV(selectedFile, this.props.accountId);
-    newTransactions.then(val => this.props.doAddUploadedTransactions(val));
+    newTransactions.then(val => this.props.actions.addUploadedTransactions(val));
   }
   render() {
     return (
@@ -34,7 +34,9 @@ class FileUpload extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ doAddUploadedTransactions: addUploadedTransactions }, dispatch);
+  return {
+    actions: bindActionCreators(transactionsActions, dispatch)
+  };
 }
 
 export default connect(null, mapDispatchToProps)(FileUpload);

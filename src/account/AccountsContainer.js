@@ -2,16 +2,16 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import AccountsGroup from './AccountsGroup.js';
-import { getAccounts } from './AccountsActions.js';
+import * as accountsActions from './AccountsActions.js';
 
 class AccountContainer extends Component {
   static propTypes = {
-    doGetAccounts: PropTypes.func.isRequired,
-    accounts: PropTypes.array
+    accounts: PropTypes.array,
+    actions: PropTypes.object.isRequired,
   }
 
   componentWillMount() {
-    this.props.doGetAccounts();
+    this.props.actions.getAccounts();
   }
 
   render() {
@@ -34,12 +34,14 @@ class AccountContainer extends Component {
 function mapStateToProps(state) {
   return {
     // state comes from the <Provider>'s 'store' property in index.js
-    accounts: state.accounts
+    accounts: state.accounts,
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ doGetAccounts: getAccounts }, dispatch);
+  return {
+    actions: bindActionCreators(accountsActions, dispatch)
+  };
 }
 
 // Promote AccountContainer from a Component to a Container, a
