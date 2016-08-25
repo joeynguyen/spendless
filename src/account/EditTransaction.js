@@ -4,16 +4,16 @@ import { Modal, Button, Input } from 'react-bootstrap';
 const EditTransaction = (props) => {
   const {
     editTransactionVisible,
-    doToggleEditTransaction,
-    doSelectActiveTransaction,
+    toggleEditTransaction,
+    selectActiveTransaction,
     pristine,
     doSubmit,
   } = props;
   const { date, description, category, amount, notes } = props.fields;
   const handleCloseModal = function() {
-    doToggleEditTransaction();
+    toggleEditTransaction();
     // reset current transaction being edited to null
-    doSelectActiveTransaction();
+    selectActiveTransaction();
   };
 
   return (
@@ -86,8 +86,8 @@ const EditTransaction = (props) => {
 };
 EditTransaction.propTypes = {
   editTransactionVisible: PropTypes.bool.isRequired,
-  doToggleEditTransaction: PropTypes.func.isRequired,
-  doSelectActiveTransaction: PropTypes.func.isRequired,
+  toggleEditTransaction: PropTypes.func.isRequired,
+  selectActiveTransaction: PropTypes.func.isRequired,
   fields: PropTypes.object.isRequired,
 };
 
