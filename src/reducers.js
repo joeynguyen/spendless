@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 import { routerReducer as routing } from 'react-router-redux';
 import AccountsReducer from './account/AccountsReducer.js';
+import ActiveAccountIdReducer from './account/ActiveAccountIdReducer.js';
 import AccountTransactionsReducer from './account/AccountTransactionsReducer.js';
 import UploadedTransactionsReducer from './account/UploadedTransactionsReducer.js';
 import ManageTransactionsListFormReducer from './account/ManageTransactionsListFormReducer.js';
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   routing: routing,
   accounts: AccountsReducer,
   accountTransactions: AccountTransactionsReducer,
+  activeAccountId: ActiveAccountIdReducer,
   activeTransaction: ActiveTransactionReducer,
   uploadedTransactions: UploadedTransactionsReducer,
   manageAccountsVisible: ManageAccountsVisibleReducer,

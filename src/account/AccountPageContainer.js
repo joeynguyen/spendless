@@ -34,8 +34,8 @@ class AccountPageContainer extends Component {
     this.context.router.setRouteLeaveHook(this.props.route, this.routerWillLeave);
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.params.id !== prevProps.params.id) {
+  componentWillReceiveProps(nextProps) {
+    if (this.props.params.id !== nextProps.params.id) {
       this.context.router.setRouteLeaveHook(this.props.route, this.routerWillLeave);
       // remove transactions from ManageTransactionsList redux-form
       this.props.doResetCurrentTransactions();
