@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import FileUpload from './FileUpload.js';
-import TransactionsListContainer from './TransactionsListContainer.js';
 import SaveButton from './SaveButton.js';
 import DeleteTransactionsButton from './DeleteTransactionsButton.js';
 import AddTransactionButton from './AddTransactionButton.js';
@@ -16,7 +15,7 @@ const AccountDetails = ({ accounts, params }) => {
   const activeAccount = accounts.find(account => account._id === params.id);
   if (!activeAccount) {
     return (
-      <div className="col-xs-9">
+      <div>
         <div className="header">
           <h3 className={styles.header}>Error: Account Doesn't Exist</h3>
         </div>
@@ -58,7 +57,6 @@ const AccountDetails = ({ accounts, params }) => {
       <DeleteTransactionsButton />
       <br />
       <AddTransactionButton />
-      <TransactionsListContainer activeAccountId={params.id} />
     </div>
   );
 };

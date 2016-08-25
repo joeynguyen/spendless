@@ -5,6 +5,7 @@ import { resetUploadedTransactions, resetCurrentTransactions } from './Transacti
 import { toggleUnsavedWarning } from './AccountsActions.js';
 import { storeNextRoutePath } from '../app/AppActions.js';
 import AccountDetailsContainer from './AccountDetailsContainer.js';
+import TransactionsListContainer from './TransactionsListContainer.js';
 import EditTransactionContainer from './EditTransactionContainer.js';
 import AddTransactionContainer from './AddTransactionContainer.js';
 import UnsavedWarning from './UnsavedWarning.js';
@@ -72,10 +73,11 @@ class AccountPageContainer extends Component {
     const editTransactionContainer = this.props.editTransactionVisible ? <EditTransactionContainer /> : null;
     const addTransactionContainer = this.props.addTransactionVisible ? <AddTransactionContainer activeAccountId={this.props.params.id} /> : null;
     return (
-      <div>
+      <div className="col-xs-9">
         <AccountDetailsContainer
           params={this.props.params}
         />
+        <TransactionsListContainer activeAccountId={this.props.params.id} />
         { addTransactionContainer }
         { editTransactionContainer }
         <UnsavedWarning show={this.props.unsavedWarningVisible} localHandleAlertStay={this.handleAlertStay} localHandleAlertLeave={this.handleAlertLeave} />
