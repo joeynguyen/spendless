@@ -8,6 +8,7 @@ class AccountContainer extends Component {
   static propTypes = {
     accounts: PropTypes.array,
     actions: PropTypes.object.isRequired,
+    activeAccountId: PropTypes.string.isRequired,
   }
 
   componentWillMount() {
@@ -22,8 +23,8 @@ class AccountContainer extends Component {
     const bankAccounts = this.props.accounts.filter(account => account.type === 'bank');
     return (
       <div>
-        <AccountsGroup title="Banks" icon="bank" accounts={bankAccounts} />
-        <AccountsGroup title="Credit Cards" icon="credit-card" accounts={ccAccounts} />
+        <AccountsGroup title="Banks" icon="bank" accounts={bankAccounts} activeAccountId={this.props.activeAccountId} />
+        <AccountsGroup title="Credit Cards" icon="credit-card" accounts={ccAccounts} activeAccountId={this.props.activeAccountId} />
       </div>
     );
   }
@@ -35,6 +36,7 @@ function mapStateToProps(state) {
   return {
     // state comes from the <Provider>'s 'store' property in index.js
     accounts: state.accounts,
+    activeAccountId: state.activeAccountId,
   };
 }
 
