@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { resetUploadedTransactions, resetCurrentTransactions } from './TransactionsActions.js';
 import { toggleUnsavedWarning } from './AccountsActions.js';
 import { storeNextRoutePath } from '../app/AppActions.js';
-import AccountDetails from './AccountDetail.js';
+import AccountDetailsContainer from './AccountDetailsContainer.js';
 import EditTransactionContainer from './EditTransactionContainer.js';
 import AddTransactionContainer from './AddTransactionContainer.js';
 import UnsavedWarning from './UnsavedWarning.js';
@@ -73,8 +73,7 @@ class AccountPageContainer extends Component {
     const addTransactionContainer = this.props.addTransactionVisible ? <AddTransactionContainer activeAccountId={this.props.params.id} /> : null;
     return (
       <div>
-        <AccountDetails
-          accounts={this.props.accounts}
+        <AccountDetailsContainer
           params={this.props.params}
         />
         { addTransactionContainer }
@@ -87,7 +86,6 @@ class AccountPageContainer extends Component {
 
 function mapStateToProps(state) {
   return {
-    accounts: state.accounts,
     addTransactionVisible: state.addTransactionVisible,
     editTransactionVisible: state.editTransactionVisible,
     unsavedWarningVisible: state.unsavedWarningVisible,
