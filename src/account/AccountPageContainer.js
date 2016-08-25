@@ -74,10 +74,8 @@ class AccountPageContainer extends Component {
     const addTransactionContainer = this.props.addTransactionVisible ? <AddTransactionContainer activeAccountId={this.props.params.id} /> : null;
     return (
       <div className="col-xs-9">
-        <AccountDetailsContainer
-          params={this.props.params}
-        />
-        <TransactionsListContainer activeAccountId={this.props.params.id} />
+        <AccountDetailsContainer />
+        <TransactionsListContainer />
         { addTransactionContainer }
         { editTransactionContainer }
         <UnsavedWarning show={this.props.unsavedWarningVisible} localHandleAlertStay={this.handleAlertStay} localHandleAlertLeave={this.handleAlertLeave} />

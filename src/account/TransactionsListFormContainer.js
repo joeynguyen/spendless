@@ -5,7 +5,6 @@ import TransactionsList from './TransactionsList.js';
 class TransactionsListFormContainer extends Component {
   static propTypes = {
     accountTransactions: PropTypes.arrayOf(React.PropTypes.object),
-    activeAccountId: PropTypes.string.isRequired,
     fields: PropTypes.object.isRequired,
     uploadedTransactions: PropTypes.arrayOf(React.PropTypes.object),
   }

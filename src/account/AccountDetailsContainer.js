@@ -5,14 +5,14 @@ import AccountDetails from './AccountDetail.js';
 class AccountDetailsContainer extends Component {
   static propTypes = {
     accounts: PropTypes.arrayOf(React.PropTypes.object),
-    params: PropTypes.object.isRequired,
+    activeAccountId: PropTypes.string.isRequired,
   }
 
   render() {
     return (
       <AccountDetails
         accounts={this.props.accounts}
-        params={this.props.params}
+        activeAccountId={this.props.activeAccountId}
       />
     );
   }
@@ -21,6 +21,7 @@ class AccountDetailsContainer extends Component {
 function mapStateToProps(state) {
   return {
     accounts: state.accounts,
+    activeAccountId: state.activeAccountId,
   };
 }
 

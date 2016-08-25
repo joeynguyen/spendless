@@ -40,7 +40,6 @@ class TransactionListContainer extends Component {
     return (
       <TransactionsListFormContainer
         accountTransactions={this.props.accountTransactions}
-        activeAccountId={this.props.activeAccountId}
         fields={fields}
         {...formInitialValues}
       />
@@ -51,6 +50,7 @@ class TransactionListContainer extends Component {
 function mapStateToProps(state) {
   return {
     accountTransactions: state.accountTransactions,
+    activeAccountId: state.activeAccountId,
   };
 }
 

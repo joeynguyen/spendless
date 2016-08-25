@@ -5,14 +5,14 @@ import DeleteTransactionsButton from './DeleteTransactionsButton.js';
 import AddTransactionButton from './AddTransactionButton.js';
 import styles from './Account.module.css';
 
-const AccountDetails = ({ accounts, params }) => {
+const AccountDetails = ({ accounts, activeAccountId }) => {
   // show loading spinner until accounts are loaded
   if (accounts.length < 1) {
     return <div><p className="text-center"><i className="fa fa-cog fa-spin fa-3x"></i></p></div>;
   }
 
   // handle instance where you delete the account that you're currently on
-  const activeAccount = accounts.find(account => account._id === params.id);
+  const activeAccount = accounts.find(account => account._id === activeAccountId);
   if (!activeAccount) {
     return (
       <div>
@@ -51,7 +51,7 @@ const AccountDetails = ({ accounts, params }) => {
         <h3 className={styles.header}>{icon} {activeAccount.name} <br />
           <small>{activeAccount.company}</small></h3>
       </div>
-      <FileUpload accountId={params.id} />
+      <FileUpload accountId={activeAccountId} />
       <SaveButton />
       {' '}
       <DeleteTransactionsButton />
@@ -62,7 +62,7 @@ const AccountDetails = ({ accounts, params }) => {
 };
 AccountDetails.propTypes = {
   accounts: PropTypes.arrayOf(React.PropTypes.object),
-  params: PropTypes.object.isRequired,
+  activeAccountId: PropTypes.string.isRequired,
 };
 
 export default AccountDetails;
