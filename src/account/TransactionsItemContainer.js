@@ -27,7 +27,6 @@ class TransactionsItemContainer extends Component {
         reduxFormCheckbox={this.props.field}
         transaction={this.props.transaction}
         toggleEditTransaction={this.props.actions.toggleEditTransaction}
-        selectActiveTransaction={this.props.actions.selectActiveTransaction}
         unsaved={this.props.unsaved}
         handleDeleteTransactions={this.handleDeleteTransactions}
       />

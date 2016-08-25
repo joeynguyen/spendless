@@ -5,15 +5,13 @@ const EditTransaction = (props) => {
   const {
     editTransactionVisible,
     toggleEditTransaction,
-    selectActiveTransaction,
     pristine,
     doSubmit,
   } = props;
   const { date, description, category, amount, notes } = props.fields;
   const handleCloseModal = function() {
-    toggleEditTransaction();
     // reset current transaction being edited to null
-    selectActiveTransaction();
+    toggleEditTransaction();
   };
 
   return (
@@ -87,7 +85,6 @@ const EditTransaction = (props) => {
 EditTransaction.propTypes = {
   editTransactionVisible: PropTypes.bool.isRequired,
   toggleEditTransaction: PropTypes.func.isRequired,
-  selectActiveTransaction: PropTypes.func.isRequired,
   fields: PropTypes.object.isRequired,
 };
 
