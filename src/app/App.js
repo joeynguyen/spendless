@@ -9,16 +9,6 @@ const App = ({ children }) => {
       <Header />
       <Sidebar />
       {children}
-      {
-      /*
-        (() => {
-          if (process.env.NODE_ENV !== 'production') {
-            const DevTools = require('./DevTools');
-            return <DevTools />;
-          }
-        })()
-      */
-      }
       <ManageAccountsContainer />
     </div>
   );

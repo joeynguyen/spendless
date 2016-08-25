@@ -4,10 +4,9 @@ import TransactionsListContainer from './TransactionsListContainer.js';
 import SaveButton from './SaveButton.js';
 import DeleteTransactionsButton from './DeleteTransactionsButton.js';
 import AddTransactionButton from './AddTransactionButton.js';
-import UnsavedWarning from './UnsavedWarning.js';
 import styles from './Account.module.css';
 
-const AccountDetails = ({ accounts, params, unsavedWarningVisible, handleAlertStay, handleAlertLeave }) => {
+const AccountDetails = ({ accounts, params }) => {
   // show loading spinner until accounts are loaded
   if (accounts.length < 1) {
     return <div><p className="text-center"><i className="fa fa-cog fa-spin fa-3x"></i></p></div>;
@@ -60,16 +59,12 @@ const AccountDetails = ({ accounts, params, unsavedWarningVisible, handleAlertSt
       <br />
       <AddTransactionButton />
       <TransactionsListContainer activeAccountId={params.id} />
-      <UnsavedWarning show={unsavedWarningVisible} localHandleAlertStay={handleAlertStay} localHandleAlertLeave={handleAlertLeave} />
     </div>
   );
 };
 AccountDetails.propTypes = {
   accounts: PropTypes.arrayOf(React.PropTypes.object),
   params: PropTypes.object.isRequired,
-  unsavedWarningVisible: PropTypes.bool.isRequired,
-  handleAlertStay: PropTypes.func.isRequired,
-  handleAlertLeave: PropTypes.func.isRequired,
 };
 
 export default AccountDetails;
