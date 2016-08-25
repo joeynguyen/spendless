@@ -8,7 +8,7 @@ class AccountContainer extends Component {
   static propTypes = {
     accounts: PropTypes.array,
     actions: PropTypes.object.isRequired,
-    activeAccountId: PropTypes.string.isRequired,
+    activeAccountId: PropTypes.string,
   }
 
   componentWillMount() {

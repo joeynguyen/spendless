@@ -29,7 +29,7 @@ AccountsGroup.propTypes = {
   title: PropTypes.string.isRequired,
   icon: PropTypes.string.isRequired,
   accounts: PropTypes.array.isRequired,
-  activeAccountId: PropTypes.string.isRequired,
+  activeAccountId: PropTypes.string,
 };
 
 export default AccountsGroup;
