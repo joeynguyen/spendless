@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { resetCurrentTransactions } from './TransactionsActions.js';
 import { toggleUnsavedWarning } from './AccountsActions.js';
 import { storeNextRoutePath } from '../app/AppActions.js';
+import AccountPage from './AccountPage.js';
+
 import AccountDetailsContainer from './AccountDetailsContainer.js';
 import TransactionsListContainer from './TransactionsListContainer.js';
 import EditTransactionContainer from './EditTransactionContainer.js';
@@ -79,16 +81,14 @@ class AccountPageContainer extends Component {
   }
 
   render() {
-    const editTransactionContainer = this.props.editTransactionVisible ? <EditTransactionContainer /> : null;
-    const addTransactionContainer = this.props.addTransactionVisible ? <AddTransactionContainer /> : null;
     return (
-      <div className="col-xs-9">
-        <AccountDetailsContainer />
-        <TransactionsListContainer />
-        { addTransactionContainer }
-        { editTransactionContainer }
-        <UnsavedWarning show={this.props.unsavedWarningVisible} localHandleAlertStay={this.handleAlertStay} localHandleAlertLeave={this.handleAlertLeave} />
-      </div>
+      <AccountPage
+        editTransactionVisible={this.props.editTransactionVisible}
+        addTransactionVisible={this.props.addTransactionVisible}
+        unsavedWarningVisible={this.props.unsavedWarningVisible}
+        localHandleAlertStay={this.handleAlertStay}
+        localHandleAlertLeave={this.handleAlertLeave}
+      />
     );
   }
 }
