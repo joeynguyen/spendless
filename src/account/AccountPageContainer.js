@@ -6,12 +6,6 @@ import { toggleUnsavedWarning } from './AccountsActions.js';
 import { storeNextRoutePath } from '../app/AppActions.js';
 import AccountPage from './AccountPage.js';
 
-import AccountDetailsContainer from './AccountDetailsContainer.js';
-import TransactionsListContainer from './TransactionsListContainer.js';
-import EditTransactionContainer from './EditTransactionContainer.js';
-import AddTransactionContainer from './AddTransactionContainer.js';
-import UnsavedWarning from './UnsavedWarning.js';
-
 class AccountPageContainer extends Component {
   static propTypes = {
     accounts: PropTypes.arrayOf(React.PropTypes.object),

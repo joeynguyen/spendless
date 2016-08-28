@@ -30,7 +30,7 @@ const AccountDetails = ({ accounts, activeAccountId }) => {
   const icon = ( activeAccount && activeAccount.type === 'creditcard' ) ? findFaIcon(activeAccount.company) : null;
 
   return (
-    <div className="col-xs-9">
+    <div className="col-xs-12">
       <div className="header">
         <h3 className={styles.header}>{icon} {activeAccount.name} <br />
           <small>{activeAccount.company}</small></h3>
