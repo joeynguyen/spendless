@@ -36,14 +36,14 @@ export function getAccountTransactions(accountId) {
   };
 }
 
-export function saveTransactions(transactions) {
+export function saveAccountTransactions(transactions) {
   return function(dispatch) {
     return TransactionsApi.saveTransactionsToDB(transactions).then(savedTransactions => {
       dispatch(updateAccountTransactions(savedTransactions));
       // pass transaction object back to invoker's success method
       return savedTransactions;
     }).catch(error => {
-      console.log('saveTransactions error', error);
+      console.log('saveAccountTransactions error', error);
       throw error;
     });
   };

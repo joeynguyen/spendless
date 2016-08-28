@@ -28,7 +28,7 @@ class AddTransactionContainer extends Component {
     };
 
     // Add account to DB
-    this.props.actions.saveTransactions(newTransactionObj)
+    this.props.actions.saveAccountTransactions(newTransactionObj)
       .then(() => {
         toastr.success('Transaction added', null, {timeOut: 1500});
         this.props.actions.toggleAddTransaction();

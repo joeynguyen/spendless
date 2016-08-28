@@ -12,7 +12,7 @@ class SaveButtonContainer extends Component {
   }
   // Save transactions uploaded from CSV to database
   handleSave = () => {
-    this.props.actions.saveTransactions(this.props.uploadedTransactions)
+    this.props.actions.saveAccountTransactions(this.props.uploadedTransactions)
       .then(() => {
         // Remove unsaved transactions from UI
         this.props.actions.resetUploadedTransactions();

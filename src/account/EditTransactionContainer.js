@@ -25,7 +25,7 @@ class EditTransactionContainer extends Component {
     });
 
     // Update account in DB
-    this.props.actions.saveTransactions(newTransactionObj)
+    this.props.actions.saveAccountTransactions(newTransactionObj)
       .then(() => {
         toastr.success('Transaction updated', null, {timeOut: 1500});
         // reset current transaction being edited to null
