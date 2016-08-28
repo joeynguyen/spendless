@@ -6,6 +6,9 @@ export default function(state = [], action) {
       return action.payload;
     case RESET_UPLOADED_TRANSACTIONS:
       return action.payload;
+    case '@@router/LOCATION_CHANGE':
+      // reset uploaded transactions to 0 whenever page changes
+      return [];
     default:
       return state;
   }

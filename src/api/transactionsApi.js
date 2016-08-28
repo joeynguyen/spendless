@@ -31,7 +31,6 @@ class TransactionsApi {
           sort: [{date: 'desc'}]
         });
       }).then((result) => {
-        syncDB();
         resolve(
           result.docs.map(function(doc) {
             return {

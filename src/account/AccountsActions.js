@@ -42,7 +42,7 @@ export function saveAccount(account) {
       // pass account object back to invoker's success method
       return savedAccount;
     }).catch(error => {
-      console.log('saveAccounts error', error);
+      console.error('saveAccounts error', error);
       throw error;
     });
   };
@@ -53,7 +53,7 @@ export function getAccounts() {
     return AccountsApi.getAccountsFromDB().then(accounts => {
       dispatch(loadAccountsSuccess(accounts));
     }).catch(error => {
-      console.log('getAccounts error', error);
+      console.error('getAccounts error', error);
       throw error;
     });
   };
@@ -66,7 +66,7 @@ export function deleteAccount(account) {
       // pass deleted account object back to invoker's success method
       return deletedAccount;
     }).catch(error => {
-      console.log('deleteAccount error', error);
+      console.error('deleteAccount error', error);
       throw error;
     });
   };

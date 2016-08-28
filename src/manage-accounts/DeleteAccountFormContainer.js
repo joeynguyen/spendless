@@ -8,8 +8,13 @@ import { deleteAccount } from '../account/AccountsActions.js';
 class DeleteAccountFormContainer extends Component {
   static propTypes = {
     account: PropTypes.object.isRequired,
+    activeAccountId: PropTypes.string.isRequired,
     toggleConfirmDelete: PropTypes.func.isRequired,
     doDeleteAccount: PropTypes.func.isRequired,
+  }
+
+  static contextTypes = {
+    router: React.PropTypes.object
   }
 
   state = {
@@ -22,11 +27,16 @@ class DeleteAccountFormContainer extends Component {
 
   handleDeleteAccount = (e) => {
     e.preventDefault();
+    // cache name we will still have it after deleting the account
     const accountName = this.props.account.name;
     // Remove account from DB
     this.props.doDeleteAccount(this.props.account)
-      .then(() => {
-        toastr.success(accountName + ' deleted', null, {timeOut: 1500});
+      .then(deletedAccount => {
+        // if current route is on the deleted account, route back to root dir
+        if (this.props.activeAccountId === deletedAccount.id) {
+          this.context.router.push('/');
+        }
+        toastr.success(accountName + ' account deleted', null, {timeOut: 1500});
       })
       .catch(() => {
         toastr.error('Restart the application and retry', 'Error deleting account', {timeOut: 1500});
@@ -66,10 +76,16 @@ class DeleteAccountFormContainer extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    activeAccountId: state.activeAccountId,
+  };
+}
+
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     doDeleteAccount: deleteAccount,
   }, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(DeleteAccountFormContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(DeleteAccountFormContainer);

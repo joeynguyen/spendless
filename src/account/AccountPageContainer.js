@@ -31,15 +31,28 @@ class AccountPageContainer extends Component {
   }
 
   componentDidMount() {
+    // set subscription to router leave event
     this.context.router.setRouteLeaveHook(this.props.route, this.routerWillLeave);
   }
 
   componentWillReceiveProps(nextProps) {
+    // handle changing routes
     if (this.props.params.id !== nextProps.params.id) {
-      this.context.router.setRouteLeaveHook(this.props.route, this.routerWillLeave);
       // remove transactions from ManageTransactionsList redux-form
       this.props.doResetCurrentTransactions();
+
+      // re-reset subscription to router leave event after route changed
+      this.context.router.setRouteLeaveHook(this.props.route, this.routerWillLeave);
     }
+  }
+
+  shouldComponentUpdate(nextProps) {
+    // handle case where user deletes the account that the route is currently at
+    // check to see if account still exists inside of list of accounts
+    if (!nextProps.accounts.some(account => account._id === this.props.params.id)) {
+      return false;
+    }
+    return true;
   }
 
   routerWillLeave = (nextLocation) => {
@@ -62,7 +75,6 @@ class AccountPageContainer extends Component {
   }
 
   handleAlertLeave = () => {
-    this.props.doResetUploadedTransactions();
     this.props.doToggleUnsavedWarning();
     this.context.router.push(this.props.nextRoutePath);
     // reset nextRoutePath prop
@@ -86,6 +98,7 @@ class AccountPageContainer extends Component {
 
 function mapStateToProps(state) {
   return {
+    accounts: state.accounts,
     addTransactionVisible: state.addTransactionVisible,
     editTransactionVisible: state.editTransactionVisible,
     unsavedWarningVisible: state.unsavedWarningVisible,

@@ -21,7 +21,6 @@ class AccountsApi {
         include_docs: true,
         descending: true,
       }).then((result) => {
-        syncDB();
         resolve(
           result.rows.map((row) => {
             return {

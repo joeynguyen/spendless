@@ -8,6 +8,15 @@ class AccountDetailsContainer extends Component {
     activeAccountId: PropTypes.string.isRequired,
   }
 
+  shouldComponentUpdate(nextProps) {
+    // handle case where user deletes the account that the route is currently at
+    // check to see if account still exists inside of list of accounts
+    if (!nextProps.accounts.some(account => account._id === this.props.activeAccountId)) {
+      return false;
+    }
+    return true;
+  }
+
   render() {
     return (
       <AccountDetails
