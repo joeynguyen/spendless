@@ -83,7 +83,7 @@ class AccountPageContainer extends Component {
 
   render() {
     const editTransactionContainer = this.props.editTransactionVisible ? <EditTransactionContainer /> : null;
-    const addTransactionContainer = this.props.addTransactionVisible ? <AddTransactionContainer activeAccountId={this.props.params.id} /> : null;
+    const addTransactionContainer = this.props.addTransactionVisible ? <AddTransactionContainer /> : null;
     return (
       <div className="col-xs-9">
         <AccountDetailsContainer />

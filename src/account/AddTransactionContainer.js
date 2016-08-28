@@ -75,6 +75,7 @@ function validateForm(values) {
 function mapStateToProps(state) {
   return {
     addTransactionVisible: state.addTransactionVisible,
+    activeAccountId: state.activeAccountId,
   };
 }
 

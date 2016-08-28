@@ -10,6 +10,15 @@
 .horizontal-button-group .input-group-btn:last-child > .btn {
   border-radius: 4px;
 }
+
+/* placeholder for now until react-bootstrap is updated to newer version that does this by default
+this is used so that user can't change routes to same route which resets uploadedTransactions state */
+.list-group-item.disabled,
+.list-group-item.disabled:hover,
+.list-group-item.disabled:focus {
+  pointer-events: none;
+}
+
 /* Adding style here because CSS modules can't target child class names */
 .toggle-account-setting-icon i {
   cursor: pointer;
