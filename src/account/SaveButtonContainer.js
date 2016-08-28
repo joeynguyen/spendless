@@ -3,20 +3,19 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import toastr from 'toastr';
 import { Button } from 'react-bootstrap';
-import { saveTransactions, resetUploadedTransactions } from '../account/TransactionsActions.js';
+import * as transactionsActions from '../account/TransactionsActions.js';
 
-class SaveButton extends Component {
+class SaveButtonContainer extends Component {
   static propTypes = {
+    actions: PropTypes.object.isRequired,
     uploadedTransactions: PropTypes.arrayOf(React.PropTypes.object),
-    doResetUploadedTransactions: PropTypes.func.isRequired,
-    doSaveTransactions: PropTypes.func.isRequired,
   }
   // Save transactions uploaded from CSV to database
   handleSave = () => {
-    this.props.doSaveTransactions(this.props.uploadedTransactions)
+    this.props.actions.saveTransactions(this.props.uploadedTransactions)
       .then(() => {
         // Remove unsaved transactions from UI
-        this.props.doResetUploadedTransactions();
+        this.props.actions.resetUploadedTransactions();
       }).catch(() => {
         toastr.error('Restart the application and retry', 'Error adding transactions', {timeOut: 1500});
       });
@@ -42,10 +41,9 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    doResetUploadedTransactions: resetUploadedTransactions,
-    doSaveTransactions: saveTransactions,
-  }, dispatch);
+  return {
+    actions: bindActionCreators(transactionsActions, dispatch)
+  };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SaveButton);
+export default connect(mapStateToProps, mapDispatchToProps)(SaveButtonContainer);

@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import FileUpload from './FileUpload.js';
-import SaveButton from './SaveButton.js';
+import SaveButtonContainer from './SaveButtonContainer.js';
 import DeleteTransactionsButton from './DeleteTransactionsButton.js';
 import AddTransactionButton from './AddTransactionButton.js';
 import styles from './Account.module.css';
@@ -36,7 +36,7 @@ const AccountDetails = ({ accounts, activeAccountId }) => {
           <small>{activeAccount.company}</small></h3>
       </div>
       <FileUpload accountId={activeAccountId} />
-      <SaveButton />
+      <SaveButtonContainer />
       {' '}
       <DeleteTransactionsButton />
       <br />
