@@ -5,16 +5,16 @@ import { Collapse } from 'react-bootstrap';
 import toastr from 'toastr';
 import EditAccountForm from './EditAccountForm.js';
 import DeleteAccountFormContainer from './DeleteAccountFormContainer.js';
-import { saveAccount } from '../account/AccountsActions.js';
+import * as accountsActions from '../account/AccountsActions.js';
 
 class EditAccountFormContainer extends Component {
   static propTypes = {
     account: PropTypes.object.isRequired,
+    actions: PropTypes.object.isRequired,
     toggleSettings: PropTypes.func.isRequired,
     fields: PropTypes.object.isRequired,
     resetForm: PropTypes.func.isRequired,
     pristine: PropTypes.bool.isRequired,
-    doSaveAccount: PropTypes.func.isRequired,
   }
 
   state = {
@@ -34,7 +34,7 @@ class EditAccountFormContainer extends Component {
       company: this.props.fields.accountCompany.value,
     });
     // Update account in DB
-    this.props.doSaveAccount(newAccountObj)
+    this.props.actions.saveAccount(newAccountObj)
       .then(result => {
         toastr.success(result.name + ' account updated', null, {timeOut: 1500});
       })
@@ -68,9 +68,9 @@ class EditAccountFormContainer extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    doSaveAccount: saveAccount,
-  }, dispatch);
+  return {
+    actions: bindActionCreators(accountsActions, dispatch)
+  };
 }
 
 export default reduxForm(

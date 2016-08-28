@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Input, Button, ButtonInput } from 'react-bootstrap';
 import toastr from 'toastr';
-import { deleteAccount } from '../account/AccountsActions.js';
+import * as accountsActions from '../account/AccountsActions.js';
 
 class DeleteAccountFormContainer extends Component {
   static propTypes = {
     account: PropTypes.object.isRequired,
-    activeAccountId: PropTypes.string.isRequired,
+    actions: PropTypes.object.isRequired,
+    activeAccountId: PropTypes.string,
     toggleConfirmDelete: PropTypes.func.isRequired,
-    doDeleteAccount: PropTypes.func.isRequired,
   }
 
   static contextTypes = {
@@ -30,7 +30,7 @@ class DeleteAccountFormContainer extends Component {
     // cache name we will still have it after deleting the account
     const accountName = this.props.account.name;
     // Remove account from DB
-    this.props.doDeleteAccount(this.props.account)
+    this.props.actions.deleteAccount(this.props.account)
       .then(deletedAccount => {
         // if current route is on the deleted account, route back to root dir
         if (this.props.activeAccountId === deletedAccount.id) {
@@ -83,9 +83,9 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    doDeleteAccount: deleteAccount,
-  }, dispatch);
+  return {
+    actions: bindActionCreators(accountsActions, dispatch)
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DeleteAccountFormContainer);

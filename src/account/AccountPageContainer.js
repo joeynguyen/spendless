@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { resetUploadedTransactions, resetCurrentTransactions } from './TransactionsActions.js';
+import { resetCurrentTransactions } from './TransactionsActions.js';
 import { toggleUnsavedWarning } from './AccountsActions.js';
 import { storeNextRoutePath } from '../app/AppActions.js';
 import AccountDetailsContainer from './AccountDetailsContainer.js';
@@ -13,16 +13,13 @@ import UnsavedWarning from './UnsavedWarning.js';
 class AccountPageContainer extends Component {
   static propTypes = {
     accounts: PropTypes.arrayOf(React.PropTypes.object),
+    actions: PropTypes.object.isRequired,
     addTransactionVisible: PropTypes.bool.isRequired,
     editTransactionVisible: PropTypes.bool.isRequired,
     params: PropTypes.object.isRequired,
     route: PropTypes.object.isRequired,
     uploadedTransactions: PropTypes.arrayOf(React.PropTypes.object),
-    doResetUploadedTransactions: PropTypes.func.isRequired,
-    doResetCurrentTransactions: PropTypes.func.isRequired,
-    doToggleUnsavedWarning: PropTypes.func.isRequired,
     unsavedWarningVisible: PropTypes.bool.isRequired,
-    doStoreNextRoutePath: PropTypes.func.isRequired,
     nextRoutePath: PropTypes.string.isRequired
   }
 
@@ -39,7 +36,7 @@ class AccountPageContainer extends Component {
     // handle changing routes
     if (this.props.params.id !== nextProps.params.id) {
       // remove transactions from ManageTransactionsList redux-form
-      this.props.doResetCurrentTransactions();
+      this.props.actions.resetCurrentTransactions();
 
       // re-reset subscription to router leave event after route changed
       this.context.router.setRouteLeaveHook(this.props.route, this.routerWillLeave);
@@ -60,25 +57,25 @@ class AccountPageContainer extends Component {
       // need to check for nextRoutePath as empty string or else this will run again when
       // handleAlertLeave() is called and returns false for changing routes with
       // this.context.router.push(this.props.nextRoutePath);
-      this.props.doToggleUnsavedWarning();
+      this.props.actions.toggleUnsavedWarning();
       // store nextRoutePath for use with this.context.router.push later
-      this.props.doStoreNextRoutePath(nextLocation.pathname + nextLocation.search);
+      this.props.actions.storeNextRoutePath(nextLocation.pathname + nextLocation.search);
       // return false to prevent a transition
       return false;
     }
   }
 
   handleAlertStay = () => {
-    this.props.doToggleUnsavedWarning();
+    this.props.actions.toggleUnsavedWarning();
     // reset nextRoutePath prop
-    this.props.doStoreNextRoutePath('');
+    this.props.actions.storeNextRoutePath('');
   }
 
   handleAlertLeave = () => {
-    this.props.doToggleUnsavedWarning();
+    this.props.actions.toggleUnsavedWarning();
     this.context.router.push(this.props.nextRoutePath);
     // reset nextRoutePath prop
-    this.props.doStoreNextRoutePath('');
+    this.props.actions.storeNextRoutePath('');
   }
 
   render() {
@@ -108,12 +105,13 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    doResetUploadedTransactions: resetUploadedTransactions,
-    doResetCurrentTransactions: resetCurrentTransactions,
-    doToggleUnsavedWarning: toggleUnsavedWarning,
-    doStoreNextRoutePath: storeNextRoutePath
-  }, dispatch);
+  return {
+    actions: bindActionCreators({
+      resetCurrentTransactions: resetCurrentTransactions,
+      toggleUnsavedWarning: toggleUnsavedWarning,
+      storeNextRoutePath: storeNextRoutePath,
+    }, dispatch)
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AccountPageContainer);

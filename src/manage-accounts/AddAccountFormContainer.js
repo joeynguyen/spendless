@@ -3,11 +3,11 @@ import { bindActionCreators } from 'redux';
 import toastr from 'toastr';
 import AddAccountForm from './AddAccountForm.js';
 import { reduxForm } from 'redux-form';
-import { saveAccount } from '../account/AccountsActions.js';
+import * as accountsActions from '../account/AccountsActions.js';
 
 class AddAccountFormContainer extends Component {
   static propTypes = {
-    doSaveAccount: PropTypes.func.isRequired,
+    actions: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     resetForm: PropTypes.func.isRequired,
     fields: PropTypes.object.isRequired,
@@ -21,7 +21,7 @@ class AddAccountFormContainer extends Component {
       'company': this.props.fields.accountCompany.value,
     };
 
-    this.props.doSaveAccount(newAccount)
+    this.props.actions.saveAccount(newAccount)
       .then(result => {
         toastr.success(result.name + ' account added', null, {timeOut: 1500});
         // Reset AddAccount form fields
@@ -60,9 +60,9 @@ function validateForm(values) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    doSaveAccount: saveAccount,
-  }, dispatch);
+  return {
+    actions: bindActionCreators(accountsActions, dispatch)
+  };
 }
 
 // connect: 1st argument is mapStateToProps, 2nd state is mapDispatchToProps

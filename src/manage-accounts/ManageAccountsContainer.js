@@ -1,18 +1,22 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { toggleManageAccounts } from './ManageAccountsActions.js';
+import * as manageAccountsActions from './ManageAccountsActions.js';
 import ManageAccounts from './ManageAccounts.js';
 
 class ManageAccountsContainer extends Component {
   static propTypes = {
-    manageAccountsVisible: PropTypes.bool.isRequired,
-    doToggleManageAccounts: PropTypes.func.isRequired,
     accounts: PropTypes.array.isRequired,
+    actions: PropTypes.object.isRequired,
+    manageAccountsVisible: PropTypes.bool.isRequired,
   }
   render() {
     return (
-      <ManageAccounts {...this.props} />
+      <ManageAccounts
+        accounts={this.props.accounts}
+        actions={this.props.actions}
+        manageAccountsVisible={this.props.manageAccountsVisible}
+      />
     );
   }
 }
@@ -25,9 +29,9 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    doToggleManageAccounts: toggleManageAccounts,
-  }, dispatch);
+  return {
+    actions: bindActionCreators(manageAccountsActions, dispatch)
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManageAccountsContainer);
