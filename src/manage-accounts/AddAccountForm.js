@@ -15,6 +15,7 @@ const AddAccountForm = ({ doSubmit, fields, submitting }) => {
         help={accountName.touched ? accountName.error : ''}
         {...accountName}
       />
+
       <Input
         type="select"
         label="Type"
@@ -43,6 +44,7 @@ const AddAccountForm = ({ doSubmit, fields, submitting }) => {
           />
         </div>
       </Collapse>
+
       <Collapse in={accountType.value === 'creditcard'}>
         <div>
           <Input

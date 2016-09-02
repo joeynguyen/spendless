@@ -41,8 +41,7 @@ const AddTransaction = (props) => {
                 {...category}
               />
               <Input
-                type="number"
-                step="0.01"
+                type="text"
                 addonBefore="$"
                 label="Amount"
                 bsStyle={amount.touched && amount.invalid ? 'error' : null}

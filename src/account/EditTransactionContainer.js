@@ -51,6 +51,7 @@ class EditTransactionContainer extends Component {
 
 function validateForm(values) {
   const errors = {};
+  const amountRegex = /^-?\d*\.?\d{0,2}$/;
 
   if (!values.date) {
     errors.date = 'Enter a date';
@@ -63,8 +64,13 @@ function validateForm(values) {
   }
   if (!values.amount) {
     errors.amount = 'Enter an amount';
-  } else if (values.amount && values.amount.indexOf('.') > -1 && values.amount.split('.')[1].length > 2) {
+  } else if (values.amount && values.amount.toString().indexOf('.') > -1 && values.amount.toString().split('.')[1].length > 2) {
     errors.amount = 'Enter an amount with 2 or less decimal places';
+  } else if (!amountRegex.test(values.amount)) {
+    // this is a workaround to go with input[type="text"] because redux-form@5.3.3
+    // currently doesn't allow typing ".0" in an input[type="number"]
+    // https://github.com/erikras/redux-form/issues/1383
+    errors.amount = 'Enter a valid amount. Example: (10.52)';
   }
 
   return errors;

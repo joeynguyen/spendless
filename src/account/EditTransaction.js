@@ -2,28 +2,20 @@ import React, { PropTypes } from 'react';
 import { Modal, Button, Input } from 'react-bootstrap';
 
 const EditTransaction = (props) => {
-  const {
-    editTransactionVisible,
-    toggleEditTransaction,
-    pristine,
-    doSubmit,
-  } = props;
+  const { editTransactionVisible, toggleEditTransaction, pristine, doSubmit, } = props;
   const { date, description, category, amount, notes } = props.fields;
-  const handleCloseModal = function() {
-    // reset current transaction being edited to null
-    toggleEditTransaction();
-  };
 
   return (
     <Modal
       show={editTransactionVisible}
       backdrop="static"
-      onHide={handleCloseModal}
+      onHide={toggleEditTransaction}
     >
       <form onSubmit={doSubmit}>
         <Modal.Header closeButton>
           <Modal.Title>Edit Transaction</Modal.Title>
         </Modal.Header>
+
         <Modal.Body>
           <div className="row">
             <div className="col-xs-12">
@@ -49,8 +41,7 @@ const EditTransaction = (props) => {
                 {...category}
               />
               <Input
-                type="number"
-                step="0.01"
+                type="text"
                 addonBefore="$"
                 label="Amount"
                 bsStyle={amount.touched && amount.invalid ? 'error' : null}
@@ -75,7 +66,7 @@ const EditTransaction = (props) => {
               bsStyle="primary"
             >Update</Button>
             {' '}
-            <Button onClick={handleCloseModal}>Cancel</Button>
+            <Button onClick={toggleEditTransaction}>Cancel</Button>
           </div>
         </Modal.Footer>
       </form>
