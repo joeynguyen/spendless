@@ -12,6 +12,13 @@ class TransactionsItemContainer extends Component {
     unsaved: PropTypes.bool.isRequired,
     actions: PropTypes.object.isRequired,
   }
+  static defaultProps = {
+    field: {
+      defaultChecked: '',
+      defaultValue: '',
+      checked: true
+    }
+  }
   handleDeleteTransactions = () => {
     this.props.actions.deleteAccountTransactions(this.props.transaction)
       .then(() => {

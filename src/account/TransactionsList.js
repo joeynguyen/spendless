@@ -3,9 +3,6 @@ import TransactionsItemContainer from './TransactionsItemContainer.js';
 import styles from './Transactions.module.css';
 
 const TransactionsList = ({ accountTransactions, fields, uploadedTransactions }) => {
-  // create placeholder object that fulfills component prop requirements
-  // but doesn't actually have a functional value for uploaded transactions
-  const fieldPropPlaceholder = { defaultChecked: '', defaultValue: '', checked: false };
 
   return (
     <div className="col-xs-12">
@@ -23,7 +20,7 @@ const TransactionsList = ({ accountTransactions, fields, uploadedTransactions })
         <tbody>
           {
             uploadedTransactions.map(itemData =>
-              <TransactionsItemContainer key={itemData._id} transaction={itemData} field={fieldPropPlaceholder} unsaved />
+              <TransactionsItemContainer key={itemData._id} transaction={itemData} unsaved />
             )
           }
           {
