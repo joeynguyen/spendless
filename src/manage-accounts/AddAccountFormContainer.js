@@ -24,6 +24,12 @@ class AddAccountFormContainer extends Component {
     this.props.actions.saveAccount(newAccount)
       .then(result => {
         toastr.success(result.name + ' account added', null, {timeOut: 1500});
+        // remove focus from input field that it was on when form was submitted
+        // if we hit the Enter key to submit the form the focus will stay on the
+        // input and show an error on that input because it will be marked as 'touched'
+        // by redux-form when we move the focus to another field, not good for accountCompany
+        // field because it's hidden and will display with an error when shown
+        document.activeElement.blur();
         // Reset AddAccount form fields
         this.props.resetForm();
       })

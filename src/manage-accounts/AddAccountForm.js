@@ -23,9 +23,6 @@ const AddAccountForm = ({ doSubmit, fields, submitting }) => {
         bsStyle={accountType.touched && accountType.invalid ? 'error' : null}
         help={accountType.touched ? accountType.error : ''}
         {...accountType}
-        value={accountType.value || ''}  // required syntax for reset form to work
-                                         // undefined will not change value to first empty option
-                                         // when resetting
       >
         <option value="">select...</option>
         <option value="bank">Bank</option>
@@ -54,9 +51,6 @@ const AddAccountForm = ({ doSubmit, fields, submitting }) => {
             bsStyle={accountCompany.touched && accountCompany.invalid ? 'error' : null}
             help={accountCompany.touched ? accountCompany.error : ''}
             {...accountCompany}
-            value={accountCompany.value || ''} // required syntax for reset form to work
-                                               // undefined will not change value to first empty option
-                                               // when resetting
           >
             <option value="">select...</option>
             <option value="Visa">Visa</option>
