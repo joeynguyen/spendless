@@ -14,7 +14,6 @@ class AddTransactionButton extends Component {
         onClick={this.props.actions.toggleAddTransaction}
         bsStyle="default"
         bsSize="small"
-        /* disabled={(this.props.uploadedTransactions.length === 0)} */
       >
         <i className="fa fa-plus"></i> Add Transaction
       </Button>

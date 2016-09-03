@@ -12,6 +12,17 @@ class AddAccountFormContainer extends Component {
     resetForm: PropTypes.func.isRequired,
     fields: PropTypes.object.isRequired,
     submitting: PropTypes.bool.isRequired,
+    visible: PropTypes.bool.isRequired,
+  }
+
+  componentDidUpdate(prevProps) {
+    // reset form forms on clicking Cancel button
+    if (this.props.visible !== prevProps.visible && this.props.visible === false) {
+      // wait 200ms for slideUp animation to finish so transition looks nicer
+      setTimeout(() => {
+        this.props.resetForm();
+      }, 200);
+    }
   }
   localHandleSubmit = () => {
     const newAccount = {

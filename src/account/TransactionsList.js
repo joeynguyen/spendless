@@ -3,7 +3,6 @@ import TransactionsItemContainer from './TransactionsItemContainer.js';
 import styles from './Transactions.module.css';
 
 const TransactionsList = ({ accountTransactions, fields, uploadedTransactions }) => {
-
   return (
     <div className="col-xs-12">
       <table className={styles['transactions-table'] + ' transactions-table table table-hover'}>
