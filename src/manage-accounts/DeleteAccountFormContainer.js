@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Input, Button, ButtonInput } from 'react-bootstrap';
+import { Input, Button, ButtonToolbar } from 'react-bootstrap';
 import toastr from 'toastr';
 import * as accountsActions from '../account/AccountsActions.js';
 
@@ -44,11 +44,6 @@ class DeleteAccountFormContainer extends Component {
   }
 
   render() {
-    const cancelButton = (
-      <Button
-        onClick={this.props.toggleConfirmDelete}
-      >Cancel</Button>
-    );
     return (
       <form onSubmit={this.handleDeleteAccount}>
         <hr />
@@ -62,13 +57,18 @@ class DeleteAccountFormContainer extends Component {
               placeholder="DELETE" />
           </div>
           <div className="col-xs-6">
-            <ButtonInput
-              disabled={this.state.confirmDeleteText !== 'DELETE'}
-              bsStyle="primary"
-              groupClassName="horizontal-button-group"
-              buttonAfter={cancelButton}
-              type="submit"
-              value="Confirm" />
+            <ButtonToolbar className="pull-right">
+              <Button
+                disabled={this.state.confirmDeleteText !== 'DELETE'}
+                bsStyle="primary"
+                groupClassName="horizontal-button-group"
+                type="submit"
+              >Confirm</Button>
+              {' '}
+              <Button
+                onClick={this.props.toggleConfirmDelete}
+              >Cancel</Button>
+            </ButtonToolbar>
           </div>
         </div>
       </form>

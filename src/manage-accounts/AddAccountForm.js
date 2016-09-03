@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { ButtonInput, Collapse, Input } from 'react-bootstrap';
+import { Button, Collapse, Input } from 'react-bootstrap';
 
 const AddAccountForm = ({ doSubmit, fields, submitting }) => {
   // handleSubmit and fields are from redux-form
@@ -64,11 +64,12 @@ const AddAccountForm = ({ doSubmit, fields, submitting }) => {
         </div>
       </Collapse>
 
-      <ButtonInput
+      <Button
         bsStyle="primary"
         type="submit"
-        disabled={submitting}
-        value="Save" />
+        disabled={submitting}>
+        {submitting ? 'Saving...' : 'Save'}
+      </Button>
     </form>
   );
 };
