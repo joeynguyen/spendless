@@ -16,7 +16,7 @@ class TransactionsItemContainer extends Component {
     field: {
       defaultChecked: '',
       defaultValue: '',
-      checked: true
+      checked: false
     }
   }
   handleDeleteTransactions = () => {
