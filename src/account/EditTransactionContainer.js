@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import { bindActionCreators } from 'redux';
 import toastr from 'toastr';
+import { Modal } from 'react-bootstrap';
 import EditTransaction from './EditTransaction.js';
 import * as transactionsActions from './TransactionsActions.js';
 
@@ -37,14 +38,22 @@ class EditTransactionContainer extends Component {
 
   render() {
     const reduxFormHandleSubmit = this.props.handleSubmit(this.handleUpdateTransaction);
+    // putting Modal wrapper component in Container Component instead of
+    // Presentational Component (PC) because React DevTools doesn't show
+    // PC as its own component if PC has Modal component in it
     return (
-      <EditTransaction
-        editTransactionVisible={this.props.editTransactionVisible}
-        toggleEditTransaction={this.props.actions.toggleEditTransaction}
-        fields={this.props.fields}
-        pristine={this.props.pristine}
-        doSubmit={reduxFormHandleSubmit}
-      />
+      <Modal
+        show={this.props.editTransactionVisible}
+        backdrop="static"
+        onHide={this.props.actions.toggleEditTransaction}
+      >
+        <EditTransaction
+          toggleEditTransaction={this.props.actions.toggleEditTransaction}
+          fields={this.props.fields}
+          pristine={this.props.pristine}
+          doSubmit={reduxFormHandleSubmit}
+        />
+      </Modal>
     );
   }
 }
