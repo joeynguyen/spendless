@@ -60,7 +60,7 @@ const EditTransaction = ({ toggleEditTransaction, pristine, doSubmit, fields }) 
             bsStyle="primary"
           >Update</Button>
           {' '}
-          <Button onClick={toggleEditTransaction}>Cancel</Button>
+          <Button id="cancel-edit-transaction" onClick={toggleEditTransaction}>Cancel</Button>
         </div>
       </Modal.Footer>
     </form>
