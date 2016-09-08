@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import { bindActionCreators } from 'redux';
 import toastr from 'toastr';
+import { Modal } from 'react-bootstrap';
 import AddTransaction from './AddTransaction.js';
 import * as transactionsActions from './TransactionsActions.js';
 
@@ -40,13 +41,18 @@ class AddTransactionContainer extends Component {
   render() {
     const reduxFormHandleSubmit = this.props.handleSubmit(this.handleSaveTransaction);
     return (
-      <AddTransaction
-        addTransactionVisible={this.props.addTransactionVisible}
-        toggleAddTransaction={this.props.actions.toggleAddTransaction}
-        fields={this.props.fields}
-        pristine={this.props.pristine}
-        doSubmit={reduxFormHandleSubmit}
-      />
+      <Modal
+        show={this.props.addTransactionVisible}
+        backdrop="static"
+        onHide={this.props.actions.toggleAddTransaction}
+      >
+        <AddTransaction
+          toggleAddTransaction={this.props.actions.toggleAddTransaction}
+          fields={this.props.fields}
+          pristine={this.props.pristine}
+          doSubmit={reduxFormHandleSubmit}
+        />
+      </Modal>
     );
   }
 }
