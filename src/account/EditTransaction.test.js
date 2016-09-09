@@ -3,13 +3,13 @@ import React from 'react';
 import { mount } from 'enzyme';
 import EditTransaction from './EditTransaction';
 
-function setup(pristine = true) {
+function setup() {
   // Need to create spies because if we use expect.spyOn on actual functions, we get this
   // error when test is run: "TypeError: Cannot assign to read only property 'doSubmit'"
   const mockOnSubmit = expect.createSpy();
   const mockOnCancel = expect.createSpy();
   const props = {
-    pristine: pristine,
+    pristine: true,
     toggleEditTransaction: mockOnCancel,
     doSubmit: mockOnSubmit,
     fields: {
@@ -76,7 +76,6 @@ describe('EditTransaction', () => {
 
   describe('has submit button that submits', () => {
     const submitBtn = component.find('button[type="submit"]');
-    const componentNotPristine = setup(false);
 
     it('has submit button', () => {
       expect(submitBtn).toExist();
@@ -88,18 +87,13 @@ describe('EditTransaction', () => {
       expect(submitBtn.prop('disabled')).toExist();
     });
 
-    it('button is enabled/clickable if form fields have been changed', () => {
-      const submitBtnNotPristine = componentNotPristine.find('button[type="submit"]');
-
-      expect(submitBtnNotPristine).toExist();
-      expect(submitBtnNotPristine.prop('disabled')).toNotExist();
-    });
-
     it('it submits on submit', (done) => {
-      const spy = expect.spyOn(componentNotPristine.props(), 'doSubmit');
+      const spy = expect.spyOn(component.props(), 'doSubmit');
 
+      // We can't test clicking on submit button to perform 'doSubmit' until
+      // this bug is resolved - https://github.com/airbnb/enzyme/issues/308
       expect(spy.calls.length).toEqual(0);
-      componentNotPristine.find('form').simulate('submit');
+      component.find('form').simulate('submit');
       expect(spy.calls.length).toEqual(1);
 
       spy.restore();
