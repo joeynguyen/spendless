@@ -8,6 +8,7 @@ export const UPDATE_ACCOUNT_TRANSACTIONS = 'UPDATE_ACCOUNT_TRANSACTIONS';
 export const RESET_UPLOADED_TRANSACTIONS = 'RESET_UPLOADED_TRANSACTIONS';
 export const RESET_CURRENT_TRANSACTIONS = 'RESET_CURRENT_TRANSACTIONS';
 export const TOGGLE_EDIT_TRANSACTION = 'TOGGLE_EDIT_TRANSACTION';
+export const TOGGLE_MANAGE_TRANSACTION = 'TOGGLE_MANAGE_TRANSACTION';
 export const TOGGLE_ADD_TRANSACTION = 'TOGGLE_ADD_TRANSACTION';
 
 function loadAccountTransactions(accountTransactions) {
@@ -93,6 +94,13 @@ export function resetUploadedTransactions() {
 export function resetCurrentTransactions() {
   return {
     type: RESET_CURRENT_TRANSACTIONS,
+  };
+}
+
+export function toggleManageTransaction(transaction = null) {
+  return {
+    type: TOGGLE_MANAGE_TRANSACTION,
+    data: transaction
   };
 }
 

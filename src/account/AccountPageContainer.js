@@ -11,7 +11,7 @@ class AccountPageContainer extends Component {
     accounts: PropTypes.arrayOf(React.PropTypes.object),
     actions: PropTypes.object.isRequired,
     addTransactionVisible: PropTypes.bool.isRequired,
-    editTransactionVisible: PropTypes.bool.isRequired,
+    manageTransactionVisible: PropTypes.bool.isRequired,
     params: PropTypes.object.isRequired,
     route: PropTypes.object.isRequired,
     uploadedTransactions: PropTypes.arrayOf(React.PropTypes.object),
@@ -77,7 +77,7 @@ class AccountPageContainer extends Component {
   render() {
     return (
       <AccountPage
-        editTransactionVisible={this.props.editTransactionVisible}
+        manageTransactionVisible={this.props.manageTransactionVisible}
         addTransactionVisible={this.props.addTransactionVisible}
         unsavedWarningVisible={this.props.unsavedWarningVisible}
         localHandleAlertStay={this.handleAlertStay}
@@ -91,7 +91,7 @@ function mapStateToProps(state) {
   return {
     accounts: state.accounts,
     addTransactionVisible: state.addTransactionVisible,
-    editTransactionVisible: state.editTransactionVisible,
+    manageTransactionVisible: state.manageTransactionVisible,
     unsavedWarningVisible: state.unsavedWarningVisible,
     uploadedTransactions: state.uploadedTransactions,
     nextRoutePath: state.nextRoutePath,

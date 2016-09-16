@@ -2,9 +2,9 @@ import React, { PropTypes } from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import moment from 'moment';
 
-const TransactionsItem = ({ handleDeleteTransactions, transaction, unsaved, toggleEditTransaction, reduxFormCheckbox }) => {
+const TransactionsItem = ({ handleDeleteTransactions, transaction, unsaved, toggleManageTransaction, reduxFormCheckbox }) => {
   const handleEditClick = function() {
-    toggleEditTransaction(transaction);
+    toggleManageTransaction(transaction);
   };
   const dateFormatted = moment(transaction.date, 'YYYY-MM-DD').format('MM/DD/YYYY');
   // separating out defaultValue and defaultChecked properties because React threw up error
@@ -51,7 +51,7 @@ TransactionsItem.propTypes = {
   handleDeleteTransactions: PropTypes.func.isRequired,
   transaction: PropTypes.object.isRequired,
   unsaved: PropTypes.bool.isRequired,
-  toggleEditTransaction: PropTypes.func.isRequired,
+  toggleManageTransaction: PropTypes.func.isRequired,
 };
 
 export default TransactionsItem;

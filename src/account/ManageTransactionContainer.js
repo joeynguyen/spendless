@@ -3,53 +3,74 @@ import { reduxForm } from 'redux-form';
 import { bindActionCreators } from 'redux';
 import toastr from 'toastr';
 import { Modal } from 'react-bootstrap';
-import AddTransaction from './AddTransaction.js';
+import ManageTransaction from './ManageTransaction.js';
 import * as transactionsActions from './TransactionsActions.js';
 
-class AddTransactionContainer extends Component {
+class ManageTransactionContainer extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
     activeAccountId: PropTypes.string.isRequired,
-    addTransactionVisible: PropTypes.bool.isRequired,
+    activeTransaction: PropTypes.object,
+    manageTransactionVisible: PropTypes.bool.isRequired,
     fields: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     pristine: PropTypes.bool.isRequired,
   }
 
-  handleSaveTransaction = () => {
-    const newTransactionObj = {
-      _id: new Date().getTime().toString(),
-      accountId: this.props.activeAccountId,
-      amount: Number(this.props.fields.amount.value).toFixed(2),
-      category: this.props.fields.category.value,
-      date: this.props.fields.date.value,
-      description: this.props.fields.description.value,
-      notes: this.props.fields.notes.value,
-    };
+  toggleManageTransaction = () => {
+    this.props.actions.toggleManageTransaction();
+  }
 
-    // Add account to DB
+  handleSaveTransaction = () => {
+    let newTransactionObj;
+    if (this.props.activeTransaction !== null) {
+      // update transaction
+      newTransactionObj = Object.assign({}, this.props.activeTransaction, {
+        amount: Number(this.props.fields.amount.value).toFixed(2),
+        category: this.props.fields.category.value,
+        date: this.props.fields.date.value,
+        description: this.props.fields.description.value,
+        notes: this.props.fields.notes.value,
+      });
+    } else {
+      // add new transaction
+      newTransactionObj = {
+        _id: new Date().getTime().toString(),
+        accountId: this.props.activeAccountId,
+        amount: Number(this.props.fields.amount.value).toFixed(2),
+        category: this.props.fields.category.value,
+        date: this.props.fields.date.value,
+        description: this.props.fields.description.value,
+        notes: this.props.fields.notes.value,
+      };
+    }
+
+    // Save account in DB
     this.props.actions.saveAccountTransactions(newTransactionObj)
       .then(() => {
-        toastr.success('Transaction added', null, {timeOut: 1500});
-        this.props.actions.toggleAddTransaction();
+        toastr.success('Transaction updated', null, {timeOut: 1500});
+        // reset current transaction being edited to null
+        this.toggleManageTransaction();
       }).catch(() => {
-        toastr.error('Restart the application and retry', 'Error adding transaction', {timeOut: 1500});
+        toastr.error('Restart the application and retry', 'Error updating transaction', {timeOut: 1500});
       });
   }
 
   render() {
+    const manageType = this.props.activeTransaction !== null ? 'edit' : 'add';
     const reduxFormHandleSubmit = this.props.handleSubmit(this.handleSaveTransaction);
     // putting Modal wrapper component in Container Component instead of
     // Presentational Component (PC) because React DevTools doesn't show
     // PC as its own component if PC has Modal component in it
     return (
       <Modal
-        show={this.props.addTransactionVisible}
+        show={this.props.manageTransactionVisible}
         backdrop="static"
-        onHide={this.props.actions.toggleAddTransaction}
+        onHide={this.toggleManageTransaction}
       >
-        <AddTransaction
-          toggleAddTransaction={this.props.actions.toggleAddTransaction}
+        <ManageTransaction
+          manageType={manageType}
+          toggleManageTransaction={this.toggleManageTransaction}
           fields={this.props.fields}
           pristine={this.props.pristine}
           doSubmit={reduxFormHandleSubmit}
@@ -87,16 +108,28 @@ function validateForm(values) {
 }
 
 function mapStateToProps(state) {
+  let initialValues = {
+    date: '',
+    description: '',
+    category: '',
+    amount: '',
+    notes: '',
+  };
+  if (state.activeTransaction !== null) {
+    const { date, description, category, amount, notes } = state.activeTransaction;
+    initialValues = {
+      date: date,
+      description: description,
+      category: category,
+      amount: amount,
+      notes: notes,
+    };
+  }
   return {
-    addTransactionVisible: state.addTransactionVisible,
     activeAccountId: state.activeAccountId,
-    initialValues: {
-      date: '',
-      description: '',
-      category: '',
-      amount: '',
-      notes: '',
-    },
+    activeTransaction: state.activeTransaction,
+    manageTransactionVisible: state.manageTransactionVisible,
+    initialValues: initialValues,
   };
 }
 
@@ -108,10 +141,10 @@ function mapDispatchToProps(dispatch) {
 
 export default reduxForm(
   {
-    form: 'AddTransaction',
+    form: 'ManageTransaction',
     fields: ['date', 'description', 'category', 'amount', 'notes'],
     validate: validateForm,
   },
   mapStateToProps,
   mapDispatchToProps
-)(AddTransactionContainer);
+)(ManageTransactionContainer);

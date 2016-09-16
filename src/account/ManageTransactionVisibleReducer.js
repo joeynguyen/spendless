@@ -1,10 +1,11 @@
 import { TOGGLE_MANAGE_TRANSACTION } from './TransactionsActions.js';
 
-export default function(state = null, action) {
+export default function(state = false, action) {
   switch (action.type) {
     case TOGGLE_MANAGE_TRANSACTION:
-      return action.data;
+      return !state;
     default:
       return state;
   }
 }
+
