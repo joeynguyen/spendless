@@ -9,7 +9,6 @@ export const RESET_UPLOADED_TRANSACTIONS = 'RESET_UPLOADED_TRANSACTIONS';
 export const RESET_CURRENT_TRANSACTIONS = 'RESET_CURRENT_TRANSACTIONS';
 export const TOGGLE_EDIT_TRANSACTION = 'TOGGLE_EDIT_TRANSACTION';
 export const TOGGLE_MANAGE_TRANSACTION = 'TOGGLE_MANAGE_TRANSACTION';
-export const TOGGLE_ADD_TRANSACTION = 'TOGGLE_ADD_TRANSACTION';
 
 function loadAccountTransactions(accountTransactions) {
   // Load in UI the current list of accounts
@@ -108,11 +107,5 @@ export function toggleEditTransaction(transaction = null) {
   return {
     type: TOGGLE_EDIT_TRANSACTION,
     data: transaction
-  };
-}
-
-export function toggleAddTransaction() {
-  return {
-    type: TOGGLE_ADD_TRANSACTION
   };
 }
