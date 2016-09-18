@@ -48,7 +48,7 @@ class ManageTransactionContainer extends Component {
     // Save account in DB
     this.props.actions.saveAccountTransactions(newTransactionObj)
       .then(() => {
-        toastr.success('Transaction updated', null, {timeOut: 1500});
+        toastr.success('Transaction saved', null, {timeOut: 1500});
         // reset current transaction being edited to null
         this.toggleManageTransaction();
       }).catch(() => {

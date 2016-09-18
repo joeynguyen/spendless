@@ -3,10 +3,7 @@ import { Modal, Button, Input } from 'react-bootstrap';
 
 const ManageTransaction = ({ manageType = 'add', fields, toggleManageTransaction, pristine = true, doSubmit }) => {
   const { date, description, category, amount, notes } = fields;
-  let componentTitle = 'Add Transaction';
-  if (manageType === 'edit') {
-    componentTitle = 'Edit Transaction';
-  }
+  const componentTitle = (manageType === 'edit') ? 'Edit Transaction' : 'Add Transaction';
 
   return (
     <form onSubmit={doSubmit}>
