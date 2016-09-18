@@ -1,7 +1,7 @@
 import expect from 'expect';
 import React from 'react';
 import { mount } from 'enzyme';
-import EditTransaction from './EditTransaction';
+import ManageTransaction from './ManageTransaction';
 
 function setup() {
   // Need to create spies because if we use expect.spyOn on actual functions, we get this
@@ -10,7 +10,7 @@ function setup() {
   const mockOnCancel = expect.createSpy();
   const props = {
     pristine: true,
-    toggleEditTransaction: mockOnCancel,
+    toggleManageTransaction: mockOnCancel,
     doSubmit: mockOnSubmit,
     fields: {
       amount: {
@@ -36,40 +36,40 @@ function setup() {
     },
   };
 
-  return mount(<EditTransaction {...props} />);
+  return mount(<ManageTransaction {...props} />);
 }
 
-describe('EditTransaction', () => {
+describe('ManageTransaction', () => {
   const component = setup();
 
   describe('renders all the fields with correct values', () => {
     it('amount', () => {
       const amountField = component.find('input[name="amount"]');
-      expect(amountField).toExist();
+      expect(amountField.length).toBe(1);
       expect(amountField.prop('value')).toBe('12.34');
     });
 
     it('category', () => {
       const categoryField = component.find('input[name="category"]');
-      expect(categoryField).toExist();
+      expect(categoryField.length).toBe(1);
       expect(categoryField.prop('value')).toBe('Auto');
     });
 
     it('date', () => {
       const dateField = component.find('input[name="date"]');
-      expect(dateField).toExist();
+      expect(dateField.length).toBe(1);
       expect(dateField.prop('value')).toBe('2014-07-25');
     });
 
     it('description', () => {
       const descField = component.find('input[name="description"]');
-      expect(descField).toExist();
+      expect(descField.length).toBe(1);
       expect(descField.prop('value')).toBe('This is a description');
     });
 
     it('notes', () => {
       const notesField = component.find('textarea[name="notes"]');
-      expect(notesField).toExist();
+      expect(notesField.length).toBe(1);
       expect(notesField.prop('value')).toBe('Add notes here');
     });
   });
@@ -78,7 +78,7 @@ describe('EditTransaction', () => {
     const submitBtn = component.find('button[type="submit"]');
 
     it('has submit button', () => {
-      expect(submitBtn).toExist();
+      expect(submitBtn.length).toBe(1);
     });
 
     it('button initial state is disabled', () => {
@@ -102,14 +102,14 @@ describe('EditTransaction', () => {
   });
 
   describe('has cancel button that cancels', () => {
-    const cancelBtn = component.find('#cancel-edit-transaction');
+    const cancelBtn = component.find('button#cancel-manage-transaction');
 
     it('cancel button exists', () => {
-      expect(cancelBtn).toExist();
+      expect(cancelBtn.length).toBe(1);
     });
 
     it('it cancels on click', (done) => {
-      const spy = expect.spyOn(component.props(), 'toggleEditTransaction');
+      const spy = expect.spyOn(component.props(), 'toggleManageTransaction');
 
       expect(spy.calls.length).toEqual(0);
       cancelBtn.simulate('click');

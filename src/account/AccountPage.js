@@ -1,13 +1,11 @@
 import React, { PropTypes } from 'react';
 import AccountDetailsContainer from './AccountDetailsContainer.js';
 import TransactionsListContainer from './TransactionsListContainer.js';
-import EditTransactionContainer from './EditTransactionContainer.js';
-import AddTransactionContainer from './AddTransactionContainer.js';
+import ManageTransactionContainer from './ManageTransactionContainer.js';
 import UnsavedWarning from './UnsavedWarning.js';
 
-const AccountPage = ({ addTransactionVisible, editTransactionVisible, unsavedWarningVisible, localHandleAlertStay, localHandleAlertLeave }) => {
-  const editTransactionContainer = editTransactionVisible ? <EditTransactionContainer /> : null;
-  const addTransactionContainer = addTransactionVisible ? <AddTransactionContainer /> : null;
+const AccountPage = ({ manageTransactionVisible, unsavedWarningVisible, localHandleAlertStay, localHandleAlertLeave }) => {
+  const manageTransactionContainer = manageTransactionVisible ? <ManageTransactionContainer /> : null;
 
   return (
     <div className="col-xs-9">
@@ -18,15 +16,13 @@ const AccountPage = ({ addTransactionVisible, editTransactionVisible, unsavedWar
         localHandleAlertStay={localHandleAlertStay}
         localHandleAlertLeave={localHandleAlertLeave}
       />
-      { addTransactionContainer }
-      { editTransactionContainer }
+      { manageTransactionContainer }
     </div>
   );
 };
 
 AccountPage.propTypes = {
-  addTransactionVisible: PropTypes.bool.isRequired,
-  editTransactionVisible: PropTypes.bool.isRequired,
+  manageTransactionVisible: PropTypes.bool.isRequired,
   unsavedWarningVisible: PropTypes.bool.isRequired,
   localHandleAlertStay: PropTypes.func.isRequired,
   localHandleAlertLeave: PropTypes.func.isRequired,

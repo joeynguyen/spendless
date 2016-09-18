@@ -1,13 +1,14 @@
 import React, { PropTypes } from 'react';
 import { Modal, Button, Input } from 'react-bootstrap';
 
-const EditTransaction = ({ toggleEditTransaction, pristine, doSubmit, fields }) => {
+const ManageTransaction = ({ manageType = 'add', fields, toggleManageTransaction, pristine = true, doSubmit }) => {
   const { date, description, category, amount, notes } = fields;
+  const componentTitle = (manageType === 'edit') ? 'Edit Transaction' : 'Add Transaction';
 
   return (
     <form onSubmit={doSubmit}>
       <Modal.Header closeButton>
-        <Modal.Title>Edit Transaction</Modal.Title>
+        <Modal.Title>{ componentTitle }</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
@@ -55,22 +56,23 @@ const EditTransaction = ({ toggleEditTransaction, pristine, doSubmit, fields }) 
       <Modal.Footer>
         <div className="form-group">
           <Button
+            bsStyle="primary"
             type="submit"
             disabled={pristine}
-            bsStyle="primary"
-          >Update</Button>
+          >Save</Button>
           {' '}
-          <Button id="cancel-edit-transaction" onClick={toggleEditTransaction}>Cancel</Button>
+          <Button id="cancel-manage-transaction" onClick={toggleManageTransaction}>Cancel</Button>
         </div>
       </Modal.Footer>
     </form>
   );
 };
-EditTransaction.propTypes = {
-  toggleEditTransaction: PropTypes.func.isRequired,
+ManageTransaction.propTypes = {
+  manageType: PropTypes.string.isRequired,
+  toggleManageTransaction: PropTypes.func.isRequired,
   fields: PropTypes.object.isRequired,
   pristine: PropTypes.bool.isRequired,
   doSubmit: PropTypes.func.isRequired,
 };
 
-export default EditTransaction;
+export default ManageTransaction;

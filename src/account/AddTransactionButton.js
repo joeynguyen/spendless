@@ -8,10 +8,15 @@ class AddTransactionButton extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
   }
+
+  toggleManageTransaction = () => {
+    this.props.actions.toggleManageTransaction();
+  }
+
   render() {
     return (
       <Button
-        onClick={this.props.actions.toggleAddTransaction}
+        onClick={this.toggleManageTransaction}
         bsStyle="default"
         bsSize="small"
       >
