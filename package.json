@@ -53,7 +53,7 @@
     "electron-debug": "^1.0.1",
     "electron-devtools-installer": "^2.0.0",
     "electron-prebuilt": "^1.2.8",
-    "enzyme": "^2.2.0",
+    "enzyme": "^2.4.1",
     "eslint": "^1.10.3",
     "eslint-plugin-babel": "^3.0.0",
     "eslint-plugin-react": "^3.11.3",

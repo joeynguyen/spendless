@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Modal, Button, Input } from 'react-bootstrap';
 
-const ManageTransaction = ({ manageType = 'add', fields, toggleManageTransaction, pristine, doSubmit }) => {
+const ManageTransaction = ({ manageType = 'add', fields, toggleManageTransaction, pristine = true, doSubmit }) => {
   const { date, description, category, amount, notes } = fields;
   let componentTitle = 'Add Transaction';
   if (manageType === 'edit') {
@@ -64,7 +64,7 @@ const ManageTransaction = ({ manageType = 'add', fields, toggleManageTransaction
             disabled={pristine}
           >Save</Button>
           {' '}
-          <Button onClick={toggleManageTransaction}>Cancel</Button>
+          <Button id="cancel-manage-transaction" onClick={toggleManageTransaction}>Cancel</Button>
         </div>
       </Modal.Footer>
     </form>
