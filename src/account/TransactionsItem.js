@@ -2,31 +2,25 @@ import React, { PropTypes } from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import moment from 'moment';
 
-const TransactionsItem = ({ handleDeleteTransactions, transaction, unsaved, toggleManageTransaction, reduxFormCheckbox }) => {
-  const handleEditClick = function() {
-    toggleManageTransaction(transaction);
-  };
-  const dateFormatted = moment(transaction.date, 'YYYY-MM-DD').format('MM/DD/YYYY');
-  // separating out defaultValue and defaultChecked properties because React threw up error
-  // regarding defaultChecked and checked being in same item
-  // https://fb.me/react-controlled-components
-  // error while still on redux-form 4.2.0. It may be fixed in a newer version
-  const {defaultChecked, defaultValue, ...reduxFormCheckboxRest} = reduxFormCheckbox;
+const TransactionsItem = ({ handleDeleteTransactions, transaction, unsaved, handleEditClick, reduxFormCheckbox }) => {
   // use this code if this app ever supports international currency
   // const transactionAmount = Number(transaction.amount).toLocaleString('en-US', { style: 'currency', currency: 'USD'});
+  const dateFormatted = moment(transaction.date, 'YYYY-MM-DD').format('MM/DD/YYYY');
   let rowStyle;
-  let selectCheckbox;
-  let editButton;
-  let deleteButton;
+  let selectCheckbox = '';
+  let note = '';
+  let editButton = '';
+  let deleteButton = '';
+
   if (unsaved) {
     rowStyle = {backgroundColor: 'yellow'};
   } else {
     // don't show for uploaded/unsaved transactions
-    selectCheckbox = <input type="checkbox" {...reduxFormCheckboxRest} checked={reduxFormCheckboxRest.checked || false} />;
-    editButton = <td><i className="fa fa-fw fa-lg fa-pencil" onClick={handleEditClick}></i></td>;
-    deleteButton = <td><i className="fa fa-fw fa-lg fa-remove" onClick={handleDeleteTransactions}></i></td>;
+    selectCheckbox = <input type="checkbox" {...reduxFormCheckbox} checked={reduxFormCheckbox.checked || false} />;
+    editButton = <i className="fa fa-fw fa-lg fa-pencil" onClick={handleEditClick}></i>;
+    deleteButton = <i className="fa fa-fw fa-lg fa-remove" onClick={handleDeleteTransactions}></i>;
   }
-  let note;
+
   if (transaction.notes !== '') {
     note = (
       <OverlayTrigger placement="left" overlay={<Tooltip id={transaction._id}>{transaction.notes}</Tooltip>}>
@@ -42,8 +36,8 @@ const TransactionsItem = ({ handleDeleteTransactions, transaction, unsaved, togg
       <td>{transaction.category}</td>
       <td>${transaction.amount}</td>
       <td>{note}</td>
-      { editButton }
-      { deleteButton }
+      <td>{editButton}</td>
+      <td>{deleteButton}</td>
     </tr>
   );
 };
@@ -51,7 +45,7 @@ TransactionsItem.propTypes = {
   handleDeleteTransactions: PropTypes.func.isRequired,
   transaction: PropTypes.object.isRequired,
   unsaved: PropTypes.bool.isRequired,
-  toggleManageTransaction: PropTypes.func.isRequired,
+  handleEditClick: PropTypes.func.isRequired,
 };
 
 export default TransactionsItem;

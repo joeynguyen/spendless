@@ -13,11 +13,10 @@ class TransactionsItemContainer extends Component {
     actions: PropTypes.object.isRequired,
   }
   static defaultProps = {
-    field: {
-      defaultChecked: '',
-      defaultValue: '',
-      checked: false
-    }
+    field: {}
+  }
+  handleEditClick = () => {
+    this.props.actions.toggleManageTransaction(this.props.transaction);
   }
   handleDeleteTransactions = () => {
     this.props.actions.deleteAccountTransactions(this.props.transaction)
@@ -33,7 +32,7 @@ class TransactionsItemContainer extends Component {
       <TransactionsItem
         reduxFormCheckbox={this.props.field}
         transaction={this.props.transaction}
-        toggleManageTransaction={this.props.actions.toggleManageTransaction}
+        handleEditClick={this.handleEditClick}
         unsaved={this.props.unsaved}
         handleDeleteTransactions={this.handleDeleteTransactions}
       />
