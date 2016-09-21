@@ -41,6 +41,7 @@ class AccountPageContainer extends Component {
   shouldComponentUpdate(nextProps) {
     // handle case where user deletes the account that the route is currently at
     // check to see if account still exists inside of list of accounts
+    // don't update because route will change to home page
     if (!nextProps.accounts.some(account => account._id === this.props.params.id)) {
       return false;
     }

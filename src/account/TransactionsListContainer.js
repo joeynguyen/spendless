@@ -17,6 +17,7 @@ class TransactionListContainer extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.activeAccountId !== prevProps.activeAccountId) {
+      this.props.actions.resetAccountTransactions();
       this.props.actions.getAccountTransactions(this.props.activeAccountId);
     }
   }
