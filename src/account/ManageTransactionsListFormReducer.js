@@ -1,4 +1,4 @@
-import { REMOVE_ACCOUNT_TRANSACTIONS, RESET_CURRENT_TRANSACTIONS } from './TransactionsActions.js';
+import { REMOVE_ACCOUNT_TRANSACTIONS, RESET_CHECKED_TRANSACTIONS } from './TransactionsActions.js';
 
 // Identify transaction ids on currently displayed account
 function findCurrentTransactionsIds(currentState) {
@@ -12,7 +12,7 @@ export default function(state, action) {
   let currentTransactionIds;
   let stateCopy;
   switch (action.type) {
-    case RESET_CURRENT_TRANSACTIONS:
+    case RESET_CHECKED_TRANSACTIONS:
       currentTransactionIds = findCurrentTransactionsIds(state);
       stateCopy = Object.assign({}, state);
 

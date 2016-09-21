@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { resetCurrentTransactions } from './TransactionsActions.js';
+import { resetCheckedTransactions } from './TransactionsActions.js';
 import { toggleUnsavedWarning } from './AccountsActions.js';
 import { storeNextRoutePath } from '../app/AppActions.js';
 import AccountPage from './AccountPage.js';
@@ -31,7 +31,7 @@ class AccountPageContainer extends Component {
     // handle changing routes
     if (this.props.params.id !== nextProps.params.id) {
       // remove transactions from ManageTransactionsList redux-form
-      this.props.actions.resetCurrentTransactions();
+      this.props.actions.resetCheckedTransactions();
 
       // re-reset subscription to router leave event after route changed
       this.context.router.setRouteLeaveHook(this.props.route, this.routerWillLeave);
@@ -99,7 +99,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
-      resetCurrentTransactions: resetCurrentTransactions,
+      resetCheckedTransactions: resetCheckedTransactions,
       toggleUnsavedWarning: toggleUnsavedWarning,
       storeNextRoutePath: storeNextRoutePath,
     }, dispatch)
