@@ -8,8 +8,9 @@
     "hot-server": "node -r babel-register server.js",
     "start": "cross-env NODE_ENV=production electron ./",
     "start-hot": "cross-env HOT=1 NODE_ENV=development electron -r babel-register -r babel-polyfill ./main",
-    "test": "mocha --reporter spec tools/testSetup.js \"src/**/*.test.js\"",
+    "test": "nyc mocha --reporter spec tools/testSetup.js \"src/**/*.test.js\"",
     "test:watch": "npm run test -- --watch",
+    "coverage": "./node_modules/nyc/bin/nyc.js report",
     "dev": "concurrently --kill-others \"npm run hot-server\" \"npm run start-hot\""
   },
   "repository": {
@@ -62,6 +63,7 @@
     "jsdom": "^8.5.0",
     "json-loader": "^0.5.4",
     "mocha": "^2.5.3",
+    "nyc": "^8.3.0",
     "pouchdb-server": "^1.2.0",
     "react-addons-test-utils": "^15.1.0",
     "react-transform-catch-errors": "^1.0.0",
