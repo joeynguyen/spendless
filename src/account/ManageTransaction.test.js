@@ -9,6 +9,7 @@ function setup() {
   const mockOnSubmit = expect.createSpy();
   const mockOnCancel = expect.createSpy();
   const props = {
+    manageType: 'edit',
     pristine: true,
     toggleManageTransaction: mockOnCancel,
     doSubmit: mockOnSubmit,
@@ -41,6 +42,10 @@ function setup() {
 
 describe('ManageTransaction', () => {
   const component = setup();
+
+  it('renders correct modal title', () => {
+    expect(component.find('.modal-title').text()).toEqual('Edit Transaction');
+  });
 
   describe('renders all the fields with correct values', () => {
     it('amount', () => {
