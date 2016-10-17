@@ -61,10 +61,10 @@ describe('EditAccountForm', () => {
   });
 
   describe('when not pristine...', () => {
-    const wrapper = mount(<EditAccountForm  {...props} pristine="false" />);
+    const wrapper = mount(<EditAccountForm  {...props} pristine={false} />);
 
     it('update button should be enabled', () => {
-      expect(wrapper.find('button[name="update"]').props().disabled).toBe('false');
+      expect(wrapper.find('button[name="update"]').props().disabled).toBe(false);
     });
   });
 
@@ -77,10 +77,10 @@ describe('EditAccountForm', () => {
   });
 
   describe('when confirmDeleteVisible is false...', () => {
-    const wrapper = mount(<EditAccountForm  {...props} confirmDeleteVisible="false" />);
+    const wrapper = mount(<EditAccountForm  {...props} confirmDeleteVisible={false} />);
 
     it('delete-toggle button should be disabled', () => {
-      expect(wrapper.find('button[name="delete-toggle"]').props().disabled).toBe('false');
+      expect(wrapper.find('button[name="delete-toggle"]').props().disabled).toBe(false);
     });
   });
 });
