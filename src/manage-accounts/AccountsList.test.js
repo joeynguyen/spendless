@@ -2,7 +2,6 @@ import expect from 'expect';
 import React from 'react';
 import { shallow } from 'enzyme';
 import AccountsList from './AccountsList';
-import AccountsListItem from './AccountsListItem.js';
 
 const myProps = {
   accounts: [

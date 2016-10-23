@@ -13,7 +13,7 @@ export default class AccountsListItem extends Component {
     this.setState({ settingsVisible: !this.state.settingsVisible });
   }
   render() {
-    let editAccountForm;
+    let editAccountForm = '';
     if (this.state.settingsVisible) {
       const formInitialValues = {
         initialValues: {
@@ -41,8 +41,8 @@ export default class AccountsListItem extends Component {
         <div className={(this.state.settingsVisible ? 'expanded' : '') + ' toggle-account-setting-icon'}>
           <i className="fa fa-lg fa-lg fa-fw fa-cog pull-right" onClick={this.toggleSettings} ></i>
         </div>
-        <h4>{this.props.account.name}</h4>
-        <p>{this.props.account.type === 'bank' ? 'Bank' : 'Credit Card'} - {this.props.account.company}</p>
+        <h4 className="account-name">{this.props.account.name}</h4>
+        <p className="company-info">{this.props.account.type === 'bank' ? 'Bank' : 'Credit Card'} - {this.props.account.company}</p>
         <Collapse in={this.state.settingsVisible}>
           <div>
             { editAccountForm }
