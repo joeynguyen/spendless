@@ -1,65 +1,31 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { Input, Button, ButtonToolbar } from 'react-bootstrap';
-import toastr from 'toastr';
-import * as accountsActions from '../account/AccountsActions.js';
 
-class DeleteAccountFormContainer extends Component {
+export class DeleteAccountFormContainer extends Component {
   static propTypes = {
-    account: PropTypes.object.isRequired,
-    actions: PropTypes.object.isRequired,
-    activeAccountId: PropTypes.string,
+    confirmDeleteText: PropTypes.string.isRequired,
+    handleDeleteAccount: PropTypes.func.isRequired,
+    handleConfirmDeleteText: PropTypes.func.isRequired,
     toggleConfirmDelete: PropTypes.func.isRequired,
-  }
-
-  static contextTypes = {
-    router: React.PropTypes.object
-  }
-
-  state = {
-    confirmDeleteText: '',
-  }
-
-  handleConfirmDeleteText = (e) => {
-    this.setState({ confirmDeleteText: e.target.value });
-  }
-
-  handleDeleteAccount = (e) => {
-    e.preventDefault();
-    // cache name we will still have it after deleting the account
-    const accountName = this.props.account.name;
-    // Remove account from DB
-    this.props.actions.deleteAccount(this.props.account)
-      .then(deletedAccount => {
-        // if current route is on the deleted account, route back to root dir
-        if (this.props.activeAccountId === deletedAccount.id) {
-          this.context.router.push('/');
-        }
-        toastr.success(accountName + ' account deleted', null, {timeOut: 1500});
-      })
-      .catch(() => {
-        toastr.error('Restart the application and retry', 'Error deleting account', {timeOut: 1500});
-      });
   }
 
   render() {
     return (
-      <form onSubmit={this.handleDeleteAccount}>
+      <form onSubmit={this.props.handleDeleteAccount}>
         <hr />
         <p>Type DELETE into this box to confirm</p>
         <div className="row">
           <div className="col-xs-6">
             <Input
               type="text"
-              value={this.state.confirmDeleteText}
-              onChange={this.handleConfirmDeleteText}
+              value={this.props.confirmDeleteText}
+              onChange={this.props.handleConfirmDeleteText}
               placeholder="DELETE" />
           </div>
           <div className="col-xs-6">
             <ButtonToolbar className="pull-right">
               <Button
-                disabled={this.state.confirmDeleteText !== 'DELETE'}
+                disabled={this.props.confirmDeleteText !== 'DELETE'}
                 bsStyle="primary"
                 groupClassName="horizontal-button-group"
                 type="submit"
@@ -76,16 +42,4 @@ class DeleteAccountFormContainer extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    activeAccountId: state.activeAccountId,
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(accountsActions, dispatch)
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(DeleteAccountFormContainer);
+export default DeleteAccountFormContainer;

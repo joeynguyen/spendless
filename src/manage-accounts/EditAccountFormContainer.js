@@ -7,19 +7,30 @@ import EditAccountForm from './EditAccountForm.js';
 import DeleteAccountFormContainer from './DeleteAccountFormContainer.js';
 import * as accountsActions from '../account/AccountsActions.js';
 
-class EditAccountFormContainer extends Component {
+export class EditAccountFormContainer extends Component {
   static propTypes = {
     account: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired,
+    activeAccountId: PropTypes.string,
     toggleSettings: PropTypes.func.isRequired,
     fields: PropTypes.object.isRequired,
     resetForm: PropTypes.func.isRequired,
     pristine: PropTypes.bool.isRequired,
   }
 
+  static contextTypes = {
+    router: React.PropTypes.object
+  }
+
   state = {
     confirmDeleteVisible: false,
+    confirmDeleteText: '',
   }
+
+  handleConfirmDeleteText = (e) => {
+    this.setState({ confirmDeleteText: e.target.value });
+  }
+
 
   toggleConfirmDelete = () => {
     this.setState({ confirmDeleteVisible: !this.state.confirmDeleteVisible });
@@ -43,6 +54,24 @@ class EditAccountFormContainer extends Component {
       });
   }
 
+  handleDeleteAccount = (e) => {
+    e.preventDefault();
+    // cache name we will still have it after deleting the account
+    const accountName = this.props.account.name;
+    // Remove account from DB
+    this.props.actions.deleteAccount(this.props.account)
+      .then(deletedAccount => {
+        // if current route is on the deleted account, route back to root dir
+        if (this.props.activeAccountId === deletedAccount.id) {
+          this.context.router.push('/');
+        }
+        toastr.success(accountName + ' account deleted', null, {timeOut: 1500});
+      })
+      .catch(() => {
+        toastr.error('Restart the application and retry', 'Error deleting account', {timeOut: 1500});
+      });
+  }
+
   render() {
     return (
       <div>
@@ -57,14 +86,22 @@ class EditAccountFormContainer extends Component {
         <Collapse in={this.state.confirmDeleteVisible}>
           <div>
             <DeleteAccountFormContainer
-              account={this.props.account}
               toggleConfirmDelete={this.toggleConfirmDelete}
+              handleDeleteAccount={this.handleDeleteAccount}
+              handleConfirmDeleteText={this.handleConfirmDeleteText}
+              confirmDeleteText={this.state.confirmDeleteText}
             />
           </div>
         </Collapse>
       </div>
     );
   }
+}
+
+function mapStateToProps(state) {
+  return {
+    activeAccountId: state.activeAccountId,
+  };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -78,6 +115,6 @@ export default reduxForm(
     form: 'EditAccount',
     fields: ['accountName', 'accountType', 'accountCompany'],
   },
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(EditAccountFormContainer);
