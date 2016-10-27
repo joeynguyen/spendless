@@ -4,7 +4,7 @@ import { reduxForm } from 'redux-form';
 import { Collapse } from 'react-bootstrap';
 import toastr from 'toastr';
 import EditAccountForm from './EditAccountForm.js';
-import DeleteAccountFormContainer from './DeleteAccountFormContainer.js';
+import DeleteAccountForm from './DeleteAccountForm.js';
 import * as accountsActions from '../account/AccountsActions.js';
 
 export class EditAccountFormContainer extends Component {
@@ -85,7 +85,7 @@ export class EditAccountFormContainer extends Component {
         />
         <Collapse in={this.state.confirmDeleteVisible}>
           <div>
-            <DeleteAccountFormContainer
+            <DeleteAccountForm
               toggleConfirmDelete={this.toggleConfirmDelete}
               handleDeleteAccount={this.handleDeleteAccount}
               handleConfirmDeleteText={this.handleConfirmDeleteText}
