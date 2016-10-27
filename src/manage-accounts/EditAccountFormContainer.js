@@ -31,7 +31,6 @@ export class EditAccountFormContainer extends Component {
     this.setState({ confirmDeleteText: e.target.value });
   }
 
-
   toggleConfirmDelete = () => {
     this.setState({ confirmDeleteVisible: !this.state.confirmDeleteVisible });
   }
@@ -76,20 +75,20 @@ export class EditAccountFormContainer extends Component {
     return (
       <div>
         <EditAccountForm
-          fields={this.props.fields}
-          pristine={this.props.pristine}
-          toggleSettings={this.props.toggleSettings}
           confirmDeleteVisible={this.state.confirmDeleteVisible}
-          toggleConfirmDelete={this.toggleConfirmDelete}
+          fields={this.props.fields}
           handleUpdateAccount={this.handleUpdateAccount}
+          pristine={this.props.pristine}
+          toggleConfirmDelete={this.toggleConfirmDelete}
+          toggleSettings={this.props.toggleSettings}
         />
         <Collapse in={this.state.confirmDeleteVisible}>
-          <div>
+          <div> {/* this div is necessary for smooth collapse animation */}
             <DeleteAccountForm
-              toggleConfirmDelete={this.toggleConfirmDelete}
-              handleDeleteAccount={this.handleDeleteAccount}
-              handleConfirmDeleteText={this.handleConfirmDeleteText}
               confirmDeleteText={this.state.confirmDeleteText}
+              handleConfirmDeleteText={this.handleConfirmDeleteText}
+              handleDeleteAccount={this.handleDeleteAccount}
+              toggleConfirmDelete={this.toggleConfirmDelete}
             />
           </div>
         </Collapse>
