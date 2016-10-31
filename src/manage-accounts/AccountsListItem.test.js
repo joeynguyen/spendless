@@ -15,13 +15,13 @@ const mockAccount = (type = 'creditcard') => {
   };
 };
 
-function shallowSetup(account) {
+function setup(account) {
   return shallow(<AccountsListItem account={account} />);
 }
 
 describe('AccountsListItem', () => {
   describe('renders correct elements by default', () => {
-    const wrapper = shallowSetup(mockAccount());
+    const wrapper = setup(mockAccount());
 
     it('renders the account name', () => {
       expect(wrapper.find('.account-name').text()).toBe('Chase Freedom');
@@ -36,13 +36,13 @@ describe('AccountsListItem', () => {
 
   describe('renders correct elements based on specific behaviors', () => {
     it('renders the company info with Bank if type is "bank"', () => {
-      const wrapper = shallowSetup(mockAccount('bank'));
+      const wrapper = setup(mockAccount('bank'));
       expect(wrapper.find('.company-info').text()).toBe('Bank - MasterCard');
     });
   });
 
   describe('it has correct component state based on behavior', () => {
-    const wrapper = shallowSetup(mockAccount());
+    const wrapper = setup(mockAccount());
     it('has settingsVisible as false by default', () => {
       expect(wrapper.state().settingsVisible).toBe(false);
     });
