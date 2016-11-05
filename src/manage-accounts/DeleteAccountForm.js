@@ -1,42 +1,51 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Input, Button, ButtonToolbar } from 'react-bootstrap';
 
-const DeleteAccountForm = ({ confirmDeleteText, handleConfirmDeleteText, handleDeleteAccount, toggleConfirmDelete }) => {
-  return (
-    <form onSubmit={handleDeleteAccount}>
-      <hr />
-      <p>Type DELETE into this box to confirm</p>
-      <div className="row">
-        <div className="col-xs-6">
-          <Input
-            type="text"
-            value={confirmDeleteText}
-            onChange={handleConfirmDeleteText}
-            placeholder="DELETE" />
-        </div>
-        <div className="col-xs-6">
-          <ButtonToolbar className="pull-right">
-            <Button
-              disabled={confirmDeleteText !== 'DELETE'}
-              bsStyle="primary"
-              groupClassName="horizontal-button-group"
-              type="submit"
-            >Confirm</Button>
-            {' '}
-            <Button
-              onClick={toggleConfirmDelete}
-            >Cancel</Button>
-          </ButtonToolbar>
-        </div>
-      </div>
-    </form>
-  );
-};
-DeleteAccountForm.propTypes = {
-  confirmDeleteText: PropTypes.string.isRequired,
-  handleConfirmDeleteText: PropTypes.func.isRequired,
-  handleDeleteAccount: PropTypes.func.isRequired,
-  toggleConfirmDelete: PropTypes.func.isRequired,
-};
+export default class DeleteAccountForm extends Component {
+  static propTypes = {
+    toggleConfirmDelete: PropTypes.func.isRequired,
+    handleDeleteAccount: PropTypes.func.isRequired,
+  }
 
-export default DeleteAccountForm;
+  state = {
+    confirmDeleteText: '',
+  }
+
+  handleConfirmDeleteText = (e) => {
+    this.setState({ confirmDeleteText: e.target.value });
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.props.handleDeleteAccount}>
+        <hr />
+        <p>Type DELETE into this box to confirm</p>
+        <div className="row">
+          <div className="col-xs-6">
+            <Input
+              type="text"
+              value={this.state.confirmDeleteText}
+              onChange={this.handleConfirmDeleteText}
+              placeholder="DELETE" />
+          </div>
+          <div className="col-xs-6">
+            <ButtonToolbar className="pull-right">
+              <Button
+                className="confirm-delete"
+                disabled={this.state.confirmDeleteText !== 'DELETE'}
+                bsStyle="primary"
+                groupClassName="horizontal-button-group"
+                type="submit"
+              >Confirm</Button>
+              {' '}
+              <Button
+                className="cancel-delete"
+                onClick={this.props.toggleConfirmDelete}
+              >Cancel</Button>
+            </ButtonToolbar>
+          </div>
+        </div>
+      </form>
+    );
+  }
+}
