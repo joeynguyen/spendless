@@ -3,43 +3,6 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import ManageTransaction from './ManageTransaction';
 
-function setupShallow() {
-  // Need to create spies because if we use expect.spyOn on actual functions, we get this
-  // error when test is run: "TypeError: Cannot assign to read only property 'doSubmit'"
-  const mockOnSubmit = expect.createSpy();
-  const mockOnCancel = expect.createSpy();
-  const props = {
-    manageType: 'edit',
-    pristine: true,
-    toggleManageTransaction: mockOnCancel,
-    doSubmit: mockOnSubmit,
-    fields: {
-      amount: {
-        name: 'amount',
-        value: '12.34',
-      },
-      category: {
-        name: 'category',
-        value: 'Auto',
-      },
-      date: {
-        name: 'date',
-        value: '2014-07-25',
-      },
-      description: {
-        name: 'description',
-        value: 'This is a description',
-      },
-      notes: {
-        name: 'notes',
-        value: 'Add notes here',
-      }
-    },
-  };
-
-  return shallow(<ManageTransaction {...props} />);
-}
-
 function setup() {
   // Need to create spies because if we use expect.spyOn on actual functions, we get this
   // error when test is run: "TypeError: Cannot assign to read only property 'doSubmit'"
@@ -76,22 +39,6 @@ function setup() {
 
   return mount(<ManageTransaction {...props} />);
 }
-describe('ManageTransaction shallow', () => {
-  const component = setupShallow();
-  it('renders correct number of inputs', () => {
-    const inputEls = component.find('Input');
-    expect(inputEls.length).toBe(5);
-  });
-  it('renders correct description input', () => {
-    const descInput = component.find('Input');
-    expect(descInput.at(0).prop('name')).toBe('description');
-  });
-  it('renders correct amount input', () => {
-    const descInput = component.find('Input');
-    expect(descInput.at(3).prop('value')).toBe('12.34');
-  });
-});
-
 describe('ManageTransaction', () => {
   const component = setup();
 
