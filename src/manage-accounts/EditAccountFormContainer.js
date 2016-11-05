@@ -12,10 +12,10 @@ export class EditAccountFormContainer extends Component {
     account: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired,
     activeAccountId: PropTypes.string,
-    toggleSettings: PropTypes.func.isRequired,
     fields: PropTypes.object.isRequired,
-    resetForm: PropTypes.func.isRequired,
     pristine: PropTypes.bool.isRequired,
+    resetForm: PropTypes.func.isRequired,
+    toggleSettings: PropTypes.func.isRequired,
   }
 
   static contextTypes = {
