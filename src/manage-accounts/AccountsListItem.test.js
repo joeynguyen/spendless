@@ -35,9 +35,10 @@ describe('AccountsListItem', () => {
   });
 
   describe('renders correct elements based on specific behaviors', () => {
-    it('renders the company info with Bank if type is "bank"', () => {
+    it('renders the company info with Bank if type is "bank"', (done) => {
       const wrapper = setup(mockAccount('bank'));
       expect(wrapper.find('.company-info').text()).toBe('Bank - MasterCard');
+      done();
     });
   });
 
@@ -49,11 +50,12 @@ describe('AccountsListItem', () => {
     it('doesn\'t show EditAccountFormContainer by default', () => {
       expect(wrapper.find(EditAccountFormContainer).length).toBe(0);
     });
-    it('when cog is clicked, settingsVisible state is true and EditAccountFormContainer is rendered', () => {
+    it('when cog is clicked, settingsVisible state is true and EditAccountFormContainer is rendered', (done) => {
       const cogIcon = wrapper.find('.fa-cog');
       cogIcon.simulate('click');
       expect(wrapper.state().settingsVisible).toBe(true);
       expect(wrapper.find(EditAccountFormContainer).length).toBe(1);
+      done();
     });
   });
 });

@@ -46,7 +46,7 @@ describe('EditAccountForm', () => {
       expect(wrapper.find('input[name="accountCompany"]').props().value).toBe('Santander Bank');
     });
 
-    it('renders accountCompany field with a value', () => {
+    it('renders accountType field with a value', () => {
       expect(wrapper.find('select[name="accountType"]').length).toBe(1);
       expect(wrapper.find('select[name="accountType"]').props().value).toBe('bank');
     });
