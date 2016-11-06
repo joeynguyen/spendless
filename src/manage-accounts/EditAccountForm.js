@@ -4,7 +4,7 @@ import { Collapse, Input, Button } from 'react-bootstrap';
 const EditAccountForm = ({ fields, pristine, toggleSettings, toggleConfirmDelete, confirmDeleteVisible, handleUpdateAccount }) => {
   const { accountName, accountType, accountCompany } = fields;
   return (
-    <form onSubmit={handleUpdateAccount}>
+    <form id="update-account-form" onSubmit={handleUpdateAccount}>
       <Input
         type="text"
         label="Name"

@@ -50,7 +50,7 @@ export class EditAccountFormContainer extends Component {
 
   handleDeleteAccount = (e) => {
     e.preventDefault();
-    // cache name we will still have it after deleting the account
+    // store the name using a variable so we will still have it after deleting the account
     const accountName = this.props.account.name;
     // Remove account from DB
     this.props.actions.deleteAccount(this.props.account)

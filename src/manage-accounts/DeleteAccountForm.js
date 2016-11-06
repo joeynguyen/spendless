@@ -17,7 +17,7 @@ export default class DeleteAccountForm extends Component {
 
   render() {
     return (
-      <form className="delete-account-form" onSubmit={this.props.handleDeleteAccount}>
+      <form id="delete-account-form" onSubmit={this.props.handleDeleteAccount}>
         <hr />
         <p>Type DELETE into this box to confirm</p>
         <div className="row">
