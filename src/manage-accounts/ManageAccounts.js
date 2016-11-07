@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import AddAccountContainer from './AddAccountContainer.js';
+import AddAccount from './AddAccount.js';
 import AccountsList from './AccountsList.js';
 
 const ManageAccounts = ({ accounts, actions, manageAccountsVisible }) => {
@@ -17,7 +17,7 @@ const ManageAccounts = ({ accounts, actions, manageAccountsVisible }) => {
       <Modal.Body>
         <div className="row">
           <div className="col-xs-8">
-            <AddAccountContainer />
+            <AddAccount />
             <hr />
             <AccountsList accounts={accounts} />
           </div>

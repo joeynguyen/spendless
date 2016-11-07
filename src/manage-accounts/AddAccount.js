@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Panel } from 'react-bootstrap';
 import AddAccountFormContainer from './AddAccountFormContainer.js';
 
-export default class AddAccountContainer extends Component {
+export default class AddAccount extends Component {
   state = {
     addAccountVisible: false,
   }
@@ -27,4 +27,3 @@ export default class AddAccountContainer extends Component {
     );
   }
 }
-
