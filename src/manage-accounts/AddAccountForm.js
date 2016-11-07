@@ -4,6 +4,39 @@ import { Button, Collapse, Input } from 'react-bootstrap';
 const AddAccountForm = ({ doSubmit, fields, submitting }) => {
   // handleSubmit and fields are from redux-form
   const { accountName, accountType, accountCompany } = fields;
+  let accountTypeField = '';
+  if (accountType.value === 'bank') {
+    accountTypeField = (
+      <Input
+        type="text"
+        label="Name of Institution"
+        placeholder="Enter the name of the financial institution"
+        bsStyle={accountCompany.touched && accountCompany.invalid ? 'error' : null}
+        help={accountCompany.touched ? accountCompany.error : ''}
+        {...accountCompany}
+      />
+    );
+  } else if (accountType.value === 'creditcard') {
+    accountTypeField = (
+      <Input
+        type="select"
+        label="Credit Card Company"
+        placeholder="Credit Card Company"
+        bsStyle={accountCompany.touched && accountCompany.invalid ? 'error' : null}
+        help={accountCompany.touched ? accountCompany.error : ''}
+        {...accountCompany}
+      >
+        <option value="">select...</option>
+        <option value="Visa">Visa</option>
+        <option value="MasterCard">Mastercard</option>
+        <option value="American Express">American Express</option>
+        <option value="Discover">Discover</option>
+        <option value="Diners Club">Diners Club</option>
+        <option value="JCB">JCB</option>
+        <option value="Other">Other</option>
+      </Input>
+    );
+  }
 
   return (
     <form onSubmit={doSubmit}>
@@ -29,39 +62,8 @@ const AddAccountForm = ({ doSubmit, fields, submitting }) => {
         <option value="creditcard">Credit Card</option>
       </Input>
 
-      <Collapse in={accountType.value === 'bank'}>
-        <div>
-          <Input
-            type="text"
-            label="Name of Institution"
-            placeholder="Enter the name of the financial institution"
-            bsStyle={accountCompany.touched && accountCompany.invalid ? 'error' : null}
-            help={accountCompany.touched ? accountCompany.error : ''}
-            {...accountCompany}
-          />
-        </div>
-      </Collapse>
-
-      <Collapse in={accountType.value === 'creditcard'}>
-        <div>
-          <Input
-            type="select"
-            label="Credit Card Company"
-            placeholder="Credit Card Company"
-            bsStyle={accountCompany.touched && accountCompany.invalid ? 'error' : null}
-            help={accountCompany.touched ? accountCompany.error : ''}
-            {...accountCompany}
-          >
-            <option value="">select...</option>
-            <option value="Visa">Visa</option>
-            <option value="MasterCard">Mastercard</option>
-            <option value="American Express">American Express</option>
-            <option value="Discover">Discover</option>
-            <option value="Diners Club">Diners Club</option>
-            <option value="JCB">JCB</option>
-            <option value="Other">Other</option>
-          </Input>
-        </div>
+      <Collapse in={accountType.value !== ''}>
+        <div>{accountTypeField}</div>
       </Collapse>
 
       <Button
