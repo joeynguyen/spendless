@@ -34,7 +34,7 @@ function setup() {
     },
     pristine: true,
     resetForm: () => {},
-    toggleSettings: () => {},
+    toggleSettings: expect.createSpy(),
   };
 
   return mount(<EditAccountFormContainer {...props} />);
@@ -52,6 +52,7 @@ describe('EditAccountFormContainer', () => {
 
     deleteBtn.simulate('click');
     expect(wrapper.state().confirmDeleteVisible).toBe(true);
+
     done();
   });
 
@@ -61,6 +62,7 @@ describe('EditAccountFormContainer', () => {
 
     cancelDeleteBtn.simulate('click');
     expect(wrapper.state().confirmDeleteVisible).toBe(false);
+
     done();
   });
 
@@ -100,10 +102,16 @@ describe('EditAccountFormContainer', () => {
     done();
   });
 
-  it.skip('toggleSettings function should be called on cancel button click', (done) => {
-    // Cannot create spy to test because 'toggleSettings' is a prop passed down from
-    // parent component and props passed are read-only
-    // const spy = expect.spyOn(wrapper.props(), 'toggleSettings');
+  it('toggleSettings function should be called on cancel button click', (done) => {
+    const spy = expect.spyOn(wrapper.props(), 'toggleSettings');
+
+    // see previous test regarding .update()
+    wrapper.update();
+
+    expect(spy.calls.length).toEqual(0);
+    wrapper.find('button[name="cancel"]').simulate('click');
+    expect(spy.calls.length).toEqual(1);
+
     done();
   });
 });
