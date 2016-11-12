@@ -7,8 +7,7 @@ function setup() {
   const props = {
     account: {name: 'Test Bank', id: '2'},
     actions: {
-      // saveAccount: () => { return Promise.resolve(); },
-      // deleteAccount: expect.createSpy(),
+      saveAccount: () => { return Promise.resolve({name: 'Test account'}); },
       deleteAccount: () => { return Promise.resolve({id: '2'}); },
     },
     activeAccountId: '1',
@@ -66,16 +65,11 @@ describe('EditAccountFormContainer', () => {
     done();
   });
 
-  it('handleUpdateAccount function should be called on update button click/submit', (done) => {
+  it('saveAccount function should be called on update button click/submit', (done) => {
     const updateAccountBtn = wrapper.find('button[name="update"]');
     expect(updateAccountBtn.prop('type')).toBe('submit');
 
-    const spy = expect.spyOn(wrapper.instance(), 'handleUpdateAccount');
-    // component is rendered before you spy on it, and so the onSubmit is
-    // already bound to the original so we need to .update() our wrapper
-    // https://github.com/airbnb/enzyme/issues/365
-    // http://airbnb.io/enzyme/docs/api/ReactWrapper/update.html
-    wrapper.update();
+    const spy = expect.spyOn(wrapper.props().actions, 'saveAccount').andCallThrough();
 
     expect(spy.calls.length).toEqual(0);
     wrapper.find('#update-account-form').simulate('submit');
@@ -84,16 +78,11 @@ describe('EditAccountFormContainer', () => {
     done();
   });
 
-  it('handleDeleteAccount function should be called on confirm-delete click/submit', (done) => {
+  it('deleteAccount function should be called on confirm-delete click/submit', (done) => {
     const confirmDeleteBtn = wrapper.find('button.confirm-delete');
     expect(confirmDeleteBtn.prop('type')).toBe('submit');
 
-    const spy = expect.spyOn(wrapper.instance(), 'handleDeleteAccount');
-    // component is rendered before you spy on it, and so the onSubmit is
-    // already bound to the original so we need to .update() our wrapper
-    // https://github.com/airbnb/enzyme/issues/365
-    // http://airbnb.io/enzyme/docs/api/ReactWrapper/update.html
-    wrapper.update();
+    const spy = expect.spyOn(wrapper.props().actions, 'deleteAccount').andCallThrough();
 
     expect(spy.calls.length).toEqual(0);
     wrapper.find('#delete-account-form').simulate('submit');
