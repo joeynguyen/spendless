@@ -12,6 +12,7 @@ node_modules/
 *.swo
 .DS_Store
 .sass-cache
+.tern-port
 
 # PouchDB files
 log.txt
