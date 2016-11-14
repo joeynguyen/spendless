@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import * as manageAccountsActions from './ManageAccountsActions.js';
 import ManageAccounts from './ManageAccounts.js';
 
-class ManageAccountsContainer extends Component {
+export class ManageAccountsContainer extends Component {
   static propTypes = {
     accounts: PropTypes.array.isRequired,
     actions: PropTypes.object.isRequired,

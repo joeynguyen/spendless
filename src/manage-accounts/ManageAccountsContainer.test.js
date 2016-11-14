@@ -1,7 +1,7 @@
 import expect from 'expect';
 import React from 'react';
 import { shallow } from 'enzyme';
-import ManageAccounts from './ManageAccounts.js';
+import { ManageAccountsContainer } from './ManageAccountsContainer.js';
 
 const myProps = {
   actions: {},
@@ -32,30 +32,30 @@ const myProps = {
 }
 
 function setup(props) {
-  return shallow(<ManageAccounts {...props} />);
+  return shallow(<ManageAccountsContainer {...props} />);
 }
 
-describe('ManageAccounts', () => {
+describe('ManageAccountsContainer', () => {
   const component = setup(myProps);
 
-  it('has an AddAccount component', (done) => {
-    expect(component.find('AddAccount').length).toBe(1);
+  it('has an ManageAccounts component', (done) => {
+    expect(component.find('ManageAccounts').length).toBe(1);
     done();
   });
 
-  it('has a AccountsList component', (done) => {
-    expect(component.find('AccountsList').length).toBe(1);
+  it('ManageAccounts has an accounts prop with list of accounts passed to it', (done) => {
+    expect(component.find('ManageAccounts').props().accounts).toExist();
+    expect(component.find('ManageAccounts').props().accounts).toBe(myProps.accounts);
     done();
   });
 
-  it('AccountsList has an accounts prop with list of accounts passed to it', (done) => {
-    expect(component.find('AccountsList').props().accounts).toExist();
-    expect(component.find('AccountsList').props().accounts).toBe(myProps.accounts);
+  it('ManageAccounts has an manageAccountsVisible prop', (done) => {
+    expect(component.find('ManageAccounts').props().manageAccountsVisible).toExist();
     done();
   });
 
-  it('has a close modal button', (done) => {
-    expect(component.find('Button[name="close-manage-accounts"]').length).toBe(1);
+  it('ManageAccounts has an actions prop', (done) => {
+    expect(component.find('ManageAccounts').props().actions).toExist();
     done();
   });
 });
