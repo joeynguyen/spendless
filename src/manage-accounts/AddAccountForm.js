@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import { Button, Collapse, Input } from 'react-bootstrap';
 
-const AddAccountForm = ({ doSubmit, fields, submitting }) => {
-  // handleSubmit and fields are from redux-form
+const AddAccountForm = ({ localHandleSubmit, fields, submitting }) => {
+  // fields and submitting are from redux-form
   const { accountName, accountType, accountCompany } = fields;
   let accountTypeField = '';
   if (accountType.value === 'bank') {
@@ -39,7 +39,7 @@ const AddAccountForm = ({ doSubmit, fields, submitting }) => {
   }
 
   return (
-    <form onSubmit={doSubmit}>
+    <form id="add-account-form" onSubmit={localHandleSubmit}>
       <Input
         type="text"
         label="Name"
@@ -67,6 +67,7 @@ const AddAccountForm = ({ doSubmit, fields, submitting }) => {
       </Collapse>
 
       <Button
+        name="add-account"
         bsStyle="primary"
         type="submit"
         disabled={submitting}>
@@ -77,7 +78,7 @@ const AddAccountForm = ({ doSubmit, fields, submitting }) => {
 };
 
 AddAccountForm.propTypes = {
-  doSubmit: PropTypes.func.isRequired,
+  localHandleSubmit: PropTypes.func.isRequired,
   fields: PropTypes.object.isRequired,
   submitting: PropTypes.bool.isRequired,
 };

@@ -5,12 +5,12 @@ import AddAccountForm from './AddAccountForm.js';
 import { reduxForm } from 'redux-form';
 import * as accountsActions from '../account/AccountsActions.js';
 
-class AddAccountFormContainer extends Component {
+export class AddAccountFormContainer extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
+    fields: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     resetForm: PropTypes.func.isRequired,
-    fields: PropTypes.object.isRequired,
     submitting: PropTypes.bool.isRequired,
     visible: PropTypes.bool.isRequired,
   }
@@ -53,7 +53,7 @@ class AddAccountFormContainer extends Component {
     return (
       <AddAccountForm
         fields={this.props.fields}
-        doSubmit={reduxFormHandleSubmit}
+        localHandleSubmit={reduxFormHandleSubmit}
         submitting={this.props.submitting}
       />
     );
