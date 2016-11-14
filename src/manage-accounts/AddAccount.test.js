@@ -1,7 +1,7 @@
 import expect from 'expect';
 import React from 'react';
 import { shallow } from 'enzyme';
-import AddAccount from './AddAccount';
+import AddAccount from './AddAccount.js';
 import AddAccountFormContainer from './AddAccountFormContainer.js';
 
 function setup() {

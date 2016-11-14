@@ -32,7 +32,7 @@ const ManageAccounts = ({ accounts, actions, manageAccountsVisible }) => {
 
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={actions.toggleManageAccounts}>Close</Button>
+        <Button name="close-manage-accounts" onClick={actions.toggleManageAccounts}>Close</Button>
       </Modal.Footer>
     </Modal>
   );
