@@ -3,6 +3,7 @@ import FileUpload from './FileUpload.js';
 import SaveButtonContainer from './SaveButtonContainer.js';
 import DeleteTransactionsButton from './DeleteTransactionsButton.js';
 import AddTransactionButton from './AddTransactionButton.js';
+import { getCreditIcon } from '../utils/icons.js'
 import styles from './Account.module.css';
 
 const AccountDetails = ({ accounts, activeAccountId }) => {
@@ -11,23 +12,12 @@ const AccountDetails = ({ accounts, activeAccountId }) => {
     return <div><p className="text-center"><i className="fa fa-cog fa-spin fa-3x"></i></p></div>;
   }
 
-  const findFaIcon = function(cc) {
-    let iconSuffix;
-    switch (cc) {
-      case 'American Express':
-        iconSuffix = 'cc-amex';
-        break;
-      case 'Other':
-        iconSuffix = 'credit-card-alt';
-        break;
-      default:
-        iconSuffix = 'cc-' + cc.toLowerCase().replace(/ /, '-');
-    }
-    return <i className={'fa fa-lg fa-fw fa-' + iconSuffix}></i>;
-  };
-
   const activeAccount = accounts.find(account => account._id === activeAccountId);
-  const icon = ( activeAccount && activeAccount.type === 'creditcard' ) ? findFaIcon(activeAccount.company) : null;
+  let icon = null;
+  if (activeAccount && activeAccount.type === 'creditcard') {
+    const iconSuffix = getCreditIcon(activeAccount.company);
+    icon = <i className={`fa fa-lg fa-fw fa-${iconSuffix}`}></i>;
+  }
 
   return (
     <div className="col-xs-12">
