@@ -3,7 +3,7 @@ import FileUpload from './FileUpload.js';
 import SaveButtonContainer from './SaveButtonContainer.js';
 import DeleteTransactionsButton from './DeleteTransactionsButton.js';
 import AddTransactionButton from './AddTransactionButton.js';
-import { getCreditIcon } from '../utils/icons.js'
+import { getCreditIcon } from '../utils/icons.js';
 import styles from './Account.module.css';
 
 const AccountDetails = ({ accounts, activeAccountId }) => {

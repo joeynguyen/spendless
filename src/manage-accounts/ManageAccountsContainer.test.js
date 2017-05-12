@@ -29,7 +29,7 @@ const myProps = {
     }
   ],
   manageAccountsVisible: true,
-}
+};
 
 function setup(props) {
   return shallow(<ManageAccountsContainer {...props} />);

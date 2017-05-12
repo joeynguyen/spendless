@@ -8,6 +8,7 @@ node_modules/
 /js/main.min.js
 /images/
 .nyc_output/
+.vscode/
 *.swp
 *.swo
 .DS_Store
