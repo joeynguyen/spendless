@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Panel } from 'react-bootstrap';
-import AddAccountFormContainer from './AddAccountFormContainer.js';
+import AddAccountFormContainer from './AddAccountFormContainer.jsx';
 
 export default class AddAccount extends Component {
   state = {

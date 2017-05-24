@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as manageAccountsActions from './ManageAccountsActions.js';
-import ManageAccounts from './ManageAccounts.js';
+import ManageAccounts from './ManageAccounts.jsx';
 
 export class ManageAccountsContainer extends Component {
   static propTypes = {

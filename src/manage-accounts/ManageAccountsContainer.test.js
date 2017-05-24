@@ -1,7 +1,7 @@
 import expect from 'expect';
 import React from 'react';
 import { shallow } from 'enzyme';
-import { ManageAccountsContainer } from './ManageAccountsContainer.js';
+import { ManageAccountsContainer } from './ManageAccountsContainer.jsx';
 
 const myProps = {
   actions: {},

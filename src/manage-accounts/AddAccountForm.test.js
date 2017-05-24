@@ -1,7 +1,7 @@
 import expect from 'expect';
 import React from 'react';
 import { mount, shallow } from 'enzyme'; // need to use mount because we are rendering Bootstrap components too
-import AddAccountForm from './AddAccountForm.js';
+import AddAccountForm from './AddAccountForm.jsx';
 
 const props = {
   doSubmit: () => {},

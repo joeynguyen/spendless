@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import toastr from 'toastr';
-import AddAccountForm from './AddAccountForm.js';
+import AddAccountForm from './AddAccountForm.jsx';
 import { reduxForm } from 'redux-form';
 import * as accountsActions from '../account/AccountsActions.js';
 

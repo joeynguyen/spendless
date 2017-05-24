@@ -1,7 +1,7 @@
 import expect from 'expect';
 import React from 'react';
 import { shallow } from 'enzyme';
-import DeleteAccountForm from './DeleteAccountForm';
+import DeleteAccountForm from './DeleteAccountForm.jsx';
 
 function setup() {
   const props = {

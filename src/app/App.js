@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import Header from './Header.js';
 import Sidebar from './Sidebar.js';
-import ManageAccountsContainer from '../manage-accounts/ManageAccountsContainer.js';
+import ManageAccountsContainer from '../manage-accounts/ManageAccountsContainer.jsx';
 
 const App = ({ children }) => {
   return (

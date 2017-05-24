@@ -3,8 +3,8 @@ import { bindActionCreators } from 'redux';
 import { reduxForm } from 'redux-form';
 import { Collapse } from 'react-bootstrap';
 import toastr from 'toastr';
-import EditAccountForm from './EditAccountForm.js';
-import DeleteAccountForm from './DeleteAccountForm.js';
+import EditAccountForm from './EditAccountForm.jsx';
+import DeleteAccountForm from './DeleteAccountForm.jsx';
 import * as accountsActions from '../account/AccountsActions.js';
 
 export class EditAccountFormContainer extends Component {

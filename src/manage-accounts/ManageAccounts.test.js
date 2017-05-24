@@ -1,7 +1,7 @@
 import expect from 'expect';
 import React from 'react';
 import { shallow } from 'enzyme';
-import ManageAccounts from './ManageAccounts.js';
+import ManageAccounts from './ManageAccounts.jsx';
 
 const myProps = {
   actions: {},
@@ -29,7 +29,7 @@ const myProps = {
     }
   ],
   manageAccountsVisible: true,
-}
+};
 
 function setup(props) {
   return shallow(<ManageAccounts {...props} />);

@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import AccountsListItem from './AccountsListItem.js';
+import AccountsListItem from './AccountsListItem.jsx';
 
 const AccountsList = ({ accounts }) => {
   return (

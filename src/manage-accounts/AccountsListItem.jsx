@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import EditAccountFormContainer from './EditAccountFormContainer.js';
+import EditAccountFormContainer from './EditAccountFormContainer.jsx';
 import { Well, Collapse } from 'react-bootstrap';
 
 export default class AccountsListItem extends Component {

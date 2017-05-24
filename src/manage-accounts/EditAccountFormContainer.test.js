@@ -1,7 +1,7 @@
 import expect from 'expect';
 import React from 'react';
 import { mount } from 'enzyme';
-import { EditAccountFormContainer } from './EditAccountFormContainer';
+import { EditAccountFormContainer } from './EditAccountFormContainer.jsx';
 
 function setup() {
   const props = {

@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import AddAccount from './AddAccount.js';
-import AccountsList from './AccountsList.js';
+import AddAccount from './AddAccount.jsx';
+import AccountsList from './AccountsList.jsx';
 
 const ManageAccounts = ({ accounts, actions, manageAccountsVisible }) => {
   const ccAccounts = accounts.filter(account => account.type === 'creditcard');
