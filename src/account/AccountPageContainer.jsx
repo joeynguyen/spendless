@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { resetCheckedTransactions } from './TransactionsActions.js';
 import { toggleUnsavedWarning } from './AccountsActions.js';
 import { storeNextRoutePath } from '../app/AppActions.js';
-import AccountPage from './AccountPage.js';
+import AccountPage from './AccountPage.jsx';
 
 class AccountPageContainer extends Component {
   static propTypes = {

@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
-import FileUpload from './FileUpload.js';
-import SaveButtonContainer from './SaveButtonContainer.js';
-import DeleteTransactionsButton from './DeleteTransactionsButton.js';
-import AddTransactionButton from './AddTransactionButton.js';
+import FileUpload from './FileUpload.jsx';
+import SaveButtonContainer from './SaveButtonContainer.jsx';
+import DeleteTransactionsButton from './DeleteTransactionsButton.jsx';
+import AddTransactionButton from './AddTransactionButton.jsx';
 import { getCreditIcon } from '../utils/icons.js';
 import styles from './Account.module.css';
 

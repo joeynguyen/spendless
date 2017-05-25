@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as transactionsActions from './TransactionsActions.js';
-import TransactionsListFormContainer from './TransactionsListFormContainer.js';
+import TransactionsListFormContainer from './TransactionsListFormContainer.jsx';
 
 class TransactionListContainer extends Component {
   static propTypes = {

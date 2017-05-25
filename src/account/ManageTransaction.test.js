@@ -1,7 +1,7 @@
 import expect from 'expect';
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import ManageTransaction from './ManageTransaction';
+import ManageTransaction from './ManageTransaction.jsx';
 
 function setup() {
   // Need to create spies because if we use expect.spyOn on actual functions, we get this

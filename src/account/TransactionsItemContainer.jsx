@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import toastr from 'toastr';
-import TransactionsItem from './TransactionsItem.js';
+import TransactionsItem from './TransactionsItem.jsx';
 import * as transactionsActions from './TransactionsActions.js';
 
 class TransactionsItemContainer extends Component {

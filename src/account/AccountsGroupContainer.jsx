@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import AccountsGroup from './AccountsGroup.js';
+import AccountsGroup from './AccountsGroup.jsx';
 import * as accountsActions from './AccountsActions.js';
 
 class AccountContainer extends Component {

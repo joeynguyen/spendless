@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Modal, Alert, Button } from 'react-bootstrap';
 
-const UnsavedChangesWarning = ({ localHandleAlertStay, localHandleAlertLeave, show }) => {
+const UnsavedWarning = ({ localHandleAlertStay, localHandleAlertLeave, show }) => {
   return (
     <Modal show={show} backdrop="static">
       <Alert bsStyle="danger" style={{marginBottom: 0}}>
@@ -16,10 +16,10 @@ const UnsavedChangesWarning = ({ localHandleAlertStay, localHandleAlertLeave, sh
     </Modal>
   );
 };
-UnsavedChangesWarning.propTypes = {
+UnsavedWarning.propTypes = {
   localHandleAlertStay: PropTypes.func.isRequired,
   localHandleAlertLeave: PropTypes.func.isRequired,
   show: PropTypes.bool.isRequired,
 };
 
-export default UnsavedChangesWarning;
+export default UnsavedWarning;

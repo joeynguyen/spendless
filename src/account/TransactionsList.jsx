@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import TransactionsItemContainer from './TransactionsItemContainer.js';
+import TransactionsItemContainer from './TransactionsItemContainer.jsx';
 import styles from './Transactions.module.css';
 
 const TransactionsList = ({ accountTransactions, fields, uploadedTransactions }) => {

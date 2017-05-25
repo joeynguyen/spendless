@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import AccountDetails from './AccountDetail.js';
+import AccountDetails from './AccountDetails.jsx';
 
 class AccountDetailsContainer extends Component {
   static propTypes = {

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
-import TransactionsList from './TransactionsList.js';
+import TransactionsList from './TransactionsList.jsx';
 
 class TransactionsListFormContainer extends Component {
   static propTypes = {

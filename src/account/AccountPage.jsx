@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
-import AccountDetailsContainer from './AccountDetailsContainer.js';
-import TransactionsListContainer from './TransactionsListContainer.js';
-import ManageTransactionContainer from './ManageTransactionContainer.js';
-import UnsavedWarning from './UnsavedWarning.js';
+import AccountDetailsContainer from './AccountDetailsContainer.jsx';
+import TransactionsListContainer from './TransactionsListContainer.jsx';
+import ManageTransactionContainer from './ManageTransactionContainer.jsx';
+import UnsavedWarning from './UnsavedWarning.jsx';
 
 const AccountPage = ({ manageTransactionVisible, unsavedWarningVisible, localHandleAlertStay, localHandleAlertLeave }) => {
   const manageTransactionContainer = manageTransactionVisible ? <ManageTransactionContainer /> : null;

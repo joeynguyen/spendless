@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import AppContainer from './app/AppContainer.js';
 import Overview from './overview/Overview.js';
-import AccountPageContainer from './account/AccountPageContainer.js';
+import AccountPageContainer from './account/AccountPageContainer.jsx';
 import HelpContent from './help/HelpContent.js';
 
 export default (
