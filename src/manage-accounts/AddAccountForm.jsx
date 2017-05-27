@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Button, Collapse, Input } from 'react-bootstrap';
+import { Button, Collapse, ControlLabel, FormControl, FormGroup, HelpBlock } from 'react-bootstrap';
 
 const AddAccountForm = ({ localHandleSubmit, fields, submitting }) => {
   // fields and submitting are from redux-form
@@ -7,60 +7,76 @@ const AddAccountForm = ({ localHandleSubmit, fields, submitting }) => {
   let accountTypeField = '';
   if (accountType.value === 'bank') {
     accountTypeField = (
-      <Input
-        type="text"
-        label="Name of Institution"
+      <FormGroup
+        controlId={accountCompany.name}
         placeholder="Enter the name of the financial institution"
-        bsStyle={accountCompany.touched && accountCompany.invalid ? 'error' : null}
-        help={accountCompany.touched ? accountCompany.error : ''}
-        {...accountCompany}
-      />
+        validationState={accountCompany.touched && accountCompany.invalid ? 'error' : null}
+      >
+        <ControlLabel>Name of Institution</ControlLabel>
+        <FormControl
+          type="text"
+          placeholder="Enter the name of the financial institution"
+          {...accountCompany}
+        />
+        {accountCompany.touched && <HelpBlock>{accountCompany.error}</HelpBlock>}
+      </FormGroup>
     );
   } else if (accountType.value === 'creditcard') {
     accountTypeField = (
-      <Input
-        type="select"
-        label="Credit Card Company"
-        placeholder="Credit Card Company"
-        bsStyle={accountCompany.touched && accountCompany.invalid ? 'error' : null}
-        help={accountCompany.touched ? accountCompany.error : ''}
-        {...accountCompany}
+      <FormGroup
+        controlId={accountCompany.name}
+        validationState={accountCompany.touched && accountCompany.invalid ? 'error' : null}
       >
-        <option value="">select...</option>
-        <option value="Visa">Visa</option>
-        <option value="MasterCard">Mastercard</option>
-        <option value="American Express">American Express</option>
-        <option value="Discover">Discover</option>
-        <option value="Diners Club">Diners Club</option>
-        <option value="JCB">JCB</option>
-        <option value="Other">Other</option>
-      </Input>
+        <ControlLabel>Credit Card Company</ControlLabel>
+        <FormControl
+          componentClass="select"
+          {...accountCompany}
+        >
+          <option value="">select...</option>
+          <option value="Visa">Visa</option>
+          <option value="MasterCard">Mastercard</option>
+          <option value="American Express">American Express</option>
+          <option value="Discover">Discover</option>
+          <option value="Diners Club">Diners Club</option>
+          <option value="JCB">JCB</option>
+          <option value="Other">Other</option>
+        </FormControl>
+        {accountCompany.touched && <HelpBlock>{accountCompany.error}</HelpBlock>}
+      </FormGroup>
     );
   }
 
   return (
     <form id="add-account-form" onSubmit={localHandleSubmit}>
-      <Input
-        type="text"
-        label="Name"
+      <FormGroup
+        controlId={accountName.name}
         placeholder="Enter a name for the account"
-        bsStyle={accountName.touched && accountName.invalid ? 'error' : null}
-        help={accountName.touched ? accountName.error : ''}
-        {...accountName}
-      />
-
-      <Input
-        type="select"
-        label="Type"
-        placeholder="Type"
-        bsStyle={accountType.touched && accountType.invalid ? 'error' : null}
-        help={accountType.touched ? accountType.error : ''}
-        {...accountType}
+        validationState={accountName.touched && accountName.invalid ? 'error' : null}
       >
-        <option value="">select...</option>
-        <option value="bank">Bank</option>
-        <option value="creditcard">Credit Card</option>
-      </Input>
+        <ControlLabel>Name</ControlLabel>
+        <FormControl
+          type="text"
+          placeholder="Enter a name for the account"
+          {...accountName}
+        />
+        {accountName.touched && <HelpBlock>{accountName.error}</HelpBlock>}
+      </FormGroup>
+
+      <FormGroup
+        controlId={accountType.name}
+        validationState={accountType.touched && accountType.invalid ? 'error' : null}
+      >
+        <ControlLabel>Type</ControlLabel>
+        <FormControl
+          componentClass="select"
+          {...accountType}
+        >
+          <option value="">select...</option>
+          <option value="bank">Bank</option>
+          <option value="creditcard">Credit Card</option>
+        </FormControl>
+        {accountType.touched && <HelpBlock>{accountType.error}</HelpBlock>}
+      </FormGroup>
 
       <Collapse in={accountType.value !== ''}>
         <div>{accountTypeField}</div>
