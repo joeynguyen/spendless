@@ -1,29 +1,26 @@
 import React, { PropTypes } from 'react';
 import { Button, Collapse, ControlLabel, FormControl, FormGroup, HelpBlock } from 'react-bootstrap';
 
+import FieldGroup from '../custom-components/FieldGroup.jsx';
+
 const AddAccountForm = ({ localHandleSubmit, fields, submitting }) => {
   // fields and submitting are from redux-form
   const { accountName, accountType, accountCompany } = fields;
   let accountTypeField = '';
   if (accountType.value === 'bank') {
     accountTypeField = (
-      <FormGroup
-        controlId={accountCompany.name}
+      <FieldGroup
         placeholder="Enter the name of the financial institution"
-        validationState={accountCompany.touched && accountCompany.invalid ? 'error' : null}
-      >
-        <ControlLabel>Name of Institution</ControlLabel>
-        <FormControl
-          type="text"
-          placeholder="Enter the name of the financial institution"
-          name={accountCompany.name}
-          onBlur={accountCompany.onBlur}
-          onChange={accountCompany.onChange}
-          onFocus={accountCompany.onFocus}
-          value={accountCompany.value}
-        />
-        {accountCompany.touched && <HelpBlock>{accountCompany.error}</HelpBlock>}
-      </FormGroup>
+        label="Name of Institution"
+        name={accountCompany.name}
+        error={accountCompany.error}
+        invalid={accountCompany.invalid}
+        touched={accountCompany.touched}
+        onBlur={accountCompany.onBlur}
+        onChange={accountCompany.onChange}
+        onFocus={accountCompany.onFocus}
+        value={accountCompany.value}
+      />
     );
   } else if (accountType.value === 'creditcard') {
     accountTypeField = (
@@ -81,7 +78,6 @@ const AddAccountForm = ({ localHandleSubmit, fields, submitting }) => {
         <ControlLabel>Type</ControlLabel>
         <FormControl
           componentClass="select"
-          {...accountType}
           name={accountType.name}
           onBlur={accountType.onBlur}
           onChange={accountType.onChange}
