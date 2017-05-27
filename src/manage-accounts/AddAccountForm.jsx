@@ -16,7 +16,11 @@ const AddAccountForm = ({ localHandleSubmit, fields, submitting }) => {
         <FormControl
           type="text"
           placeholder="Enter the name of the financial institution"
-          {...accountCompany}
+          name={accountCompany.name}
+          onBlur={accountCompany.onBlur}
+          onChange={accountCompany.onChange}
+          onFocus={accountCompany.onFocus}
+          value={accountCompany.value}
         />
         {accountCompany.touched && <HelpBlock>{accountCompany.error}</HelpBlock>}
       </FormGroup>
@@ -30,7 +34,11 @@ const AddAccountForm = ({ localHandleSubmit, fields, submitting }) => {
         <ControlLabel>Credit Card Company</ControlLabel>
         <FormControl
           componentClass="select"
-          {...accountCompany}
+          name={accountCompany.name}
+          onBlur={accountCompany.onBlur}
+          onChange={accountCompany.onChange}
+          onFocus={accountCompany.onFocus}
+          value={accountCompany.value}
         >
           <option value="">select...</option>
           <option value="Visa">Visa</option>
@@ -57,7 +65,11 @@ const AddAccountForm = ({ localHandleSubmit, fields, submitting }) => {
         <FormControl
           type="text"
           placeholder="Enter a name for the account"
-          {...accountName}
+          name={accountName.name}
+          onBlur={accountName.onBlur}
+          onChange={accountName.onChange}
+          onFocus={accountName.onFocus}
+          value={accountName.value}
         />
         {accountName.touched && <HelpBlock>{accountName.error}</HelpBlock>}
       </FormGroup>
@@ -70,6 +82,11 @@ const AddAccountForm = ({ localHandleSubmit, fields, submitting }) => {
         <FormControl
           componentClass="select"
           {...accountType}
+          name={accountType.name}
+          onBlur={accountType.onBlur}
+          onChange={accountType.onChange}
+          onFocus={accountType.onFocus}
+          value={accountType.value}
         >
           <option value="">select...</option>
           <option value="bank">Bank</option>
