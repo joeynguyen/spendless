@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as manageAccountsActions from '../manage-accounts/ManageAccountsActions.js';
-import SidebarHeader from './SidebarHeader.js';
+import SidebarHeader from './SidebarHeader.jsx';
 
 class SidebarHeaderContainer extends Component {
   static propTypes = {

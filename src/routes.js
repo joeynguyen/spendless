@@ -1,9 +1,9 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
-import AppContainer from './app/AppContainer.js';
-import Overview from './overview/Overview.js';
+import AppContainer from './app/AppContainer.jsx';
+import Overview from './overview/Overview.jsx';
 import AccountPageContainer from './account/AccountPageContainer.jsx';
-import HelpContent from './help/HelpContent.js';
+import HelpContent from './help/HelpContent.jsx';
 
 export default (
   <Route path="/" component={AppContainer}>

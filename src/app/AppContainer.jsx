@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import App from './App.js';
+import App from './App.jsx';
 
 class AppContainer extends Component {
   static propTypes = {
