@@ -1,49 +1,70 @@
 import React, { PropTypes } from 'react';
-import { Collapse, Input, Button } from 'react-bootstrap';
+import { Collapse, Button } from 'react-bootstrap';
+
+import FieldGroup from '../custom-components/FieldGroup.jsx';
+import { accountCompanyOptions, accountTypeOptions } from '../constants.js';
 
 const EditAccountForm = ({ fields, pristine, toggleSettings, toggleConfirmDelete, confirmDeleteVisible, handleUpdateAccount }) => {
   const { accountName, accountType, accountCompany } = fields;
   return (
     <form id="update-account-form" onSubmit={handleUpdateAccount}>
-      <Input
+      <FieldGroup
         type="text"
         label="Name"
-        {...accountName}
+        name={accountName.name}
+        error={accountName.error}
+        invalid={accountName.invalid}
+        touched={accountName.touched}
+        onBlur={accountName.onBlur}
+        onChange={accountName.onChange}
+        onFocus={accountName.onFocus}
+        value={accountName.value}
       />
-      <Input
-        type="select"
+      <FieldGroup
+        componentClass="select"
         label="Type"
-        {...accountType}
-      >
-        <option value="">select...</option>
-        <option value="bank">Bank</option>
-        <option value="creditcard">Credit Card</option>
-      </Input>
+        options={accountTypeOptions}
+        name={accountType.name}
+        error={accountType.error}
+        invalid={accountType.invalid}
+        touched={accountType.touched}
+        onBlur={accountType.onBlur}
+        onChange={accountType.onChange}
+        onFocus={accountType.onFocus}
+        value={accountType.value}
+      />
       <Collapse in={accountType.value === 'bank'}>
         <div>
-          <Input
+          <FieldGroup
             type="text"
+            placeholder="Enter the name of the financial institution"
             label="Name of Institution"
-            {...accountCompany}
+            name={accountCompany.name}
+            error={accountCompany.error}
+            invalid={accountCompany.invalid}
+            touched={accountCompany.touched}
+            onBlur={accountCompany.onBlur}
+            onChange={accountCompany.onChange}
+            onFocus={accountCompany.onFocus}
+            value={accountCompany.value}
           />
         </div>
       </Collapse>
       <Collapse in={accountType.value === 'creditcard'}>
         <div>
-          <Input
-            type="select"
+          <FieldGroup
+            componentClass="select"
             label="Credit Card Company"
-            {...accountCompany}
-          >
-            <option value="">select...</option>
-            <option value="Visa">Visa</option>
-            <option value="MasterCard">Mastercard</option>
-            <option value="American Express">American Express</option>
-            <option value="Discover">Discover</option>
-            <option value="Diners Club">Diners Club</option>
-            <option value="JCB">JCB</option>
-            <option value="Other">Other</option>
-          </Input>
+            options={accountCompanyOptions}
+            name={accountCompany.name}
+            error={accountCompany.error}
+            invalid={accountCompany.invalid}
+            touched={accountCompany.touched}
+            onBlur={accountCompany.onBlur}
+            onChange={accountCompany.onChange}
+            onFocus={accountCompany.onFocus}
+            value={accountCompany.value}
+          />
         </div>
       </Collapse>
       <div className="form-group">
