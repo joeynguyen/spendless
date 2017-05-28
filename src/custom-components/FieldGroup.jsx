@@ -1,21 +1,13 @@
 import React, { PropTypes } from 'react';
 import { ControlLabel, FormControl, FormGroup, HelpBlock } from 'react-bootstrap';
 
-const renderOptions = options => options
-  .map((option, i) => (
-    <option
-      key={i}
-      value={option.value}
-      disabled={option.disabled}
-    >
-      {option.label}
-    </option>
-  )
-);
+import { renderOptions, wrapInputGroup } from '../utils/helpers.js';
 
 const FieldGroup = (props) => {
   const {
     componentClass,
+    addonBefore,
+    addonAfter,
     label,
     options,
     placeholder,
@@ -31,30 +23,38 @@ const FieldGroup = (props) => {
     value,
  } = props;
 
+  let formControl = (
+    <FormControl
+      type={type}
+      componentClass={componentClass}
+      placeholder={placeholder}
+      name={name}
+      onBlur={onBlur}
+      onChange={onChange}
+      onFocus={onFocus}
+      value={value}
+    >
+      {componentClass && componentClass === 'select' && options && renderOptions(options)}
+    </FormControl>
+  );
+  if (addonBefore || addonAfter) {
+    formControl = wrapInputGroup(formControl, addonBefore, addonAfter);
+  }
   return (
       <FormGroup
         controlId={name}
         validationState={touched && invalid ? 'error' : null}
       >
-        <ControlLabel>{label}</ControlLabel>
-        <FormControl
-          type={type}
-          componentClass={componentClass}
-          placeholder={placeholder}
-          name={name}
-          onBlur={onBlur}
-          onChange={onChange}
-          onFocus={onFocus}
-          value={value}
-        >
-          {componentClass && componentClass === 'select' && options && renderOptions(options)}
-        </FormControl>
+        {label && <ControlLabel>{label}</ControlLabel>}
+        {formControl}
         {touched && error && <HelpBlock>{error}</HelpBlock>}
       </FormGroup>
   );
 };
 FieldGroup.propTypes = {
   componentClass: PropTypes.string,
+  addonAfter: PropTypes.string,
+  addonBefore: PropTypes.string,
   label: PropTypes.string,
   options: PropTypes.array,
   placeholder: PropTypes.string,
