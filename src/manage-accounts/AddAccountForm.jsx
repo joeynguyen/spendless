@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
-import { Button, Collapse, ControlLabel, FormControl, FormGroup, HelpBlock } from 'react-bootstrap';
+import { Button, Collapse } from 'react-bootstrap';
 
 import FieldGroup from '../custom-components/FieldGroup.jsx';
+import { accountCompanyOptions, accountTypeOptions } from '../constants.js';
 
 const AddAccountForm = ({ localHandleSubmit, fields, submitting }) => {
   // fields and submitting are from redux-form
@@ -10,6 +11,7 @@ const AddAccountForm = ({ localHandleSubmit, fields, submitting }) => {
   if (accountType.value === 'bank') {
     accountTypeField = (
       <FieldGroup
+        type="text"
         placeholder="Enter the name of the financial institution"
         label="Name of Institution"
         name={accountCompany.name}
@@ -24,72 +26,51 @@ const AddAccountForm = ({ localHandleSubmit, fields, submitting }) => {
     );
   } else if (accountType.value === 'creditcard') {
     accountTypeField = (
-      <FormGroup
-        controlId={accountCompany.name}
-        validationState={accountCompany.touched && accountCompany.invalid ? 'error' : null}
-      >
-        <ControlLabel>Credit Card Company</ControlLabel>
-        <FormControl
-          componentClass="select"
-          name={accountCompany.name}
-          onBlur={accountCompany.onBlur}
-          onChange={accountCompany.onChange}
-          onFocus={accountCompany.onFocus}
-          value={accountCompany.value}
-        >
-          <option value="">select...</option>
-          <option value="Visa">Visa</option>
-          <option value="MasterCard">Mastercard</option>
-          <option value="American Express">American Express</option>
-          <option value="Discover">Discover</option>
-          <option value="Diners Club">Diners Club</option>
-          <option value="JCB">JCB</option>
-          <option value="Other">Other</option>
-        </FormControl>
-        {accountCompany.touched && <HelpBlock>{accountCompany.error}</HelpBlock>}
-      </FormGroup>
+      <FieldGroup
+        componentClass="select"
+        label="Credit Card Company"
+        options={accountCompanyOptions}
+        name={accountCompany.name}
+        error={accountCompany.error}
+        invalid={accountCompany.invalid}
+        touched={accountCompany.touched}
+        onBlur={accountCompany.onBlur}
+        onChange={accountCompany.onChange}
+        onFocus={accountCompany.onFocus}
+        value={accountCompany.value}
+      />
     );
   }
 
   return (
     <form id="add-account-form" onSubmit={localHandleSubmit}>
-      <FormGroup
-        controlId={accountName.name}
+      <FieldGroup
+        type="text"
         placeholder="Enter a name for the account"
-        validationState={accountName.touched && accountName.invalid ? 'error' : null}
-      >
-        <ControlLabel>Name</ControlLabel>
-        <FormControl
-          type="text"
-          placeholder="Enter a name for the account"
-          name={accountName.name}
-          onBlur={accountName.onBlur}
-          onChange={accountName.onChange}
-          onFocus={accountName.onFocus}
-          value={accountName.value}
-        />
-        {accountName.touched && <HelpBlock>{accountName.error}</HelpBlock>}
-      </FormGroup>
+        label="Name"
+        name={accountName.name}
+        error={accountName.error}
+        invalid={accountName.invalid}
+        touched={accountName.touched}
+        onBlur={accountName.onBlur}
+        onChange={accountName.onChange}
+        onFocus={accountName.onFocus}
+        value={accountName.value}
+      />
 
-      <FormGroup
-        controlId={accountType.name}
-        validationState={accountType.touched && accountType.invalid ? 'error' : null}
-      >
-        <ControlLabel>Type</ControlLabel>
-        <FormControl
-          componentClass="select"
-          name={accountType.name}
-          onBlur={accountType.onBlur}
-          onChange={accountType.onChange}
-          onFocus={accountType.onFocus}
-          value={accountType.value}
-        >
-          <option value="">select...</option>
-          <option value="bank">Bank</option>
-          <option value="creditcard">Credit Card</option>
-        </FormControl>
-        {accountType.touched && <HelpBlock>{accountType.error}</HelpBlock>}
-      </FormGroup>
+      <FieldGroup
+        componentClass="select"
+        label="Type"
+        options={accountTypeOptions}
+        name={accountType.name}
+        error={accountType.error}
+        invalid={accountType.invalid}
+        touched={accountType.touched}
+        onBlur={accountType.onBlur}
+        onChange={accountType.onChange}
+        onFocus={accountType.onFocus}
+        value={accountType.value}
+      />
 
       <Collapse in={accountType.value !== ''}>
         <div>{accountTypeField}</div>
