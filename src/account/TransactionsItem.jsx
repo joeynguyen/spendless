@@ -16,7 +16,17 @@ const TransactionsItem = ({ handleDeleteTransactions, transaction, unsaved, hand
     rowStyle = {backgroundColor: 'yellow'};
   } else {
     // don't show for uploaded/unsaved transactions
-    selectCheckbox = <input type="checkbox" {...reduxFormCheckbox} checked={reduxFormCheckbox.checked || false} />;
+    selectCheckbox = (
+      <input
+        type="checkbox"
+        checked={reduxFormCheckbox.checked}
+        name={reduxFormCheckbox.name}
+        onBlur={reduxFormCheckbox.onBlur}
+        onChange={reduxFormCheckbox.onChange}
+        onFocus={reduxFormCheckbox.onFocus}
+        value={reduxFormCheckbox.value}
+        />
+    );
     editButton = <i className="fa fa-fw fa-lg fa-pencil" onClick={handleEditClick}></i>;
     deleteButton = <i className="fa fa-fw fa-lg fa-remove" onClick={handleDeleteTransactions}></i>;
   }
