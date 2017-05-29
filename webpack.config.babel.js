@@ -87,7 +87,7 @@ plugins.push(
   new webpack.LoaderOptionsPlugin(loaderOptionsConfig),
 );
 
-const exportedObj = Object.assign({
+export default Object.assign({
   entry: './src/index.js',
   output: {
     path: path.resolve('./dist'),
@@ -110,12 +110,10 @@ const exportedObj = Object.assign({
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: 'babel-loader'
-      },
-      {
+      }, {
         test: /\.json$/,
         use: 'json-loader'
-      },
-      {
+      }, {
         test: /^((?!\.module).)*\.css$/,
         use: [
           'style-loader',
@@ -125,19 +123,17 @@ const exportedObj = Object.assign({
         test: /\.module\.css$/,
         use: [
           'style-loader',
-          'css-loader?sourceMap'
+          'css-loader?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!'
         ]
-      },
-      {
+      }, {
         test: /\.scss$/,
         use: [
-          { loader: 'file-loader', options: { name: '[name].css' } },
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
           { loader: 'sass-loader',
             options: {
               outputStyle: 'compressed',
-              includePaths: [
-                './node_modules'
-              ]
+              includePaths: [ './node_modules' ]
             }
           }
         ]
@@ -151,8 +147,3 @@ const exportedObj = Object.assign({
     }
   ]
 }, devConfig);
-
-console.log('devConfig', devConfig);
-console.log('exportedObj', exportedObj);
-
-export default exportedObj;

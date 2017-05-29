@@ -6,6 +6,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import configureStore from './store/configureStore.js';
 import routes from './routes.js';
 import './app.css';
+import 'grommet/scss/vanilla/index';
 
 const store = configureStore();
 const history = syncHistoryWithStore(hashHistory, store);
