@@ -1,12 +1,13 @@
-import React, { Component, PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 import TransactionsList from './TransactionsList.jsx';
 
 class TransactionsListFormContainer extends Component {
   static propTypes = {
-    accountTransactions: PropTypes.arrayOf(React.PropTypes.object),
+    accountTransactions: PropTypes.arrayOf(PropTypes.object),
     fields: PropTypes.object.isRequired,
-    uploadedTransactions: PropTypes.arrayOf(React.PropTypes.object),
+    uploadedTransactions: PropTypes.arrayOf(PropTypes.object),
   }
 
   render() {

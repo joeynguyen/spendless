@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import { FormControl, Button, ButtonToolbar } from 'react-bootstrap';
 
 export default class DeleteAccountForm extends Component {

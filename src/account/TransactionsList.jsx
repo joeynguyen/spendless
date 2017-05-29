@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import TransactionsItemContainer from './TransactionsItemContainer.jsx';
 import styles from './Transactions.module.css';
 
@@ -34,8 +35,8 @@ const TransactionsList = ({ accountTransactions, fields, uploadedTransactions })
 };
 
 TransactionsList.propTypes = {
-  uploadedTransactions: PropTypes.arrayOf(React.PropTypes.object),
-  accountTransactions: PropTypes.arrayOf(React.PropTypes.object),
+  uploadedTransactions: PropTypes.arrayOf(PropTypes.object),
+  accountTransactions: PropTypes.arrayOf(PropTypes.object),
   fields: PropTypes.object.isRequired,
 };
 

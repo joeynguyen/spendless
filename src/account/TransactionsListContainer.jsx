@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as transactionsActions from './TransactionsActions.js';
@@ -7,7 +8,7 @@ import TransactionsListFormContainer from './TransactionsListFormContainer.jsx';
 class TransactionListContainer extends Component {
   static propTypes = {
     activeAccountId: PropTypes.string.isRequired,
-    accountTransactions: PropTypes.arrayOf(React.PropTypes.object),
+    accountTransactions: PropTypes.arrayOf(PropTypes.object),
     actions: PropTypes.object.isRequired,
   }
 

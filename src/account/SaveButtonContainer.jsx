@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import toastr from 'toastr';
@@ -8,7 +9,7 @@ import * as transactionsActions from '../account/TransactionsActions.js';
 class SaveButtonContainer extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
-    uploadedTransactions: PropTypes.arrayOf(React.PropTypes.object),
+    uploadedTransactions: PropTypes.arrayOf(PropTypes.object),
   }
   // Save transactions uploaded from CSV to database
   handleSave = () => {

@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import AccountDetailsContainer from './AccountDetailsContainer.jsx';
 import TransactionsListContainer from './TransactionsListContainer.jsx';
 import ManageTransactionContainer from './ManageTransactionContainer.jsx';

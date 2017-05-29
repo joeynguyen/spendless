@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import Header from './Header.jsx';
 import Sidebar from './Sidebar.jsx';
 import ManageAccountsContainer from '../manage-accounts/ManageAccountsContainer.jsx';

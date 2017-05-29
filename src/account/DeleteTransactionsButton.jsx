@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import toastr from 'toastr';
@@ -7,7 +8,7 @@ import * as transactionsActions from './TransactionsActions.js';
 
 class DeleteTransactionsButton extends Component {
   static propTypes = {
-    accountTransactions: PropTypes.arrayOf(React.PropTypes.object),
+    accountTransactions: PropTypes.arrayOf(PropTypes.object),
     manageTransactionsListForm: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired,
   }

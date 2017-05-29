@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import FileUpload from './FileUpload.jsx';
 import SaveButtonContainer from './SaveButtonContainer.jsx';
 import DeleteTransactionsButton from './DeleteTransactionsButton.jsx';
@@ -35,7 +36,7 @@ const AccountDetails = ({ accounts, activeAccountId }) => {
   );
 };
 AccountDetails.propTypes = {
-  accounts: PropTypes.arrayOf(React.PropTypes.object),
+  accounts: PropTypes.arrayOf(PropTypes.object),
   activeAccountId: PropTypes.string.isRequired,
 };
 

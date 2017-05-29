@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { resetCheckedTransactions } from './TransactionsActions.js';
@@ -8,18 +9,18 @@ import AccountPage from './AccountPage.jsx';
 
 class AccountPageContainer extends Component {
   static propTypes = {
-    accounts: PropTypes.arrayOf(React.PropTypes.object),
+    accounts: PropTypes.arrayOf(PropTypes.object),
     actions: PropTypes.object.isRequired,
     manageTransactionVisible: PropTypes.bool.isRequired,
     params: PropTypes.object.isRequired,
     route: PropTypes.object.isRequired,
-    uploadedTransactions: PropTypes.arrayOf(React.PropTypes.object),
+    uploadedTransactions: PropTypes.arrayOf(PropTypes.object),
     unsavedWarningVisible: PropTypes.bool.isRequired,
     nextRoutePath: PropTypes.string.isRequired
   }
 
   static contextTypes = {
-    router: React.PropTypes.object
+    router: PropTypes.object
   }
 
   componentDidMount() {

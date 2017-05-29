@@ -1,10 +1,11 @@
-import React, { Component, PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import AccountDetails from './AccountDetails.jsx';
 
 class AccountDetailsContainer extends Component {
   static propTypes = {
-    accounts: PropTypes.arrayOf(React.PropTypes.object),
+    accounts: PropTypes.arrayOf(PropTypes.object),
     activeAccountId: PropTypes.string.isRequired,
   }
 
