@@ -8,7 +8,8 @@ let plugins = [
   new webpack.DefinePlugin({
     'process.env': {
       NODE_ENV: JSON.stringify(env)
-    }
+    },
+    'global.GENTLY': false
   })
 ];
 
@@ -54,22 +55,25 @@ if (env === 'production') {
     new webpack.NoEmitOnErrorsPlugin()
   ]);
   devConfig.devtool = 'cheap-module-source-map';
+  devConfig.target = 'electron-renderer';
   devConfig.entry = [
-    'webpack-hot-middleware/client?path=http://localhost:3000/__webpack_hmr',
+    'react-hot-loader/patch',
+    `webpack-dev-server/client?http://localhost:8080/`,
+    'webpack/hot/only-dev-server',
     './src/index.js'
   ];
   devConfig.output = {
     path: path.resolve('./dist'),
     filename: 'bundle.js',
-    publicPath: 'http://localhost:3000/dist/'
+    publicPath: 'http://localhost:8080/dist/'
   };
   devConfig.devServer = {
     compress: true,
     clientLogLevel: 'none',
     contentBase: path.resolve('./dist'),
     // publicPath: '/',
-    publicPath: 'http://localhost:3000/dist/',
-    libraryTarget: 'commonjs2',
+    publicPath: 'http://localhost:8080/dist/',
+    // libraryTarget: 'commonjs2',
     quiet: true,
     hot: true,
     watchOptions: {
@@ -79,7 +83,6 @@ if (env === 'production') {
     // proxy: {
     //   '/api/*': 'http://localhost:8102'
     // },
-    target: 'electron-renderer'
   };
 }
 
@@ -93,7 +96,7 @@ export default Object.assign({
     path: path.resolve('./dist'),
     filename: 'bundle.js',
     publicPath: '/'
-    // publicPath: 'http://localhost:3000/dist/',
+    // publicPath: 'http://localhost:8080/dist/',
   },
   resolve: {
     extensions: ['.js', '.jsx', '.scss', '.css', '.json']
@@ -110,6 +113,14 @@ export default Object.assign({
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: 'babel-loader'
+        // use: [
+        //   {
+        //     loader: 'babel-loader',
+        //     options: {
+        //       presets: ['es2015', 'stage-0', 'react']
+        //     }
+        //   }
+        // ],
       }, {
         test: /\.json$/,
         use: 'json-loader'

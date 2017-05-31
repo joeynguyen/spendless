@@ -1,9 +1,7 @@
 /* eslint strict: 0 */
 'use strict';
 
-const electron = require('electron');
-const app = electron.app; // Module to control application life.
-const BrowserWindow = electron.BrowserWindow; // Module to create native browser window.
+import { app, BrowserWindow } from 'electron';
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
