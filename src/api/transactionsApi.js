@@ -1,4 +1,7 @@
 import PouchDB from 'pouchdb-browser';
+import PouchDbFind from 'pouchdb-find';
+
+PouchDB.plugin(PouchDbFind);
 
 const db = new PouchDB('transactions');
 const remoteCouch = 'http://127.0.0.1:5984/transactions';
