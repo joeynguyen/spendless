@@ -1,6 +1,5 @@
-import PouchDB from 'pouchdb';
+import PouchDB from 'pouchdb-browser';
 
-// PouchDB is loaded externally through a script tag in the browser
 const db = new PouchDB('transactions');
 const remoteCouch = 'http://127.0.0.1:5984/transactions';
 

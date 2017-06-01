@@ -14,8 +14,30 @@
   <body>
     <div id="root" class="container-fluid"></div>
 
-    <script type="text/javascript" src="../node_modules/pouchdb/dist/pouchdb.min.js"></script>
-    <script type="text/javascript" src="../node_modules/pouchdb-find/dist/pouchdb.find.min.js"></script>
-    <script type="text/javascript" src="http://localhost:8080/dist/bundle.js"></script>
+    <script>
+      {
+        const scripts = [];
+
+        // Dynamically insert the DLL script in development env in the
+        // renderer process
+        if (process.env.NODE_ENV === 'development') {
+          scripts.push('../dll/vendor.dll.js');
+        }
+
+        // Dynamically insert the bundled app script in the renderer process
+        const port = process.env.PORT || 1212;
+        scripts.push(
+          (process.env.HOT)
+            ? 'http://localhost:' + port + '/dist/bundle.js'
+            : './dist/bundle.js'
+        );
+
+        document.write(
+          scripts
+            .map(script => '<script defer src="' + script + '"><\/script>')
+            .join('')
+        );
+      }
+    </script>
   </body>
 </html>
