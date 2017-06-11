@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Panel, ListGroup, ListGroupItem } from 'react-bootstrap';
-// import { Panel, Nav, NavItem } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+// import { LinkContainer } from 'react-router-bootstrap';
+import { Link } from 'react-router-dom';
 
 const AccountsGroup = ({ title, icon, accounts, activeAccountId }) => {
   const panelHeader = (
@@ -20,9 +20,9 @@ const AccountsGroup = ({ title, icon, accounts, activeAccountId }) => {
             // disable clicking on currently displayed account in sidebar so that user
             // can't change routes to the same route which resets uploadedTransactions state
             return (
-              <LinkContainer to={`account/${account._id}`} key={account._id} active={isActive}>
+              <Link to={`/account/${account._id}`} key={account._id}>
                 <ListGroupItem disabled={isActive}>{account.name}</ListGroupItem>
-              </LinkContainer>
+              </Link>
             );
           })
         }

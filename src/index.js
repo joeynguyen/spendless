@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 
 import Root from './app/Root.jsx';
-import configureStore from './store/configureStore.js';
+import { configureStore, history } from './store/configureStore.js';
 
 const store = configureStore();
 
 const render = Component => {
   ReactDOM.render(
     <AppContainer>
-      <Component store={store} />
+      <Component store={store} history={history} />
     </AppContainer>,
     document.getElementById('root')
   );

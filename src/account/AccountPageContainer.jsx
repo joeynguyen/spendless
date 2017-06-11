@@ -12,8 +12,8 @@ class AccountPageContainer extends Component {
     accounts: PropTypes.arrayOf(PropTypes.object),
     actions: PropTypes.object.isRequired,
     manageTransactionVisible: PropTypes.bool.isRequired,
-    params: PropTypes.object.isRequired,
-    route: PropTypes.object.isRequired,
+    match: PropTypes.object.isRequired,
+    // route: PropTypes.object.isRequired,
     uploadedTransactions: PropTypes.arrayOf(PropTypes.object),
     unsavedWarningVisible: PropTypes.bool.isRequired,
     nextRoutePath: PropTypes.string.isRequired
@@ -25,17 +25,17 @@ class AccountPageContainer extends Component {
 
   componentDidMount() {
     // set subscription to router leave event
-    this.context.router.setRouteLeaveHook(this.props.route, this.routerWillLeave);
+    // this.context.router.setRouteLeaveHook(this.props.route, this.routerWillLeave);
   }
 
   componentWillReceiveProps(nextProps) {
     // handle changing routes
-    if (this.props.params.id !== nextProps.params.id) {
+    if (this.props.match.params.id !== nextProps.match.params.id) {
       // remove transactions from ManageTransactionsList redux-form
       this.props.actions.resetCheckedTransactions();
 
       // re-reset subscription to router leave event after route changed
-      this.context.router.setRouteLeaveHook(this.props.route, this.routerWillLeave);
+      // this.context.router.setRouteLeaveHook(this.props.route, this.routerWillLeave);
     }
   }
 
@@ -43,7 +43,7 @@ class AccountPageContainer extends Component {
     // handle case where user deletes the account that the route is currently at
     // check to see if account still exists inside of list of accounts
     // don't update because route will change to home page
-    if (!nextProps.accounts.some(account => account._id === this.props.params.id)) {
+    if (!nextProps.accounts.some(account => account._id === this.props.match.params.id)) {
       return false;
     }
     return true;

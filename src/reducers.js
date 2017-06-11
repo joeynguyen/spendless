@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
-import { routerReducer as routing } from 'react-router-redux';
+import { routerReducer as router } from 'react-router-redux';
 import AccountsReducer from './account/AccountsReducer.js';
 import ActiveAccountIdReducer from './account/ActiveAccountIdReducer.js';
 import AccountTransactionsReducer from './account/AccountTransactionsReducer.js';
@@ -15,7 +15,7 @@ import UnsavedWarningVisibleReducer from './account/UnsavedWarningVisibleReducer
 import NextRoutePathReducer from './app/NextRoutePathReducer.js';
 
 const rootReducer = combineReducers({
-  routing: routing,
+  router: router,
   accounts: AccountsReducer,
   accountTransactions: AccountTransactionsReducer,
   activeAccountId: ActiveAccountIdReducer,

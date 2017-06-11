@@ -1,8 +1,7 @@
 import React from 'react';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
-import { Link } from 'react-router';
-import { IndexLinkContainer, LinkContainer } from 'react-router-bootstrap';
-
+import { Link } from 'react-router-dom';
+// import { IndexLinkContainer, LinkContainer } from 'react-router-bootstrap';
 
 const styles = {
   logo: {
@@ -35,17 +34,20 @@ const Header = () => {
             {' '}
             <span style={styles.logoSpan}>spendLess</span>
           </Link>
+          <Link to="/help" style={styles.logo}>
+            <span>help page</span>
+          </Link>
         </Navbar.Brand>
         <Navbar.Toggle />
       </Navbar.Header>
       <Navbar.Collapse>
         <Nav bsStyle="pills" style={styles.navbar} pullRight>
-          <IndexLinkContainer to="/">
+          <Link to="/">
             <NavItem>Overview</NavItem>
-          </IndexLinkContainer>
-          <LinkContainer to="/help">
+          </Link>
+          <Link to="/help">
             <NavItem>Help</NavItem>
-          </LinkContainer>
+          </Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
