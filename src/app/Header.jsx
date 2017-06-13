@@ -3,17 +3,7 @@ import { Link } from 'react-router-dom';
 import { Anchor, Box, Header as GrommetHeader, Menu  } from 'grommet';
 
 const styles = {
-  logo: {
-    height: 70,
-    paddingTop: 10,
-    paddingBottom: 10,
-    paddingLeft: 10,
-  },
-  logoImg: {
-    display: 'inline-block'
-  },
   logoSpan: {
-    display: 'inline-block',
     fontFamily: ['Dawning of a New Day', 'cursive'],
     fontSize: 28,
     WebkitFontSmoothing: 'antialiased',
@@ -24,8 +14,8 @@ const Header = () => {
   return (
     <Box pad="small" colorIndex="neutral-1">
       <GrommetHeader>
-        <Link to="/" style={styles.logo}>
-          <img src="../assets/piggybank.png" width="50px" style={styles.logoImg}/>
+        <Link to="/">
+          <img src="../assets/piggybank.png" width="50px"/>
           {' '}
           <span style={styles.logoSpan}>spendLess</span>
         </Link>
