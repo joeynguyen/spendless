@@ -5,7 +5,7 @@ import styles from './Transactions.module.css';
 
 const TransactionsList = ({ accountTransactions, fields, uploadedTransactions }) => {
   return (
-    <div className="col-xs-12">
+    <div>
       <table className={styles['transactions-table'] + ' transactions-table table table-hover'}>
         <thead>
           <tr>

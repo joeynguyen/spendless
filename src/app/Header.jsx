@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Anchor, Box, Header, Menu  } from 'grommet';
+import { Anchor, Box, Header as GrommetHeader, Menu  } from 'grommet';
 
 const styles = {
   logo: {
@@ -20,10 +20,10 @@ const styles = {
   }
 };
 
-const AppHeader = () => {
+const Header = () => {
   return (
     <Box pad="small" colorIndex="neutral-1">
-      <Header>
+      <GrommetHeader>
         <Link to="/" style={styles.logo}>
           <img src="../assets/piggybank.png" width="50px" style={styles.logoImg}/>
           {' '}
@@ -35,9 +35,9 @@ const AppHeader = () => {
             <Anchor path="/help">Help</Anchor>
           </Menu>
         </Box>
-      </Header>
+      </GrommetHeader>
     </Box>
   );
 };
 
-export default AppHeader;
+export default Header;

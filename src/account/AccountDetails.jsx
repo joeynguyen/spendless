@@ -21,7 +21,7 @@ const AccountDetails = ({ accounts, activeAccountId }) => {
   }
 
   return (
-    <div className="col-xs-12">
+    <div>
       <div className="header">
         <h3 className={styles.header}>{icon} {activeAccount.name} <br />
           <small>{activeAccount.company}</small></h3>
