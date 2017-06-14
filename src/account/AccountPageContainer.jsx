@@ -60,6 +60,7 @@ class AccountPageContainer extends Component {
       // return false to prevent a transition
       return false;
     }
+    return true;
   }
 
   handleAlertStay = () => {

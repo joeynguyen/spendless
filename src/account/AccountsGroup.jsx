@@ -22,7 +22,7 @@ const AccountsGroup = ({ accounts, activeAccountId }) => {
       <AccordionPanel heading={bankHeader}>
         <List>
           {
-            bankAccounts.map(function(account, i) {
+            bankAccounts.map((account, i) => {
               // const isActive = account._id === activeAccountId;
               // disable clicking on currently displayed account in sidebar so that user
               // can't change routes to the same route which resets uploadedTransactions state
@@ -36,7 +36,7 @@ const AccountsGroup = ({ accounts, activeAccountId }) => {
       <AccordionPanel heading={ccHeader}>
         <List>
           {
-            ccAccounts.map(function(account, i) {
+            ccAccounts.map((account, i) => {
               // const isActive = account._id === activeAccountId;
               // disable clicking on currently displayed account in sidebar so that user
               // can't change routes to the same route which resets uploadedTransactions state
