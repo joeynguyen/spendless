@@ -1,21 +1,25 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Accordion, AccordionPanel, Anchor, CreditCardIcon, MoneyIcon, List, ListItem } from 'grommet';
+import { Accordion, AccordionPanel, Anchor, Box, CreditCardIcon, Heading, MoneyIcon, List, ListItem } from 'grommet';
 
 const AccountsGroup = ({ accounts, activeAccountId }) => {
   const bankAccounts = accounts.filter(account => account.type === 'bank');
   const ccAccounts = accounts.filter(account => account.type === 'creditcard');
   const bankHeader = (
-    <div>
+    <Box direction="row" align="center">
       <MoneyIcon />
-      Banks
-    </div>
+      <Box pad={{horizontal: 'small'}}>
+        <Heading tag="h4" margin="none">Banks</Heading>
+      </Box>
+    </Box>
   );
   const ccHeader = (
-    <div>
+    <Box direction="row" align="center">
       <CreditCardIcon />
-      Credit Cards
-    </div>
+      <Box pad={{horizontal: 'small'}}>
+        <Heading tag="h4" margin="none">Credit Cards</Heading>
+      </Box>
+    </Box>
   );
   return (
     <Accordion openMulti active={[0, 1]}>
