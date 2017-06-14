@@ -15,7 +15,7 @@ const App = ({ children }) => {
       <Header />
       <Split flex="right" priority="right" showOnResponsive="priority">
         <Sidebar />
-        <Box pad="small">
+        <Box pad={{horizontal: 'large', vertical: 'medium'}}>
           {children}
         </Box>
       </Split>
