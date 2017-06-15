@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Animate, Button, Form } from 'grommet';
 
-import FieldGroup from '../custom-components/FieldGroup.jsx';
 import ConnectedTextInput from '../custom-components/ConnectedTextInput.jsx';
+import ConnectedSelect from '../custom-components/ConnectedSelect.jsx';
 import { accountCompanyOptions, accountTypeOptions } from '../constants.js';
 
 const AddAccountForm = ({ localHandleSubmit, fields, submitting }) => {
@@ -28,8 +28,7 @@ const AddAccountForm = ({ localHandleSubmit, fields, submitting }) => {
     );
   } else if (accountType.value === 'creditcard') {
     accountTypeField = (
-      <FieldGroup
-        componentClass="select"
+      <ConnectedSelect
         label="Credit Card Company"
         options={accountCompanyOptions}
         name={accountCompany.name}
@@ -60,8 +59,7 @@ const AddAccountForm = ({ localHandleSubmit, fields, submitting }) => {
         value={accountName.value}
       />
 
-      <FieldGroup
-        componentClass="select"
+      <ConnectedSelect
         label="Type"
         options={accountTypeOptions}
         name={accountType.name}

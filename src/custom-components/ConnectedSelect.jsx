@@ -1,12 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { FormField, TextInput } from 'grommet';
+import { FormField, Select } from 'grommet';
 
 const ConnectedTextInput = (props) => {
   const {
     helpText,
     id,
     label,
+    options,
     placeholder,
     // redux-form props
     name,
@@ -26,12 +27,16 @@ const ConnectedTextInput = (props) => {
         error={touched && invalid && error ? error : null}
         help={helpText}
       >
-        <TextInput
+        <Select
           id={id}
           name={name}
+          options={options}
           placeholder={placeholder}
           onBlur={onBlur}
-          onDOMChange={onChange}
+          onChange={({ option }) => {
+            // change redux value
+            onChange(option);
+          }}
           onFocus={onFocus}
           value={value}
         />
@@ -42,6 +47,7 @@ ConnectedTextInput.propTypes = {
   helpText: PropTypes.string,
   id: PropTypes.string,
   label: PropTypes.string,
+  options: PropTypes.array,
   placeholder: PropTypes.string,
   // redux-form props
   name: PropTypes.string.isRequired,
