@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Animate, Button } from 'grommet';
+import { Animate, Button, Form } from 'grommet';
 
 import FieldGroup from '../custom-components/FieldGroup.jsx';
+import ConnectedTextInput from '../custom-components/ConnectedTextInput.jsx';
 import { accountCompanyOptions, accountTypeOptions } from '../constants.js';
 
 const AddAccountForm = ({ localHandleSubmit, fields, submitting }) => {
@@ -11,8 +12,8 @@ const AddAccountForm = ({ localHandleSubmit, fields, submitting }) => {
   let accountTypeField = '';
   if (accountType.value === 'bank') {
     accountTypeField = (
-      <FieldGroup
-        type="text"
+      <ConnectedTextInput
+        id={accountCompany.name}
         placeholder="Enter the name of the financial institution"
         label="Name of Institution"
         name={accountCompany.name}
@@ -44,9 +45,9 @@ const AddAccountForm = ({ localHandleSubmit, fields, submitting }) => {
   }
 
   return (
-    <form id="add-account-form" onSubmit={localHandleSubmit}>
-      <FieldGroup
-        type="text"
+    <Form id="add-account-form" onSubmit={localHandleSubmit}>
+      <ConnectedTextInput
+        id={accountName.name}
         placeholder="Enter a name for the account"
         label="Name"
         name={accountName.name}
@@ -87,7 +88,7 @@ const AddAccountForm = ({ localHandleSubmit, fields, submitting }) => {
         label={submitting ? 'Saving...' : 'Save'}
         disabled={submitting}
       />
-    </form>
+    </Form>
   );
 };
 
