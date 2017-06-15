@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Animate, Button, Form } from 'grommet';
+import { Animate, Box, Button, Form, Heading } from 'grommet';
 
 import ConnectedTextInput from '../custom-components/ConnectedTextInput.jsx';
 import ConnectedSelect from '../custom-components/ConnectedSelect.jsx';
@@ -44,7 +44,8 @@ const AddAccountForm = ({ localHandleSubmit, fields, submitting }) => {
   }
 
   return (
-    <Form id="add-account-form" onSubmit={localHandleSubmit}>
+    <Form id="add-account-form" onSubmit={localHandleSubmit} pad={{vertical: 'small'}}>
+      <Heading tag="h4">Add Account</Heading>
       <ConnectedTextInput
         id={accountName.name}
         placeholder="Enter a name for the account"
@@ -79,13 +80,15 @@ const AddAccountForm = ({ localHandleSubmit, fields, submitting }) => {
         {accountTypeField}
       </Animate>
 
-      <Button
-        name="add-account"
-        type="submit"
-        accent
-        label={submitting ? 'Saving...' : 'Save'}
-        disabled={submitting}
-      />
+      <Box align="end" size="large" pad={{vertical: 'medium'}}>
+        <Button
+          name="add-account"
+          type="submit"
+          accent
+          label={submitting ? 'Saving...' : 'Save'}
+          disabled={submitting}
+        />
+      </Box>
     </Form>
   );
 };

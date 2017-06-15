@@ -15,19 +15,19 @@ export default class AddAccount extends Component {
     const btnLabel = addAccountVisible ? 'Cancel' : 'Add Account';
     return (
       <div>
-        <Button
-          icon={btnIcon}
-          critical={addAccountVisible}
-          label={btnLabel}
-          onClick={this.toggleAddAccount}
-        />
+        <Box size="small" pad={{vertical: 'medium'}}>
+          <Button
+            icon={btnIcon}
+            critical={addAccountVisible}
+            label={btnLabel}
+            onClick={this.toggleAddAccount}
+          />
+        </Box>
         <Animate
           visible={addAccountVisible}
           enter={{animation: 'slide-down', duration: 300, delay: 0}}
         >
-          <Box pad={{vertical: 'medium'}}>
-            <AddAccountFormContainer visible={this.state.addAccountVisible} />
-          </Box>
+          <AddAccountFormContainer visible={this.state.addAccountVisible} />
         </Animate>
       </div>
     );
