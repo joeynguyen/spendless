@@ -29,6 +29,7 @@ const AddAccountForm = ({ localHandleSubmit, fields, submitting }) => {
   } else if (accountType.value === 'creditcard') {
     accountTypeField = (
       <ConnectedSelect
+        id={accountCompany.name}
         label="Credit Card Company"
         options={accountCompanyOptions}
         name={accountCompany.name}
@@ -61,6 +62,7 @@ const AddAccountForm = ({ localHandleSubmit, fields, submitting }) => {
       />
 
       <ConnectedSelect
+        id={accountType.name}
         label="Type"
         options={accountTypeOptions}
         name={accountType.name}
