@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Button, Collapse } from 'react-bootstrap';
+import { Animate, Button } from 'grommet';
 
 import FieldGroup from '../custom-components/FieldGroup.jsx';
 import { accountCompanyOptions, accountTypeOptions } from '../constants.js';
@@ -73,17 +73,20 @@ const AddAccountForm = ({ localHandleSubmit, fields, submitting }) => {
         value={accountType.value}
       />
 
-      <Collapse in={accountType.value !== ''}>
-        <div>{accountTypeField}</div>
-      </Collapse>
+      <Animate
+        visible={accountType.value !== ''}
+        enter={{animation: 'slide-down', duration: 300, delay: 0}}
+      >
+        {accountTypeField}
+      </Animate>
 
       <Button
         name="add-account"
-        bsStyle="primary"
         type="submit"
-        disabled={submitting}>
-        {submitting ? 'Saving...' : 'Save'}
-      </Button>
+        accent
+        label={submitting ? 'Saving...' : 'Save'}
+        disabled={submitting}
+      />
     </form>
   );
 };

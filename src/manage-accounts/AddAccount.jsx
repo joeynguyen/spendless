@@ -15,7 +15,8 @@ export default class AddAccount extends Component {
     const btnLabel = addAccountVisible ? 'Cancel' : 'Add Account';
     return (
       <div>
-        <Button icon={btnIcon}
+        <Button
+          icon={btnIcon}
           critical={addAccountVisible}
           label={btnLabel}
           onClick={this.toggleAddAccount}
