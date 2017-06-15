@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Panel } from 'react-bootstrap';
+import { AddIcon, Animate, Box, Button } from 'grommet';
 import AddAccountFormContainer from './AddAccountFormContainer.jsx';
 
 export default class AddAccount extends Component {
@@ -10,19 +10,24 @@ export default class AddAccount extends Component {
     this.setState({ addAccountVisible: !this.state.addAccountVisible });
   }
   render() {
-    let addButton = { style: 'primary', class: 'fa fa-plus', text: ' Add Account' };
-    if (this.state.addAccountVisible) {
-      addButton = { style: 'danger', class: '', text: 'Cancel' };
-    }
+    const addAccountVisible = this.state.addAccountVisible;
+    const btnIcon = addAccountVisible ? null : <AddIcon />;
+    const btnLabel = addAccountVisible ? 'Cancel' : 'Add Account';
     return (
       <div>
-        <Button onClick={this.toggleAddAccount} bsStyle={addButton.style} bsSize="large" block>
-          <i className={addButton.class}></i>
-          {addButton.text}
-        </Button>
-        <Panel collapsible expanded={this.state.addAccountVisible}>
-          <AddAccountFormContainer visible={this.state.addAccountVisible} />
-        </Panel>
+        <Button icon={btnIcon}
+          critical={addAccountVisible}
+          label={btnLabel}
+          onClick={this.toggleAddAccount}
+        />
+        <Animate
+          visible={addAccountVisible}
+          enter={{animation: 'slide-down', duration: 300, delay: 0}}
+        >
+          <Box pad={{vertical: 'medium'}}>
+            <AddAccountFormContainer visible={this.state.addAccountVisible} />
+          </Box>
+        </Animate>
       </div>
     );
   }

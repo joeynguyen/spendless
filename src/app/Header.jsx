@@ -24,7 +24,12 @@ const Header = () => {
         </Link>
       </Title>
       <Box align="center" direction="row">
-        <Menu direction="row" size="large" dropAlign={{right: 'right'}}>
+        <Menu
+          direction="row"
+          size="large"
+          pad={{horizontal: 'medium'}}
+          dropAlign={{right: 'right'}}
+        >
           <Anchor path="/" className="active">Overview</Anchor>
           <Anchor path="/help">Help</Anchor>
         </Menu>

@@ -19,10 +19,7 @@ export class AddAccountFormContainer extends Component {
   componentDidUpdate(prevProps) {
     // reset form forms on clicking Cancel button
     if (this.props.visible !== prevProps.visible && this.props.visible === false) {
-      // wait 200ms for slideUp animation to finish so transition looks nicer
-      setTimeout(() => {
-        this.props.resetForm();
-      }, 200);
+      this.props.resetForm();
     }
   }
   localHandleSubmit = () => {
