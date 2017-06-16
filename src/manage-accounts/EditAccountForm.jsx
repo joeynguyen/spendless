@@ -1,16 +1,18 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Collapse, Button } from 'react-bootstrap';
+import { Animate, Button } from 'grommet';
 
-import FieldGroup from '../custom-components/FieldGroup.jsx';
+import ConnectedTextInput from '../custom-components/ConnectedTextInput.jsx';
+import ConnectedSelect from '../custom-components/ConnectedSelect.jsx';
 import { accountCompanyOptions, accountTypeOptions } from '../constants.js';
 
 const EditAccountForm = ({ fields, pristine, toggleSettings, toggleConfirmDelete, confirmDeleteVisible, handleUpdateAccount }) => {
   const { accountName, accountType, accountCompany } = fields;
   return (
     <form id="update-account-form" onSubmit={handleUpdateAccount}>
-      <FieldGroup
-        type="text"
+      <ConnectedTextInput
+        id={accountName.name}
+        placeholder="Enter the name of the financial institution"
         label="Name"
         name={accountName.name}
         error={accountName.error}
@@ -21,8 +23,8 @@ const EditAccountForm = ({ fields, pristine, toggleSettings, toggleConfirmDelete
         onFocus={accountName.onFocus}
         value={accountName.value}
       />
-      <FieldGroup
-        componentClass="select"
+      <ConnectedSelect
+        id={accountType.name}
         label="Type"
         options={accountTypeOptions}
         name={accountType.name}
@@ -34,59 +36,67 @@ const EditAccountForm = ({ fields, pristine, toggleSettings, toggleConfirmDelete
         onFocus={accountType.onFocus}
         value={accountType.value}
       />
-      <Collapse in={accountType.value === 'bank'}>
-        <div>
-          <FieldGroup
-            type="text"
-            placeholder="Enter the name of the financial institution"
-            label="Name of Institution"
-            name={accountCompany.name}
-            error={accountCompany.error}
-            invalid={accountCompany.invalid}
-            touched={accountCompany.touched}
-            onBlur={accountCompany.onBlur}
-            onChange={accountCompany.onChange}
-            onFocus={accountCompany.onFocus}
-            value={accountCompany.value}
-          />
-        </div>
-      </Collapse>
-      <Collapse in={accountType.value === 'creditcard'}>
-        <div>
-          <FieldGroup
-            componentClass="select"
-            label="Credit Card Company"
-            options={accountCompanyOptions}
-            name={accountCompany.name}
-            error={accountCompany.error}
-            invalid={accountCompany.invalid}
-            touched={accountCompany.touched}
-            onBlur={accountCompany.onBlur}
-            onChange={accountCompany.onChange}
-            onFocus={accountCompany.onFocus}
-            value={accountCompany.value}
-          />
-        </div>
-      </Collapse>
+      <Animate
+        enter={{animation: 'fade', duration: 300, delay: 0}}
+        visible={accountType.value === 'bank'}
+      >
+        <ConnectedTextInput
+          id={accountCompany.name}
+          placeholder="Enter the name of the financial institution"
+          label="Name of Institution"
+          name={accountCompany.name}
+          error={accountCompany.error}
+          invalid={accountCompany.invalid}
+          touched={accountCompany.touched}
+          onBlur={accountCompany.onBlur}
+          onChange={accountCompany.onChange}
+          onFocus={accountCompany.onFocus}
+          value={accountCompany.value}
+        />
+      </Animate>
+      <Animate
+        enter={{animation: 'fade', duration: 300, delay: 0}}
+        visible={accountType.value === 'creditcard'}
+      >
+        <ConnectedSelect
+          id={accountCompany.name}
+          label="Credit Card Company"
+          options={accountCompanyOptions}
+          name={accountCompany.name}
+          error={accountCompany.error}
+          invalid={accountCompany.invalid}
+          touched={accountCompany.touched}
+          onBlur={accountCompany.onBlur}
+          onChange={accountCompany.onChange}
+          onFocus={accountCompany.onFocus}
+          value={accountCompany.value}
+        />
+      </Animate>
       <div className="form-group">
         <Button
           name="update"
           type="submit"
+          accent
+          label="Update"
           disabled={pristine}
-          bsStyle="primary"
-        >Update</Button>
+        />
         {' '}
         <Button
           name="cancel"
+          type="button"
+          accent
+          label="Cancel"
           onClick={toggleSettings}
-        >Cancel</Button>
+        />
         <Button
           name="delete-toggle"
-          className="pull-right"
+          type="button"
+          critical
+          label="Delete"
+          onClick={toggleSettings}
           disabled={confirmDeleteVisible}
           onClick={toggleConfirmDelete}
-          bsStyle="danger"
-        >Delete</Button>
+        />
       </div>
     </form>
   );
