@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import EditAccountFormContainer from './EditAccountFormContainer.jsx';
-import { Well, Collapse } from 'react-bootstrap';
+import { Animate, Box } from 'grommet';
 
 export default class AccountsListItem extends Component {
   static propTypes = {
@@ -38,18 +38,24 @@ export default class AccountsListItem extends Component {
     }
 
     return (
-      <Well bsSize="small" key={this.props.account._id}>
+      <Box
+        colorIndex="accent-2-a"
+        key={this.props.account._id}
+        margin={{vertical: 'medium'}}
+        pad="small"
+      >
         <div className={(this.state.settingsVisible ? 'expanded' : '') + ' toggle-account-setting-icon'}>
           <i className="fa fa-lg fa-lg fa-fw fa-cog pull-right" onClick={this.toggleSettings} ></i>
         </div>
         <h4 className="account-name">{this.props.account.name}</h4>
         <p className="company-info">{this.props.account.type === 'bank' ? 'Bank' : 'Credit Card'} - {this.props.account.company}</p>
-        <Collapse in={this.state.settingsVisible}>
-          <div>
-            { editAccountForm }
-          </div>
-        </Collapse>
-      </Well>
+        <Animate
+          enter={{animation: 'slide-down', duration: 300, delay: 0}}
+          visible={this.state.settingsVisible}
+        >
+          { editAccountForm }
+        </Animate>
+      </Box>
     );
   }
 }
