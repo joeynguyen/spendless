@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { FormControl, Button, ButtonToolbar } from 'react-bootstrap';
+import { Box, Button, Form, TextInput } from 'grommet';
 
 export default class DeleteAccountForm extends Component {
   static propTypes = {
@@ -18,34 +18,31 @@ export default class DeleteAccountForm extends Component {
 
   render() {
     return (
-      <form id="delete-account-form" onSubmit={this.props.handleDeleteAccount}>
+      <Form id="delete-account-form" onSubmit={this.props.handleDeleteAccount}>
         <hr />
         <p>Type DELETE into this box to confirm</p>
-        <div className="row">
-          <div className="col-xs-6">
-            <FormControl
-              type="text"
-              value={this.state.confirmDeleteText}
-              onChange={this.handleConfirmDeleteText}
-              placeholder="DELETE" />
-          </div>
-          <div className="col-xs-6">
-            <ButtonToolbar className="pull-right">
-              <Button
-                className="confirm-delete"
-                disabled={this.state.confirmDeleteText !== 'DELETE'}
-                bsStyle="primary"
-                type="submit"
-              >Confirm</Button>
-              {' '}
-              <Button
-                className="cancel-delete"
-                onClick={this.props.toggleConfirmDelete}
-              >Cancel</Button>
-            </ButtonToolbar>
-          </div>
-        </div>
-      </form>
+        <Box>
+          <TextInput
+            value={this.state.confirmDeleteText}
+            onDOMChange={this.handleConfirmDeleteText}
+            placeHolder="DELETE"
+          />
+          <Box direction="row" justify="between" pad={{vertical: 'small'}}>
+            <Button
+              // how to disable Grommet Button - https://github.com/grommet/grommet/issues/1089
+              type={this.state.confirmDeleteText === 'DELETE' ? 'submit' : 'button' }
+              critical
+              label="Confirm"
+            />
+            <Button
+              className="cancel-delete"
+              type="button"
+              label="Cancel"
+              onClick={this.props.toggleConfirmDelete}
+            />
+          </Box>
+        </Box>
+      </Form>
     );
   }
 }

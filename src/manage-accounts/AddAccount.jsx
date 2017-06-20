@@ -18,6 +18,7 @@ export default class AddAccount extends Component {
         <Box size="small" pad={{vertical: 'medium'}}>
           <Button
             icon={btnIcon}
+            primary={!addAccountVisible}
             critical={addAccountVisible}
             label={btnLabel}
             onClick={this.toggleAddAccount}

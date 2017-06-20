@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Animate, Button } from 'grommet';
+import { Animate, Box, Button, Form } from 'grommet';
 
 import ConnectedTextInput from '../custom-components/ConnectedTextInput.jsx';
 import ConnectedSelect from '../custom-components/ConnectedSelect.jsx';
@@ -9,7 +9,7 @@ import { accountCompanyOptions, accountTypeOptions } from '../constants.js';
 const EditAccountForm = ({ fields, pristine, toggleSettings, toggleConfirmDelete, confirmDeleteVisible, handleUpdateAccount }) => {
   const { accountName, accountType, accountCompany } = fields;
   return (
-    <form id="update-account-form" onSubmit={handleUpdateAccount}>
+    <Form id="update-account-form" onSubmit={handleUpdateAccount} pad={{vertical: 'small'}}>
       <ConnectedTextInput
         id={accountName.name}
         placeholder="Enter the name of the financial institution"
@@ -72,7 +72,7 @@ const EditAccountForm = ({ fields, pristine, toggleSettings, toggleConfirmDelete
           value={accountCompany.value}
         />
       </Animate>
-      <div className="form-group">
+      <Box direction="row" justify="between" pad={{vertical: 'small'}}>
         <Button
           name="update"
           type="submit"
@@ -84,21 +84,22 @@ const EditAccountForm = ({ fields, pristine, toggleSettings, toggleConfirmDelete
         <Button
           name="cancel"
           type="button"
-          accent
           label="Cancel"
           onClick={toggleSettings}
         />
+      </Box>
+      <Box size="small" alignSelf="center">
         <Button
           name="delete-toggle"
           type="button"
           critical
           label="Delete"
-          onClick={toggleSettings}
           disabled={confirmDeleteVisible}
           onClick={toggleConfirmDelete}
+          fill={false}
         />
-      </div>
-    </form>
+      </Box>
+    </Form>
   );
 };
 EditAccountForm.propTypes = {
