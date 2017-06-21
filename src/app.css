@@ -20,6 +20,9 @@ this is used so that user can't change routes to same route which resets uploade
 }
 
 /* Adding style here because CSS modules can't target child class names */
+.account-list-item-container .grommetux-button--plain .grommetux-button__icon {
+  padding: 0;
+}
 .toggle-account-setting-icon i {
   cursor: pointer;
   margin-top: 10px;

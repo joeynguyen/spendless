@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import EditAccountFormContainer from './EditAccountFormContainer.jsx';
-import { Animate, Box } from 'grommet';
+import { Animate, Box, Button, SettingsOptionIcon } from 'grommet';
 
 export default class AccountsListItem extends Component {
   static propTypes = {
@@ -42,10 +42,11 @@ export default class AccountsListItem extends Component {
         colorIndex="accent-2-a"
         key={this.props.account._id}
         pad="small"
+        className="account-list-item-container"
       >
-        <div className={(this.state.settingsVisible ? 'expanded' : '') + ' toggle-account-setting-icon'}>
-          <i className="fa fa-lg fa-lg fa-fw fa-cog pull-right" onClick={this.toggleSettings} ></i>
-        </div>
+        <Box alignSelf="end" pad="none">
+          <Button icon={<SettingsOptionIcon />} onClick={this.toggleSettings} />
+        </Box>
         <h4 className="account-name">{this.props.account.name}</h4>
         <h5 className="company-info">{this.props.account.type === 'bank' ? 'Bank' : 'Credit Card'} - {this.props.account.company}</h5>
         <Animate

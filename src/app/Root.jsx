@@ -3,7 +3,6 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 
 import Routes from '../routes.js';
-import '../app.css';
 
 export default function Root({ history, store }) {
   return (
