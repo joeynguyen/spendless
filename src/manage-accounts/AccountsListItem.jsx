@@ -41,14 +41,13 @@ export default class AccountsListItem extends Component {
       <Box
         colorIndex="accent-2-a"
         key={this.props.account._id}
-        margin={{vertical: 'medium'}}
         pad="small"
       >
         <div className={(this.state.settingsVisible ? 'expanded' : '') + ' toggle-account-setting-icon'}>
           <i className="fa fa-lg fa-lg fa-fw fa-cog pull-right" onClick={this.toggleSettings} ></i>
         </div>
         <h4 className="account-name">{this.props.account.name}</h4>
-        <p className="company-info">{this.props.account.type === 'bank' ? 'Bank' : 'Credit Card'} - {this.props.account.company}</p>
+        <h5 className="company-info">{this.props.account.type === 'bank' ? 'Bank' : 'Credit Card'} - {this.props.account.company}</h5>
         <Animate
           enter={{animation: 'slide-down', duration: 300, delay: 0}}
           visible={this.state.settingsVisible}

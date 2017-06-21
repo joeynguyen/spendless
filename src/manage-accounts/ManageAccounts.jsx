@@ -11,16 +11,15 @@ const ManageAccounts = ({ accounts, actions, manageAccountsVisible }) => {
   if (manageAccountsVisible) {
     modal = (
       <Layer closer onClose={actions.toggleManageAccounts}>
-        <Article>
-          <Section pad={{vertical: 'medium'}}>
+        <Article pad={{vertical: 'medium'}}>
+          <Section pad="none" margin={{bottom: 'medium'}}>
             <Heading tag="h3">Manage Accounts</Heading>
             <hr />
             <AddAccount />
           </Section>
-          <Section direction="row" pad={{vertical: 'small'}}>
-            <Box size="medium">
-              <AccountsList accounts={accounts} />
-            </Box>
+          <hr />
+          <Section direction="row" margin={{bottom: 'medium'}}>
+            <AccountsList accounts={accounts} />
             <Box size="small">
               <ul>
                 <li>{bankAccounts.length} Bank accounts</li>
@@ -29,7 +28,7 @@ const ManageAccounts = ({ accounts, actions, manageAccountsVisible }) => {
             </Box>
           </Section>
           <hr />
-          <Section align="end" pad={{vertical: 'medium'}}>
+          <Section align="end" pad="none" margin={{top: 'medium'}}>
             <Button
               name="close-manage-accounts"
               onClick={actions.toggleManageAccounts}

@@ -82,7 +82,7 @@ const AddAccountForm = ({ localHandleSubmit, fields, submitting }) => {
         {accountTypeField}
       </Animate>
 
-      <Box align="end" size="large" pad={{vertical: 'medium'}}>
+      <Box align="end" size="large" margin={{top: 'medium'}}>
         <Button
           name="add-account"
           type="submit"

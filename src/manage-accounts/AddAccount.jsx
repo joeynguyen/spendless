@@ -15,7 +15,7 @@ export default class AddAccount extends Component {
     const btnLabel = addAccountVisible ? 'Cancel' : 'Add Account';
     return (
       <div>
-        <Box size="small" pad={{vertical: 'medium'}}>
+        <Box size="small">
           <Button
             icon={btnIcon}
             primary={!addAccountVisible}

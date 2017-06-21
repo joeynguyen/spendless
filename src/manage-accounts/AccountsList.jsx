@@ -1,18 +1,20 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { Box } from 'grommet';
+
 import AccountsListItem from './AccountsListItem.jsx';
 
 const AccountsList = ({ accounts }) => {
   return (
-    <div>
+    <Box size="medium" pad={{between: 'medium'}}>
     {
       accounts.map(function(account) {
         return (
-          <AccountsListItem account={account} key={account._id} />
+            <AccountsListItem account={account} key={account._id} />
         );
       })
     }
-    </div>
+    </Box>
   );
 };
 AccountsList.propTypes = {
