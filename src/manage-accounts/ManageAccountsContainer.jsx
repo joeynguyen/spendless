@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Layer } from 'grommet';
+
 import * as manageAccountsActions from './ManageAccountsActions.js';
 import ManageAccounts from './ManageAccounts.jsx';
 
@@ -12,13 +14,20 @@ export class ManageAccountsContainer extends Component {
     manageAccountsVisible: PropTypes.bool.isRequired,
   }
   render() {
-    return (
-      <ManageAccounts
-        accounts={this.props.accounts}
-        actions={this.props.actions}
-        manageAccountsVisible={this.props.manageAccountsVisible}
-      />
-    );
+    if (this.props.manageAccountsVisible) {
+      // Using Layer in container component to make debugging
+      // ManageAccounts component using React Dev Tools easier
+      return (
+        <Layer closer onClose={this.props.actions.toggleManageAccounts}>
+          <ManageAccounts
+            accounts={this.props.accounts}
+            actions={this.props.actions}
+          />
+        </Layer>
+      );
+    }
+
+    return null;
   }
 }
 
