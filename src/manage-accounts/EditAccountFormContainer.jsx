@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { reduxForm } from 'redux-form';
-import { Collapse } from 'react-bootstrap';
+import { Animate } from 'grommet';
 import toastr from 'toastr';
 import EditAccountForm from './EditAccountForm.jsx';
 import DeleteAccountForm from './DeleteAccountForm.jsx';
@@ -78,14 +78,17 @@ export class EditAccountFormContainer extends Component {
           toggleConfirmDelete={this.toggleConfirmDelete}
           toggleSettings={this.props.toggleSettings}
         />
-        <Collapse in={this.state.confirmDeleteVisible}>
+        <Animate
+          enter={{animation: 'slide-down', duration: 300, delay: 0}}
+          visible={this.state.confirmDeleteVisible}
+        >
           <div> {/* this div is necessary for smooth collapse animation */}
             <DeleteAccountForm
               handleDeleteAccount={this.handleDeleteAccount}
               toggleConfirmDelete={this.toggleConfirmDelete}
             />
           </div>
-        </Collapse>
+        </Animate>
       </div>
     );
   }

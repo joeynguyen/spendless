@@ -37,7 +37,7 @@ const EditAccountForm = ({ fields, pristine, toggleSettings, toggleConfirmDelete
         value={accountType.value}
       />
       <Animate
-        enter={{animation: 'fade', duration: 300, delay: 0}}
+        enter={{animation: 'slide-up', duration: 300, delay: 0}}
         visible={accountType.value === 'bank'}
       >
         <ConnectedTextInput
