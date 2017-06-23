@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { FormField, Select } from 'grommet';
 
-const ConnectedTextInput = (props) => {
+const ConnectedSelect = (props) => {
   const {
     helpText,
     id,
@@ -43,7 +43,7 @@ const ConnectedTextInput = (props) => {
       </FormField>
   );
 };
-ConnectedTextInput.propTypes = {
+ConnectedSelect.propTypes = {
   helpText: PropTypes.string,
   id: PropTypes.string,
   label: PropTypes.string,
@@ -60,4 +60,4 @@ ConnectedTextInput.propTypes = {
   value: PropTypes.string.isRequired,
 };
 
-export default ConnectedTextInput;
+export default ConnectedSelect;
