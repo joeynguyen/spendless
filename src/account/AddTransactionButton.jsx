@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Button } from 'react-bootstrap';
+import { AddIcon, Button } from 'grommet';
 import * as transactionsActions from './TransactionsActions.js';
 
 class AddTransactionButton extends Component {
@@ -17,12 +17,10 @@ class AddTransactionButton extends Component {
   render() {
     return (
       <Button
+        icon={<AddIcon />}
+        label="Add Transaction"
         onClick={this.toggleManageTransaction}
-        bsStyle="default"
-        bsSize="small"
-      >
-        <i className="fa fa-plus"></i> Add Transaction
-      </Button>
+      />
     );
   }
 }
