@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import toastr from 'toastr';
-import { Button } from 'react-bootstrap';
+import { Button } from 'grommet';
 import * as transactionsActions from './TransactionsActions.js';
 
 class DeleteTransactionsButton extends Component {
@@ -34,16 +34,16 @@ class DeleteTransactionsButton extends Component {
       const currentKey = this.props.manageTransactionsListForm[item];
       return (currentKey !== undefined && currentKey._isFieldValue && currentKey.value);
     });
+    // how to disable Grommet Button - https://github.com/grommet/grommet/issues/901
+    const deleteClickHandler = (selectedTransactionsIds.length === 0) ?
+      undefined : () => this.handleDelete(selectedTransactionsIds);
 
     return (
       <Button
-        onClick={() => this.handleDelete(selectedTransactionsIds)}
-        bsStyle="danger"
-        disabled={(selectedTransactionsIds.length === 0)}
-        bsSize="small"
-      >
-        Delete Selected Transactions
-      </Button>
+        critical
+        label="Delete Selected Transactions"
+        onClick={deleteClickHandler}
+      />
     );
   }
 }
