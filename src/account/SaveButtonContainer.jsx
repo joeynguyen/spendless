@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import toastr from 'toastr';
-import { Button } from 'react-bootstrap';
+import { Button } from 'grommet';
 import * as transactionsActions from '../account/TransactionsActions.js';
 
 class SaveButtonContainer extends Component {
@@ -22,15 +22,15 @@ class SaveButtonContainer extends Component {
       });
   }
   render() {
+    // how to disable Grommet Button - https://github.com/grommet/grommet/issues/901
+    const saveClickHandler = (this.props.uploadedTransactions.length === 0) ?
+      undefined : () => this.handleSave;
     return (
       <Button
-        onClick={this.handleSave}
-        bsStyle="primary"
-        bsSize="small"
-        disabled={(this.props.uploadedTransactions.length === 0)}
-      >
-        Save Uploaded Transactions
-      </Button>
+        accent
+        label="Save Uploaded Transactions"
+        onClick={saveClickHandler}
+      />
     );
   }
 }
