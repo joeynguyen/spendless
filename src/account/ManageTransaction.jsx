@@ -1,13 +1,16 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Article, Box, Button, Form, Heading, Section } from 'grommet';
+import moment from 'moment';
 
 import ConnectedTextInput from '../custom-components/ConnectedTextInput.jsx';
+import ConnectedDateTime from '../custom-components/ConnectedDateTime.jsx';
 import FieldGroup from '../custom-components/FieldGroup.jsx';
 
 const ManageTransaction = ({ manageType = 'add', fields, toggleManageTransaction, pristine = true, doSubmit }) => {
   const { date, description, category, amount, notes } = fields;
   const componentTitle = (manageType === 'edit') ? 'Edit Transaction' : 'Add Transaction';
+  const momentDate = moment(date.value, 'YYYY-MM-DD').format('MM/DD/YYYY');
 
   return (
     <Article pad={{vertical: 'medium'}}>
@@ -29,8 +32,8 @@ const ManageTransaction = ({ manageType = 'add', fields, toggleManageTransaction
             onFocus={description.onFocus}
             value={description.value}
           />
-          <FieldGroup
-            type="date"
+          <ConnectedDateTime
+            format="MM/DD/YYYY"
             label="Date"
             name={date.name}
             error={date.error}
@@ -39,7 +42,7 @@ const ManageTransaction = ({ manageType = 'add', fields, toggleManageTransaction
             onBlur={date.onBlur}
             onChange={date.onChange}
             onFocus={date.onFocus}
-            value={date.value}
+            value={momentDate}
           />
           <ConnectedTextInput
             id={category.name}
