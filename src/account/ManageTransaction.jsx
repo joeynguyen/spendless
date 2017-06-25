@@ -4,8 +4,8 @@ import { Article, Box, Button, Form, Heading, Section } from 'grommet';
 import moment from 'moment';
 
 import ConnectedTextInput from '../custom-components/ConnectedTextInput.jsx';
+import ConnectedTextArea from '../custom-components/ConnectedTextArea.jsx';
 import ConnectedDateTime from '../custom-components/ConnectedDateTime.jsx';
-import FieldGroup from '../custom-components/FieldGroup.jsx';
 
 const ManageTransaction = ({ manageType = 'add', fields, toggleManageTransaction, pristine = true, doSubmit }) => {
   const { date, description, category, amount, notes } = fields;
@@ -68,11 +68,11 @@ const ManageTransaction = ({ manageType = 'add', fields, toggleManageTransaction
             onFocus={amount.onFocus}
             value={amount.value}
           />
-          <FieldGroup
-            componentClass="textarea"
+          <ConnectedTextArea
             label="Notes"
             placeholder="Add notes for this transaction"
             name={notes.name}
+            rows={4}
             error={notes.error}
             invalid={notes.invalid}
             touched={notes.touched}
