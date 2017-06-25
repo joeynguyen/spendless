@@ -82,12 +82,10 @@ export class EditAccountFormContainer extends Component {
           enter={{animation: 'slide-down', duration: 300, delay: 0}}
           visible={this.state.confirmDeleteVisible}
         >
-          <div> {/* this div is necessary for smooth collapse animation */}
-            <DeleteAccountForm
-              handleDeleteAccount={this.handleDeleteAccount}
-              toggleConfirmDelete={this.toggleConfirmDelete}
-            />
-          </div>
+          <DeleteAccountForm
+            handleDeleteAccount={this.handleDeleteAccount}
+            toggleConfirmDelete={this.toggleConfirmDelete}
+          />
         </Animate>
       </div>
     );

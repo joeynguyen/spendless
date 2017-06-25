@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 import { bindActionCreators } from 'redux';
 import toastr from 'toastr';
-import { Modal } from 'react-bootstrap';
+import { Layer } from 'grommet';
 import ManageTransaction from './ManageTransaction.jsx';
 import * as transactionsActions from './TransactionsActions.js';
 
@@ -58,26 +58,26 @@ class ManageTransactionContainer extends Component {
   }
 
   render() {
-    const manageType = this.props.activeTransaction !== null ? 'edit' : 'add';
-    const reduxFormHandleSubmit = this.props.handleSubmit(this.handleSaveTransaction);
-    // putting Modal wrapper component in Container Component instead of
-    // Presentational Component (PC) because React DevTools doesn't show
-    // PC as its own component if PC has Modal component in it
-    return (
-      <Modal
-        show={this.props.manageTransactionVisible}
-        backdrop="static"
-        onHide={this.toggleManageTransaction}
-      >
-        <ManageTransaction
-          manageType={manageType}
-          toggleManageTransaction={this.toggleManageTransaction}
-          fields={this.props.fields}
-          pristine={this.props.pristine}
-          doSubmit={reduxFormHandleSubmit}
-        />
-      </Modal>
-    );
+    if (this.props.manageTransactionVisible) {
+      const manageType = this.props.activeTransaction !== null ? 'edit' : 'add';
+      const reduxFormHandleSubmit = this.props.handleSubmit(this.handleSaveTransaction);
+      // putting Layer wrapper component in Container Component instead of
+      // Presentational Component (PC) because React DevTools doesn't show
+      // PC as its own component if PC has Layer component in it
+      return (
+        <Layer closer onClose={this.toggleManageTransaction}>
+          <ManageTransaction
+            manageType={manageType}
+            toggleManageTransaction={this.toggleManageTransaction}
+            fields={this.props.fields}
+            pristine={this.props.pristine}
+            doSubmit={reduxFormHandleSubmit}
+          />
+        </Layer>
+      );
+    }
+
+    return null;
   }
 }
 

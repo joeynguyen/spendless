@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import { Article, Box, Button, Form, Heading, Section } from 'grommet';
 
 import FieldGroup from '../custom-components/FieldGroup.jsx';
 
@@ -9,14 +9,13 @@ const ManageTransaction = ({ manageType = 'add', fields, toggleManageTransaction
   const componentTitle = (manageType === 'edit') ? 'Edit Transaction' : 'Add Transaction';
 
   return (
-    <form onSubmit={doSubmit}>
-      <Modal.Header closeButton>
-        <Modal.Title>{ componentTitle }</Modal.Title>
-      </Modal.Header>
-
-      <Modal.Body>
-        <div className="row">
-          <div className="col-xs-12">
+    <Article pad={{vertical: 'medium'}}>
+      <Section pad="none" margin="none">
+        <Heading tag="h3">{ componentTitle }</Heading>
+      </Section>
+      <hr />
+      <Form onSubmit={doSubmit}>
+        <Box pad="none" margin={{vertical: 'medium'}}>
             <FieldGroup
               type="text"
               label="Description"
@@ -79,22 +78,26 @@ const ManageTransaction = ({ manageType = 'add', fields, toggleManageTransaction
               onFocus={notes.onFocus}
               value={notes.value}
             />
-          </div>
-        </div>
-      </Modal.Body>
-
-      <Modal.Footer>
-        <div className="form-group">
+        </Box>
+        <hr />
+        <Box align="end" pad="none" margin={{top: 'medium'}}>
           <Button
-            bsStyle="primary"
+            name="save"
             type="submit"
+            accent
+            label="Save"
             disabled={pristine}
-          >Save</Button>
-          {' '}
-          <Button id="cancel-manage-transaction" onClick={toggleManageTransaction}>Cancel</Button>
-        </div>
-      </Modal.Footer>
-    </form>
+          />
+          <Button
+            id="cancel-manage-transaction"
+            name="cancel"
+            type="button"
+            label="Cancel"
+            onClick={toggleManageTransaction}
+          />
+        </Box>
+      </Form>
+    </Article>
   );
 };
 ManageTransaction.propTypes = {
