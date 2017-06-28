@@ -15,7 +15,7 @@ class SidebarHeader extends Component {
           <EditIcon
             onMouseOver={() => this.setState({editTipVisible: true})}
             onMouseLeave={() => this.setState({editTipVisible: false})}
-            id="edit-icon"
+            id="accounts-edit-icon"
             size="small"
             className={styles['accounts-edit']}
             onClick={this.props.toggleManageAccounts}
@@ -25,7 +25,7 @@ class SidebarHeader extends Component {
           enter={{animation: 'fade', duration: 100, delay: 0}}
           visible={this.state.editTipVisible}
         >
-          <Tip target="edit-icon" onClose={() => {}}>Edit</Tip>
+          <Tip target="accounts-edit-icon" onClose={() => {}}>Edit</Tip>
         </Animate>
       </div>
     );

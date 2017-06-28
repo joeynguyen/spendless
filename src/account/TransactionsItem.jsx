@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { CloseIcon, EditIcon, NoteIcon } from 'grommet';
 import moment from 'moment';
 
 const TransactionsItem = ({ handleDeleteTransactions, transaction, unsaved, handleEditClick, reduxFormCheckbox }) => {
@@ -28,14 +29,14 @@ const TransactionsItem = ({ handleDeleteTransactions, transaction, unsaved, hand
         value={reduxFormCheckbox.value}
         />
     );
-    editButton = <i className="fa fa-fw fa-lg fa-pencil" onClick={handleEditClick}></i>;
-    deleteButton = <i className="fa fa-fw fa-lg fa-remove" onClick={handleDeleteTransactions}></i>;
+    editButton = <EditIcon colorIndex="accent-1" size="xsmall" onClick={handleEditClick} />;
+    deleteButton = <CloseIcon colorIndex="critical" size="xsmall" onClick={handleDeleteTransactions}/>;
   }
 
   if (transaction.notes !== '') {
     note = (
       <OverlayTrigger placement="left" overlay={<Tooltip id={transaction._id}>{transaction.notes}</Tooltip>}>
-        <i className="fa fa-fw fa-lg fa-sticky-note-o" ></i>
+        <NoteIcon colorIndex="warning" size="xsmall"/>
       </OverlayTrigger>
     );
   }

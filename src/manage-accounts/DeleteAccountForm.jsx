@@ -29,7 +29,7 @@ export default class DeleteAccountForm extends Component {
           />
           <Box direction="row" justify="between" pad={{vertical: 'small'}}>
             <Button
-              // how to disable Grommet Button - https://github.com/grommet/grommet/issues/1089
+              // how to disable Grommet submit Button - https://github.com/grommet/grommet/issues/1089
               type={this.state.confirmDeleteText === 'DELETE' ? 'submit' : 'button' }
               critical
               label="Confirm"
