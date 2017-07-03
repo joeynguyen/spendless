@@ -3,7 +3,6 @@ import React from 'react';
 import Header from './Header.jsx';
 import Sidebar from './Sidebar.jsx';
 import ManageAccountsContainer from '../manage-accounts/ManageAccountsContainer.jsx';
-import 'grommet/scss/vanilla/index.scss';
 
 const App = ({ children }) => {
   return (
