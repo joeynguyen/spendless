@@ -9,7 +9,7 @@ const AccountPage = ({ manageTransactionVisible, unsavedWarningVisible, localHan
   const manageTransactionContainer = manageTransactionVisible ? <ManageTransactionContainer /> : null;
 
   return (
-    <div className="col-xs-9">
+    <div>
       <AccountDetailsContainer />
       <TransactionsListContainer />
       <UnsavedWarning

@@ -45,6 +45,7 @@
     "babel-loader": "7.0.0",
     "babel-plugin-add-module-exports": "0.2.1",
     "babel-plugin-dynamic-import-webpack": "1.0.1",
+    "babel-plugin-import": "1.2.1",
     "babel-plugin-react-transform": "2.0.0",
     "babel-plugin-transform-class-properties": "6.24.1",
     "babel-plugin-transform-es2015-classes": "6.24.1",
@@ -89,6 +90,7 @@
     "webpack-merge": "4.1.0"
   },
   "dependencies": {
+    "antd": "2.11.2",
     "bootstrap": "3.3.6",
     "electron-debug": "1.1.0",
     "font-awesome": "4.5.0",

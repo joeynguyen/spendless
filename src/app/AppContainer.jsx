@@ -1,6 +1,11 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import App from './App.jsx';
+import { Layout } from 'antd';
+import AppHeader  from './Header.jsx';
+import AppSidebar from './Sidebar.jsx';
+import ManageAccountsContainer from '../manage-accounts/ManageAccountsContainer.jsx';
+
+const { Header, Sider, Content } = Layout;
 
 class AppContainer extends Component {
   static propTypes = {
@@ -8,7 +13,22 @@ class AppContainer extends Component {
   }
   render() {
     return (
-      <App children={this.props.children} />
+      <Layout>
+        <Header>
+          <AppHeader />
+        </Header>
+
+        <Layout>
+          <Sider>
+            <AppSidebar />
+          </Sider>
+          <Content>
+            {this.props.children}
+          </Content>
+        </Layout>
+
+        <ManageAccountsContainer />
+      </Layout>
     );
   }
 }

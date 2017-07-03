@@ -5,7 +5,7 @@ import AccountsGroupContainer from '../account/AccountsGroupContainer.jsx';
 
 const Sidebar = () => {
   return (
-    <div className={styles.sidebar + ' col-xs-3 sidebar'}>
+    <div className={styles.sidebar + ' sidebar'}>
       <SidebarHeaderContainer />
       <AccountsGroupContainer />
     </div>
