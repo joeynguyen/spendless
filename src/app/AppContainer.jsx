@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import App from './App.jsx';
+import Header from './Header.jsx';
+import Sidebar from './Sidebar.jsx';
+import ManageAccountsContainer from '../manage-accounts/ManageAccountsContainer.jsx';
 
 class AppContainer extends Component {
   static propTypes = {
@@ -8,7 +10,12 @@ class AppContainer extends Component {
   }
   render() {
     return (
-      <App children={this.props.children} />
+      <div className="row">
+        <Header />
+        <Sidebar />
+        {this.props.children}
+        <ManageAccountsContainer />
+      </div>
     );
   }
 }
