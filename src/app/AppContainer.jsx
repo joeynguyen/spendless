@@ -14,7 +14,7 @@ class AppContainer extends Component {
   render() {
     return (
       <Layout>
-        <Header>
+        <Header style={{ lineHeight: '70px', height: '70px' }}>
           <AppHeader />
         </Header>
 

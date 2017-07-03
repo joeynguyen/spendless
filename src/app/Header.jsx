@@ -1,13 +1,12 @@
 import React from 'react';
-import { Navbar, Nav, NavItem } from 'react-bootstrap';
+import { Col, Row, Menu } from 'antd';
 import { Link } from 'react-router-dom';
 // import { IndexLinkContainer, LinkContainer } from 'react-router-bootstrap';
 
 const styles = {
   logo: {
-    height: 70,
-    paddingTop: 10,
-    paddingBottom: 10,
+    height: 60,
+    float: 'left',
   },
   logoImg: {
     display: 'inline-block'
@@ -26,31 +25,21 @@ const styles = {
 
 const Header = () => {
   return (
-    <Navbar fluid>
-      <Navbar.Header>
-        <Navbar.Brand>
-          <Link to="/" style={styles.logo}>
-            <img src="../assets/piggybank.png" width="50px" style={styles.logoImg}/>
-            {' '}
-            <span style={styles.logoSpan}>spendLess</span>
-          </Link>
-          <Link to="/help" style={styles.logo}>
-            <span>help page</span>
-          </Link>
-        </Navbar.Brand>
-        <Navbar.Toggle />
-      </Navbar.Header>
-      <Navbar.Collapse>
-        <Nav bsStyle="pills" style={styles.navbar} pullRight>
-          <Link to="/">
-            <NavItem>Overview</NavItem>
-          </Link>
-          <Link to="/help">
-            <NavItem>Help</NavItem>
-          </Link>
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
+    <Row>
+      <Col span={8}>
+        <Link to="/" style={styles.logo}>
+          <img src="../assets/piggybank.png" width="50px" style={styles.logoImg}/>
+          {' '}
+          <span style={styles.logoSpan}>spendLess</span>
+        </Link>
+      </Col>
+      <Col span={8} offset={8}>
+        <Menu mode="horizontal" theme="dark">
+          <Menu.Item><Link to="/">Overview</Link></Menu.Item>
+          <Menu.Item><Link to="/help">Help</Link></Menu.Item>
+        </Menu>
+      </Col>
+    </Row>
   );
 };
 
