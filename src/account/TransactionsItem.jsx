@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Icon, Popconfirm } from 'antd';
 import moment from 'moment';
 
 const TransactionsItem = ({ handleDeleteTransactions, transaction, unsaved, handleEditClick, reduxFormCheckbox }) => {
@@ -29,7 +30,17 @@ const TransactionsItem = ({ handleDeleteTransactions, transaction, unsaved, hand
         />
     );
     editButton = <i className="fa fa-fw fa-lg fa-pencil" onClick={handleEditClick}></i>;
-    deleteButton = <i className="fa fa-fw fa-lg fa-remove" onClick={handleDeleteTransactions}></i>;
+    deleteButton = (
+      <Popconfirm
+        placement="left"
+        onConfirm={handleDeleteTransactions}
+        title="Are you sure？"
+        okText="Yes"
+        cancelText="No"
+      >
+        <Icon type="close" />
+      </Popconfirm>
+    );
   }
 
   if (transaction.notes !== '') {
