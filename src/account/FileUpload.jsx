@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Button } from 'antd';
+import { Button, Popconfirm, Col, Row } from 'antd';
 import ReactFileReader from 'react-file-reader';
 import parseCSV from '../utils/csvParser.js';
 import * as transactionsActions from './TransactionsActions.js';
@@ -29,15 +29,31 @@ class FileUpload extends Component {
       });
     }
   }
+  removeUploadedFile = () => {
+    this.setState({ uploadedFile: '' });
+    this.props.actions.resetUploadedTransactions();
+  }
   render() {
     const uploadedFileContent = this.state.uploadedFile ?
       (
-        <div style={{ position: 'relative' }}>
-          <div className="ant-upload-list-item-info">
-            <i className="anticon anticon-paper-clip"></i>
-            <span className="ant-upload-list-item-name">{this.state.uploadedFile}</span>
-          </div>
-        </div>
+        <Row>
+          <Col span={6}>
+            <div className="ant-upload-list-item ant-upload-list-item-done" style={{ marginTop: 0 }}>
+              <div className="ant-upload-list-item-info">
+                <i className="anticon anticon-paper-clip"></i>
+                <span className="ant-upload-list-item-name">{this.state.uploadedFile}</span>
+              </div>
+              <Popconfirm
+                onConfirm={this.removeUploadedFile}
+                title="Are you sure？"
+                okText="Yes"
+                cancelText="No"
+              >
+                <i title="Remove file" className="anticon anticon-cross"></i>
+              </Popconfirm>
+            </div>
+          </Col>
+        </Row>
       )
       : null
     ;
