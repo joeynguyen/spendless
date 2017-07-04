@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Col, Row, Menu } from 'antd';
 import { Link } from 'react-router-dom';
 
@@ -22,7 +23,12 @@ const styles = {
   }
 };
 
-const Header = () => {
+const routeKeyMap = {
+  '/': 'overview',
+  '/help': 'help',
+};
+
+const Header = (props) => {
   return (
     <Row>
       <Col span={8}>
@@ -33,13 +39,16 @@ const Header = () => {
         </Link>
       </Col>
       <Col span={8} offset={8}>
-        <Menu mode="horizontal" style={{ borderBottom: 'none' }}>
-          <Menu.Item><Link to="/">Overview</Link></Menu.Item>
-          <Menu.Item><Link to="/help">Help</Link></Menu.Item>
+        <Menu selectedKeys={[routeKeyMap[props.currentRoute]]} mode="horizontal" style={{ borderBottom: 'none' }}>
+          <Menu.Item key="overview"><Link to="/">Overview</Link></Menu.Item>
+          <Menu.Item key="help"><Link to="/help">Help</Link></Menu.Item>
         </Menu>
       </Col>
     </Row>
   );
+};
+Header.propTypes = {
+  currentRoute: PropTypes.string.isRequired,
 };
 
 export default Header;

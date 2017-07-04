@@ -11,11 +11,14 @@ class AppContainer extends Component {
   static propTypes = {
     children: PropTypes.element.isRequired,
   }
+  static contextTypes = {
+    router: React.PropTypes.object,
+  }
   render() {
     return (
       <Layout style={{'height': '100%', 'width': '100%'}}>
         <Header style={{ background: '#fff', lineHeight: '70px', height: '70px' }}>
-          <AppHeader />
+          <AppHeader currentRoute={this.context.router.route.location.pathname} />
         </Header>
 
         <Layout>
