@@ -14,15 +14,15 @@ class AppContainer extends Component {
   render() {
     return (
       <Layout>
-        <Header style={{ lineHeight: '70px', height: '70px' }}>
+        <Header style={{ background: '#fff', lineHeight: '70px', height: '70px' }}>
           <AppHeader />
         </Header>
 
         <Layout>
-          <Sider>
+          <Sider style={{ background: '#333' }}>
             <AppSidebar />
           </Sider>
-          <Content>
+          <Content style={{ background: '#fff', padding: 16 }}>
             {this.props.children}
           </Content>
         </Layout>

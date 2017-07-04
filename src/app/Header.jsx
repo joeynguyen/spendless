@@ -33,7 +33,7 @@ const Header = () => {
         </Link>
       </Col>
       <Col span={8} offset={8}>
-        <Menu mode="horizontal" theme="dark">
+        <Menu mode="horizontal" style={{ borderBottom: 'none' }}>
           <Menu.Item><Link to="/">Overview</Link></Menu.Item>
           <Menu.Item><Link to="/help">Help</Link></Menu.Item>
         </Menu>
