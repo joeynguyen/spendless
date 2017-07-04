@@ -13,7 +13,7 @@ class AppContainer extends Component {
   }
   render() {
     return (
-      <Layout>
+      <Layout style={{'height': '100%', 'width': '100%'}}>
         <Header style={{ background: '#fff', lineHeight: '70px', height: '70px' }}>
           <AppHeader />
         </Header>
