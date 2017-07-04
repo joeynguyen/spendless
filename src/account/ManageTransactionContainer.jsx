@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 import { bindActionCreators } from 'redux';
 import toastr from 'toastr';
-import { Modal } from 'react-bootstrap';
 import ManageTransaction from './ManageTransaction.jsx';
 import * as transactionsActions from './TransactionsActions.js';
 
