@@ -1,7 +1,6 @@
 import React from 'react';
 import { Col, Row, Menu } from 'antd';
 import { Link } from 'react-router-dom';
-// import { IndexLinkContainer, LinkContainer } from 'react-router-bootstrap';
 
 const styles = {
   logo: {

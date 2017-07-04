@@ -6,7 +6,7 @@ import styles from './Sidebar.module.css';
 const SidebarHeader = ({ toggleManageAccounts }) => {
   const editTooltip = (<Tooltip id="edit-tooltip">Edit</Tooltip>);
   return (
-    <h3 className={styles['sidebar-header'] + ' clearfix'}>
+    <h3 className="clearfix">
       <span className="pull-left">Accounts</span>
       <span className="pull-right">
         <OverlayTrigger placement="top" overlay={editTooltip}>
