@@ -19,10 +19,10 @@ class AppContainer extends Component {
         </Header>
 
         <Layout>
-          <Sider style={{ background: '#333' }}>
+          <Sider collapsible style={{ background: '#333' }}>
             <AppSidebar />
           </Sider>
-          <Content style={{ background: '#fff', padding: 16 }}>
+          <Content style={{ padding: 16 }}>
             {this.props.children}
           </Content>
         </Layout>

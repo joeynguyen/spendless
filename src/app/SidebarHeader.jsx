@@ -1,23 +1,16 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { OverlayTrigger, Tooltip } from 'react-bootstrap';
-import styles from './Sidebar.module.css';
+import { Button } from 'antd';
 
 const SidebarHeader = ({ toggleManageAccounts }) => {
-  const editTooltip = (<Tooltip id="edit-tooltip">Edit</Tooltip>);
   return (
-    <h3 className="clearfix">
-      <span className="pull-left">Accounts</span>
-      <span className="pull-right">
-        <OverlayTrigger placement="top" overlay={editTooltip}>
-          <i
-            id="accounts-edit"
-            onClick={toggleManageAccounts}
-            className={styles['accounts-edit'] + ' fa fa-fw fa-edit'}>
-          </i>
-        </OverlayTrigger>
-      </span>
-    </h3>
+    <Button
+      style={{borderRadius: 0, 'width': '100%'}}
+      type="primary"
+      icon="edit"
+      size="large"
+      onClick={toggleManageAccounts}
+    >Edit Accounts</Button>
   );
 };
 
