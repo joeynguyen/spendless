@@ -59,9 +59,12 @@ class FileUpload extends Component {
     ;
     return (
       <form encType="multipart/form-data">
-        <ReactFileReader handleFiles={this.handleFile} fileTypes=".csv">
-          <Button size="large" icon="upload">Click to Upload</Button>
-        </ReactFileReader>
+        {/* prevent file input clickable window from extending across screen */}
+        <div style={{ display: 'inline-block' }}>
+          <ReactFileReader handleFiles={this.handleFile} fileTypes=".csv">
+            <Button size="large" icon="upload">Click to Upload</Button>
+          </ReactFileReader>
+        </div>
         { uploadedFileContent }
       </form>
     );
