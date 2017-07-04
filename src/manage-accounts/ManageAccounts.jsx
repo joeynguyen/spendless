@@ -1,40 +1,41 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import { Col, Row, Button, Modal } from 'antd';
 import AddAccount from './AddAccount.jsx';
 import AccountsList from './AccountsList.jsx';
 
 const ManageAccounts = ({ accounts, actions, manageAccountsVisible }) => {
   const ccAccounts = accounts.filter(account => account.type === 'creditcard');
   const bankAccounts = accounts.filter(account => account.type === 'bank');
+  const modalFooter = [(
+    <Button
+      size="large"
+      onClick={actions.toggleManageAccounts}
+    >Close</Button>
+  )];
   return (
     <Modal
-      show={manageAccountsVisible}
-      onHide={actions.toggleManageAccounts}
+      closable
+      maskClosable={false}
+      visible={manageAccountsVisible}
+      onCancel={actions.toggleManageAccounts}
+      title="Manage Accounts"
+      footer={modalFooter}
     >
-      <Modal.Header closeButton>
-        <Modal.Title>Manage Accounts</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <div className="row">
-          <div className="col-xs-8">
-            <AddAccount />
-            <hr />
-            <AccountsList accounts={accounts} />
-          </div>
+      <Row>
+        <Col span={16}>
+          <AddAccount />
+          <hr />
+          <AccountsList accounts={accounts} />
+        </Col>
 
-          <div className="col-xs-4">
-            <ul>
-              <li>{bankAccounts.length} Bank accounts</li>
-              <li>{ccAccounts.length} Credit card accounts</li>
-            </ul>
-          </div>
-        </div>
-
-      </Modal.Body>
-      <Modal.Footer>
-        <Button name="close-manage-accounts" onClick={actions.toggleManageAccounts}>Close</Button>
-      </Modal.Footer>
+        <Col span={8} style={{padding: '0 12px' }}>
+          <ul>
+            <li>{bankAccounts.length} Bank accounts</li>
+            <li>{ccAccounts.length} Credit card accounts</li>
+          </ul>
+        </Col>
+      </Row>
     </Modal>
   );
 };
