@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+
 import FileUpload from './FileUpload.jsx';
 import SaveButtonContainer from './SaveButtonContainer.jsx';
 import DeleteTransactionsButton from './DeleteTransactionsButton.jsx';
@@ -8,11 +9,6 @@ import { getCreditIcon } from '../utils/icons.js';
 import styles from './Account.module.css';
 
 const AccountDetails = ({ accounts, activeAccountId }) => {
-  // show loading spinner until accounts are loaded
-  if (accounts.length < 1) {
-    return <div><p className="text-center"><i className="fa fa-cog fa-spin fa-3x"></i></p></div>;
-  }
-
   const activeAccount = accounts.find(account => account._id === activeAccountId);
   let icon = null;
   if (activeAccount && activeAccount.type === 'creditcard') {

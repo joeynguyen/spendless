@@ -11,6 +11,7 @@ class AccountPageContainer extends Component {
   static propTypes = {
     accounts: PropTypes.arrayOf(PropTypes.object),
     actions: PropTypes.object.isRequired,
+    activeAccountId: PropTypes.string,
     manageTransactionVisible: PropTypes.bool.isRequired,
     match: PropTypes.object.isRequired,
     // route: PropTypes.object.isRequired,
@@ -78,6 +79,8 @@ class AccountPageContainer extends Component {
   render() {
     return (
       <AccountPage
+        accounts={this.props.accounts}
+        activeAccountId={this.props.activeAccountId}
         manageTransactionVisible={this.props.manageTransactionVisible}
         unsavedWarningVisible={this.props.unsavedWarningVisible}
         localHandleAlertStay={this.handleAlertStay}
@@ -90,6 +93,7 @@ class AccountPageContainer extends Component {
 function mapStateToProps(state) {
   return {
     accounts: state.accounts,
+    activeAccountId: state.activeAccountId,
     manageTransactionVisible: state.manageTransactionVisible,
     unsavedWarningVisible: state.unsavedWarningVisible,
     uploadedTransactions: state.uploadedTransactions,
