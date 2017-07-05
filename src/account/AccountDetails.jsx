@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { Col, Row } from 'antd';
 
 import FileUpload from './FileUpload.jsx';
 import SaveButtonContainer from './SaveButtonContainer.jsx';
@@ -22,12 +23,17 @@ const AccountDetails = ({ accounts, activeAccountId }) => {
         <h3 className={styles.header}>{icon} {activeAccount.name} <br />
           <small>{activeAccount.company}</small></h3>
       </div>
-      <FileUpload accountId={activeAccountId} />
-      <SaveButtonContainer />
-      {' '}
-      <DeleteTransactionsButton />
-      <br />
-      <AddTransactionButton />
+      <Row>
+        <Col span={6}>
+          <FileUpload accountId={activeAccountId} />
+          <SaveButtonContainer />
+          <br />
+          <DeleteTransactionsButton />
+        </Col>
+        <Col span={6}>
+          <AddTransactionButton />
+        </Col>
+      </Row>
     </div>
   );
 };

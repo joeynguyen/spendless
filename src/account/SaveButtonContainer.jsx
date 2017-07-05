@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import toastr from 'toastr';
-import { Button } from 'react-bootstrap';
+import { Button } from 'antd';
 import * as transactionsActions from '../account/TransactionsActions.js';
 
 class SaveButtonContainer extends Component {
@@ -22,15 +22,15 @@ class SaveButtonContainer extends Component {
       });
   }
   render() {
+    // don't show this button unless there are uploaded transactions
+    if (this.props.uploadedTransactions.length === 0) {
+      return null;
+    }
     return (
       <Button
+        type="primary"
         onClick={this.handleSave}
-        bsStyle="primary"
-        bsSize="small"
-        disabled={(this.props.uploadedTransactions.length === 0)}
-      >
-        Save Uploaded Transactions
-      </Button>
+      >Save Transactions</Button>
     );
   }
 }

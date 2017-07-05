@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import toastr from 'toastr';
-import { Button } from 'react-bootstrap';
+import { Button } from 'antd';
 import * as transactionsActions from './TransactionsActions.js';
 
 class DeleteTransactionsButton extends Component {
@@ -35,15 +35,16 @@ class DeleteTransactionsButton extends Component {
       return (currentKey !== undefined && currentKey._isFieldValue && currentKey.value);
     });
 
+    // don't show this button unless there are selected transactions
+    if (selectedTransactionsIds.length === 0) {
+      return null;
+    }
+
     return (
       <Button
+        type="danger"
         onClick={() => this.handleDelete(selectedTransactionsIds)}
-        bsStyle="danger"
-        disabled={(selectedTransactionsIds.length === 0)}
-        bsSize="small"
-      >
-        Delete Selected Transactions
-      </Button>
+      >Delete Transactions</Button>
     );
   }
 }

@@ -33,7 +33,7 @@ const TransactionsItem = ({ handleDeleteTransactions, transaction, unsaved, hand
       <Popconfirm
         placement="left"
         onConfirm={handleDeleteTransactions}
-        title="Are you sure？"
+        title="Delete？"
         okText="Yes"
         cancelText="No"
       >
