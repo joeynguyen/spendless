@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { OverlayTrigger, Tooltip } from 'react-bootstrap';
-import { Icon, Popconfirm } from 'antd';
+import { Icon, Popconfirm, Tooltip } from 'antd';
 import moment from 'moment';
 
 const TransactionsItem = ({ handleDeleteTransactions, transaction, unsaved, handleEditClick, reduxFormCheckbox }) => {
@@ -29,7 +28,7 @@ const TransactionsItem = ({ handleDeleteTransactions, transaction, unsaved, hand
         value={reduxFormCheckbox.value}
         />
     );
-    editButton = <i className="fa fa-fw fa-lg fa-pencil" onClick={handleEditClick}></i>;
+    editButton = <Icon type="edit" onClick={handleEditClick}/>;
     deleteButton = (
       <Popconfirm
         placement="left"
@@ -45,9 +44,9 @@ const TransactionsItem = ({ handleDeleteTransactions, transaction, unsaved, hand
 
   if (transaction.notes !== '') {
     note = (
-      <OverlayTrigger placement="left" overlay={<Tooltip id={transaction._id}>{transaction.notes}</Tooltip>}>
-        <i className="fa fa-fw fa-lg fa-sticky-note-o" ></i>
-      </OverlayTrigger>
+      <Tooltip id={transaction._id} placement="left" title={transaction.notes}>
+        <Icon type="file-text" />
+      </Tooltip>
     );
   }
   return (
