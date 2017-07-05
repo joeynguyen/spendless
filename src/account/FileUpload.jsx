@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Button, Popconfirm, Col, Row } from 'antd';
+import { Button, Popconfirm } from 'antd';
 import ReactFileReader from 'react-file-reader';
 import parseCSV from '../utils/csvParser.js';
 import * as transactionsActions from './TransactionsActions.js';

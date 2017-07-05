@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Spin } from 'antd';
+import { Spin, Col, Row } from 'antd';
 
 import AccountDetails from './AccountDetails.jsx';
 import TransactionsListContainer from './TransactionsListContainer.jsx';
@@ -17,7 +17,13 @@ const AccountPage = ({
 }) => {
   // show loading spinner until accounts are loaded
   if (accounts.length < 1 && activeAccountId) {
-    return <div className="text-center"><Spin size="large" /></div>;
+    return (
+      <Row type="flex" justify="center" align="middle" style={{ height: '100%' }}>
+        <Col span={2} style={{ textAlign: 'center' }}>
+          <Spin size="large" />
+        </Col>
+      </Row>
+    );
   }
 
   const manageTransactionContainer = manageTransactionVisible ? <ManageTransactionContainer /> : null;
