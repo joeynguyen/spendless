@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Panel } from 'react-bootstrap';
+import { Button, Collapse } from 'antd';
 import AddAccountFormContainer from './AddAccountFormContainer.jsx';
 
 export default class AddAccount extends Component {
@@ -10,20 +10,25 @@ export default class AddAccount extends Component {
     this.setState({ addAccountVisible: !this.state.addAccountVisible });
   }
   render() {
-    let addButton = { style: 'primary', class: 'fa fa-plus', text: ' Add Account' };
+    let addButton = { style: 'primary', icon: 'plus', text: ' Add Account' };
     if (this.state.addAccountVisible) {
-      addButton = { style: 'danger', class: '', text: 'Cancel' };
+      addButton = { style: 'danger', icon: '', text: 'Cancel' };
     }
+    const toggleFormButton = (
+      <Button
+        type={addButton.style}
+        icon={addButton.icon}
+        size="large"
+        onClick={this.toggleAddAccount}
+      >{addButton.text}</Button>
+    );
+    const accountForm = this.state.addAccountVisible ? <AddAccountFormContainer visible={this.state.addAccountVisible} /> : null;
     return (
-      <div>
-        <Button onClick={this.toggleAddAccount} bsStyle={addButton.style} bsSize="large" block>
-          <i className={addButton.class}></i>
-          {addButton.text}
-        </Button>
-        <Panel collapsible expanded={this.state.addAccountVisible}>
-          <AddAccountFormContainer visible={this.state.addAccountVisible} />
-        </Panel>
-      </div>
+      <Collapse bordered={false} className="add-account-form">
+        <Collapse.Panel header={toggleFormButton} key="1">
+          {accountForm}
+        </Collapse.Panel>
+      </Collapse>
     );
   }
 }

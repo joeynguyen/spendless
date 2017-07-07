@@ -5,7 +5,7 @@ import styles from './Transactions.module.css';
 
 const TransactionsList = ({ accountTransactions, fields, uploadedTransactions }) => {
   return (
-    <table className={styles['transactions-table'] + ' transactions-table table table-hover'}>
+    <table className={styles['transactions-table'] + ' table table-hover'}>
       <thead>
         <tr>
           <th><input type="checkbox" /></th>
