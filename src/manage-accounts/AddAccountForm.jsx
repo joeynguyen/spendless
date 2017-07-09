@@ -1,9 +1,16 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Button, Collapse } from 'react-bootstrap';
+import { Collapse } from 'react-collapse';
+import { Button } from 'antd';
 
 import FieldGroup from '../custom-components/FieldGroup.jsx';
 import { accountCompanyOptions, accountTypeOptions } from '../constants.js';
+
+const addAccountFormStyle = {
+  borderRadius: '4px',
+  background: 'lightgray',
+  padding: '15px'
+};
 
 const AddAccountForm = ({ localHandleSubmit, fields, submitting }) => {
   // fields and submitting are from redux-form
@@ -44,7 +51,7 @@ const AddAccountForm = ({ localHandleSubmit, fields, submitting }) => {
   }
 
   return (
-    <form id="add-account-form" onSubmit={localHandleSubmit}>
+    <form id="add-account-form" onSubmit={localHandleSubmit} style={addAccountFormStyle} >
       <FieldGroup
         type="text"
         placeholder="Enter a name for the account"
@@ -73,15 +80,17 @@ const AddAccountForm = ({ localHandleSubmit, fields, submitting }) => {
         value={accountType.value}
       />
 
-      <Collapse in={accountType.value !== ''}>
+      <Collapse isOpened={accountType.value !== ''} fixedHeight={72}>
         <div>{accountTypeField}</div>
       </Collapse>
 
       <Button
         name="add-account"
-        bsStyle="primary"
-        type="submit"
-        disabled={submitting}>
+        type="primary"
+        htmlType="submit"
+        size="large"
+        disabled={submitting}
+      >
         {submitting ? 'Saving...' : 'Save'}
       </Button>
     </form>

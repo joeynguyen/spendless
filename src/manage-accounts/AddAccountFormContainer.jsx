@@ -13,6 +13,7 @@ export class AddAccountFormContainer extends Component {
     handleSubmit: PropTypes.func.isRequired,
     resetForm: PropTypes.func.isRequired,
     submitting: PropTypes.bool.isRequired,
+    toggleAddAccount: PropTypes.func.isRequired,
     visible: PropTypes.bool.isRequired,
   }
 
@@ -44,6 +45,7 @@ export class AddAccountFormContainer extends Component {
         document.activeElement.blur();
         // Reset AddAccount form fields
         this.props.resetForm();
+        this.props.toggleAddAccount();
       })
       .catch(() => {
         toastr.error('Restart the application and retry', 'Error adding account', {timeOut: 1500});

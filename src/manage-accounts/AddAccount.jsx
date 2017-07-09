@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Button, Collapse } from 'antd';
+import { Collapse } from 'react-collapse';
+import { Button } from 'antd';
 import AddAccountFormContainer from './AddAccountFormContainer.jsx';
 
 export default class AddAccount extends Component {
@@ -14,21 +15,20 @@ export default class AddAccount extends Component {
     if (this.state.addAccountVisible) {
       addButton = { style: 'danger', icon: '', text: 'Cancel' };
     }
-    const toggleFormButton = (
-      <Button
-        type={addButton.style}
-        icon={addButton.icon}
-        size="large"
-        onClick={this.toggleAddAccount}
-      >{addButton.text}</Button>
-    );
-    const accountForm = this.state.addAccountVisible ? <AddAccountFormContainer visible={this.state.addAccountVisible} /> : null;
     return (
-      <Collapse bordered={false} className="add-account-form">
-        <Collapse.Panel header={toggleFormButton} key="1">
-          {accountForm}
-        </Collapse.Panel>
-      </Collapse>
+      <div style={{marginBottom: '15px'}}>
+        <Button
+          type={addButton.style}
+          icon={addButton.icon}
+          size="large"
+          onClick={this.toggleAddAccount}
+        >{addButton.text}</Button>
+        <Collapse isOpened={this.state.addAccountVisible}>
+          <AddAccountFormContainer
+            toggleAddAccount={this.toggleAddAccount}
+            visible={this.state.addAccountVisible} />
+        </Collapse>
+      </div>
     );
   }
 }
