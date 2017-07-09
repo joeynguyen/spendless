@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Collapse, Button } from 'react-bootstrap';
+import { Collapse } from 'react-collapse';
+import { Button } from 'antd';
 
 import FieldGroup from '../custom-components/FieldGroup.jsx';
 import { accountCompanyOptions, accountTypeOptions } from '../constants.js';
@@ -34,7 +35,7 @@ const EditAccountForm = ({ fields, pristine, toggleSettings, toggleConfirmDelete
         onFocus={accountType.onFocus}
         value={accountType.value}
       />
-      <Collapse in={accountType.value === 'bank'}>
+      <Collapse isOpened={accountType.value === 'bank'} fixedHeight={72}>
         <div>
           <FieldGroup
             type="text"
@@ -51,7 +52,7 @@ const EditAccountForm = ({ fields, pristine, toggleSettings, toggleConfirmDelete
           />
         </div>
       </Collapse>
-      <Collapse in={accountType.value === 'creditcard'}>
+      <Collapse isOpened={accountType.value === 'creditcard'} fixedHeight={72}>
         <div>
           <FieldGroup
             componentClass="select"
@@ -68,24 +69,25 @@ const EditAccountForm = ({ fields, pristine, toggleSettings, toggleConfirmDelete
           />
         </div>
       </Collapse>
-      <div className="form-group">
+      <div>
         <Button
           name="update"
-          type="submit"
           disabled={pristine}
-          bsStyle="primary"
+          htmlType="submit"
+          size="large"
+          type="primary"
         >Update</Button>
-        {' '}
         <Button
           name="cancel"
           onClick={toggleSettings}
+          size="large"
         >Cancel</Button>
         <Button
           name="delete-toggle"
-          className="pull-right"
           disabled={confirmDeleteVisible}
           onClick={toggleConfirmDelete}
-          bsStyle="danger"
+          size="large"
+          type="danger"
         >Delete</Button>
       </div>
     </form>
