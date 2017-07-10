@@ -25,7 +25,6 @@ const ManageAccounts = ({ accounts, actions, manageAccountsVisible }) => {
       <Row>
         <Col span={16}>
           <AddAccount />
-          <hr />
           <AccountsList accounts={accounts} />
         </Col>
 

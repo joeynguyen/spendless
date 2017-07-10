@@ -6,12 +6,6 @@ import { Button } from 'antd';
 import FieldGroup from '../custom-components/FieldGroup.jsx';
 import { accountCompanyOptions, accountTypeOptions } from '../constants.js';
 
-const addAccountFormStyle = {
-  borderRadius: '4px',
-  background: 'lightgray',
-  padding: '15px'
-};
-
 const AddAccountForm = ({ localHandleSubmit, fields, submitting }) => {
   // fields and submitting are from redux-form
   const { accountName, accountType, accountCompany } = fields;
@@ -51,7 +45,7 @@ const AddAccountForm = ({ localHandleSubmit, fields, submitting }) => {
   }
 
   return (
-    <form id="add-account-form" onSubmit={localHandleSubmit} style={addAccountFormStyle} >
+    <form id="add-account-form" className="well" onSubmit={localHandleSubmit}>
       <FieldGroup
         type="text"
         placeholder="Enter a name for the account"
