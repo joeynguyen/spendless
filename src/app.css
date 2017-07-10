@@ -19,6 +19,7 @@ http://andrewhfarmer.com/css-modules-by-example/#example-4-nested-class-names
 
 .toggle-account-setting-icon i {
   cursor: pointer;
+  font-size: 14px;
   animation: unRoll .1s 3;
 }
 .toggle-account-setting-icon.expanded i {

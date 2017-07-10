@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { FormControl, Button, ButtonToolbar } from 'react-bootstrap';
-import { Col, Row } from 'antd';
+import { Col, Row, Button, Input } from 'antd';
 
 export default class DeleteAccountForm extends Component {
   static propTypes = {
@@ -20,30 +19,29 @@ export default class DeleteAccountForm extends Component {
   render() {
     return (
       <form id="delete-account-form" onSubmit={this.props.handleDeleteAccount}>
-        <hr />
         <p>Type DELETE into this box to confirm</p>
         <Row>
-          <Col span={12}>
-            <FormControl
-              type="text"
-              value={this.state.confirmDeleteText}
+          <Col span={8}>
+            <Input
+              placeholder="DELETE"
               onChange={this.handleConfirmDeleteText}
-              placeholder="DELETE" />
+              value={this.state.confirmDeleteText}
+            />
           </Col>
-          <Col span={12}>
-            <ButtonToolbar className="pull-right">
+          <Col span={16}>
+            <div className="float-right">
               <Button
                 className="confirm-delete"
                 disabled={this.state.confirmDeleteText !== 'DELETE'}
-                bsStyle="primary"
-                type="submit"
+                type="primary"
+                htmlType="submit"
               >Confirm</Button>
               {' '}
               <Button
                 className="cancel-delete"
                 onClick={this.props.toggleConfirmDelete}
               >Cancel</Button>
-            </ButtonToolbar>
+            </div>
           </Col>
         </Row>
       </form>
