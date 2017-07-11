@@ -1,28 +1,16 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Alert, Button, Modal } from 'antd';
+import { Alert, Modal } from 'antd';
 
 const UnsavedWarning = ({ localHandleAlertStay, localHandleAlertLeave, show }) => {
-  const modalFooter = [(
-    <Button
-      key="cancel"
-      size="large"
-      onClick={localHandleAlertStay}
-
-    >No, stay on this page</Button>
-  ), (
-    <Button
-      key="confirm"
-      type="primary"
-      size="large"
-      onClick={localHandleAlertLeave}
-    >Yes, discard changes</Button>
-  )];
   return (
     <Modal
       closable={false}
       visible={show}
-      footer={modalFooter}
+      cancelText="No, stay on this page"
+      onCancel={localHandleAlertStay}
+      okText="Yes, discard changes"
+      onOk={localHandleAlertLeave}
     >
       <Alert
         type="warning"
