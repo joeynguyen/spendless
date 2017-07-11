@@ -9,6 +9,7 @@ const ManageAccounts = ({ accounts, actions, manageAccountsVisible }) => {
   const bankAccounts = accounts.filter(account => account.type === 'bank');
   const modalFooter = [(
     <Button
+      key={0}
       size="large"
       onClick={actions.toggleManageAccounts}
     >Close</Button>

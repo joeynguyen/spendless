@@ -23,6 +23,7 @@ export default class DeleteAccountForm extends Component {
         <Row>
           <Col span={8}>
             <Input
+              size="large"
               placeholder="DELETE"
               onChange={this.handleConfirmDeleteText}
               value={this.state.confirmDeleteText}
@@ -34,10 +35,12 @@ export default class DeleteAccountForm extends Component {
                 className="confirm-delete"
                 disabled={this.state.confirmDeleteText !== 'DELETE'}
                 type="primary"
+                size="large"
                 htmlType="submit"
               >Confirm</Button>
               {' '}
               <Button
+                size="large"
                 className="cancel-delete"
                 onClick={this.props.toggleConfirmDelete}
               >Cancel</Button>
