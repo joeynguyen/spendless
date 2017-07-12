@@ -2,27 +2,20 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Button, Form, Input } from 'antd';
 
+import withAddAccountHandler from './AddAccountHandler.jsx';
+
 const FormItem = Form.Item;
 
-export class AddBankAccount extends Component {
-  handleSubmit = (e) => {
-    e.preventDefault();
-    this.props.form.validateFields((err, values) => {
-      if (!err) {
-        console.log('Received values of form: ', values);
-      }
-    });
-  }
+class AddBankAccount extends Component {
   render() {
     const { getFieldDecorator } = this.props.form;
 
     return (
-      <Form onSubmit={this.handleSubmit} layout="vertical">
+      <Form onSubmit={this.props.handleSubmit} layout="vertical">
+        {/* hidden field to pass on save data */}
         {getFieldDecorator('accountType', {initialValue: 'bank'})(<Input type="hidden" />)}
 
-        <FormItem
-          label="Name"
-        >
+        <FormItem label="Name">
           {getFieldDecorator('accountName', {
             rules: [{ required: true, message: 'Enter a name for the account' }],
           })(
@@ -53,6 +46,7 @@ export class AddBankAccount extends Component {
 
 AddBankAccount.propTypes = {
   form: PropTypes.object.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
 };
 
-export default Form.create({})(AddBankAccount);
+export default withAddAccountHandler(AddBankAccount);

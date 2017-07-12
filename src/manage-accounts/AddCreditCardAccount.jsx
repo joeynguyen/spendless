@@ -1,30 +1,23 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Button, Form, Select, Input } from 'antd';
+
+import withAddAccountHandler from './AddAccountHandler.jsx';
 import { renderAntdOptions } from '../utils/helpers.js';
 import { accountCompanyOptions } from '../constants.js';
 
 const FormItem = Form.Item;
 
-export class AddCreditCardAccount extends Component {
-  handleSubmit = (e) => {
-    e.preventDefault();
-    this.props.form.validateFields((err, values) => {
-      if (!err) {
-        console.log('Received values of form: ', values);
-      }
-    });
-  }
+class AddCreditCardAccount extends Component {
   render() {
     const { getFieldDecorator } = this.props.form;
 
     return (
-      <Form onSubmit={this.handleSubmit} layout="vertical">
+      <Form onSubmit={this.props.handleSubmit} layout="vertical">
+        {/* hidden field to pass on save data */}
         {getFieldDecorator('accountType', {initialValue: 'creditcard'})(<Input type="hidden" />)}
 
-        <FormItem
-          label="Name"
-        >
+        <FormItem label="Name">
           {getFieldDecorator('accountName', {
             rules: [{ required: true, message: 'Enter a name for the account' }],
           })(
@@ -55,7 +48,8 @@ export class AddCreditCardAccount extends Component {
 
 AddCreditCardAccount.propTypes = {
   form: PropTypes.object.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
 };
 
-export default Form.create({})(AddCreditCardAccount);
+export default withAddAccountHandler(AddCreditCardAccount);
 
