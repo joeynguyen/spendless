@@ -8,7 +8,6 @@ import UploadedTransactionsReducer from './account/UploadedTransactionsReducer.j
 import ManageTransactionsListFormReducer from './account/ManageTransactionsListFormReducer.js';
 import ManageAccountsVisibleReducer from './manage-accounts/ManageAccountsVisibleReducer.js';
 import EditAccountFormReducer from './manage-accounts/EditAccountFormReducer.js';
-import AddAccountFormReducer from './manage-accounts/AddAccountFormReducer.js';
 import ManageTransactionVisibleReducer from './account/ManageTransactionVisibleReducer.js';
 import ActiveTransactionReducer from './account/ActiveTransactionReducer.js';
 import UnsavedWarningVisibleReducer from './account/UnsavedWarningVisibleReducer.js';
@@ -26,7 +25,6 @@ const rootReducer = combineReducers({
   unsavedWarningVisible: UnsavedWarningVisibleReducer,
   nextRoutePath: NextRoutePathReducer,
   form: formReducer.plugin({
-    AddAccount: AddAccountFormReducer,
     EditAccount: EditAccountFormReducer,
     ManageTransactionsList: ManageTransactionsListFormReducer
   }),
