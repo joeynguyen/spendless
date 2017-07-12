@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Collapse } from 'react-collapse';
 import { Button } from 'antd';
-import AddAccountFormContainer from './AddAccountFormContainer.jsx';
+import AddAccountForm from './AddAccountForm.jsx';
 
 export default class AddAccount extends Component {
   state = {
@@ -24,9 +24,7 @@ export default class AddAccount extends Component {
           onClick={this.toggleAddAccount}
         >{addButton.text}</Button>
         <Collapse isOpened={this.state.addAccountVisible}>
-          <AddAccountFormContainer
-            toggleAddAccount={this.toggleAddAccount}
-            visible={this.state.addAccountVisible} />
+          <AddAccountForm />
         </Collapse>
       </div>
     );
