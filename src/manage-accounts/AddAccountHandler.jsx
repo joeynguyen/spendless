@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-// import { bindActionCreators } from 'redux';
-// import toastr from 'toastr';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import toastr from 'toastr';
 import { Form } from 'antd';
-// import * as accountsActions from '../account/AccountsActions.js';
+import * as accountsActions from '../account/AccountsActions.js';
 
 export default function withAddAccountHandler(OriginalComponent) {
   class WrappingClass extends Component {
@@ -11,7 +12,21 @@ export default function withAddAccountHandler(OriginalComponent) {
       e.preventDefault();
       this.props.form.validateFields((err, values) => {
         if (!err) {
-          console.log('Received values of form: ', values);
+          const newAccount = {
+            '_id': new Date().toISOString(),
+            'name': values.accountName,
+            'type': values.accountType,
+            'company': values.companyName,
+          };
+
+          this.props.actions.saveAccount(newAccount)
+            .then(result => {
+              toastr.success(result.name + ' account added', null, {timeOut: 1500});
+              this.props.form.resetFields();
+            })
+            .catch(() => {
+              toastr.error('Restart the application and retry', 'Error adding account', {timeOut: 1500});
+            });
         }
       });
     }
@@ -27,8 +42,15 @@ export default function withAddAccountHandler(OriginalComponent) {
   }
 
   WrappingClass.propTypes = {
+    actions: PropTypes.object.isRequired,
     form: PropTypes.object.isRequired,
   };
 
-  return Form.create({})(WrappingClass);
+  function mapDispatchToProps(dispatch) {
+    return {
+      actions: bindActionCreators(accountsActions, dispatch)
+    };
+  }
+
+  return connect(null, mapDispatchToProps)(Form.create({})(WrappingClass));
 }
