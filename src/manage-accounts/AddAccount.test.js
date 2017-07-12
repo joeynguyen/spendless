@@ -2,7 +2,6 @@ import expect from 'expect';
 import React from 'react';
 import { shallow } from 'enzyme';
 import AddAccount from './AddAccount.jsx';
-import AddAccountFormContainer from './AddAccountFormContainer.jsx';
 
 function setup() {
   return shallow(<AddAccount />);
@@ -19,11 +18,6 @@ describe('AddAccount', () => {
 
     it('has a Panel', (done) => {
       expect(component.find('Panel').length).toBe(1);
-      done();
-    });
-
-    it('has an AddAccountFormContainer', (done) => {
-      expect(component.find(AddAccountFormContainer).length).toBe(1);
       done();
     });
 
