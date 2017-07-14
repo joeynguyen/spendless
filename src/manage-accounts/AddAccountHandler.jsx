@@ -7,7 +7,7 @@ import { Form } from 'antd';
 import * as accountsActions from '../account/AccountsActions.js';
 
 export default function withAddAccountHandler(OriginalComponent) {
-  class WrappingClass extends Component {
+  class WrapperClass extends Component {
     handleSubmit = (e) => {
       e.preventDefault();
       this.props.form.validateFields((err, values) => {
@@ -41,7 +41,7 @@ export default function withAddAccountHandler(OriginalComponent) {
     }
   }
 
-  WrappingClass.propTypes = {
+  WrapperClass.propTypes = {
     actions: PropTypes.object.isRequired,
     form: PropTypes.object.isRequired,
   };
@@ -52,5 +52,5 @@ export default function withAddAccountHandler(OriginalComponent) {
     };
   }
 
-  return connect(null, mapDispatchToProps)(Form.create({})(WrappingClass));
+  return connect(null, mapDispatchToProps)(Form.create({})(WrapperClass));
 }
