@@ -1,46 +1,24 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { reduxForm } from 'redux-form';
-import { Collapse } from 'react-collapse';
 import toastr from 'toastr';
-import EditAccountForm from './EditAccountForm.jsx';
-import DeleteAccountForm from './DeleteAccountForm.jsx';
+
+import EditBankAccount from './EditBankAccount.jsx';
+import EditCreditCardAccount from './EditCreditCardAccount.jsx';
 import * as accountsActions from '../account/AccountsActions.js';
 
 export class EditAccountFormContainer extends Component {
   static propTypes = {
     account: PropTypes.object.isRequired,
-    actions: PropTypes.object.isRequired,
+    actions: PropTypes.object,
     activeAccountId: PropTypes.string,
-    fields: PropTypes.object.isRequired,
-    pristine: PropTypes.bool.isRequired,
-    resetForm: PropTypes.func.isRequired,
+    initialValues: PropTypes.object.isRequired,
     toggleSettings: PropTypes.func.isRequired,
   }
 
-  static contextTypes = {
-    router: PropTypes.object
-  }
-
-  state = {
-    confirmDeleteVisible: false,
-  }
-
-  toggleConfirmDelete = () => {
-    this.setState({ confirmDeleteVisible: !this.state.confirmDeleteVisible });
-  }
-
-  handleUpdateAccount = (e) => {
-    e.preventDefault();
-
-    const newAccountObj = Object.assign({}, this.props.account, {
-      name: this.props.fields.accountName.value,
-      type: this.props.fields.accountType.value,
-      company: this.props.fields.accountCompany.value,
-    });
-    // Update account in DB
-    this.props.actions.saveAccount(newAccountObj)
+  saveToDB = (accountObj) => {
+    this.props.actions.saveAccount(accountObj)
       .then(result => {
         toastr.success(result.name + ' account updated', null, {timeOut: 1500});
       })
@@ -49,18 +27,15 @@ export class EditAccountFormContainer extends Component {
       });
   }
 
-  handleDeleteAccount = (e) => {
-    e.preventDefault();
-    // store the name using a variable so we will still have it after deleting the account
-    const accountName = this.props.account.name;
+  removeFromDB = () => {
     // Remove account from DB
     this.props.actions.deleteAccount(this.props.account)
       .then(deletedAccount => {
         // if current route is on the deleted account, route back to root dir
         if (this.props.activeAccountId === deletedAccount.id) {
-          this.context.router.push('/');
+          this.context.router.history.push('/');
         }
-        toastr.success(accountName + ' account deleted', null, {timeOut: 1500});
+        toastr.success(this.props.account.name + ' account deleted', null, {timeOut: 1500});
       })
       .catch(() => {
         toastr.error('Restart the application and retry', 'Error deleting account', {timeOut: 1500});
@@ -68,24 +43,31 @@ export class EditAccountFormContainer extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <EditAccountForm
-          confirmDeleteVisible={this.state.confirmDeleteVisible}
-          fields={this.props.fields}
-          handleUpdateAccount={this.handleUpdateAccount}
-          pristine={this.props.pristine}
-          toggleConfirmDelete={this.toggleConfirmDelete}
+    let accountTypeForm;
+    if (this.props.account.type === 'bank') {
+      accountTypeForm = (
+        <EditBankAccount
+          account={this.props.account}
+          activeAccountId={this.props.activeAccountId}
+          removeFromDB={this.removeFromDB}
+          saveToDB={this.saveToDB}
+          initialValues={this.props.initialValues}
           toggleSettings={this.props.toggleSettings}
         />
-        <Collapse isOpened={this.state.confirmDeleteVisible}>
-          <DeleteAccountForm
-            handleDeleteAccount={this.handleDeleteAccount}
-            toggleConfirmDelete={this.toggleConfirmDelete}
-          />
-        </Collapse>
-      </div>
-    );
+      );
+    } else {
+      accountTypeForm = (
+        <EditCreditCardAccount
+          account={this.props.account}
+          activeAccountId={this.props.activeAccountId}
+          removeFromDB={this.removeFromDB}
+          saveToDB={this.saveToDB}
+          initialValues={this.props.initialValues}
+          toggleSettings={this.props.toggleSettings}
+        />
+      );
+    }
+    return accountTypeForm;
   }
 }
 
@@ -101,11 +83,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default reduxForm(
-  {
-    form: 'EditAccount',
-    fields: ['accountName', 'accountType', 'accountCompany'],
-  },
-  mapStateToProps,
-  mapDispatchToProps
-)(EditAccountFormContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(EditAccountFormContainer);

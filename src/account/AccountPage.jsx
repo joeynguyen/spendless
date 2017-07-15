@@ -34,7 +34,7 @@ const AccountPage = ({
         accounts={accounts}
         activeAccountId={activeAccountId}
       />
-      <TransactionsListContainer />
+      <TransactionsListContainer activeAccountId={activeAccountId} />
       <UnsavedWarning
         show={unsavedWarningVisible}
         localHandleAlertStay={localHandleAlertStay}

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import * as transactionsActions from './TransactionsActions.js';
 import TransactionsListFormContainer from './TransactionsListFormContainer.jsx';
 
-class TransactionListContainer extends Component {
+class TransactionsListContainer extends Component {
   static propTypes = {
     activeAccountId: PropTypes.string.isRequired,
     accountTransactions: PropTypes.arrayOf(PropTypes.object),
@@ -52,7 +52,6 @@ class TransactionListContainer extends Component {
 function mapStateToProps(state) {
   return {
     accountTransactions: state.accountTransactions,
-    activeAccountId: state.activeAccountId,
   };
 }
 
@@ -62,4 +61,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TransactionListContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(TransactionsListContainer);

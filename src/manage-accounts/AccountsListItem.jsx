@@ -26,13 +26,12 @@ export default class AccountsListItem extends Component {
       };
       // adding EditAccount form this way so that the component will mount and
       // unmount, resetting the form fields in doing so
-      // also, this speeds up loading the modal because redux-form isn't initialized
+      // also, this speeds up loading the modal because forms aren't initialized
       // for every account form on load. Only initializes when account is toggled
       editAccountForm = (
         <EditAccountFormContainer
           {...formInitialValues}
           account={this.props.account}
-          formKey={this.props.account._id}
           toggleSettings={this.toggleSettings}
         />
       );
