@@ -1,8 +1,10 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import moment from 'moment';
 import toastr from 'toastr';
+import { Form } from 'antd';
 import ManageTransaction from './ManageTransaction.jsx';
 import * as transactionsActions from './TransactionsActions.js';
 
@@ -11,39 +13,46 @@ class ManageTransactionContainer extends Component {
     actions: PropTypes.object.isRequired,
     activeAccountId: PropTypes.string.isRequired,
     activeTransaction: PropTypes.object,
+    form: PropTypes.object.isRequired,
+    initialValues: PropTypes.object.isRequired,
     manageTransactionVisible: PropTypes.bool.isRequired,
-    fields: PropTypes.object.isRequired,
-    handleSubmit: PropTypes.func.isRequired,
-    pristine: PropTypes.bool.isRequired,
   }
 
   toggleManageTransaction = () => {
     this.props.actions.toggleManageTransaction();
   }
 
-  handleSaveTransaction = () => {
+  handleSaveTransaction = (e) => {
+    e.preventDefault();
     let newTransactionObj;
-    if (this.props.activeTransaction !== null) {
-      // update transaction
-      newTransactionObj = Object.assign({}, this.props.activeTransaction, {
-        amount: Number(this.props.fields.amount.value).toFixed(2),
-        category: this.props.fields.category.value,
-        date: this.props.fields.date.value,
-        description: this.props.fields.description.value,
-        notes: this.props.fields.notes.value,
-      });
-    } else {
-      // add new transaction
-      newTransactionObj = {
-        _id: new Date().getTime().toString(),
-        accountId: this.props.activeAccountId,
-        amount: Number(this.props.fields.amount.value).toFixed(2),
-        category: this.props.fields.category.value,
-        date: this.props.fields.date.value,
-        description: this.props.fields.description.value,
-        notes: this.props.fields.notes.value,
-      };
-    }
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        // values.date is returned as a moment object so was have to convert it here
+        const dateStringified = values.date.format('YYYY-MM-DD');
+        console.log('dateStringified', dateStringified);
+        if (this.props.activeTransaction !== null) {
+          // update transaction
+          newTransactionObj = Object.assign({}, this.props.activeTransaction, {
+            amount: Number(values.amount).toFixed(2),
+            category: values.category,
+            date: dateStringified,
+            description: values.description,
+            notes: values.notes,
+          });
+        } else {
+          // add new transaction
+          newTransactionObj = {
+            _id: new Date().getTime().toString(),
+            accountId: this.props.activeAccountId,
+            amount: Number(values.amount).toFixed(2),
+            category: values.category,
+            date: dateStringified,
+            description: values.description,
+            notes: values.notes,
+          };
+        }
+      }
+    });
 
     // Save account in DB
     this.props.actions.saveAccountTransactions(newTransactionObj)
@@ -58,59 +67,33 @@ class ManageTransactionContainer extends Component {
 
   render() {
     const manageType = this.props.activeTransaction !== null ? 'edit' : 'add';
-    const reduxFormHandleSubmit = this.props.handleSubmit(this.handleSaveTransaction);
     return (
       <ManageTransaction
+        form={this.props.form}
+        initialValues={this.props.initialValues}
         manageType={manageType}
         manageTransactionVisible={this.props.manageTransactionVisible}
         toggleManageTransaction={this.toggleManageTransaction}
-        fields={this.props.fields}
-        pristine={this.props.pristine}
-        doSubmit={reduxFormHandleSubmit}
+        doSubmit={this.handleSaveTransaction}
       />
     );
   }
 }
 
-function validateForm(values) {
-  const errors = {};
-  const amountRegex = /^-?\d*\.?\d{0,2}$/;
-
-  if (!values.date) {
-    errors.date = 'Enter a date';
-  }
-  if (!values.description) {
-    errors.description = 'Enter a description';
-  }
-  if (!values.category) {
-    errors.category = 'Enter a category';
-  }
-  if (!values.amount) {
-    errors.amount = 'Enter an amount';
-  } else if (values.amount && values.amount.indexOf('.') > -1 && values.amount.split('.')[1].length > 2) {
-    errors.amount = 'Enter an amount with 2 or less decimal places';
-  } else if (!amountRegex.test(values.amount)) {
-    // this is a workaround to go with input[type="text"] because redux-form@5.3.3
-    // currently doesn't allow typing ".0" in an input[type="number"]
-    // https://github.com/erikras/redux-form/issues/1383
-    errors.amount = 'Enter a valid amount. Example: (10.52)';
-  }
-
-  return errors;
-}
-
 function mapStateToProps(state) {
   let initialValues = {
-    date: '',
-    description: '',
-    category: '',
-    amount: '',
+    date: undefined,
+    description: undefined,
+    category: undefined,
+    amount: undefined,
     notes: '',
   };
+
   if (state.activeTransaction !== null) {
     const { date, description, category, amount, notes } = state.activeTransaction;
+    const dateFormat = 'YYYY-MM-DD';
     initialValues = {
-      date: date,
+      date: moment(date, dateFormat),
       description: description,
       category: category,
       amount: amount,
@@ -131,12 +114,24 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default reduxForm(
-  {
-    form: 'ManageTransaction',
-    fields: ['date', 'description', 'category', 'amount', 'notes'],
-    validate: validateForm,
+export default connect(mapStateToProps, mapDispatchToProps)(Form.create({
+  mapPropsToFields(props) {
+    return {
+      description: {
+        value: props.initialValues.description,
+      },
+      date: {
+        value: props.initialValues.date,
+      },
+      category: {
+        value: props.initialValues.category,
+      },
+      amount: {
+        value: props.initialValues.amount,
+      },
+      notes: {
+        value: props.initialValues.notes,
+      },
+    };
   },
-  mapStateToProps,
-  mapDispatchToProps
-)(ManageTransactionContainer);
+})(ManageTransactionContainer));

@@ -21,7 +21,6 @@ const ManageTransaction = ({ form, manageType = 'add', manageTransactionVisible,
       id="cancel-manage-transaction"
       size="large"
       onClick={toggleManageTransaction}
-
     >Cancel</Button>
   )];
 
@@ -68,9 +67,7 @@ const ManageTransaction = ({ form, manageType = 'add', manageTransactionVisible,
         </FormItem>
 
         <FormItem label="Notes">
-          {getFieldDecorator('notes', {
-            rules: [{ required: true, message: 'Enter an amount' }],
-          })(
+          {getFieldDecorator('notes', {})(
             <TextArea rows={4} placeholder="Add notes for this transaction"/>
           )}
         </FormItem>
@@ -78,13 +75,15 @@ const ManageTransaction = ({ form, manageType = 'add', manageTransactionVisible,
     </Modal>
   );
 };
+
 ManageTransaction.propTypes = {
   form: PropTypes.object.isRequired,
+  initialValues: PropTypes.object.isRequired,
   manageTransactionVisible: PropTypes.bool.isRequired,
   manageType: PropTypes.string.isRequired,
   toggleManageTransaction: PropTypes.func.isRequired,
   doSubmit: PropTypes.func.isRequired,
 };
 
-export default Form.create({})(ManageTransaction);
+export default ManageTransaction;
 
