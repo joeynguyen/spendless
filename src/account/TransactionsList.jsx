@@ -87,8 +87,7 @@ class TransactionsList extends Component {
       },
     ];
     const rowSelection = {
-      onChange: (selectedRowKeys, selectedRows) => {
-        console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+      onChange: (selectedRowKeys) => {
         this.setState({ selectedTransactionsIds: selectedRowKeys });
       },
     };
