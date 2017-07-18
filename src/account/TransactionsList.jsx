@@ -55,8 +55,8 @@ class TransactionsList extends Component {
         </Tooltip>) : null
       },
       {
-        title: 'Action',
-        dataIndex: 'action',
+        title: 'Actions',
+        dataIndex: 'actions',
         render: (text, record) => (
           <span>
             <a href="#" onClick={(e) => this.handleEditClick(e, record.key)}>Edit</a>

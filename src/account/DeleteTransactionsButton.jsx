@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import toastr from 'toastr';
-import { Button } from 'antd';
+import { Button, Popconfirm } from 'antd';
 import * as transactionsActions from './TransactionsActions.js';
 
 class DeleteTransactionsButton extends Component {
@@ -23,7 +23,7 @@ class DeleteTransactionsButton extends Component {
 
     this.props.actions.deleteAccountTransactions(selectedTransactions)
       .then(() => {
-        toastr.success('Transactions deleted', null, {timeOut: 1500});
+        toastr.success('Transaction(s) deleted', null, {timeOut: 1500});
       }).catch(() => {
         toastr.error('Restart the application and retry', 'Error deleting transactions', {timeOut: 1500});
       });
@@ -32,12 +32,18 @@ class DeleteTransactionsButton extends Component {
     const noTransactionsSelected = (this.props.selectedTransactionsIds.length === 0);
 
     return (
-      <Button
-        type="danger"
-        size="large"
-        disabled={noTransactionsSelected}
-        onClick={() => this.handleDelete(this.props.selectedTransactionsIds)}
-      >Delete Transactions</Button>
+        <Popconfirm
+          onConfirm={() => this.handleDelete(this.props.selectedTransactionsIds)}
+          title="Delete transaction(s)?"
+          okText="Yes"
+          cancelText="No"
+        >
+          <Button
+            type="danger"
+            size="large"
+            disabled={noTransactionsSelected}
+          >Delete Transactions</Button>
+        </Popconfirm>
     );
   }
 }
