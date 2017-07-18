@@ -4,12 +4,11 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Icon, Popconfirm, Table, Tooltip } from 'antd';
 import toastr from 'toastr';
-// import styles from './Transactions.module.css';
+
 import DeleteTransactionsButton from './DeleteTransactionsButton.jsx';
 import * as transactionsActions from './TransactionsActions.js';
 
-
-const mapData = (data) => data.map(transaction => ({
+const mapTransactionData = (data) => data.map(transaction => ({
   key: transaction._id,
   amount: transaction.amount,
   category: transaction.category,
@@ -92,7 +91,7 @@ class TransactionsList extends Component {
       },
     };
     const { accountTransactions, uploadedTransactions } = this.props;
-    const data = mapData(accountTransactions);
+    const data = mapTransactionData(accountTransactions);
 
     return (
       <div>

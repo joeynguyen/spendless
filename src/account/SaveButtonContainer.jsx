@@ -22,14 +22,14 @@ class SaveButtonContainer extends Component {
       });
   }
   render() {
-    // don't show this button unless there are uploaded transactions
-    if (this.props.uploadedTransactions.length === 0) {
-      return null;
-    }
+    const noTransactionsUploaded = (this.props.uploadedTransactions.length === 0);
+
     return (
       <Button
         type="primary"
+        size="large"
         onClick={this.handleSave}
+        disabled={noTransactionsUploaded}
       >Save Transactions</Button>
     );
   }
