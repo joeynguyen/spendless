@@ -16,6 +16,7 @@ const ManageAccounts = ({ accounts, actions, manageAccountsVisible }) => {
   )];
   return (
     <Modal
+      id="ManageAccounts"
       closable
       maskClosable={false}
       visible={manageAccountsVisible}

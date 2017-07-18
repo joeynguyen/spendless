@@ -5,6 +5,7 @@ import { Alert, Modal } from 'antd';
 const UnsavedWarning = ({ localHandleAlertStay, localHandleAlertLeave, show }) => {
   return (
     <Modal
+      id="UnsavedWarning"
       closable={false}
       visible={show}
       cancelText="No, stay on this page"

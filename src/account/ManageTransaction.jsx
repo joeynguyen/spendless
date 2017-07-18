@@ -26,6 +26,7 @@ const ManageTransaction = ({ form, manageType = 'add', manageTransactionVisible,
 
   return (
     <Modal
+      id="ManageTransaction"
       closable
       maskClosable={false}
       visible={manageTransactionVisible}
