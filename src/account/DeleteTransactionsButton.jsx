@@ -29,15 +29,13 @@ class DeleteTransactionsButton extends Component {
       });
   }
   render() {
-    // don't show this button unless there are selected transactions
-    if (this.props.selectedTransactionsIds.length === 0) {
-      return null;
-    }
+    const noTransactionsSelected = (this.props.selectedTransactionsIds.length === 0);
 
     return (
       <Button
         type="danger"
         size="large"
+        disabled={noTransactionsSelected}
         onClick={() => this.handleDelete(this.props.selectedTransactionsIds)}
       >Delete Transactions</Button>
     );
