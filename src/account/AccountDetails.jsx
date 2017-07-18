@@ -4,7 +4,6 @@ import { Col, Row } from 'antd';
 
 import FileUpload from './FileUpload.jsx';
 import SaveButtonContainer from './SaveButtonContainer.jsx';
-import DeleteTransactionsButton from './DeleteTransactionsButton.jsx';
 import AddTransactionButton from './AddTransactionButton.jsx';
 import { getCreditIcon } from '../utils/icons.js';
 import styles from './Account.module.css';
@@ -27,8 +26,6 @@ const AccountDetails = ({ accounts, activeAccountId }) => {
         <Col span={6}>
           <FileUpload accountId={activeAccountId} />
           <SaveButtonContainer />
-          <br />
-          <DeleteTransactionsButton />
         </Col>
         <Col span={6}>
           <AddTransactionButton />

@@ -9,15 +9,16 @@ import * as transactionsActions from './TransactionsActions.js';
 class DeleteTransactionsButton extends Component {
   static propTypes = {
     accountTransactions: PropTypes.arrayOf(PropTypes.object),
-    manageTransactionsListForm: PropTypes.object.isRequired,
+    // manageTransactionsListForm: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired,
+    selectedTransactionsIds: PropTypes.array.isRequired,
   }
 
   handleDelete = (selectedIds) => {
     const selectedTransactions = selectedIds.map(id => {
       // find transaction objects that correspond to each selected id
       const transactionObject = this.props.accountTransactions.find(transaction => transaction._id === id);
-      // mark transaction object as ready for deletion
+      // mark transaction object as ready for deletion for PouchDB
       return Object.assign({}, transactionObject, {_deleted: true});
     });
 
@@ -29,21 +30,16 @@ class DeleteTransactionsButton extends Component {
       });
   }
   render() {
-    // find Ids of each selected transaction
-    const selectedTransactionsIds = Object.keys(this.props.manageTransactionsListForm).filter(item => {
-      const currentKey = this.props.manageTransactionsListForm[item];
-      return (currentKey !== undefined && currentKey._isFieldValue && currentKey.value);
-    });
-
     // don't show this button unless there are selected transactions
-    if (selectedTransactionsIds.length === 0) {
+    if (this.props.selectedTransactionsIds.length === 0) {
       return null;
     }
 
     return (
       <Button
         type="danger"
-        onClick={() => this.handleDelete(selectedTransactionsIds)}
+        size="large"
+        onClick={() => this.handleDelete(this.props.selectedTransactionsIds)}
       >Delete Transactions</Button>
     );
   }
@@ -52,7 +48,7 @@ class DeleteTransactionsButton extends Component {
 function mapStateToProps(state) {
   return {
     accountTransactions: state.accountTransactions,
-    manageTransactionsListForm: state.form.ManageTransactionsList,
+    // manageTransactionsListForm: state.form.ManageTransactionsList,
   };
 }
 

@@ -1,41 +1,71 @@
 import PropTypes from 'prop-types';
-import React from 'react';
-import TransactionsItemContainer from './TransactionsItemContainer.jsx';
-import styles from './Transactions.module.css';
+import React, { Component } from 'react';
+import { Icon, Table, Tooltip } from 'antd';
+// import TransactionsItemContainer from './TransactionsItemContainer.jsx';
+// import styles from './Transactions.module.css';
+import DeleteTransactionsButton from './DeleteTransactionsButton.jsx';
 
-const TransactionsList = ({ accountTransactions, fields, uploadedTransactions }) => {
-  return (
-    <table className={styles['transactions-table'] + ' table table-hover'}>
-      <thead>
-        <tr>
-          <th><input type="checkbox" /></th>
-          <th>Date</th>
-          <th>Description</th>
-          <th>Category</th>
-          <th>Amount</th>
-          <th>Notes</th>
-        </tr>
-      </thead>
-      <tbody>
-        {
-          uploadedTransactions.map(itemData =>
-            <TransactionsItemContainer key={itemData._id} transaction={itemData} unsaved />
-          )
-        }
-        {
-          accountTransactions.map(itemData =>
-            <TransactionsItemContainer key={itemData._id} transaction={itemData} field={fields[itemData._id]} unsaved={false} />
-          )
-        }
-      </tbody>
-    </table>
-  );
-};
+const renderColumns = [
+  {
+    title: 'Date',
+    dataIndex: 'date',
+  },
+  {
+    title: 'Description',
+    dataIndex: 'description',
+  },
+  {
+    title: 'Category',
+    dataIndex: 'category',
+  },
+  {
+    title: 'Amount',
+    dataIndex: 'amount',
+  },
+  {
+    title: 'Notes',
+    dataIndex: 'notes',
+    render: text => text ? (<Tooltip placement="left" title={text}>
+      <Icon type="file-text" style={{ fontSize: 14 }} />
+    </Tooltip>) : null
+  },
+];
+
+const mapData = (data) => data.map(transaction => ({
+  key: transaction._id,
+  amount: transaction.amount,
+  category: transaction.category,
+  date: transaction.date,
+  description: transaction.description,
+  notes: transaction.notes,
+}));
+
+class TransactionsList extends Component {
+  state = {
+    selectedTransactionsIds: [],
+  };
+  render() {
+    const rowSelection = {
+      onChange: (selectedRowKeys, selectedRows) => {
+        console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+        this.setState({ selectedTransactionsIds: selectedRowKeys });
+      },
+    };
+    const { accountTransactions, uploadedTransactions } = this.props;
+    const data = mapData(accountTransactions);
+
+    return (
+      <div>
+        <DeleteTransactionsButton selectedTransactionsIds={this.state.selectedTransactionsIds} />
+        <Table rowSelection={rowSelection} columns={renderColumns} dataSource={data} />
+      </div>
+    );
+  }
+}
 
 TransactionsList.propTypes = {
   uploadedTransactions: PropTypes.arrayOf(PropTypes.object),
   accountTransactions: PropTypes.arrayOf(PropTypes.object),
-  fields: PropTypes.object.isRequired,
 };
 
 export default TransactionsList;
