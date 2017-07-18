@@ -2,7 +2,8 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Icon, Table, Tooltip } from 'antd';
+import { Icon, Popconfirm, Table, Tooltip } from 'antd';
+import toastr from 'toastr';
 // import styles from './Transactions.module.css';
 import DeleteTransactionsButton from './DeleteTransactionsButton.jsx';
 import * as transactionsActions from './TransactionsActions.js';
@@ -27,6 +28,17 @@ class TransactionsList extends Component {
     // find transaction that corresponds to id
     const thisTransaction = this.props.accountTransactions.find(transaction => transaction._id === transactionId);
     this.props.actions.toggleManageTransaction(thisTransaction);
+  }
+
+  handleDeleteTransaction = (transactionId) => {
+    const thisTransaction = this.props.accountTransactions.find(transaction => transaction._id === transactionId);
+    this.props.actions.deleteAccountTransactions(thisTransaction)
+      .then(() => {
+        toastr.success('Transaction deleted', null, {timeOut: 1500});
+      })
+      .catch(() => {
+        toastr.error('Restart the application and retry', 'Error deleting transaction', {timeOut: 1500});
+      });
   }
 
   render() {
@@ -61,7 +73,15 @@ class TransactionsList extends Component {
           <span>
             <a href="#" onClick={(e) => this.handleEditClick(e, record.key)}>Edit</a>
             <span className="ant-divider" />
-            <a href="#">Delete</a>
+            <Popconfirm
+              onConfirm={() => this.handleDeleteTransaction(record.key)}
+              title="Delete transaction?"
+              okText="Yes"
+              cancelText="No"
+              placement="left"
+            >
+              <a href="#">Delete</a>
+            </Popconfirm>
           </span>
         )
       },
