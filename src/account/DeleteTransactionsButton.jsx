@@ -9,7 +9,6 @@ import * as transactionsActions from './TransactionsActions.js';
 class DeleteTransactionsButton extends Component {
   static propTypes = {
     accountTransactions: PropTypes.arrayOf(PropTypes.object),
-    // manageTransactionsListForm: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired,
     selectedTransactionsIds: PropTypes.array.isRequired,
   }
@@ -48,7 +47,6 @@ class DeleteTransactionsButton extends Component {
 function mapStateToProps(state) {
   return {
     accountTransactions: state.accountTransactions,
-    // manageTransactionsListForm: state.form.ManageTransactionsList,
   };
 }
 

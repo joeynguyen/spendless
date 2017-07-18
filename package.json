@@ -108,7 +108,6 @@
     "react-router-dom": "4.1.1",
     "react-router-redux": "5.0.0-alpha.6",
     "redux": "3.5.2",
-    "redux-form": "5.3.3",
     "redux-thunk": "2.0.1",
     "toastr": "2.1.2"
   },
