@@ -33,6 +33,7 @@ class TransactionsListContainer extends Component {
       <TransactionsList
         accountTransactions={this.props.accountTransactions}
         uploadedTransactions={this.props.uploadedTransactions}
+        actions={this.props.actions}
       />
     );
   }

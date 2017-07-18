@@ -1,12 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import { Icon, Popconfirm, Table, Tooltip } from 'antd';
 import toastr from 'toastr';
 
 import DeleteTransactionsButton from './DeleteTransactionsButton.jsx';
-import * as transactionsActions from './TransactionsActions.js';
 
 const mapTransactionData = (data) => data.map(transaction => ({
   key: transaction._id,
@@ -108,10 +105,4 @@ TransactionsList.propTypes = {
   uploadedTransactions: PropTypes.arrayOf(PropTypes.object),
 };
 
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(transactionsActions, dispatch)
-  };
-}
-
-export default connect(null, mapDispatchToProps)(TransactionsList);
+export default TransactionsList;
