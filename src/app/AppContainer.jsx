@@ -13,7 +13,7 @@ class AppContainer extends Component {
     children: PropTypes.element.isRequired,
   }
   static contextTypes = {
-    router: React.PropTypes.object,
+    router: PropTypes.object,
   }
   render() {
     return (
