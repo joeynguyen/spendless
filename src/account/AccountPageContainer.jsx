@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { toggleUnsavedWarning } from './AccountsActions.js';
+import { toggleUnsavedWarning, toggleUploadedTransactionsModal } from './AccountsActions.js';
 import { storeNextRoutePath } from '../app/AppActions.js';
 import AccountPage from './AccountPage.jsx';
 
@@ -15,6 +15,7 @@ class AccountPageContainer extends Component {
     match: PropTypes.object.isRequired,
     // route: PropTypes.object.isRequired,
     uploadedTransactions: PropTypes.arrayOf(PropTypes.object),
+    uploadedTransactionsModalVisible: PropTypes.bool.isRequired,
     unsavedWarningVisible: PropTypes.bool.isRequired,
     nextRoutePath: PropTypes.string.isRequired
   }
@@ -34,6 +35,10 @@ class AccountPageContainer extends Component {
 
       // re-reset subscription to router leave event after route changed
       // this.context.router.setRouteLeaveHook(this.props.route, this.routerWillLeave);
+    }
+    if (this.props.uploadedTransactions.length !== nextProps.uploadedTransactions.length
+      && nextProps.uploadedTransactions.length > 0) {
+      this.props.actions.toggleUploadedTransactionsModal();
     }
   }
 
@@ -58,6 +63,7 @@ class AccountPageContainer extends Component {
       // return false to prevent a transition
       return false;
     }
+    return true;
   }
 
   handleAlertStay = () => {
@@ -80,6 +86,7 @@ class AccountPageContainer extends Component {
         activeAccountId={this.props.activeAccountId}
         manageTransactionVisible={this.props.manageTransactionVisible}
         unsavedWarningVisible={this.props.unsavedWarningVisible}
+        uploadedTransactionsModalVisible={this.props.uploadedTransactionsModalVisible}
         localHandleAlertStay={this.handleAlertStay}
         localHandleAlertLeave={this.handleAlertLeave}
       />
@@ -94,6 +101,7 @@ function mapStateToProps(state) {
     manageTransactionVisible: state.manageTransactionVisible,
     unsavedWarningVisible: state.unsavedWarningVisible,
     uploadedTransactions: state.uploadedTransactions,
+    uploadedTransactionsModalVisible: state.uploadedTransactionsModalVisible,
     nextRoutePath: state.nextRoutePath,
   };
 }
@@ -102,6 +110,7 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
       toggleUnsavedWarning: toggleUnsavedWarning,
+      toggleUploadedTransactionsModal: toggleUploadedTransactionsModal,
       storeNextRoutePath: storeNextRoutePath,
     }, dispatch)
   };

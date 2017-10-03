@@ -6,12 +6,14 @@ import AccountDetails from './AccountDetails.jsx';
 import TransactionsListContainer from './TransactionsListContainer.jsx';
 import ManageTransactionContainer from './ManageTransactionContainer.jsx';
 import UnsavedWarning from './UnsavedWarning.jsx';
+import UploadedTransactionsContainer from './UploadedTransactionsContainer.jsx';
 
 const AccountPage = ({
   accounts,
   activeAccountId,
   manageTransactionVisible,
   unsavedWarningVisible,
+  uploadedTransactionsModalVisible,
   localHandleAlertStay,
   localHandleAlertLeave
 }) => {
@@ -26,7 +28,8 @@ const AccountPage = ({
     );
   }
 
-  const manageTransactionContainer = manageTransactionVisible ? <ManageTransactionContainer /> : null;
+  const manageTransactionModal = manageTransactionVisible ? <ManageTransactionContainer /> : null;
+  const uploadedTransactionsModal = uploadedTransactionsModalVisible ? <UploadedTransactionsContainer /> : null;
 
   return (
     <div>
@@ -40,7 +43,8 @@ const AccountPage = ({
         localHandleAlertStay={localHandleAlertStay}
         localHandleAlertLeave={localHandleAlertLeave}
       />
-      { manageTransactionContainer }
+      { manageTransactionModal }
+      { uploadedTransactionsModal }
     </div>
   );
 };
@@ -50,6 +54,7 @@ AccountPage.propTypes = {
   activeAccountId: PropTypes.string.isRequired,
   manageTransactionVisible: PropTypes.bool.isRequired,
   unsavedWarningVisible: PropTypes.bool.isRequired,
+  uploadedTransactionsModalVisible: PropTypes.bool.isRequired,
   localHandleAlertStay: PropTypes.func.isRequired,
   localHandleAlertLeave: PropTypes.func.isRequired,
 };
