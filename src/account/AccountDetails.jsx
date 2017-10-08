@@ -3,7 +3,6 @@ import React from 'react';
 import { Col, Row } from 'antd';
 
 import FileUpload from './FileUpload.jsx';
-import SaveButtonContainer from './SaveButtonContainer.jsx';
 import AddTransactionButton from './AddTransactionButton.jsx';
 import { getCreditIcon } from '../utils/icons.js';
 import styles from './Account.module.css';
@@ -25,7 +24,6 @@ const AccountDetails = ({ accounts, activeAccountId, uploadedTransactionsExist }
       <Row>
         <Col span={6}>
           <FileUpload accountId={activeAccountId} uploadedTransactionsExist={uploadedTransactionsExist} />
-          <SaveButtonContainer />
         </Col>
         <Col span={6}>
           <AddTransactionButton />
