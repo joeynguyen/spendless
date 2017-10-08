@@ -89,7 +89,7 @@
     "webpack-merge": "4.1.0"
   },
   "dependencies": {
-    "antd": "2.12.0",
+    "antd": "2.12.8",
     "electron-debug": "1.1.0",
     "font-awesome": "4.5.0",
     "jquery": "2.2.3",
