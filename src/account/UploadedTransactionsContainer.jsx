@@ -2,14 +2,13 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { toggleUploadedTransactionsModal } from './AccountsActions.js';
+import { resetUploadedTransactions } from './TransactionsActions.js';
 import UploadedTransactions from './UploadedTransactions.jsx';
 
 class UploadedTransactionsContainer extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
     activeAccountId: PropTypes.string,
-    uploadedTransactionsModalVisible: PropTypes.bool.isRequired,
     uploadedTransactions: PropTypes.arrayOf(PropTypes.object),
   }
 
@@ -17,9 +16,8 @@ class UploadedTransactionsContainer extends Component {
     return (
       <UploadedTransactions
         activeAccountId={this.props.activeAccountId}
-        uploadedTransactionsModalVisible={this.props.uploadedTransactionsModalVisible}
         uploadedTransactions={this.props.uploadedTransactions}
-        toggleUploadedTransactionsModal={this.props.actions.toggleUploadedTransactionsModal}
+        resetUploadedTransactions={this.props.actions.resetUploadedTransactions}
       />
     );
   }
@@ -28,7 +26,6 @@ class UploadedTransactionsContainer extends Component {
 function mapStateToProps(state) {
   return {
     activeAccountId: state.activeAccountId,
-    uploadedTransactionsModalVisible: state.uploadedTransactionsModalVisible,
     uploadedTransactions: state.uploadedTransactions,
   };
 }
@@ -36,7 +33,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
-      toggleUploadedTransactionsModal: toggleUploadedTransactionsModal,
+      resetUploadedTransactions: resetUploadedTransactions,
     }, dispatch)
   };
 }

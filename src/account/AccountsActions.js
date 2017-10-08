@@ -4,7 +4,6 @@ export const LOAD_ACCOUNTS_SUCCESS = 'LOAD_ACCOUNTS_SUCCESS';
 export const UPDATE_ACCOUNTS = 'UPDATE_ACCOUNTS';
 export const REMOVE_ACCOUNT = 'REMOVE_ACCOUNT';
 export const TOGGLE_UNSAVED_WARNING = 'TOGGLE_UNSAVED_WARNING';
-export const TOGGLE_UPLOADED_TRANSACTIONS_MODAL = 'TOGGLE_UPLOADED_TRANSACTIONS_MODAL';
 
 // Load in UI the current list of accounts
 function loadAccountsSuccess(accounts) {
@@ -35,13 +34,6 @@ export function toggleUnsavedWarning() {
     type: TOGGLE_UNSAVED_WARNING
   };
 }
-
-export function toggleUploadedTransactionsModal() {
-  return {
-    type: TOGGLE_UPLOADED_TRANSACTIONS_MODAL
-  };
-}
-
 
 export function saveAccount(account) {
   return function(dispatch) {

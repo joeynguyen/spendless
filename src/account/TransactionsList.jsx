@@ -87,7 +87,7 @@ class TransactionsList extends Component {
         this.setState({ selectedTransactionsIds: selectedRowKeys });
       },
     };
-    const { accountTransactions, uploadedTransactions } = this.props;
+    const { accountTransactions } = this.props;
     const data = mapTransactionData(accountTransactions);
 
     return (
@@ -102,7 +102,6 @@ class TransactionsList extends Component {
 TransactionsList.propTypes = {
   accountTransactions: PropTypes.arrayOf(PropTypes.object),
   actions: PropTypes.object.isRequired,
-  uploadedTransactions: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default TransactionsList;
