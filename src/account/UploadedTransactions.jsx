@@ -29,14 +29,14 @@ const renderColumns = [
   },
 ];
 
-const UploadedTransactions = ({ uploadedTransactions, resetUploadedTransactions }) => {
+const UploadedTransactions = ({ uploadedTransactions, resetUploadedTransactions, handleSave }) => {
   const data = mapTransactionData(uploadedTransactions);
   const modalFooter = [(
     <Button
       key="confirm"
       type="primary"
-      htmlType="submit"
-      form="uploaded-transactions"
+      id="save-uploaded-transactions"
+      onClick={handleSave}
     >Save</Button>
   ), (
     <Button
@@ -65,6 +65,8 @@ const UploadedTransactions = ({ uploadedTransactions, resetUploadedTransactions 
 
 UploadedTransactions.propTypes = {
   uploadedTransactions: PropTypes.arrayOf(PropTypes.object),
+  resetUploadedTransactions: PropTypes.func.isRequired,
+  handleSave: PropTypes.func.isRequired,
 };
 
 export default UploadedTransactions;

@@ -2,7 +2,9 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { resetUploadedTransactions } from './TransactionsActions.js';
+import toastr from 'toastr';
+
+import { resetUploadedTransactions, saveAccountTransactions } from './TransactionsActions.js';
 import UploadedTransactions from './UploadedTransactions.jsx';
 
 class UploadedTransactionsContainer extends Component {
@@ -11,6 +13,16 @@ class UploadedTransactionsContainer extends Component {
     activeAccountId: PropTypes.string,
     uploadedTransactions: PropTypes.arrayOf(PropTypes.object),
   }
+  handleSave = () => {
+    this.props.actions.saveAccountTransactions(this.props.uploadedTransactions)
+      .then(() => {
+        toastr.success('Uploaded transactions saved', null, {timeOut: 1500});
+        // Remove unsaved transactions from UI
+        this.props.actions.resetUploadedTransactions();
+      }).catch(() => {
+        toastr.error('Restart the application and retry', 'Error adding transactions', {timeOut: 1500});
+      });
+  }
 
   render() {
     return (
@@ -18,6 +30,7 @@ class UploadedTransactionsContainer extends Component {
         activeAccountId={this.props.activeAccountId}
         uploadedTransactions={this.props.uploadedTransactions}
         resetUploadedTransactions={this.props.actions.resetUploadedTransactions}
+        handleSave={this.handleSave}
       />
     );
   }
@@ -33,7 +46,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
-      resetUploadedTransactions: resetUploadedTransactions,
+      resetUploadedTransactions,
+      saveAccountTransactions,
     }, dispatch)
   };
 }
