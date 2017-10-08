@@ -70,7 +70,6 @@ class ManageTransactionContainer extends Component {
     return (
       <ManageTransaction
         form={this.props.form}
-        initialValues={this.props.initialValues}
         manageType={manageType}
         manageTransactionVisible={this.props.manageTransactionVisible}
         toggleManageTransaction={this.toggleManageTransaction}
@@ -104,7 +103,7 @@ function mapStateToProps(state) {
     activeAccountId: state.activeAccountId,
     activeTransaction: state.activeTransaction,
     manageTransactionVisible: state.manageTransactionVisible,
-    initialValues: initialValues,
+    initialValues,
   };
 }
 

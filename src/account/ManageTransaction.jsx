@@ -79,7 +79,6 @@ const ManageTransaction = ({ form, manageType = 'add', manageTransactionVisible,
 
 ManageTransaction.propTypes = {
   form: PropTypes.object.isRequired,
-  initialValues: PropTypes.object.isRequired,
   manageTransactionVisible: PropTypes.bool.isRequired,
   manageType: PropTypes.string.isRequired,
   toggleManageTransaction: PropTypes.func.isRequired,
