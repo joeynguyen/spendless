@@ -11,12 +11,16 @@ class FileUpload extends Component {
   static propTypes = {
     accountId: PropTypes.string.isRequired,
     actions: PropTypes.object.isRequired,
+    uploadedTransactionsExist: PropTypes.bool.isRequired,
   }
   state = {
     uploadedFile: '',
   }
   componentWillReceiveProps(nextProps) {
-    if (nextProps.accountId !== this.props.accountId) {
+    if (
+      nextProps.uploadedTransactionsExist !== this.props.uploadedTransactionsExist
+      && nextProps.uploadedTransactionsExist === false
+    ) {
       this.setState({ uploadedFile: '' });
     }
   }

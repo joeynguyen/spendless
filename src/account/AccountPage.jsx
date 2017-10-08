@@ -13,7 +13,7 @@ const AccountPage = ({
   activeAccountId,
   manageTransactionVisible,
   unsavedWarningVisible,
-  uploadedTransactionsModalVisible,
+  uploadedTransactionsExist,
   localHandleAlertStay,
   localHandleAlertLeave
 }) => {
@@ -29,13 +29,14 @@ const AccountPage = ({
   }
 
   const manageTransactionModal = manageTransactionVisible ? <ManageTransactionContainer /> : null;
-  const uploadedTransactionsModal = uploadedTransactionsModalVisible ? <UploadedTransactionsContainer /> : null;
+  const uploadedTransactionsModal = uploadedTransactionsExist ? <UploadedTransactionsContainer /> : null;
 
   return (
     <div>
       <AccountDetails
         accounts={accounts}
         activeAccountId={activeAccountId}
+        uploadedTransactionsExist={uploadedTransactionsExist}
       />
       <TransactionsListContainer activeAccountId={activeAccountId} />
       <UnsavedWarning
@@ -54,7 +55,7 @@ AccountPage.propTypes = {
   activeAccountId: PropTypes.string.isRequired,
   manageTransactionVisible: PropTypes.bool.isRequired,
   unsavedWarningVisible: PropTypes.bool.isRequired,
-  uploadedTransactionsModalVisible: PropTypes.bool.isRequired,
+  uploadedTransactionsExist: PropTypes.bool.isRequired,
   localHandleAlertStay: PropTypes.func.isRequired,
   localHandleAlertLeave: PropTypes.func.isRequired,
 };

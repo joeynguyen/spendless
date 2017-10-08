@@ -81,7 +81,7 @@ class AccountPageContainer extends Component {
         activeAccountId={this.props.activeAccountId}
         manageTransactionVisible={this.props.manageTransactionVisible}
         unsavedWarningVisible={this.props.unsavedWarningVisible}
-        uploadedTransactionsModalVisible={this.props.uploadedTransactions.length > 0}
+        uploadedTransactionsExist={this.props.uploadedTransactions.length > 0}
         localHandleAlertStay={this.handleAlertStay}
         localHandleAlertLeave={this.handleAlertLeave}
       />

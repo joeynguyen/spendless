@@ -8,7 +8,7 @@ import AddTransactionButton from './AddTransactionButton.jsx';
 import { getCreditIcon } from '../utils/icons.js';
 import styles from './Account.module.css';
 
-const AccountDetails = ({ accounts, activeAccountId }) => {
+const AccountDetails = ({ accounts, activeAccountId, uploadedTransactionsExist }) => {
   const activeAccount = accounts.find(account => account._id === activeAccountId);
   let icon = null;
   if (activeAccount && activeAccount.type === 'creditcard') {
@@ -24,7 +24,7 @@ const AccountDetails = ({ accounts, activeAccountId }) => {
       </div>
       <Row>
         <Col span={6}>
-          <FileUpload accountId={activeAccountId} />
+          <FileUpload accountId={activeAccountId} uploadedTransactionsExist={uploadedTransactionsExist} />
           <SaveButtonContainer />
         </Col>
         <Col span={6}>
@@ -37,6 +37,7 @@ const AccountDetails = ({ accounts, activeAccountId }) => {
 AccountDetails.propTypes = {
   accounts: PropTypes.arrayOf(PropTypes.object),
   activeAccountId: PropTypes.string.isRequired,
+  uploadedTransactionsExist: PropTypes.bool.isRequired,
 };
 
 export default AccountDetails;
