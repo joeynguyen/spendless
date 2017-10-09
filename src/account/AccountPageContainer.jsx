@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { resetCheckedTransactions } from './TransactionsActions.js';
 import { toggleUnsavedWarning } from './AccountsActions.js';
 import { storeNextRoutePath } from '../app/AppActions.js';
 import AccountPage from './AccountPage.jsx';
@@ -11,6 +10,7 @@ class AccountPageContainer extends Component {
   static propTypes = {
     accounts: PropTypes.arrayOf(PropTypes.object),
     actions: PropTypes.object.isRequired,
+    activeAccountId: PropTypes.string,
     manageTransactionVisible: PropTypes.bool.isRequired,
     match: PropTypes.object.isRequired,
     // route: PropTypes.object.isRequired,
@@ -31,8 +31,6 @@ class AccountPageContainer extends Component {
   componentWillReceiveProps(nextProps) {
     // handle changing routes
     if (this.props.match.params.id !== nextProps.match.params.id) {
-      // remove transactions from ManageTransactionsList redux-form
-      this.props.actions.resetCheckedTransactions();
 
       // re-reset subscription to router leave event after route changed
       // this.context.router.setRouteLeaveHook(this.props.route, this.routerWillLeave);
@@ -60,6 +58,7 @@ class AccountPageContainer extends Component {
       // return false to prevent a transition
       return false;
     }
+    return true;
   }
 
   handleAlertStay = () => {
@@ -78,8 +77,11 @@ class AccountPageContainer extends Component {
   render() {
     return (
       <AccountPage
+        accounts={this.props.accounts}
+        activeAccountId={this.props.activeAccountId}
         manageTransactionVisible={this.props.manageTransactionVisible}
         unsavedWarningVisible={this.props.unsavedWarningVisible}
+        uploadedTransactionsExist={this.props.uploadedTransactions.length > 0}
         localHandleAlertStay={this.handleAlertStay}
         localHandleAlertLeave={this.handleAlertLeave}
       />
@@ -90,6 +92,7 @@ class AccountPageContainer extends Component {
 function mapStateToProps(state) {
   return {
     accounts: state.accounts,
+    activeAccountId: state.activeAccountId,
     manageTransactionVisible: state.manageTransactionVisible,
     unsavedWarningVisible: state.unsavedWarningVisible,
     uploadedTransactions: state.uploadedTransactions,
@@ -100,7 +103,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
-      resetCheckedTransactions: resetCheckedTransactions,
       toggleUnsavedWarning: toggleUnsavedWarning,
       storeNextRoutePath: storeNextRoutePath,
     }, dispatch)

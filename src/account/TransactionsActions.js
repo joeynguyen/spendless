@@ -6,7 +6,6 @@ export const ADD_UPLOADED_TRANSACTIONS = 'ADD_UPLOADED_TRANSACTIONS';
 export const REMOVE_ACCOUNT_TRANSACTIONS = 'REMOVE_ACCOUNT_TRANSACTIONS';
 export const UPDATE_ACCOUNT_TRANSACTIONS = 'UPDATE_ACCOUNT_TRANSACTIONS';
 export const RESET_UPLOADED_TRANSACTIONS = 'RESET_UPLOADED_TRANSACTIONS';
-export const RESET_CHECKED_TRANSACTIONS = 'RESET_CHECKED_TRANSACTIONS';
 export const TOGGLE_MANAGE_TRANSACTION = 'TOGGLE_MANAGE_TRANSACTION';
 
 function loadAccountTransactions(accountTransactions) {
@@ -86,12 +85,6 @@ export function resetUploadedTransactions() {
   return {
     type: RESET_UPLOADED_TRANSACTIONS,
     payload: []
-  };
-}
-
-export function resetCheckedTransactions() {
-  return {
-    type: RESET_CHECKED_TRANSACTIONS,
   };
 }
 

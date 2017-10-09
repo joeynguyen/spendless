@@ -1,18 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { Col, Row } from 'antd';
+
 import FileUpload from './FileUpload.jsx';
-import SaveButtonContainer from './SaveButtonContainer.jsx';
-import DeleteTransactionsButton from './DeleteTransactionsButton.jsx';
 import AddTransactionButton from './AddTransactionButton.jsx';
 import { getCreditIcon } from '../utils/icons.js';
 import styles from './Account.module.css';
 
-const AccountDetails = ({ accounts, activeAccountId }) => {
-  // show loading spinner until accounts are loaded
-  if (accounts.length < 1) {
-    return <div><p className="text-center"><i className="fa fa-cog fa-spin fa-3x"></i></p></div>;
-  }
-
+const AccountDetails = ({ accounts, activeAccountId, uploadedTransactionsExist }) => {
   const activeAccount = accounts.find(account => account._id === activeAccountId);
   let icon = null;
   if (activeAccount && activeAccount.type === 'creditcard') {
@@ -21,23 +16,26 @@ const AccountDetails = ({ accounts, activeAccountId }) => {
   }
 
   return (
-    <div className="col-xs-12">
+    <div>
       <div className="header">
         <h3 className={styles.header}>{icon} {activeAccount.name} <br />
           <small>{activeAccount.company}</small></h3>
       </div>
-      <FileUpload accountId={activeAccountId} />
-      <SaveButtonContainer />
-      {' '}
-      <DeleteTransactionsButton />
-      <br />
-      <AddTransactionButton />
+      <Row>
+        <Col span={6}>
+          <FileUpload accountId={activeAccountId} uploadedTransactionsExist={uploadedTransactionsExist} />
+        </Col>
+        <Col span={6}>
+          <AddTransactionButton />
+        </Col>
+      </Row>
     </div>
   );
 };
 AccountDetails.propTypes = {
   accounts: PropTypes.arrayOf(PropTypes.object),
   activeAccountId: PropTypes.string.isRequired,
+  uploadedTransactionsExist: PropTypes.bool.isRequired,
 };
 
 export default AccountDetails;

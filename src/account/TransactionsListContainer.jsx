@@ -3,13 +3,14 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as transactionsActions from './TransactionsActions.js';
-import TransactionsListFormContainer from './TransactionsListFormContainer.jsx';
+import TransactionsList from './TransactionsList.jsx';
 
-class TransactionListContainer extends Component {
+class TransactionsListContainer extends Component {
   static propTypes = {
     activeAccountId: PropTypes.string.isRequired,
     accountTransactions: PropTypes.arrayOf(PropTypes.object),
     actions: PropTypes.object.isRequired,
+    uploadedTransactions: PropTypes.arrayOf(PropTypes.object),
   }
 
   componentDidMount() {
@@ -28,22 +29,11 @@ class TransactionListContainer extends Component {
   }
 
   render() {
-    // create an initialValues prop to pass to component that uses redux-form
-    // need to do this so that these key value pairs are in state when form is initialized
-    // set the checkboxes to not be checked by default
-    const formCheckboxInitialValues = this.props.accountTransactions.reduce((previousValue, currentValue) => {
-      return Object.assign(previousValue, {[currentValue._id.toString()]: false});
-    }, {});
-    const formInitialValues = {
-      initialValues: formCheckboxInitialValues
-    };
-    const fields = this.props.accountTransactions.map(transaction => transaction._id);
-
     return (
-      <TransactionsListFormContainer
+      <TransactionsList
         accountTransactions={this.props.accountTransactions}
-        fields={fields}
-        {...formInitialValues}
+        uploadedTransactions={this.props.uploadedTransactions}
+        actions={this.props.actions}
       />
     );
   }
@@ -52,7 +42,7 @@ class TransactionListContainer extends Component {
 function mapStateToProps(state) {
   return {
     accountTransactions: state.accountTransactions,
-    activeAccountId: state.activeAccountId,
+    uploadedTransactions: state.uploadedTransactions,
   };
 }
 
@@ -62,4 +52,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TransactionListContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(TransactionsListContainer);

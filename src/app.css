@@ -1,28 +1,25 @@
-.sidebar .panel-title > a:hover,
-.sidebar .panel-title > a:focus {
-  text-decoration: none;
+/*
+Adding styles here because CSS modules can't target nested class names
+http://andrewhfarmer.com/css-modules-by-example/#example-4-nested-class-names
+*/
+.add-account-form.ant-collapse .ant-collapse-item .ant-collapse-header {
+  display: inline-block;
+  height: auto;
+  line-height: initial;
+  padding-left: 0;
+}
+.add-account-form.ant-collapse .ant-collapse-item .arrow,
+.add-account-form.ant-collapse .ant-collapse-item .ant-collapse-header[aria-expanded="true"] .arrow {
+  display: none;
 }
 
-/* for React-Bootstrap Modal to work with nested modals */
-.modal {
-  z-index: 1040;
-}
-.horizontal-button-group .input-group-btn:last-child > .btn {
-  border-radius: 4px;
+.add-account-form.ant-collapse-borderless > .ant-collapse-item > .ant-collapse-content {
+  border-top: none;
 }
 
-/* placeholder for now until react-bootstrap is updated to newer version that does this by default
-this is used so that user can't change routes to same route which resets uploadedTransactions state */
-.list-group-item.disabled,
-.list-group-item.disabled:hover,
-.list-group-item.disabled:focus {
-  pointer-events: none;
-}
-
-/* Adding style here because CSS modules can't target child class names */
 .toggle-account-setting-icon i {
   cursor: pointer;
-  margin-top: 10px;
+  font-size: 14px;
   animation: unRoll .1s 3;
 }
 .toggle-account-setting-icon.expanded i {
@@ -35,4 +32,16 @@ this is used so that user can't change routes to same route which resets uploade
 @keyframes unRoll {
   from { transform: rotate(0); }
   to { transform: rotate(-30deg); }
+}
+
+.well {
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  background: #f5f5f5;
+  min-height: 20px;
+  padding: 15px;
+}
+
+.float-right {
+    float: right;
 }

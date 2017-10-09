@@ -1,108 +1,89 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import { Button, DatePicker, Form, Input, Modal } from 'antd';
 
-import FieldGroup from '../custom-components/FieldGroup.jsx';
+const FormItem = Form.Item;
+const { TextArea } = Input;
 
-const ManageTransaction = ({ manageType = 'add', fields, toggleManageTransaction, pristine = true, doSubmit }) => {
-  const { date, description, category, amount, notes } = fields;
+const ManageTransaction = ({ form, manageType = 'add', manageTransactionVisible, toggleManageTransaction, doSubmit }) => {
+  const { getFieldDecorator } = form;
   const componentTitle = (manageType === 'edit') ? 'Edit Transaction' : 'Add Transaction';
+  const modalFooter = [(
+    <Button
+      key="confirm"
+      type="primary"
+      htmlType="submit"
+      form="manage-transaction"
+    >Save</Button>
+  ), (
+    <Button
+      key="cancel"
+      id="cancel-manage-transaction"
+      size="large"
+      onClick={toggleManageTransaction}
+    >Cancel</Button>
+  )];
 
   return (
-    <form onSubmit={doSubmit}>
-      <Modal.Header closeButton>
-        <Modal.Title>{ componentTitle }</Modal.Title>
-      </Modal.Header>
+    <Modal
+      id="ManageTransaction"
+      closable
+      maskClosable={false}
+      visible={manageTransactionVisible}
+      onCancel={toggleManageTransaction}
+      title={componentTitle}
+      footer={modalFooter}
+    >
+      <Form id="manage-transaction" onSubmit={doSubmit} layout="vertical">
+        <FormItem label="Description">
+          {getFieldDecorator('description', {
+            rules: [{ required: true, message: 'Enter a description' }],
+          })(
+            <Input />
+          )}
+        </FormItem>
 
-      <Modal.Body>
-        <div className="row">
-          <div className="col-xs-12">
-            <FieldGroup
-              type="text"
-              label="Description"
-              name={description.name}
-              error={description.error}
-              invalid={description.invalid}
-              touched={description.touched}
-              onBlur={description.onBlur}
-              onChange={description.onChange}
-              onFocus={description.onFocus}
-              value={description.value}
-            />
-            <FieldGroup
-              type="date"
-              label="Date"
-              name={date.name}
-              error={date.error}
-              invalid={date.invalid}
-              touched={date.touched}
-              onBlur={date.onBlur}
-              onChange={date.onChange}
-              onFocus={date.onFocus}
-              value={date.value}
-            />
-            <FieldGroup
-              type="text"
-              label="Category"
-              name={category.name}
-              error={category.error}
-              invalid={category.invalid}
-              touched={category.touched}
-              onBlur={category.onBlur}
-              onChange={category.onChange}
-              onFocus={category.onFocus}
-              value={category.value}
-            />
-            <FieldGroup
-              type="text"
-              addonBefore="$"
-              label="Amount"
-              name={amount.name}
-              error={amount.error}
-              invalid={amount.invalid}
-              touched={amount.touched}
-              onBlur={amount.onBlur}
-              onChange={amount.onChange}
-              onFocus={amount.onFocus}
-              value={amount.value}
-            />
-            <FieldGroup
-              componentClass="textarea"
-              label="Notes"
-              placeholder="Add notes for this transaction"
-              name={notes.name}
-              error={notes.error}
-              invalid={notes.invalid}
-              touched={notes.touched}
-              onBlur={notes.onBlur}
-              onChange={notes.onChange}
-              onFocus={notes.onFocus}
-              value={notes.value}
-            />
-          </div>
-        </div>
-      </Modal.Body>
+        <FormItem label="Date">
+          {getFieldDecorator('date', {
+            rules: [{ required: true, message: 'Enter a date' }],
+          })(
+            <DatePicker />
+          )}
+        </FormItem>
 
-      <Modal.Footer>
-        <div className="form-group">
-          <Button
-            bsStyle="primary"
-            type="submit"
-            disabled={pristine}
-          >Save</Button>
-          {' '}
-          <Button id="cancel-manage-transaction" onClick={toggleManageTransaction}>Cancel</Button>
-        </div>
-      </Modal.Footer>
-    </form>
+        <FormItem label="Category">
+          {getFieldDecorator('category', {
+            rules: [{ required: true, message: 'Enter a category' }],
+          })(
+            <Input />
+          )}
+        </FormItem>
+
+        <FormItem label="Amount">
+          {getFieldDecorator('amount', {
+            rules: [{ required: true, message: 'Enter an amount' }],
+          })(
+            <Input addonBefore="$" />
+          )}
+        </FormItem>
+
+        <FormItem label="Notes">
+          {getFieldDecorator('notes', {})(
+            <TextArea rows={4} placeholder="Add notes for this transaction"/>
+          )}
+        </FormItem>
+      </Form>
+    </Modal>
   );
 };
+
 ManageTransaction.propTypes = {
+  form: PropTypes.object.isRequired,
+  manageTransactionVisible: PropTypes.bool.isRequired,
   manageType: PropTypes.string.isRequired,
   toggleManageTransaction: PropTypes.func.isRequired,
-  fields: PropTypes.object.isRequired,
-  pristine: PropTypes.bool.isRequired,
   doSubmit: PropTypes.func.isRequired,
 };
 
 export default ManageTransaction;
+

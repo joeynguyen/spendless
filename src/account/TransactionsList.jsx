@@ -1,43 +1,107 @@
 import PropTypes from 'prop-types';
-import React from 'react';
-import TransactionsItemContainer from './TransactionsItemContainer.jsx';
-import styles from './Transactions.module.css';
+import React, { Component } from 'react';
+import { Icon, Popconfirm, Table, Tooltip } from 'antd';
+import toastr from 'toastr';
 
-const TransactionsList = ({ accountTransactions, fields, uploadedTransactions }) => {
-  return (
-    <div className="col-xs-12">
-      <table className={styles['transactions-table'] + ' transactions-table table table-hover'}>
-        <thead>
-          <tr>
-            <th><input type="checkbox" /></th>
-            <th>Date</th>
-            <th>Description</th>
-            <th>Category</th>
-            <th>Amount</th>
-            <th>Notes</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            uploadedTransactions.map(itemData =>
-              <TransactionsItemContainer key={itemData._id} transaction={itemData} unsaved />
-            )
-          }
-          {
-            accountTransactions.map(itemData =>
-              <TransactionsItemContainer key={itemData._id} transaction={itemData} field={fields[itemData._id]} unsaved={false} />
-            )
-          }
-        </tbody>
-      </table>
-    </div>
-  );
-};
+import DeleteTransactionsButton from './DeleteTransactionsButton.jsx';
+
+const mapTransactionData = (data) => data.map(transaction => ({
+  key: transaction._id,
+  amount: transaction.amount,
+  category: transaction.category,
+  date: transaction.date,
+  description: transaction.description,
+  notes: transaction.notes,
+}));
+
+class TransactionsList extends Component {
+  state = {
+    selectedTransactionsIds: [],
+  }
+
+  handleEditClick = (e, transactionId) => {
+    e.preventDefault();
+    // find transaction that corresponds to id
+    const thisTransaction = this.props.accountTransactions.find(transaction => transaction._id === transactionId);
+    this.props.actions.toggleManageTransaction(thisTransaction);
+  }
+
+  handleDeleteTransaction = (transactionId) => {
+    const thisTransaction = this.props.accountTransactions.find(transaction => transaction._id === transactionId);
+    this.props.actions.deleteAccountTransactions(thisTransaction)
+      .then(() => {
+        toastr.success('Transaction deleted', null, {timeOut: 1500});
+      })
+      .catch(() => {
+        toastr.error('Restart the application and retry', 'Error deleting transaction', {timeOut: 1500});
+      });
+  }
+
+  render() {
+    const renderColumns = [
+      {
+        title: 'Date',
+        dataIndex: 'date',
+      },
+      {
+        title: 'Description',
+        dataIndex: 'description',
+      },
+      {
+        title: 'Category',
+        dataIndex: 'category',
+      },
+      {
+        title: 'Amount',
+        dataIndex: 'amount',
+      },
+      {
+        title: 'Notes',
+        dataIndex: 'notes',
+        render: text => text ? (<Tooltip placement="left" title={text}>
+          <Icon type="file-text" style={{ fontSize: 14 }} />
+        </Tooltip>) : null
+      },
+      {
+        title: 'Actions',
+        dataIndex: 'actions',
+        render: (text, record) => (
+          <span>
+            <a href="#" onClick={(e) => this.handleEditClick(e, record.key)}>Edit</a>
+            <span className="ant-divider" />
+            <Popconfirm
+              onConfirm={() => this.handleDeleteTransaction(record.key)}
+              title="Delete transaction?"
+              okText="Yes"
+              cancelText="No"
+              placement="left"
+            >
+              <a href="#">Delete</a>
+            </Popconfirm>
+          </span>
+        )
+      },
+    ];
+    const rowSelection = {
+      onChange: (selectedRowKeys) => {
+        this.setState({ selectedTransactionsIds: selectedRowKeys });
+      },
+    };
+    const { accountTransactions } = this.props;
+    const data = mapTransactionData(accountTransactions);
+
+    return (
+      <div>
+        <DeleteTransactionsButton selectedTransactionsIds={this.state.selectedTransactionsIds} />
+        <Table rowSelection={rowSelection} columns={renderColumns} dataSource={data} />
+      </div>
+    );
+  }
+}
 
 TransactionsList.propTypes = {
-  uploadedTransactions: PropTypes.arrayOf(PropTypes.object),
   accountTransactions: PropTypes.arrayOf(PropTypes.object),
-  fields: PropTypes.object.isRequired,
+  actions: PropTypes.object.isRequired,
 };
 
 export default TransactionsList;
