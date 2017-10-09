@@ -5,7 +5,7 @@ Personal finance tool built with the following goals:
 * encourage users to spend less than they earn so they're able to put more money towards investments and savings, enabling them to retire comfortably and possibly even early.
 
 (How it currently looks. Still lots of work to be done...)
-<img src="assets/screenshot.jpg" />
+<img src="assets/screenshot-app-v0.3.0.jpg" />
 
 ## Install
 
@@ -35,6 +35,6 @@ npm run db-server
 
 Test the CSV upload functionality by uploading one of the sample CSV files found inside the assets directory. (Currently only supports Discover credit card CSVs. More financial institutions will be supported in the future.)
 
-*Note: requires a node version >= 4 and an npm version >= 2.*
+*Note: requires a node version >= 6 and an npm version >= 3.*
 
 Architecture for this app was inspired by react-transform-boilerplate, webpack-react-boilerplate, and electron-react-boilerplate
