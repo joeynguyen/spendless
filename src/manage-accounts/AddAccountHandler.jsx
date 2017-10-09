@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import toastr from 'toastr';
+import { message } from 'antd';
 import { Form } from 'antd';
 import * as accountsActions from '../account/AccountsActions.js';
 
@@ -21,11 +21,11 @@ export default function withAddAccountHandler(OriginalComponent) {
 
           this.props.actions.saveAccount(newAccount)
             .then(result => {
-              toastr.success(result.name + ' account added', null, {timeOut: 1500});
+              message.success(`${result.name} account added`);
               this.props.form.resetFields();
             })
             .catch(() => {
-              toastr.error('Restart the application and retry', 'Error adding account', {timeOut: 1500});
+              message.error('Restart the application and retry');
             });
         }
       });

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import moment from 'moment';
-import toastr from 'toastr';
+import { message } from 'antd';
 import { Form } from 'antd';
 import ManageTransaction from './ManageTransaction.jsx';
 import * as transactionsActions from './TransactionsActions.js';
@@ -57,11 +57,11 @@ class ManageTransactionContainer extends Component {
     // Save account in DB
     this.props.actions.saveAccountTransactions(newTransactionObj)
       .then(() => {
-        toastr.success('Transaction saved', null, {timeOut: 1500});
+        message.success('Transaction saved');
         // reset current transaction being edited to null
         this.toggleManageTransaction();
       }).catch(() => {
-        toastr.error('Restart the application and retry', 'Error updating transaction', {timeOut: 1500});
+        message.error('Restart the application and retry');
       });
   }
 

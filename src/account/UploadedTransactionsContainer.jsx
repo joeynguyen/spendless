@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import toastr from 'toastr';
+import { message } from 'antd';
 
 import { resetUploadedTransactions, saveAccountTransactions } from './TransactionsActions.js';
 import UploadedTransactions from './UploadedTransactions.jsx';
@@ -16,11 +16,11 @@ class UploadedTransactionsContainer extends Component {
   handleSave = () => {
     this.props.actions.saveAccountTransactions(this.props.uploadedTransactions)
       .then(() => {
-        toastr.success('Uploaded transactions saved', null, {timeOut: 1500});
+        message.success('Uploaded transactions saved');
         // Remove unsaved transactions from UI
         this.props.actions.resetUploadedTransactions();
       }).catch(() => {
-        toastr.error('Restart the application and retry', 'Error adding transactions', {timeOut: 1500});
+        message.error('Restart the application and retry');
       });
   }
 

@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import toastr from 'toastr';
+import { message } from 'antd';
 
 import EditBankAccount from './EditBankAccount.jsx';
 import EditCreditCardAccount from './EditCreditCardAccount.jsx';
@@ -20,10 +20,10 @@ export class EditAccountFormContainer extends Component {
   saveToDB = (accountObj) => {
     this.props.actions.saveAccount(accountObj)
       .then(result => {
-        toastr.success(result.name + ' account updated', null, {timeOut: 1500});
+        message.success(`${result.name} account updated`);
       })
       .catch(() => {
-        toastr.error('Restart the application and retry', 'Error updating account', {timeOut: 1500});
+        message.error('Restart the application and retry');
       });
   }
 
@@ -35,10 +35,10 @@ export class EditAccountFormContainer extends Component {
         if (this.props.activeAccountId === deletedAccount.id) {
           this.context.router.history.push('/');
         }
-        toastr.success(this.props.account.name + ' account deleted', null, {timeOut: 1500});
+        message.success(`${this.props.account.name} account deleted`);
       })
       .catch(() => {
-        toastr.error('Restart the application and retry', 'Error deleting account', {timeOut: 1500});
+        message.error('Restart the application and retry');
       });
   }
 

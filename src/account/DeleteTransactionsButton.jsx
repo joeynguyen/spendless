@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import toastr from 'toastr';
+import { message } from 'antd';
 import { Button, Popconfirm } from 'antd';
 import * as transactionsActions from './TransactionsActions.js';
 
@@ -23,9 +23,9 @@ class DeleteTransactionsButton extends Component {
 
     this.props.actions.deleteAccountTransactions(selectedTransactions)
       .then(() => {
-        toastr.success('Transaction(s) deleted', null, {timeOut: 1500});
+        message.success('Transaction(s) deleted');
       }).catch(() => {
-        toastr.error('Restart the application and retry', 'Error deleting transactions', {timeOut: 1500});
+        message.error('Restart the application and retry');
       });
   }
   render() {

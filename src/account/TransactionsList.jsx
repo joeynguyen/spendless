@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Icon, Popconfirm, Table, Tooltip } from 'antd';
-import toastr from 'toastr';
+import { message } from 'antd';
 
 import DeleteTransactionsButton from './DeleteTransactionsButton.jsx';
 
@@ -30,10 +30,10 @@ class TransactionsList extends Component {
     const thisTransaction = this.props.accountTransactions.find(transaction => transaction._id === transactionId);
     this.props.actions.deleteAccountTransactions(thisTransaction)
       .then(() => {
-        toastr.success('Transaction deleted', null, {timeOut: 1500});
+        message.success('Transaction deleted');
       })
       .catch(() => {
-        toastr.error('Restart the application and retry', 'Error deleting transaction', {timeOut: 1500});
+        message.error('Restart the application and retry');
       });
   }
 
