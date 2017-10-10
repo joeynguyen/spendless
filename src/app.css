@@ -1,3 +1,4 @@
+@import "../node_modules/font-awesome/css/font-awesome.min.css";
 /*
 Adding styles here because CSS modules can't target nested class names
 http://andrewhfarmer.com/css-modules-by-example/#example-4-nested-class-names
