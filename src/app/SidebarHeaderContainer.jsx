@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as manageAccountsActions from '../manage-accounts/ManageAccountsActions.js';
-import SidebarHeader from './SidebarHeader.jsx';
+import { Button } from 'antd';
 
 class SidebarHeaderContainer extends Component {
   static propTypes = {
@@ -11,9 +11,13 @@ class SidebarHeaderContainer extends Component {
   }
   render() {
     return (
-      <SidebarHeader
-        toggleManageAccounts={this.props.actions.toggleManageAccounts}
-      />
+      <Button
+        style={{borderRadius: 0, 'width': '100%'}}
+        type="primary"
+        icon="edit"
+        size="large"
+        onClick={this.props.actions.toggleManageAccounts}
+      >Edit Accounts</Button>
     );
   }
 }

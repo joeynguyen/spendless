@@ -40,6 +40,7 @@ class DeleteTransactionsButton extends Component {
         >
           <Button
             type="danger"
+            icon="minus"
             size="large"
             disabled={noTransactionsSelected}
           >Delete Transactions</Button>
