@@ -27,9 +27,8 @@ class ManageTransactionContainer extends Component {
     let newTransactionObj;
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        // values.date is returned as a moment object so was have to convert it here
+        // values.date is returned as a moment object so we have to convert it here
         const dateStringified = values.date.format('YYYY-MM-DD');
-        console.log('dateStringified', dateStringified);
         if (this.props.activeTransaction !== null) {
           // update transaction
           newTransactionObj = Object.assign({}, this.props.activeTransaction, {
@@ -51,18 +50,18 @@ class ManageTransactionContainer extends Component {
             notes: values.notes,
           };
         }
+
+        // Save account in DB
+        this.props.actions.saveAccountTransactions(newTransactionObj)
+          .then(() => {
+            message.success('Transaction saved');
+            // reset current transaction being edited to null
+            this.toggleManageTransaction();
+          }).catch(() => {
+            message.error('Restart the application and retry');
+          });
       }
     });
-
-    // Save account in DB
-    this.props.actions.saveAccountTransactions(newTransactionObj)
-      .then(() => {
-        message.success('Transaction saved');
-        // reset current transaction being edited to null
-        this.toggleManageTransaction();
-      }).catch(() => {
-        message.error('Restart the application and retry');
-      });
   }
 
   render() {
