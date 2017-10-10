@@ -10,7 +10,6 @@ import UploadedTransactions from './UploadedTransactions.jsx';
 class UploadedTransactionsContainer extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
-    activeAccountId: PropTypes.string,
     uploadedTransactions: PropTypes.arrayOf(PropTypes.object),
   }
   handleSave = () => {
@@ -27,7 +26,6 @@ class UploadedTransactionsContainer extends Component {
   render() {
     return (
       <UploadedTransactions
-        activeAccountId={this.props.activeAccountId}
         uploadedTransactions={this.props.uploadedTransactions}
         resetUploadedTransactions={this.props.actions.resetUploadedTransactions}
         handleSave={this.handleSave}
@@ -38,7 +36,6 @@ class UploadedTransactionsContainer extends Component {
 
 function mapStateToProps(state) {
   return {
-    activeAccountId: state.activeAccountId,
     uploadedTransactions: state.uploadedTransactions,
   };
 }
