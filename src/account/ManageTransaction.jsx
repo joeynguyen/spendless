@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Button, DatePicker, Form, Input, Modal } from 'antd';
+import { Button, Col, DatePicker, Form, Input, Modal, Row } from 'antd';
 
 const FormItem = Form.Item;
 const { TextArea } = Input;
@@ -43,13 +43,27 @@ const ManageTransaction = ({ form, manageType = 'add', manageTransactionVisible,
           )}
         </FormItem>
 
-        <FormItem label="Date">
-          {getFieldDecorator('date', {
-            rules: [{ required: true, message: 'Enter a date' }],
-          })(
-            <DatePicker />
-          )}
-        </FormItem>
+        <Row>
+          <Col span={8}>
+            <FormItem label="Amount">
+              {getFieldDecorator('amount', {
+                rules: [{ required: true, message: 'Enter an amount' }],
+              })(
+                <Input addonBefore="$" />
+              )}
+            </FormItem>
+          </Col>
+
+          <Col offset={4} span={12}>
+            <FormItem label="Date">
+              {getFieldDecorator('date', {
+                rules: [{ required: true, message: 'Enter a date' }],
+              })(
+                <DatePicker />
+              )}
+            </FormItem>
+          </Col>
+        </Row>
 
         <FormItem label="Category">
           {getFieldDecorator('category', {
@@ -59,15 +73,7 @@ const ManageTransaction = ({ form, manageType = 'add', manageTransactionVisible,
           )}
         </FormItem>
 
-        <FormItem label="Amount">
-          {getFieldDecorator('amount', {
-            rules: [{ required: true, message: 'Enter an amount' }],
-          })(
-            <Input addonBefore="$" />
-          )}
-        </FormItem>
-
-        <FormItem label="Notes">
+        <FormItem label="Notes" style={{marginBottom: 5}}>
           {getFieldDecorator('notes', {})(
             <TextArea rows={4} placeholder="Add notes for this transaction"/>
           )}
