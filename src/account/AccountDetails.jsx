@@ -18,7 +18,7 @@ const AccountDetails = ({ accounts, activeAccountId, uploadedTransactionsExist }
   return (
     <div>
       <div className="header">
-        <h3 className={styles.header}>{icon} {activeAccount.name} <br />
+        <h3 className={styles.header}>{activeAccount.name} {icon}<br />
           <small>{activeAccount.company}</small></h3>
       </div>
       <Row>

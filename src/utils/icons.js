@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const getCreditIcon = (cc) => {
   let iconSuffix;
   switch (cc) {
