@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Button, Popconfirm } from 'antd';
+import { Button, Popconfirm, message } from 'antd';
 import ReactFileReader from 'react-file-reader';
 import parseCSV from '../utils/csvParser.js';
 import * as transactionsActions from './TransactionsActions.js';
@@ -26,11 +26,15 @@ class FileUpload extends Component {
   }
   handleFile = (files) => {
     if (files[0]) {
-      const newTransactions = parseCSV(files[0], this.props.accountId);
-      newTransactions.then(val => {
-        this.setState({ uploadedFile: files[0].name });
-        this.props.actions.addUploadedTransactions(val);
-      });
+      parseCSV(files[0], this.props.accountId)
+        .then(val => {
+          this.setState({ uploadedFile: files[0].name });
+          this.props.actions.addUploadedTransactions(val);
+        })
+        .catch(err => {
+          console.log('err', err);
+          message.error(err);
+        });
     }
   }
   removeUploadedFile = () => {
