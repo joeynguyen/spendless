@@ -1,9 +1,16 @@
-import { ADD_UPLOADED_TRANSACTIONS, RESET_UPLOADED_TRANSACTIONS } from './TransactionsActions.js';
+import { ADD_UPLOADED_TRANSACTIONS, NEGATE_UPLOADED_TRANSACTIONS, RESET_UPLOADED_TRANSACTIONS } from './TransactionsActions.js';
 
 export default function(state = [], action) {
   switch (action.type) {
     case ADD_UPLOADED_TRANSACTIONS:
       return action.payload;
+    case NEGATE_UPLOADED_TRANSACTIONS:
+      return state.map(item => (
+        {
+          ...item,
+          amount: (item.amount * -1).toFixed(2)
+        }
+      ));
     case RESET_UPLOADED_TRANSACTIONS:
       return action.payload;
     case '@@router/LOCATION_CHANGE':

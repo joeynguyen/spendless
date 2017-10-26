@@ -31,7 +31,12 @@ const renderColumns = [
   },
 ];
 
-const UploadedTransactions = ({ uploadedTransactions, resetUploadedTransactions, handleSave }) => {
+const UploadedTransactions = ({
+  uploadedTransactions,
+  negateUploadedTransactions,
+  resetUploadedTransactions,
+  handleSave
+}) => {
   const data = mapTransactionData(uploadedTransactions);
   const modalFooter = [(
     <Button
@@ -60,6 +65,10 @@ const UploadedTransactions = ({ uploadedTransactions, resetUploadedTransactions,
       footer={modalFooter}
       width={840}
     >
+      <Button
+        id="negate-uploaded-transactions-amounts"
+        onClick={negateUploadedTransactions}
+      >My amounts are the opposite of what they should be</Button>
       <Table columns={renderColumns} dataSource={data} />
     </Modal>
   );
@@ -67,6 +76,7 @@ const UploadedTransactions = ({ uploadedTransactions, resetUploadedTransactions,
 
 UploadedTransactions.propTypes = {
   uploadedTransactions: PropTypes.arrayOf(PropTypes.object),
+  negateUploadedTransactions: PropTypes.func.isRequired,
   resetUploadedTransactions: PropTypes.func.isRequired,
   handleSave: PropTypes.func.isRequired,
 };

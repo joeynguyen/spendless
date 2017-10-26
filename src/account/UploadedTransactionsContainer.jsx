@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { message } from 'antd';
 
-import { resetUploadedTransactions, saveAccountTransactions } from './TransactionsActions.js';
+import { negateUploadedTransactions, resetUploadedTransactions, saveAccountTransactions } from './TransactionsActions.js';
 import UploadedTransactions from './UploadedTransactions.jsx';
 
 class UploadedTransactionsContainer extends Component {
@@ -28,6 +28,7 @@ class UploadedTransactionsContainer extends Component {
       <UploadedTransactions
         uploadedTransactions={this.props.uploadedTransactions}
         resetUploadedTransactions={this.props.actions.resetUploadedTransactions}
+        negateUploadedTransactions={this.props.actions.negateUploadedTransactions}
         handleSave={this.handleSave}
       />
     );
@@ -43,6 +44,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
+      negateUploadedTransactions,
       resetUploadedTransactions,
       saveAccountTransactions,
     }, dispatch)
