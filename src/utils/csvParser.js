@@ -10,7 +10,7 @@ function convertTransactionArrayToObject(transaction, index, accountId, headerRo
   console.log('transaction', transaction);
   console.log('newTransObj', newTransObj);
   // date has to be in this format for input[type="date"] to read it
-  // TODO: check if date value is 'MM-DD-YYYY' format before formatting with momemt
+  // TODO: check if date value is in 'MM-DD-YYYY' format before formatting with momemt
   const dateFormatted = moment(newTransObj[dateColumnTitle], 'MM-DD-YYYY').format('YYYY-MM-DD');
   return {
     // added 'index' to prevent duplicate _id error but still
@@ -21,7 +21,7 @@ function convertTransactionArrayToObject(transaction, index, accountId, headerRo
     category: newTransObj.Category || '',
     description: newTransObj.Description,
     date: dateFormatted,
-    notes: '',
+    notes: newTransObj.Notes || '',
   };
 }
 

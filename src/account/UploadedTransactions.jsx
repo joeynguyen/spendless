@@ -25,7 +25,9 @@ const renderColumns = [
   },
   {
     title: 'Amount',
+    className: 'column-amount',
     dataIndex: 'amount',
+    render: (amount) => <span className={amount > 0 ? 'positive-amount' : ''}>{amount}</span>,
   },
 ];
 

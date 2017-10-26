@@ -53,10 +53,13 @@ class TransactionsList extends Component {
       },
       {
         title: 'Amount',
+        className: 'column-amount',
         dataIndex: 'amount',
+        render: (amount) => <span className={amount > 0 ? 'positive-amount' : ''}>{amount}</span>
       },
       {
         title: 'Notes',
+        className: 'column-notes',
         dataIndex: 'notes',
         render: text => text ? (<Tooltip placement="left" title={text}>
           <Icon type="file-text" style={{ fontSize: 14 }} />
@@ -64,6 +67,7 @@ class TransactionsList extends Component {
       },
       {
         title: 'Actions',
+        className: 'column-actions',
         dataIndex: 'actions',
         render: (text, record) => (
           <span>
@@ -87,8 +91,7 @@ class TransactionsList extends Component {
         this.setState({ selectedTransactionsIds: selectedRowKeys });
       },
     };
-    const { accountTransactions } = this.props;
-    const data = mapTransactionData(accountTransactions);
+    const data = mapTransactionData(this.props.accountTransactions);
 
     return (
       <div>

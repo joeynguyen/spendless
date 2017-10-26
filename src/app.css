@@ -1,8 +1,24 @@
 @import "../node_modules/font-awesome/css/font-awesome.min.css";
+
+/* global styles */
+.positive-amount {
+  color: #00a854;
+}
+
 /*
 Adding styles here because CSS modules can't target nested class names
 http://andrewhfarmer.com/css-modules-by-example/#example-4-nested-class-names
 */
+.ant-table-thead > tr > th.column-amount,
+td.column-amount {
+  text-align: right;
+}
+.ant-table-thead > tr > th.column-notes,
+.ant-table-thead > tr > th.column-actions,
+td.column-notes,
+td.column-actions {
+  text-align: center;
+}
 .add-account-form.ant-collapse .ant-collapse-item .ant-collapse-header {
   display: inline-block;
   height: auto;
