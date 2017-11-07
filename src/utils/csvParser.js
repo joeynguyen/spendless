@@ -57,6 +57,49 @@ function convertTransactionArrayToObject(transaction, index, accountId, headerRo
   };
 }
 
+// convert each row of text from CSV into JS arrays for formatting use
+function convertTransactionTextToArray(text) {
+  // Some CSV files wrap each item in a row in quotes, others don't. See VISA_561_010115_113015.CSV
+  // example: '"Cleared","01/13/2017","TARGET        00024943   HOUSTON      TX↵","23.09","","JAY EN"'
+  const re = /","/g;
+  // Some Descriptions have commas in them that break our .split(',')
+  // example: 'Cleared,11/22/15,"ONLINE PAYMENT, THANK YOU               ",,14.66'
+  const re2 = /".+,.+"/;
+  // Some CSV files have hidden carriage returns in their transactions data so we have to remove them.
+  // example: '"Cleared","01/13/2017","TARGET        00024943   HOUSTON      TX↵","23.09","","JAY EN"'
+  // see VISA_561_010115_113015.CSV
+  const textFormatted = text.replace(/[\r\n]/, '');
+
+  let textAsArray;
+
+  if (textFormatted.match(re)) {
+    textAsArray = textFormatted
+      // differientiate commas that are used for item separation to handle transaction fields that have commas
+      // See file Costco Visa Statement Feb 2017
+      .replace(re, '"__DELIMITER__"')
+      .replace(/"/g, '') // remove double quotes
+      .trim()
+      .split('__DELIMITER__');
+  } else if (textFormatted.match(re2)) {
+    const match = textFormatted.match(re2)[0]; // ex: "ONLINE PAYMENT, THANK YOU"
+    const matchTokenized = match.replace(/,/g, '__COMMA__'); // "ONLINE PAYMENT__COMMA__ THANK YOU"
+    const textTokenized = textFormatted.replace(match, matchTokenized);
+    textAsArray = textTokenized
+      .replace(/"/g, '') // remove double quotes - ONLINE PAYMENT__COMMA__ THANK YOU
+      .trim()
+      .replace(/,/g, '__DELIMITER__') // change remaining commas to something else
+      .replace(/__COMMA__/g, ',') // untokenize commas
+      .split('__DELIMITER__');
+  } else {
+    textAsArray = textFormatted
+      .replace(/"/g, '') // remove double quotes
+      .trim()
+      .split(',');
+  }
+
+  return textAsArray;
+}
+
 // Naive approach for testing if a row in the CSV is a header row
 // Most CSV files from financial institutions that include headers
 // have header columns with the titles: "Date", "Description", and either "Amount" or "Credit" and "Debit" for transactions
@@ -97,48 +140,7 @@ export default function parseCSV(selectedFile, accountId) {
           .split(',');
 
         // convert each row of text from CSV into JS arrays for formatting use
-        const transactionRowsArray = rowsAfterHeaderRow
-          .map(row => {
-            // Some CSV files wrap each item in a row in quotes, others don't. See VISA_561_010115_113015.CSV
-            // example: '"Cleared","01/13/2017","TARGET        00024943   HOUSTON      TX↵","23.09","","JAY EN"'
-            const re = /","/g;
-            // Some Descriptions have commas in them that break our .split(',')
-            // example: 'Cleared,11/22/15,"ONLINE PAYMENT, THANK YOU               ",,14.66'
-            const re2 = /".+,.+"/;
-            // Some CSV files have carriage returns in their transactions data so we have to remove them.
-            // example: '"Cleared","01/13/2017","TARGET        00024943   HOUSTON      TX↵","23.09","","JAY EN"'
-            // see VISA_561_010115_113015.CSV
-            const rowFormatted = row.replace(/[\r\n]/, '');
-
-            let rowAsArray;
-
-            if (rowFormatted.match(re)) {
-              rowAsArray = rowFormatted
-                // differientiate commas that are used for item separation to handle transaction fields that have commas
-                // See file Costco Visa Statement Feb 2017
-                .replace(re, '"__DELIMITER__"')
-                .replace(/"/g, '') // remove double quotes
-                .trim()
-                .split('__DELIMITER__');
-            } else if (rowFormatted.match(re2)) {
-              const match = rowFormatted.match(re2)[0];
-              const matchTokenized = match.replace(/,/g, '__COMMA__');
-              const rowTokenized = rowFormatted.replace(match, matchTokenized);
-              rowAsArray = rowTokenized
-                .replace(/"/g, '') // remove double quotes
-                .trim()
-                .replace(/,/g, '__DELIMITER__') // change remaining commas to something else
-                .replace(/__COMMA__/g, ',') // untokenize commas
-                .split('__DELIMITER__');
-            } else {
-              rowAsArray = rowFormatted
-                .replace(/"/g, '') // remove double quotes
-                .trim()
-                .split(',');
-            }
-
-            return rowAsArray;
-          });
+        const transactionRowsArray = rowsAfterHeaderRow.map(convertTransactionTextToArray);
 
         // find the name of the column that has the word "Date"
         // if there's more than one, use the first one (e.g. Discover CSV has "Trans. Date" and "Post Date")
@@ -147,6 +149,7 @@ export default function parseCSV(selectedFile, accountId) {
         newTransactions = transactionRowsArray.map((transaction, i) =>
           convertTransactionArrayToObject(transaction, i, accountId, headerRowArray, dateColumnTitle));
       }
+
       resolve(newTransactions);
     };
   });
