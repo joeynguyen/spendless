@@ -5,6 +5,7 @@ export default function(state = [], action) {
     case ADD_UPLOADED_TRANSACTIONS:
       return action.payload;
     case NEGATE_UPLOADED_TRANSACTIONS:
+      // Flip negative and positive values
       return state.map(item => (
         {
           ...item,
