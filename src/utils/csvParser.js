@@ -112,20 +112,25 @@ function isHeaderRow(rowStr) {
   );
 }
 
+function findRowDelimiter(str) {
+  let rowDelimiter;
+  if (str.includes('\r\n')) {
+    rowDelimiter = '\r\n';
+  } else if (str.includes('\n')) {
+    rowDelimiter = '\n';
+  } else {
+    rowDelimiter = '\r';
+  }
+  return rowDelimiter;
+}
+
 export default function parseCSV(selectedFile, accountId) {
   return new Promise((resolve, reject) => {
     const fileReader = new FileReader();
     let newTransactions = [];
     fileReader.readAsText(selectedFile);
     fileReader.onload = function onLoad() {
-      let rowDelimiter;
-      if (this.result.indexOf('\r\n') > -1) {
-        rowDelimiter = '\r\n';
-      } else if (this.result.indexOf('\n') > -1) {
-        rowDelimiter = '\n';
-      } else {
-        rowDelimiter = '\r';
-      }
+      const rowDelimiter = findRowDelimiter(this.result);
 
       const rows = this.result.trim().split(rowDelimiter);
 
