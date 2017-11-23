@@ -44,6 +44,7 @@ function convertTransactionArrayToObject(transaction, index, accountId, headerRo
   // date has to be in this format for input[type="date"] to read it
   // TODO: check if date value is in 'MM-DD-YYYY' format before formatting with momemt
   const dateFormatted = moment(newTransObj[dateColumnTitle], 'MM-DD-YYYY').format('YYYY-MM-DD');
+
   return {
     // added 'index' to prevent duplicate _id error but still
     // preserve valid date format in case we need to use it later
@@ -117,7 +118,15 @@ export default function parseCSV(selectedFile, accountId) {
     let newTransactions = [];
     fileReader.readAsText(selectedFile);
     fileReader.onload = function onLoad() {
-      const rowDelimiter = (this.result.indexOf('\n') === -1 ? '\r' : '\r\n');
+      let rowDelimiter;
+      if (this.result.indexOf('\r\n') > -1) {
+        rowDelimiter = '\r\n';
+      } else if (this.result.indexOf('\n') > -1) {
+        rowDelimiter = '\n';
+      } else {
+        rowDelimiter = '\r';
+      }
+
       const rows = this.result.trim().split(rowDelimiter);
 
       let headerRowIndex;
@@ -134,13 +143,14 @@ export default function parseCSV(selectedFile, accountId) {
         reject('Unable to find a header row in the CSV file');
       } else {
         const rowsAfterHeaderRow = rows.slice(headerRowIndex + 1);
+
+        // convert each row of text from CSV into JS arrays for formatting use
+        const transactionRowsArray = rowsAfterHeaderRow.map(convertTransactionTextToArray);
+
         const headerRowArray = headerRow
           .replace(/"/g, '')
           .trim()
           .split(',');
-
-        // convert each row of text from CSV into JS arrays for formatting use
-        const transactionRowsArray = rowsAfterHeaderRow.map(convertTransactionTextToArray);
 
         // find the name of the column that has the word "Date"
         // if there's more than one, use the first one (e.g. Discover CSV has "Trans. Date" and "Post Date")

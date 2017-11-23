@@ -42,7 +42,7 @@ app.on('ready', async () => {
   await installExtensions();
 
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 1200, height: 800});
+  mainWindow = new BrowserWindow({width: 1440, height: 900});
 
   if (process.env.HOT) {
     mainWindow.loadURL(`file://${__dirname}/src/hot-dev-app.html`);
