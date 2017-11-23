@@ -1,62 +1,6 @@
 import moment from 'moment';
 
-function trimMultipleSpaces(str) {
-  return str.replace(/\s{2,}/g, ' ').trim();
-  // "ONLINE PAYMENT,     THANK YOU               " --> "ONLINE PAYMENT, THANK YOU"
-}
-
-function removeCommas(str) {
-  return str.replace(',', '');
-}
-
-// get absolute number so that multiplying the result by a negative always ensures a negative value
-function convertNumStrToAbsoluteNum(str) {
-  return Math.abs(Number(removeCommas(str)));
-}
-
-function convertTransactionArrayToObject(transaction, index, accountId, headerRowArray, dateColumnTitle) {
-  const newTransObj = headerRowArray.reduce((obj, columnName, i) => {
-    return {
-      ...obj,
-      [columnName]: transaction[i],
-    };
-  }, {});
-
-  // Merge values from Credit/Debit columns into single Amount field. Make debit values negative
-  if (newTransObj.Credit) {
-    newTransObj.Credit = convertNumStrToAbsoluteNum(newTransObj.Credit);
-    newTransObj.Amount = newTransObj.Credit;
-  } else if (newTransObj.Debit) {
-    newTransObj.Debit = convertNumStrToAbsoluteNum(newTransObj.Debit);
-    newTransObj.Amount = newTransObj.Debit * -1;
-  }
-
-  // Some transactions have no value for amount. See "MEMBERSHIP FEE" in file VISA_561_010115_113015.CSV
-  if (typeof newTransObj.Amount === 'undefined') {
-    newTransObj.Amount = 0;
-  }
-
-  // for Descriptions that look like this in CSV - "NEPAL RESTAURANT         ESTES PARK   CO"
-  if (newTransObj.Description && newTransObj.Description.match(/\s{2,}/)) {
-    newTransObj.Description = trimMultipleSpaces(newTransObj.Description);
-  }
-
-  // date has to be in this format for input[type="date"] to read it
-  // TODO: check if date value is in 'MM-DD-YYYY' format before formatting with momemt
-  const dateFormatted = moment(newTransObj[dateColumnTitle], 'MM-DD-YYYY').format('YYYY-MM-DD');
-
-  return {
-    // added 'index' to prevent duplicate _id error but still
-    // preserve valid date format in case we need to use it later
-    _id: (new Date().getTime() + index).toString(), // PouchDB requires _id to be string type
-    accountId,
-    amount: newTransObj.Amount,
-    category: newTransObj.Category || '',
-    description: newTransObj.Description || '',
-    date: dateFormatted,
-    notes: newTransObj.Notes || '',
-  };
-}
+import { convertNumStrToAbsoluteNum, trimMultipleSpaces } from './strings';
 
 // convert each row of text from CSV into JS arrays for formatting use
 function convertTransactionTextToArray(text) {
@@ -99,6 +43,51 @@ function convertTransactionTextToArray(text) {
   }
 
   return textAsArray;
+}
+
+// convert each transaction array to objects for easier data manipulation
+function convertTransactionArrayToObject(transaction, index, accountId, headerRowArray, dateColumnTitle) {
+  const newTransObj = headerRowArray.reduce((obj, columnName, i) => {
+    return {
+      ...obj,
+      [columnName]: transaction[i],
+    };
+  }, {});
+
+  // Merge values from Credit/Debit columns into single Amount field. Make debit values negative
+  if (newTransObj.Credit) {
+    newTransObj.Credit = convertNumStrToAbsoluteNum(newTransObj.Credit);
+    newTransObj.Amount = newTransObj.Credit;
+  } else if (newTransObj.Debit) {
+    newTransObj.Debit = convertNumStrToAbsoluteNum(newTransObj.Debit);
+    newTransObj.Amount = newTransObj.Debit * -1;
+  }
+
+  // Some transactions have no value for amount. See "MEMBERSHIP FEE" in file VISA_561_010115_113015.CSV
+  if (typeof newTransObj.Amount === 'undefined') {
+    newTransObj.Amount = 0;
+  }
+
+  // for Descriptions that look like this in CSV - "NEPAL RESTAURANT         ESTES PARK   CO"
+  if (newTransObj.Description && newTransObj.Description.match(/\s{2,}/)) {
+    newTransObj.Description = trimMultipleSpaces(newTransObj.Description);
+  }
+
+  // date has to be in this format for input[type="date"] to read it
+  // TODO: check if date value is in 'MM-DD-YYYY' format before formatting with momemt
+  const dateFormatted = moment(newTransObj[dateColumnTitle], 'MM-DD-YYYY').format('YYYY-MM-DD');
+
+  return {
+    // added 'index' to prevent duplicate _id error but still
+    // preserve valid date format in case we need to use it later
+    _id: (new Date().getTime() + index).toString(), // PouchDB requires _id to be string type
+    accountId,
+    amount: newTransObj.Amount,
+    category: newTransObj.Category || '',
+    description: newTransObj.Description || '',
+    date: dateFormatted,
+    notes: newTransObj.Notes || '',
+  };
 }
 
 // Naive approach for testing if a row in the CSV is a header row
