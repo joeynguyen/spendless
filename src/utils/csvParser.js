@@ -17,6 +17,8 @@ function convertTransactionTextToArray(text) {
 
   let textAsArray;
 
+  // TODO: re and re2 patterns are mutually exclusive (can both occur in same file)
+  // so this `if` block should be separated
   if (textFormatted.match(re)) {
     textAsArray = textFormatted
       // differientiate commas that are used for item separation to handle transaction fields that have commas
