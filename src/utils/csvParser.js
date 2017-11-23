@@ -50,7 +50,7 @@ function convertTransactionArrayToObject(transaction, index, accountId, headerRo
     // preserve valid date format in case we need to use it later
     _id: (new Date().getTime() + index).toString(), // PouchDB requires _id to be string type
     accountId,
-    amount: Number(newTransObj.Amount).toFixed(2), // 2 decimal places for US Currency
+    amount: newTransObj.Amount,
     category: newTransObj.Category || '',
     description: newTransObj.Description || '',
     date: dateFormatted,

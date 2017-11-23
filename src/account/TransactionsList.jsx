@@ -55,13 +55,17 @@ class TransactionsList extends Component {
         title: 'Amount',
         className: 'column-amount',
         dataIndex: 'amount',
-        render: (amount) => <span className={amount > 0 ? 'positive-amount' : ''}>{amount}</span>
+        render: (amount) => (
+          <span className={amount > 0 ? 'positive-amount' : ''}>
+            {Number(amount).toFixed(2)}
+          </span>
+        ),
       },
       {
         title: 'Notes',
         className: 'column-notes',
         dataIndex: 'notes',
-        render: text => text ? (<Tooltip placement="left" title={text}>
+        render: (text) => text ? (<Tooltip placement="left" title={text}>
           <Icon type="file-text" style={{ fontSize: 14 }} />
         </Tooltip>) : null
       },
