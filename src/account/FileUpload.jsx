@@ -25,6 +25,7 @@ class FileUpload extends Component {
     }
   }
   handleFile = (files) => {
+    // TODO: Fix not being able to upload same file twice in a row if canceled first time
     if (files[0]) {
       parseCSV(files[0], this.props.accountId)
         .then(val => {

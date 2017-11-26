@@ -4,45 +4,29 @@ import { convertNumStrToAbsoluteNum, trimMultipleSpaces } from './strings';
 
 // convert each row of text from CSV into JS arrays for formatting use
 function convertTransactionTextToArray(text) {
-  // Some CSV files wrap each item in a row in quotes, others don't. See VISA_561_010115_113015.CSV
-  // example: '"Cleared","01/13/2017","TARGET        00024943   HOUSTON      TX↵","23.09","","JAY EN"'
-  const re = /","/g;
-  // Some Descriptions have commas in them that break our .split(',')
-  // example: 'Cleared,11/22/15,"ONLINE PAYMENT, THANK YOU               ",,14.66'
-  const re2 = /".+,.+"/;
-  // Some CSV files have hidden carriage returns in their transactions data so we have to remove them.
+  // Some CSV files have hidden carriage returns in their fields so we have to remove them.
   // example: '"Cleared","01/13/2017","TARGET        00024943   HOUSTON      TX↵","23.09","","JAY EN"'
   // see VISA_561_010115_113015.CSV
-  const textFormatted = text.replace(/[\r\n]/, '');
 
-  let textAsArray;
+  // Some fields have commas in them that break our .split(',')
+  // example: 'Cleared,11/22/15,"ONLINE PAYMENT, THANK YOU               ",,14.66'
+  // Solution: match all instances of commas not inside quotes and tokenize and split on them
 
-  // TODO: re and re2 patterns are mutually exclusive (can both occur in same file)
-  // so this `if` block should be separated
-  if (textFormatted.match(re)) {
-    textAsArray = textFormatted
-      // differientiate commas that are used for item separation to handle transaction fields that have commas
-      // See file Costco Visa Statement Feb 2017
-      .replace(re, '"__DELIMITER__"')
-      .replace(/"/g, '') // remove double quotes
-      .trim()
-      .split('__DELIMITER__');
-  } else if (textFormatted.match(re2)) {
-    const match = textFormatted.match(re2)[0]; // ex: "ONLINE PAYMENT, THANK YOU"
-    const matchTokenized = match.replace(/,/g, '__COMMA__'); // "ONLINE PAYMENT__COMMA__ THANK YOU"
-    const textTokenized = textFormatted.replace(match, matchTokenized);
-    textAsArray = textTokenized
-      .replace(/"/g, '') // remove double quotes - ONLINE PAYMENT__COMMA__ THANK YOU
-      .trim()
-      .replace(/,/g, '__DELIMITER__') // change remaining commas to something else
-      .replace(/__COMMA__/g, ',') // untokenize commas
-      .split('__DELIMITER__');
-  } else {
-    textAsArray = textFormatted
-      .replace(/"/g, '') // remove double quotes
-      .trim()
-      .split(',');
-  }
+  // https://stackoverflow.com/questions/6462578/alternative-to-regex-match-all-instances-not-inside-quotes
+  const re3 = /"[^"]*"|(,)/g;
+  const textFormatted = text
+    .replace(/[\r\n]/, '')
+    .replace(re3, (m, group1) => {
+      if (!group1) {
+        return m;
+      }
+      return '__DELIMITER__';
+    });
+
+  const textAsArray = textFormatted
+    .replace(/"/g, '') // remove double quotes
+    .trim()
+    .split('__DELIMITER__');
 
   return textAsArray;
 }
@@ -66,7 +50,7 @@ function convertTransactionArrayToObject(transaction, index, accountId, headerRo
   }
 
   // Some transactions have no value for amount. See "MEMBERSHIP FEE" in file VISA_561_010115_113015.CSV
-  if (typeof newTransObj.Amount === 'undefined') {
+  if (typeof newTransObj.Amount === 'undefined' || !newTransObj.Amount) {
     newTransObj.Amount = 0;
   }
 
@@ -74,6 +58,7 @@ function convertTransactionArrayToObject(transaction, index, accountId, headerRo
   if (newTransObj.Description && newTransObj.Description.match(/\s{2,}/)) {
     newTransObj.Description = trimMultipleSpaces(newTransObj.Description);
   }
+
 
   // date has to be in this format for input[type="date"] to read it
   // TODO: check if date value is in 'MM-DD-YYYY' format before formatting with momemt
