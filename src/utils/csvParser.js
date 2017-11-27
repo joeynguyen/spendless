@@ -1,6 +1,10 @@
 import moment from 'moment';
 
-import { convertNumStrToAbsoluteNum, trimMultipleSpaces } from './strings';
+import {
+  convertNumStrToAbsoluteNum,
+  convertNumStrToValidNum,
+  trimMultipleSpaces
+} from './strings';
 
 // convert each row of text from CSV into JS arrays for formatting use
 function convertTransactionTextToArray(text) {
@@ -12,7 +16,7 @@ function convertTransactionTextToArray(text) {
   // example: 'Cleared,11/22/15,"ONLINE PAYMENT, THANK YOU               ",,14.66'
   // Solution: match all instances of commas not inside quotes and tokenize and split on them
 
-  // https://stackoverflow.com/questions/6462578/alternative-to-regex-match-all-instances-not-inside-quotes
+  // source: https://stackoverflow.com/a/23667311
   const re3 = /"[^"]*"|(,)/g;
   const textFormatted = text
     .replace(/[\r\n]/, '')
@@ -40,13 +44,15 @@ function convertTransactionArrayToObject(transaction, index, accountId, headerRo
     };
   }, {});
 
+  if (newTransObj.Amount) {
+    newTransObj.Amount = convertNumStrToValidNum(newTransObj.Amount);
+  }
+
   // Merge values from Credit/Debit columns into single Amount field. Make debit values negative
   if (newTransObj.Credit) {
-    newTransObj.Credit = convertNumStrToAbsoluteNum(newTransObj.Credit);
-    newTransObj.Amount = newTransObj.Credit;
+    newTransObj.Amount = convertNumStrToAbsoluteNum(newTransObj.Credit);
   } else if (newTransObj.Debit) {
-    newTransObj.Debit = convertNumStrToAbsoluteNum(newTransObj.Debit);
-    newTransObj.Amount = newTransObj.Debit * -1;
+    newTransObj.Amount = convertNumStrToAbsoluteNum(newTransObj.Debit) * -1;
   }
 
   // Some transactions have no value for amount. See "MEMBERSHIP FEE" in file VISA_561_010115_113015.CSV
@@ -58,7 +64,6 @@ function convertTransactionArrayToObject(transaction, index, accountId, headerRo
   if (newTransObj.Description && newTransObj.Description.match(/\s{2,}/)) {
     newTransObj.Description = trimMultipleSpaces(newTransObj.Description);
   }
-
 
   // date has to be in this format for input[type="date"] to read it
   // TODO: check if date value is in 'MM-DD-YYYY' format before formatting with momemt
@@ -131,7 +136,10 @@ export default function parseCSV(selectedFile, accountId) {
         const headerRowArray = headerRow
           .replace(/"/g, '')
           .trim()
-          .split(',');
+          .split(',')
+          // remove possible surrounding whitespace of items in header row
+          // ex: LMCU Checking Statement: 'Date,Description,Comments,Check Number, Amount, Balance'
+          .map(item => item.trim());
 
         // find the name of the column that has the word "Date"
         // if there's more than one, use the first one (e.g. Discover CSV has "Trans. Date" and "Post Date")
