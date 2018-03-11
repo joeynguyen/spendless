@@ -17,10 +17,10 @@ function convertTransactionTextToArray(text) {
   // Solution: match all instances of commas not inside quotes and tokenize and split on them
 
   // source: https://stackoverflow.com/a/23667311
-  const re3 = /"[^"]*"|(,)/g;
+  const re = /"[^"]*"|(,)/g;
   const textFormatted = text
     .replace(/[\r\n]/, '')
-    .replace(re3, (m, group1) => {
+    .replace(re, (m, group1) => {
       if (!group1) {
         return m;
       }
