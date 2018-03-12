@@ -10,9 +10,9 @@ import * as accountsActions from '../account/AccountsActions.js';
 import * as transactionsActions from '../account/TransactionsActions.js';
 import * as manageAccountsActions from '../manage-accounts/ManageAccountsActions.js';
 
-const history = createHashHistory();
+export const history = createHashHistory();
 
-const configureStore = (initialState) => {
+export const configureStore = (initialState) => {
   // Redux Configuration
   const middleware = [];
   const enhancers = [];
@@ -64,5 +64,3 @@ const configureStore = (initialState) => {
 
   return store;
 };
-
-export default { configureStore, history };

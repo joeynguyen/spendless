@@ -1,27 +1,11 @@
 import React from 'react';
-import { render } from 'react-dom';
-import { AppContainer as HotReloadContainer } from 'react-hot-loader';
-
+import ReactDOM from 'react-dom';
 import Root from './app/Root.jsx';
-import { configureStore, history } from './store/configureStore.js';
+import registerServiceWorker from './registerServiceWorker';
+import { configureStore, history } from './store/configureStore.dev.js';
 
 const store = configureStore();
 
-render(
-  <HotReloadContainer>
-    <Root store={store} history={history} />
-  </HotReloadContainer>,
-  document.getElementById('root')
-);
+ReactDOM.render(<Root store={store} history={history} />, document.getElementById('root'));
+registerServiceWorker();
 
-if (module.hot) {
-  module.hot.accept('./app/Root', () => {
-    const NextRoot = require('./app/Root'); // eslint-disable-line global-require
-    render(
-      <HotReloadContainer>
-        <NextRoot store={store} history={history} />
-      </HotReloadContainer>,
-      document.getElementById('root')
-    );
-  });
-}
