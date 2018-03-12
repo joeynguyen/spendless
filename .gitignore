@@ -9,6 +9,7 @@ dist/
 .DS_Store
 .sass-cache
 .tern-port
+.tern-project
 
 # PouchDB files
 log.txt
