@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Button, Form, Radio } from 'antd';
+import { Form, Radio } from 'antd';
 
 import AddBankAccount from './AddBankAccount.jsx';
 import AddCreditCardAccount from './AddCreditCardAccount.jsx';

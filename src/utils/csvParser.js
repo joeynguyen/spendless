@@ -87,9 +87,12 @@ function convertTransactionArrayToObject(transaction, index, accountId, headerRo
 // have header columns with the titles: "Date", "Description", and either "Amount" or "Credit" and "Debit" for transactions
 function isHeaderRow(rowStr) {
   return (
-    rowStr.includes('Date')
-    && rowStr.includes('Description')
-    && (rowStr.includes('Amount') || rowStr.includes('Credit') && rowStr.includes('Debit'))
+    rowStr.includes('Date') &&
+    rowStr.includes('Description') &&
+    (
+      rowStr.includes('Amount') ||
+      (rowStr.includes('Credit') && rowStr.includes('Debit'))
+    )
   );
 }
 

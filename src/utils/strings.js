@@ -26,7 +26,7 @@ export function convertNumStrToValidNum(str) {
 
   if (
     str.startsWith('-') ||
-    str.startsWith('(') && str.endsWith(')')
+    (str.startsWith('(') && str.endsWith(')'))
   ) {
     // Convert to negative number strings with preceding
     // minus symbol or surrounding parentheses, e.g. '-18', '(50.33)'

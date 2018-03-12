@@ -33,7 +33,7 @@ const Header = (props) => {
     <Row>
       <Col span={8}>
         <Link to="/" style={styles.logo}>
-          <img src="../assets/piggybank.png" width="50px" style={styles.logoImg}/>
+          <img alt="Piggy Bank Logo" src="../assets/piggybank.png" width="50px" style={styles.logoImg}/>
           {' '}
           <span style={styles.logoSpan}>spendLess</span>
         </Link>
