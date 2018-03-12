@@ -48,6 +48,7 @@
   "dependencies": {
     "antd": "2.12.8",
     "electron": "1.8.3",
+    "electron-devtools-installer": "2.2.3",
     "electron-is-dev": "0.3.0",
     "font-awesome": "4.7.0",
     "history": "4.6.1",

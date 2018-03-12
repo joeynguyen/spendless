@@ -8,6 +8,23 @@ const BrowserWindow = electron.BrowserWindow
 const path = require('path')
 // const url = require('url')
 
+// install dev tools for debugging during development
+const installExtensions = async () => {
+  if (process.execPath.search('electron') > -1) {
+    const installer = require('electron-devtools-installer'); // eslint-disable-line global-require
+    const extensions = [
+      'REACT_DEVELOPER_TOOLS',
+      'REDUX_DEVTOOLS'
+    ];
+    const forceDownload = !!process.env.UPGRADE_EXTENSIONS;
+    for (const name of extensions) {
+      try {
+        await installer.default(installer[name], forceDownload);
+      } catch (e) {console.log(e);} // eslint-disable-line
+    }
+  }
+};
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
@@ -43,7 +60,10 @@ function createWindow () {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', createWindow)
+app.on('ready', async () => {
+  await installExtensions();
+  createWindow();
+});
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
