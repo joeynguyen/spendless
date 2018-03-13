@@ -1,5 +1,4 @@
 const electron = require('electron');
-const electronIsDev = require('electron-is-dev');
 // Module to control application life.
 const app = electron.app
 // Module to create native browser window.
@@ -7,6 +6,8 @@ const BrowserWindow = electron.BrowserWindow
 
 const path = require('path')
 // const url = require('url')
+
+const isDev = process.env.ELECTRON_IS_DEV;
 
 // install dev tools for debugging during development
 const installExtensions = async () => {
@@ -33,7 +34,7 @@ function createWindow () {
 
   // and load the index.html of the app.
   mainWindow.loadURL(
-    electronIsDev
+    isDev
       ? 'http://localhost:3000' // Dev server ran by react-scripts
       : `file://${path.join(__dirname, '/build/index.html')}` // Bundled application
   );
@@ -59,7 +60,7 @@ function createWindow () {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', async () => {
-  if (electronIsDev) {
+  if (isDev) {
     await installExtensions();
   }
   createWindow();

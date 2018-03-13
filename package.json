@@ -11,7 +11,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "react-start": "BROWSER=none react-scripts start",
-    "electron-start": "electron .",
+    "electron-start": "ELECTRON_IS_DEV=1 electron .",
     "react-build": "react-scripts build",
     "electron-build": "electron-packager ./ --overwrite"
   },
@@ -37,6 +37,7 @@
   "homepage": "https://github.com/joeynguyen/spendless",
   "devDependencies": {
     "concurrently": "3.5.1",
+    "electron": "1.8.3",
     "electron-packager": "11.1.0",
     "nyc": "8.3.0",
     "pouchdb-server": "2.3.7",
@@ -47,9 +48,7 @@
   },
   "dependencies": {
     "antd": "2.12.8",
-    "electron": "1.8.3",
     "electron-devtools-installer": "2.2.3",
-    "electron-is-dev": "0.3.0",
     "font-awesome": "4.7.0",
     "history": "4.6.1",
     "moment": "2.12.0",
