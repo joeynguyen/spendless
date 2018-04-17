@@ -6,6 +6,8 @@ import AppHeader  from './Header.jsx';
 import AppSidebar from './Sidebar.jsx';
 import ManageAccountsContainer from '../manage-accounts/ManageAccountsContainer.jsx';
 
+import './App.css';
+
 const { Header, Sider, Content } = Layout;
 
 class AppContainer extends Component {

@@ -38,6 +38,7 @@
   "devDependencies": {
     "concurrently": "3.5.1",
     "electron": "1.8.3",
+    "electron-devtools-installer": "2.2.3",
     "electron-packager": "11.1.0",
     "nyc": "8.3.0",
     "pouchdb-server": "2.3.7",
@@ -48,7 +49,6 @@
   },
   "dependencies": {
     "antd": "2.12.8",
-    "electron-devtools-installer": "2.2.3",
     "font-awesome": "4.7.0",
     "history": "4.6.1",
     "moment": "2.12.0",
