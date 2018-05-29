@@ -13,7 +13,9 @@
     "react-start": "BROWSER=none react-scripts start",
     "electron-start": "ELECTRON_IS_DEV=1 electron .",
     "react-build": "react-scripts build",
-    "electron-build": "electron-packager ./ --overwrite"
+    "electron-build": "electron-packager ./ --overwrite",
+    "prettier": "prettier --write './src/**/*.{ts,js,css,json}'",
+    "precommit": "pretty-quick --staged"
   },
   "repository": {
     "type": "git",
@@ -40,8 +42,11 @@
     "electron": "1.8.3",
     "electron-devtools-installer": "2.2.3",
     "electron-packager": "11.1.0",
+    "husky": "0.14.3",
     "nyc": "8.3.0",
     "pouchdb-server": "2.3.7",
+    "prettier": "1.13.0",
+    "pretty-quick": "1.6.0",
     "react-scripts": "1.1.1",
     "redux-immutable-state-invariant": "1.2.3",
     "redux-logger": "3.0.6",
