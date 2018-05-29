@@ -4,7 +4,7 @@ import { Form } from 'antd';
 
 export default function withEditAccountHandler(OriginalComponent) {
   class WrapperClass extends Component {
-    handleUpdateAccount = (e) => {
+    handleUpdateAccount = e => {
       e.preventDefault();
 
       this.props.form.validateFields((err, values) => {
@@ -19,7 +19,7 @@ export default function withEditAccountHandler(OriginalComponent) {
           this.props.saveToDB(newAccountObj);
         }
       });
-    }
+    };
 
     render() {
       return (
@@ -39,7 +39,7 @@ export default function withEditAccountHandler(OriginalComponent) {
     saveToDB: PropTypes.func.isRequired,
   };
 
-  return (Form.create({
+  return Form.create({
     mapPropsToFields(props) {
       return {
         accountName: {
@@ -53,5 +53,5 @@ export default function withEditAccountHandler(OriginalComponent) {
         },
       };
     },
-  })(WrapperClass));
+  })(WrapperClass);
 }

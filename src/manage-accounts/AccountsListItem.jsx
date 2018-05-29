@@ -7,13 +7,13 @@ import { Icon } from 'antd';
 export default class AccountsListItem extends Component {
   static propTypes = {
     account: PropTypes.object.isRequired,
-  }
+  };
   state = {
     settingsVisible: false,
-  }
+  };
   toggleSettings = () => {
     this.setState({ settingsVisible: !this.state.settingsVisible });
-  }
+  };
   render() {
     let editAccountForm = '';
     if (this.state.settingsVisible) {
@@ -22,7 +22,7 @@ export default class AccountsListItem extends Component {
           accountName: this.props.account.name,
           accountType: this.props.account.type,
           accountCompany: this.props.account.company,
-        }
+        },
       };
       // adding EditAccount form this way so that the component will mount and
       // unmount, resetting the form fields in doing so
@@ -39,15 +39,21 @@ export default class AccountsListItem extends Component {
 
     return (
       <div className="well" key={this.props.account._id}>
-        <div className={(this.state.settingsVisible ? 'expanded' : '') + ' toggle-account-setting-icon float-right'}>
+        <div
+          className={
+            (this.state.settingsVisible ? 'expanded' : '') +
+            ' toggle-account-setting-icon float-right'
+          }
+        >
           <Icon type="setting" onClick={this.toggleSettings} />
         </div>
         <h4 className="account-name">{this.props.account.name}</h4>
-        <p className="company-info">{this.props.account.type === 'bank' ? 'Bank' : 'Credit Card'} - {this.props.account.company}</p>
+        <p className="company-info">
+          {this.props.account.type === 'bank' ? 'Bank' : 'Credit Card'} -{' '}
+          {this.props.account.company}
+        </p>
         <Collapse isOpened={this.state.settingsVisible}>
-          <div>
-            { editAccountForm }
-          </div>
+          <div>{editAccountForm}</div>
         </Collapse>
       </div>
     );

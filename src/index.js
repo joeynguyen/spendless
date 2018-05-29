@@ -6,6 +6,8 @@ import { configureStore, history } from './store/configureStore.js';
 
 const store = configureStore();
 
-ReactDOM.render(<Root store={store} history={history} />, document.getElementById('root'));
+ReactDOM.render(
+  <Root store={store} history={history} />,
+  document.getElementById('root')
+);
 registerServiceWorker();
-

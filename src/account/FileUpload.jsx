@@ -12,19 +12,20 @@ class FileUpload extends Component {
     accountId: PropTypes.string.isRequired,
     actions: PropTypes.object.isRequired,
     uploadedTransactionsExist: PropTypes.bool.isRequired,
-  }
+  };
   state = {
     uploadedFile: '',
-  }
+  };
   componentWillReceiveProps(nextProps) {
     if (
-      nextProps.uploadedTransactionsExist !== this.props.uploadedTransactionsExist
-      && nextProps.uploadedTransactionsExist === false
+      nextProps.uploadedTransactionsExist !==
+        this.props.uploadedTransactionsExist &&
+      nextProps.uploadedTransactionsExist === false
     ) {
       this.setState({ uploadedFile: '' });
     }
   }
-  handleFile = (files) => {
+  handleFile = files => {
     // TODO: Fix not being able to upload same file twice in a row if canceled first time
     if (files[0]) {
       parseCSV(files[0], this.props.accountId)
@@ -37,38 +38,42 @@ class FileUpload extends Component {
           message.error(err);
         });
     }
-  }
+  };
   removeUploadedFile = () => {
     this.setState({ uploadedFile: '' });
     this.props.actions.resetUploadedTransactions();
-  }
+  };
   render() {
-    const uploadedFileContent = this.state.uploadedFile ?
-      (
-        <div className="ant-upload-list-item ant-upload-list-item-done" style={{ marginTop: 0 }}>
-          <div className="ant-upload-list-item-info">
-            <i className="anticon anticon-paper-clip"></i>
-            <span className="ant-upload-list-item-name">{this.state.uploadedFile}</span>
-          </div>
-          <Popconfirm
-            onConfirm={this.removeUploadedFile}
-            title="Remove this file and its transactions？"
-            okText="Yes"
-            cancelText="No"
-          >
-            <i title="Remove file" className="anticon anticon-cross"></i>
-          </Popconfirm>
+    const uploadedFileContent = this.state.uploadedFile ? (
+      <div
+        className="ant-upload-list-item ant-upload-list-item-done"
+        style={{ marginTop: 0 }}
+      >
+        <div className="ant-upload-list-item-info">
+          <i className="anticon anticon-paper-clip" />
+          <span className="ant-upload-list-item-name">
+            {this.state.uploadedFile}
+          </span>
         </div>
-      )
-      : null
-    ;
+        <Popconfirm
+          onConfirm={this.removeUploadedFile}
+          title="Remove this file and its transactions？"
+          okText="Yes"
+          cancelText="No"
+        >
+          <i title="Remove file" className="anticon anticon-cross" />
+        </Popconfirm>
+      </div>
+    ) : null;
     return (
       <form encType="multipart/form-data" style={{ display: 'inline-block' }}>
         {/* inline-block prevents file input clickable window from extending across screen */}
         <ReactFileReader handleFiles={this.handleFile} fileTypes=".csv">
-          <Button size="large" icon="upload">Upload Transactions</Button>
+          <Button size="large" icon="upload">
+            Upload Transactions
+          </Button>
         </ReactFileReader>
-        { uploadedFileContent }
+        {uploadedFileContent}
       </form>
     );
   }
@@ -76,7 +81,7 @@ class FileUpload extends Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(transactionsActions, dispatch)
+    actions: bindActionCreators(transactionsActions, dispatch),
   };
 }
 

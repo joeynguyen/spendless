@@ -2,7 +2,11 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Alert, Modal } from 'antd';
 
-const UnsavedWarning = ({ localHandleAlertStay, localHandleAlertLeave, show }) => {
+const UnsavedWarning = ({
+  localHandleAlertStay,
+  localHandleAlertLeave,
+  show,
+}) => {
   return (
     <Modal
       id="UnsavedWarning"

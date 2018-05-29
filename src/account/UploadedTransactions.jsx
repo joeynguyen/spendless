@@ -2,13 +2,14 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Button, Modal, Table } from 'antd';
 
-const mapTransactionData = (data) => data.map(transaction => ({
-  key: transaction._id,
-  amount: transaction.amount,
-  category: transaction.category,
-  date: transaction.date,
-  description: transaction.description,
-}));
+const mapTransactionData = data =>
+  data.map(transaction => ({
+    key: transaction._id,
+    amount: transaction.amount,
+    category: transaction.category,
+    date: transaction.date,
+    description: transaction.description,
+  }));
 
 const renderColumns = [
   {
@@ -27,7 +28,7 @@ const renderColumns = [
     title: 'Amount',
     className: 'column-amount',
     dataIndex: 'amount',
-    render: (amount) => (
+    render: amount => (
       <span className={amount > 0 ? 'positive-amount' : ''}>
         {Number(amount).toFixed(2)}
       </span>
@@ -39,24 +40,27 @@ const UploadedTransactions = ({
   uploadedTransactions,
   negateUploadedTransactions,
   resetUploadedTransactions,
-  handleSave
+  handleSave,
 }) => {
   const data = mapTransactionData(uploadedTransactions);
-  const modalFooter = [(
+  const modalFooter = [
     <Button
       key="confirm"
       type="primary"
       id="save-uploaded-transactions"
       onClick={handleSave}
-    >Save</Button>
-  ), (
+    >
+      Save
+    </Button>,
     <Button
       key="cancel"
       id="cancel-manage-uploaded-transactions"
       size="large"
       onClick={resetUploadedTransactions}
-    >Cancel</Button>
-  )];
+    >
+      Cancel
+    </Button>,
+  ];
 
   return (
     <Modal
@@ -72,7 +76,9 @@ const UploadedTransactions = ({
       <Button
         id="negate-uploaded-transactions-amounts"
         onClick={negateUploadedTransactions}
-      >My amounts are the opposite of what they should be</Button>
+      >
+        My amounts are the opposite of what they should be
+      </Button>
       <Table columns={renderColumns} dataSource={data} />
     </Modal>
   );

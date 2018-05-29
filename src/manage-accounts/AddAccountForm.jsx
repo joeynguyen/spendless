@@ -14,17 +14,17 @@ export class AddAccountForm extends Component {
     const accountTypeSelected = this.props.form.getFieldValue('accountType');
     let accountTypeForm;
     if (accountTypeSelected === 'bank') {
-      accountTypeForm = (<AddBankAccount />);
+      accountTypeForm = <AddBankAccount />;
     } else {
-      accountTypeForm = (<AddCreditCardAccount />);
+      accountTypeForm = <AddCreditCardAccount />;
     }
 
     return (
       <div className="well">
-        <Form layout="vertical" >
+        <Form layout="vertical">
           <FormItem label="Type">
             {getFieldDecorator('accountType', {
-              initialValue: 'bank'
+              initialValue: 'bank',
             })(
               <Radio.Group>
                 <Radio.Button value="bank">Bank</Radio.Button>

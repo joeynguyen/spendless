@@ -12,7 +12,7 @@ import * as manageAccountsActions from '../manage-accounts/ManageAccountsActions
 
 export const history = createHashHistory();
 
-export const configureStore = (initialState) => {
+export const configureStore = initialState => {
   // Redux Configuration
   const middleware = [];
   const enhancers = [];
@@ -23,7 +23,7 @@ export const configureStore = (initialState) => {
   // Logging Middleware
   const logger = createLogger({
     level: 'info',
-    collapsed: true
+    collapsed: true,
   });
   middleware.push(logger);
 
@@ -44,9 +44,9 @@ export const configureStore = (initialState) => {
   /* eslint-disable no-underscore-dangle */
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-      // Options: http://zalmoxisus.github.io/redux-devtools-extension/API/Arguments.html
-      actionCreators,
-    })
+        // Options: http://zalmoxisus.github.io/redux-devtools-extension/API/Arguments.html
+        actionCreators,
+      })
     : compose;
 
   // Apply Middleware & Compose Enhancers
@@ -57,8 +57,9 @@ export const configureStore = (initialState) => {
   const store = createStore(rootReducer, initialState, enhancer);
 
   if (module.hot) {
-    module.hot.accept('../reducers', () =>
-      store.replaceReducer(require('../reducers')) // eslint-disable-line global-require
+    module.hot.accept(
+      '../reducers',
+      () => store.replaceReducer(require('../reducers')) // eslint-disable-line global-require
     );
   }
 

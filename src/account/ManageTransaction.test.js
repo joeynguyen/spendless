@@ -33,7 +33,7 @@ function setup() {
       notes: {
         name: 'notes',
         value: 'Add notes here',
-      }
+      },
     },
   };
 
@@ -91,7 +91,7 @@ describe('ManageTransaction', () => {
       expect(submitBtn.prop('disabled')).toExist();
     });
 
-    it('it submits on submit', (done) => {
+    it('it submits on submit', done => {
       const spy = expect.spyOn(component.props(), 'doSubmit');
 
       // We can't test clicking on submit button to perform 'doSubmit' until
@@ -112,7 +112,7 @@ describe('ManageTransaction', () => {
       expect(cancelBtn.length).toBe(1);
     });
 
-    it('it cancels on click', (done) => {
+    it('it cancels on click', done => {
       const spy = expect.spyOn(component.props(), 'toggleManageTransaction');
 
       expect(spy.calls.length).toEqual(0);

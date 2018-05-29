@@ -7,13 +7,11 @@ import AccountsList from './AccountsList.jsx';
 const ManageAccounts = ({ accounts, actions, manageAccountsVisible }) => {
   const ccAccounts = accounts.filter(account => account.type === 'creditcard');
   const bankAccounts = accounts.filter(account => account.type === 'bank');
-  const modalFooter = [(
-    <Button
-      key={0}
-      size="large"
-      onClick={actions.toggleManageAccounts}
-    >Close</Button>
-  )];
+  const modalFooter = [
+    <Button key={0} size="large" onClick={actions.toggleManageAccounts}>
+      Close
+    </Button>,
+  ];
   return (
     <Modal
       id="ManageAccounts"
@@ -30,7 +28,7 @@ const ManageAccounts = ({ accounts, actions, manageAccountsVisible }) => {
           <AccountsList accounts={accounts} />
         </Col>
 
-        <Col span={8} style={{padding: '0 12px' }}>
+        <Col span={8} style={{ padding: '0 12px' }}>
           <ul>
             <li>{bankAccounts.length} Bank accounts</li>
             <li>{ccAccounts.length} Credit card accounts</li>

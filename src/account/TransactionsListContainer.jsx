@@ -11,7 +11,7 @@ class TransactionsListContainer extends Component {
     accountTransactions: PropTypes.arrayOf(PropTypes.object),
     actions: PropTypes.object.isRequired,
     uploadedTransactions: PropTypes.arrayOf(PropTypes.object),
-  }
+  };
 
   componentDidMount() {
     this.props.actions.getAccountTransactions(this.props.activeAccountId);
@@ -48,8 +48,10 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(transactionsActions, dispatch)
+    actions: bindActionCreators(transactionsActions, dispatch),
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TransactionsListContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  TransactionsListContainer
+);

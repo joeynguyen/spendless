@@ -1,4 +1,9 @@
-import { LOAD_ACCOUNT_TRANSACTIONS, RESET_ACCOUNT_TRANSACTIONS, UPDATE_ACCOUNT_TRANSACTIONS, REMOVE_ACCOUNT_TRANSACTIONS } from './TransactionsActions.js';
+import {
+  LOAD_ACCOUNT_TRANSACTIONS,
+  RESET_ACCOUNT_TRANSACTIONS,
+  UPDATE_ACCOUNT_TRANSACTIONS,
+  REMOVE_ACCOUNT_TRANSACTIONS,
+} from './TransactionsActions.js';
 
 export default function(state = [], action) {
   switch (action.type) {
@@ -7,7 +12,9 @@ export default function(state = [], action) {
     case RESET_ACCOUNT_TRANSACTIONS:
       return action.payload;
     case UPDATE_ACCOUNT_TRANSACTIONS:
-      const updatedTransactionIndex = state.findIndex(item => item._id === action.payload._id);
+      const updatedTransactionIndex = state.findIndex(
+        item => item._id === action.payload._id
+      );
 
       // Adding new transaction(s)
       if (updatedTransactionIndex < 0) {
@@ -28,7 +35,9 @@ export default function(state = [], action) {
       }
 
       // handle single delete
-      const deletedTransactionIndex = state.findIndex(item => item._id === action.payload.id);
+      const deletedTransactionIndex = state.findIndex(
+        item => item._id === action.payload.id
+      );
       return [
         ...state.slice(0, deletedTransactionIndex),
         ...state.slice(deletedTransactionIndex + 1),

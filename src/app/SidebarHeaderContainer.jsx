@@ -8,23 +8,25 @@ import { Button } from 'antd';
 class SidebarHeaderContainer extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
-  }
+  };
   render() {
     return (
       <Button
-        style={{borderRadius: 0, 'width': '100%'}}
+        style={{ borderRadius: 0, width: '100%' }}
         type="primary"
         icon="edit"
         size="large"
         onClick={this.props.actions.toggleManageAccounts}
-      >Edit Accounts</Button>
+      >
+        Edit Accounts
+      </Button>
     );
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(manageAccountsActions, dispatch)
+    actions: bindActionCreators(manageAccountsActions, dispatch),
   };
 }
 

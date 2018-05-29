@@ -16,13 +16,13 @@ class ManageTransactionContainer extends Component {
     form: PropTypes.object.isRequired,
     initialValues: PropTypes.object.isRequired,
     manageTransactionVisible: PropTypes.bool.isRequired,
-  }
+  };
 
   toggleManageTransaction = () => {
     this.props.actions.toggleManageTransaction();
-  }
+  };
 
-  handleSaveTransaction = (e) => {
+  handleSaveTransaction = e => {
     e.preventDefault();
     let newTransactionObj;
     this.props.form.validateFields((err, values) => {
@@ -52,17 +52,19 @@ class ManageTransactionContainer extends Component {
         }
 
         // Save account in DB
-        this.props.actions.saveAccountTransactions(newTransactionObj)
+        this.props.actions
+          .saveAccountTransactions(newTransactionObj)
           .then(() => {
             message.success('Transaction saved');
             // reset current transaction being edited to null
             this.toggleManageTransaction();
-          }).catch(() => {
+          })
+          .catch(() => {
             message.error('Restart the application and retry');
           });
       }
     });
-  }
+  };
 
   render() {
     const manageType = this.props.activeTransaction !== null ? 'edit' : 'add';
@@ -88,7 +90,13 @@ function mapStateToProps(state) {
   };
 
   if (state.activeTransaction !== null) {
-    const { date, description, category, amount, notes } = state.activeTransaction;
+    const {
+      date,
+      description,
+      category,
+      amount,
+      notes,
+    } = state.activeTransaction;
     const dateFormat = 'YYYY-MM-DD';
     initialValues = {
       date: moment(date, dateFormat),
@@ -108,28 +116,30 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(transactionsActions, dispatch)
+    actions: bindActionCreators(transactionsActions, dispatch),
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Form.create({
-  mapPropsToFields(props) {
-    return {
-      description: {
-        value: props.initialValues.description,
-      },
-      date: {
-        value: props.initialValues.date,
-      },
-      category: {
-        value: props.initialValues.category,
-      },
-      amount: {
-        value: props.initialValues.amount,
-      },
-      notes: {
-        value: props.initialValues.notes,
-      },
-    };
-  },
-})(ManageTransactionContainer));
+export default connect(mapStateToProps, mapDispatchToProps)(
+  Form.create({
+    mapPropsToFields(props) {
+      return {
+        description: {
+          value: props.initialValues.description,
+        },
+        date: {
+          value: props.initialValues.date,
+        },
+        category: {
+          value: props.initialValues.category,
+        },
+        amount: {
+          value: props.initialValues.amount,
+        },
+        notes: {
+          value: props.initialValues.notes,
+        },
+      };
+    },
+  })(ManageTransactionContainer)
+);

@@ -8,26 +8,24 @@ import * as transactionsActions from './TransactionsActions.js';
 class AddTransactionButton extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
-  }
+  };
 
   toggleManageTransaction = () => {
     this.props.actions.toggleManageTransaction();
-  }
+  };
 
   render() {
     return (
-      <Button
-        icon="plus"
-        size="large"
-        onClick={this.toggleManageTransaction}
-      >Add Transaction</Button>
+      <Button icon="plus" size="large" onClick={this.toggleManageTransaction}>
+        Add Transaction
+      </Button>
     );
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(transactionsActions, dispatch)
+    actions: bindActionCreators(transactionsActions, dispatch),
   };
 }
 

@@ -8,18 +8,19 @@ import * as accountsActions from '../account/AccountsActions.js';
 
 export default function withAddAccountHandler(OriginalComponent) {
   class WrapperClass extends Component {
-    handleSubmit = (e) => {
+    handleSubmit = e => {
       e.preventDefault();
       this.props.form.validateFields((err, values) => {
         if (!err) {
           const newAccount = {
-            '_id': new Date().toISOString(),
-            'name': values.accountName,
-            'type': values.accountType,
-            'company': values.companyName,
+            _id: new Date().toISOString(),
+            name: values.accountName,
+            type: values.accountType,
+            company: values.companyName,
           };
 
-          this.props.actions.saveAccount(newAccount)
+          this.props.actions
+            .saveAccount(newAccount)
             .then(result => {
               message.success(`${result.name} account added`);
               this.props.form.resetFields();
@@ -29,7 +30,7 @@ export default function withAddAccountHandler(OriginalComponent) {
             });
         }
       });
-    }
+    };
     render() {
       return (
         <OriginalComponent
@@ -48,7 +49,7 @@ export default function withAddAccountHandler(OriginalComponent) {
 
   function mapDispatchToProps(dispatch) {
     return {
-      actions: bindActionCreators(accountsActions, dispatch)
+      actions: bindActionCreators(accountsActions, dispatch),
     };
   }
 

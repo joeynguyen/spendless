@@ -15,12 +15,17 @@ const AccountPage = ({
   unsavedWarningVisible,
   uploadedTransactionsExist,
   localHandleAlertStay,
-  localHandleAlertLeave
+  localHandleAlertLeave,
 }) => {
   // show loading spinner until accounts are loaded
   if (accounts.length < 1 && activeAccountId) {
     return (
-      <Row type="flex" justify="center" align="middle" style={{ height: '100%' }}>
+      <Row
+        type="flex"
+        justify="center"
+        align="middle"
+        style={{ height: '100%' }}
+      >
         <Col span={2} style={{ textAlign: 'center' }}>
           <Spin size="large" />
         </Col>
@@ -28,8 +33,12 @@ const AccountPage = ({
     );
   }
 
-  const manageTransactionModal = manageTransactionVisible ? <ManageTransactionContainer /> : null;
-  const uploadedTransactionsModal = uploadedTransactionsExist ? <UploadedTransactionsContainer /> : null;
+  const manageTransactionModal = manageTransactionVisible ? (
+    <ManageTransactionContainer />
+  ) : null;
+  const uploadedTransactionsModal = uploadedTransactionsExist ? (
+    <UploadedTransactionsContainer />
+  ) : null;
 
   return (
     <div>
@@ -44,8 +53,8 @@ const AccountPage = ({
         localHandleAlertStay={localHandleAlertStay}
         localHandleAlertLeave={localHandleAlertLeave}
       />
-      { manageTransactionModal }
-      { uploadedTransactionsModal }
+      {manageTransactionModal}
+      {uploadedTransactionsModal}
     </div>
   );
 };

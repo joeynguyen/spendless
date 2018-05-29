@@ -29,7 +29,7 @@ const props = {
 };
 
 describe('AddAccountForm', () => {
-  const wrapper = mount(<AddAccountForm  {...props} />);
+  const wrapper = mount(<AddAccountForm {...props} />);
 
   describe('renders 3 user input fields', () => {
     it('renders accountName field with empty value', () => {
@@ -42,7 +42,7 @@ describe('AddAccountForm', () => {
       // expect(wrapper.find('select[name="accountType"]').props().value).toBe('');
     });
 
-    it('doesn\'t render accountCompany field initially', () => {
+    it("doesn't render accountCompany field initially", () => {
       expect(wrapper.find('input[name="accountCompany"]').length).toBe(0);
     });
   });

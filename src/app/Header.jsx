@@ -9,7 +9,7 @@ const styles = {
     float: 'left',
   },
   logoImg: {
-    display: 'inline-block'
+    display: 'inline-block',
   },
   logoSpan: {
     display: 'inline-block',
@@ -19,8 +19,8 @@ const styles = {
     WebkitFontSmoothing: 'antialiased',
   },
   navbar: {
-    marginTop: 10
-  }
+    marginTop: 10,
+  },
 };
 
 const routeKeyMap = {
@@ -28,20 +28,32 @@ const routeKeyMap = {
   '/help': 'help',
 };
 
-const Header = (props) => {
+const Header = props => {
   return (
     <Row>
       <Col span={8}>
         <Link to="/" style={styles.logo}>
-          <img alt="Piggy Bank Logo" src="../assets/piggybank.png" width="50px" style={styles.logoImg}/>
-          {' '}
+          <img
+            alt="Piggy Bank Logo"
+            src="../assets/piggybank.png"
+            width="50px"
+            style={styles.logoImg}
+          />{' '}
           <span style={styles.logoSpan}>spendLess</span>
         </Link>
       </Col>
       <Col span={8} offset={8}>
-        <Menu selectedKeys={[routeKeyMap[props.currentRoute]]} mode="horizontal" style={{ borderBottom: 'none' }}>
-          <Menu.Item key="overview"><Link to="/">Overview</Link></Menu.Item>
-          <Menu.Item key="help"><Link to="/help">Help</Link></Menu.Item>
+        <Menu
+          selectedKeys={[routeKeyMap[props.currentRoute]]}
+          mode="horizontal"
+          style={{ borderBottom: 'none' }}
+        >
+          <Menu.Item key="overview">
+            <Link to="/">Overview</Link>
+          </Menu.Item>
+          <Menu.Item key="help">
+            <Link to="/help">Help</Link>
+          </Menu.Item>
         </Menu>
       </Col>
     </Row>

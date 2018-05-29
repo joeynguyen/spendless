@@ -13,19 +13,26 @@ class AddBankAccount extends Component {
     return (
       <Form onSubmit={this.props.handleSubmit} layout="vertical">
         {/* hidden field to pass on save data */}
-        {getFieldDecorator('accountType', {initialValue: 'bank'})(<Input type="hidden" />)}
+        {getFieldDecorator('accountType', { initialValue: 'bank' })(
+          <Input type="hidden" />
+        )}
 
         <FormItem label="Name">
           {getFieldDecorator('accountName', {
-            rules: [{ required: true, message: 'Enter a name for the account' }],
-          })(
-            <Input placeholder="Enter a name for the account" />
-          )}
+            rules: [
+              { required: true, message: 'Enter a name for the account' },
+            ],
+          })(<Input placeholder="Enter a name for the account" />)}
         </FormItem>
 
         <FormItem label="Bank">
           {getFieldDecorator('companyName', {
-            rules: [{ required: true, message: 'Enter the name of the financial institution' }],
+            rules: [
+              {
+                required: true,
+                message: 'Enter the name of the financial institution',
+              },
+            ],
           })(
             <Input placeholder="Enter the name of the financial institution" />
           )}
@@ -37,7 +44,9 @@ class AddBankAccount extends Component {
             type="primary"
             htmlType="submit"
             size="large"
-          >Save</Button>
+          >
+            Save
+          </Button>
         </FormItem>
       </Form>
     );

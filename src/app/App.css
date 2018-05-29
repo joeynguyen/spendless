@@ -1,5 +1,5 @@
 @import '~antd/dist/antd.css';
-@import "~font-awesome/css/font-awesome.min.css";
+@import '~font-awesome/css/font-awesome.min.css';
 
 /* global styles */
 .positive-amount {
@@ -27,29 +27,42 @@ td.column-actions {
   padding-left: 0;
 }
 .add-account-form.ant-collapse .ant-collapse-item .arrow,
-.add-account-form.ant-collapse .ant-collapse-item .ant-collapse-header[aria-expanded="true"] .arrow {
+.add-account-form.ant-collapse
+  .ant-collapse-item
+  .ant-collapse-header[aria-expanded='true']
+  .arrow {
   display: none;
 }
 
-.add-account-form.ant-collapse-borderless > .ant-collapse-item > .ant-collapse-content {
+.add-account-form.ant-collapse-borderless
+  > .ant-collapse-item
+  > .ant-collapse-content {
   border-top: none;
 }
 
 .toggle-account-setting-icon i {
   cursor: pointer;
   font-size: 14px;
-  animation: unRoll .1s 3;
+  animation: unRoll 0.1s 3;
 }
 .toggle-account-setting-icon.expanded i {
-  animation: roll .1s 3;
+  animation: roll 0.1s 3;
 }
 @keyframes roll {
-  from { transform: rotate(0); }
-  to { transform: rotate(30deg); }
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(30deg);
+  }
 }
 @keyframes unRoll {
-  from { transform: rotate(0); }
-  to { transform: rotate(-30deg); }
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(-30deg);
+  }
 }
 
 .well {
@@ -61,5 +74,5 @@ td.column-actions {
 }
 
 .float-right {
-    float: right;
+  float: right;
 }

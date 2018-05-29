@@ -19,18 +19,21 @@ class EditBankAccount extends Component {
 
         <FormItem label="Name">
           {getFieldDecorator('accountName', {
-            rules: [{ required: true, message: 'Enter a name for the account' }],
-          })(
-            <Input placeholder="Enter a name for the account" />
-          )}
+            rules: [
+              { required: true, message: 'Enter a name for the account' },
+            ],
+          })(<Input placeholder="Enter a name for the account" />)}
         </FormItem>
 
         <FormItem label="Credit Card Company">
           {getFieldDecorator('companyName', {
-            rules: [{ required: true, message: 'Enter the name of the financial institution' }],
-          })(
-            <Select>{renderAntdOptions(accountCompanyOptions)}</Select>
-          )}
+            rules: [
+              {
+                required: true,
+                message: 'Enter the name of the financial institution',
+              },
+            ],
+          })(<Select>{renderAntdOptions(accountCompanyOptions)}</Select>)}
         </FormItem>
 
         <FormItem>
@@ -39,12 +42,16 @@ class EditBankAccount extends Component {
             type="primary"
             htmlType="submit"
             size="large"
-          >Save</Button>
+          >
+            Save
+          </Button>
           <Button
             name="cancel"
             onClick={this.props.toggleSettings}
             size="large"
-          >Cancel</Button>
+          >
+            Cancel
+          </Button>
         </FormItem>
         <Popconfirm
           onConfirm={this.props.removeFromDB}
@@ -52,11 +59,9 @@ class EditBankAccount extends Component {
           okText="Yes"
           cancelText="No"
         >
-          <Button
-            name="delete-toggle"
-            size="large"
-            type="danger"
-          >Delete</Button>
+          <Button name="delete-toggle" size="large" type="danger">
+            Delete
+          </Button>
         </Popconfirm>
       </Form>
     );

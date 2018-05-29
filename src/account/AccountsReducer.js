@@ -1,11 +1,17 @@
-import { LOAD_ACCOUNTS_SUCCESS, UPDATE_ACCOUNTS, REMOVE_ACCOUNT } from './AccountsActions.js';
+import {
+  LOAD_ACCOUNTS_SUCCESS,
+  UPDATE_ACCOUNTS,
+  REMOVE_ACCOUNT,
+} from './AccountsActions.js';
 
 export default function(state = [], action) {
   switch (action.type) {
     case LOAD_ACCOUNTS_SUCCESS:
       return action.payload;
     case UPDATE_ACCOUNTS:
-      const updatedAccountIndex = state.findIndex(item => item._id === action.data._id);
+      const updatedAccountIndex = state.findIndex(
+        item => item._id === action.data._id
+      );
 
       // Add new account if account doesn't already exist
       if (updatedAccountIndex < 0) {
@@ -19,7 +25,9 @@ export default function(state = [], action) {
         ...state.slice(updatedAccountIndex + 1),
       ];
     case REMOVE_ACCOUNT:
-      const deletedAccountIndex = state.findIndex(item => item._id === action.data);
+      const deletedAccountIndex = state.findIndex(
+        item => item._id === action.data
+      );
       return [
         ...state.slice(0, deletedAccountIndex),
         ...state.slice(deletedAccountIndex + 1),

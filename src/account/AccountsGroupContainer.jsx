@@ -10,7 +10,7 @@ class AccountContainer extends Component {
     accounts: PropTypes.array,
     actions: PropTypes.object.isRequired,
     activeAccountId: PropTypes.string,
-  }
+  };
 
   componentWillMount() {
     this.props.actions.getAccounts();
@@ -18,7 +18,10 @@ class AccountContainer extends Component {
 
   render() {
     return (
-      <AccountsGroup accounts={this.props.accounts} activeAccountId={this.props.activeAccountId} />
+      <AccountsGroup
+        accounts={this.props.accounts}
+        activeAccountId={this.props.activeAccountId}
+      />
     );
   }
 }
@@ -34,7 +37,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(accountsActions, dispatch)
+    actions: bindActionCreators(accountsActions, dispatch),
   };
 }
 

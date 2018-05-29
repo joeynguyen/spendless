@@ -9,7 +9,7 @@ export const TOGGLE_UNSAVED_WARNING = 'TOGGLE_UNSAVED_WARNING';
 function loadAccountsSuccess(accounts) {
   return {
     type: LOAD_ACCOUNTS_SUCCESS,
-    payload: accounts
+    payload: accounts,
   };
 }
 
@@ -17,7 +17,7 @@ function loadAccountsSuccess(accounts) {
 function removeAccount(accountId) {
   return {
     type: REMOVE_ACCOUNT,
-    data: accountId
+    data: accountId,
   };
 }
 
@@ -25,49 +25,55 @@ function removeAccount(accountId) {
 function updateAccounts(accountData) {
   return {
     type: UPDATE_ACCOUNTS,
-    data: accountData
+    data: accountData,
   };
 }
 
 export function toggleUnsavedWarning() {
   return {
-    type: TOGGLE_UNSAVED_WARNING
+    type: TOGGLE_UNSAVED_WARNING,
   };
 }
 
 export function saveAccount(account) {
   return function(dispatch) {
-    return AccountsApi.saveAccountToDB(account).then(savedAccount => {
-      dispatch(updateAccounts(savedAccount));
-      // pass account object back to invoker's success method
-      return savedAccount;
-    }).catch(error => {
-      console.error('saveAccounts error', error);
-      throw error;
-    });
+    return AccountsApi.saveAccountToDB(account)
+      .then(savedAccount => {
+        dispatch(updateAccounts(savedAccount));
+        // pass account object back to invoker's success method
+        return savedAccount;
+      })
+      .catch(error => {
+        console.error('saveAccounts error', error);
+        throw error;
+      });
   };
 }
 
 export function getAccounts() {
   return function(dispatch) {
-    return AccountsApi.getAccountsFromDB().then(accounts => {
-      dispatch(loadAccountsSuccess(accounts));
-    }).catch(error => {
-      console.error('getAccounts error', error);
-      throw error;
-    });
+    return AccountsApi.getAccountsFromDB()
+      .then(accounts => {
+        dispatch(loadAccountsSuccess(accounts));
+      })
+      .catch(error => {
+        console.error('getAccounts error', error);
+        throw error;
+      });
   };
 }
 
 export function deleteAccount(account) {
   return function(dispatch) {
-    return AccountsApi.deleteAccountFromDB(account).then(deletedAccount => {
-      dispatch(removeAccount(deletedAccount.id));
-      // pass deleted account object back to invoker's success method
-      return deletedAccount;
-    }).catch(error => {
-      console.error('deleteAccount error', error);
-      throw error;
-    });
+    return AccountsApi.deleteAccountFromDB(account)
+      .then(deletedAccount => {
+        dispatch(removeAccount(deletedAccount.id));
+        // pass deleted account object back to invoker's success method
+        return deletedAccount;
+      })
+      .catch(error => {
+        console.error('deleteAccount error', error);
+        throw error;
+      });
   };
 }

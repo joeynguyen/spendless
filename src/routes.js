@@ -8,9 +8,9 @@ import HelpContent from './help/HelpContent.jsx';
 export default () => (
   <AppContainer>
     <Switch>
-        <Route exact path="/help" component={HelpContent} />
-        <Route exact path="/account/:id" component={AccountPageContainer} />
-        <Route exact path="/" component={Overview} />
+      <Route exact path="/help" component={HelpContent} />
+      <Route exact path="/account/:id" component={AccountPageContainer} />
+      <Route exact path="/" component={Overview} />
     </Switch>
   </AppContainer>
 );

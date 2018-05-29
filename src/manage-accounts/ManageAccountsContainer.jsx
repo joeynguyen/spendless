@@ -10,7 +10,7 @@ export class ManageAccountsContainer extends Component {
     accounts: PropTypes.array.isRequired,
     actions: PropTypes.object.isRequired,
     manageAccountsVisible: PropTypes.bool.isRequired,
-  }
+  };
   render() {
     return (
       <ManageAccounts
@@ -31,8 +31,10 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(manageAccountsActions, dispatch)
+    actions: bindActionCreators(manageAccountsActions, dispatch),
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ManageAccountsContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  ManageAccountsContainer
+);

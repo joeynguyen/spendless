@@ -6,7 +6,9 @@ import { AddAccountFormContainer } from './AddAccountFormContainer.jsx';
 function setup() {
   const props = {
     actions: {
-      saveAccount: () => { return Promise.resolve({name: 'Test account'}); },
+      saveAccount: () => {
+        return Promise.resolve({ name: 'Test account' });
+      },
     },
     fields: {
       accountName: {
@@ -40,11 +42,13 @@ function setup() {
 describe('AddAccountFormContainer', () => {
   const wrapper = setup();
 
-  it('saveAccount function should be called on update button click/submit', (done) => {
+  it('saveAccount function should be called on update button click/submit', done => {
     const addAccountBtn = wrapper.find('button[name="add-account"]');
     expect(addAccountBtn.prop('type')).toBe('submit');
 
-    const spy = expect.spyOn(wrapper.props().actions, 'saveAccount').andCallThrough();
+    const spy = expect
+      .spyOn(wrapper.props().actions, 'saveAccount')
+      .andCallThrough();
 
     expect(spy.calls.length).toEqual(0);
     wrapper.find('#add-account-form').simulate('submit');
@@ -53,4 +57,3 @@ describe('AddAccountFormContainer', () => {
     done();
   });
 });
-

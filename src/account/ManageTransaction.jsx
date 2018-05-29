@@ -5,24 +5,34 @@ import { Button, Col, DatePicker, Form, Input, Modal, Row } from 'antd';
 const FormItem = Form.Item;
 const { TextArea } = Input;
 
-const ManageTransaction = ({ form, manageType = 'add', manageTransactionVisible, toggleManageTransaction, doSubmit }) => {
+const ManageTransaction = ({
+  form,
+  manageType = 'add',
+  manageTransactionVisible,
+  toggleManageTransaction,
+  doSubmit,
+}) => {
   const { getFieldDecorator } = form;
-  const componentTitle = (manageType === 'edit') ? 'Edit Transaction' : 'Add Transaction';
-  const modalFooter = [(
+  const componentTitle =
+    manageType === 'edit' ? 'Edit Transaction' : 'Add Transaction';
+  const modalFooter = [
     <Button
       key="confirm"
       type="primary"
       htmlType="submit"
       form="manage-transaction"
-    >Save</Button>
-  ), (
+    >
+      Save
+    </Button>,
     <Button
       key="cancel"
       id="cancel-manage-transaction"
       size="large"
       onClick={toggleManageTransaction}
-    >Cancel</Button>
-  )];
+    >
+      Cancel
+    </Button>,
+  ];
 
   return (
     <Modal
@@ -38,9 +48,7 @@ const ManageTransaction = ({ form, manageType = 'add', manageTransactionVisible,
         <FormItem label="Description">
           {getFieldDecorator('description', {
             rules: [{ required: true, message: 'Enter a description' }],
-          })(
-            <Input />
-          )}
+          })(<Input />)}
         </FormItem>
 
         <Row>
@@ -48,9 +56,7 @@ const ManageTransaction = ({ form, manageType = 'add', manageTransactionVisible,
             <FormItem label="Amount">
               {getFieldDecorator('amount', {
                 rules: [{ required: true, message: 'Enter an amount' }],
-              })(
-                <Input addonBefore="$" />
-              )}
+              })(<Input addonBefore="$" />)}
             </FormItem>
           </Col>
 
@@ -58,9 +64,7 @@ const ManageTransaction = ({ form, manageType = 'add', manageTransactionVisible,
             <FormItem label="Date">
               {getFieldDecorator('date', {
                 rules: [{ required: true, message: 'Enter a date' }],
-              })(
-                <DatePicker />
-              )}
+              })(<DatePicker />)}
             </FormItem>
           </Col>
         </Row>
@@ -68,14 +72,12 @@ const ManageTransaction = ({ form, manageType = 'add', manageTransactionVisible,
         <FormItem label="Category">
           {getFieldDecorator('category', {
             rules: [{ required: true, message: 'Enter a category' }],
-          })(
-            <Input />
-          )}
+          })(<Input />)}
         </FormItem>
 
-        <FormItem label="Notes" style={{marginBottom: 5}}>
+        <FormItem label="Notes" style={{ marginBottom: 5 }}>
           {getFieldDecorator('notes', {})(
-            <TextArea rows={4} placeholder="Add notes for this transaction"/>
+            <TextArea rows={4} placeholder="Add notes for this transaction" />
           )}
         </FormItem>
       </Form>
@@ -92,4 +94,3 @@ ManageTransaction.propTypes = {
 };
 
 export default ManageTransaction;
-

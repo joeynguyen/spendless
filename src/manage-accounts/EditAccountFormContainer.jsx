@@ -15,21 +15,23 @@ export class EditAccountFormContainer extends Component {
     activeAccountId: PropTypes.string,
     initialValues: PropTypes.object.isRequired,
     toggleSettings: PropTypes.func.isRequired,
-  }
+  };
 
-  saveToDB = (accountObj) => {
-    this.props.actions.saveAccount(accountObj)
+  saveToDB = accountObj => {
+    this.props.actions
+      .saveAccount(accountObj)
       .then(result => {
         message.success(`${result.name} account updated`);
       })
       .catch(() => {
         message.error('Restart the application and retry');
       });
-  }
+  };
 
   removeFromDB = () => {
     // Remove account from DB
-    this.props.actions.deleteAccount(this.props.account)
+    this.props.actions
+      .deleteAccount(this.props.account)
       .then(deletedAccount => {
         // if current route is on the deleted account, route back to root dir
         if (this.props.activeAccountId === deletedAccount.id) {
@@ -40,7 +42,7 @@ export class EditAccountFormContainer extends Component {
       .catch(() => {
         message.error('Restart the application and retry');
       });
-  }
+  };
 
   render() {
     let accountTypeForm;
@@ -79,8 +81,10 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(accountsActions, dispatch)
+    actions: bindActionCreators(accountsActions, dispatch),
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditAccountFormContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  EditAccountFormContainer
+);
