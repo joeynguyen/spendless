@@ -1,26 +1,37 @@
 const electron = require('electron');
+const path = require('path');
+
 // Module to control application life.
 const app = electron.app;
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
 
-const path = require('path');
-// const url = require('url')
-
 const isDev = process.env.ELECTRON_IS_DEV;
 
 // install dev tools for debugging during development
 const installExtensions = async () => {
-  const installer = require('electron-devtools-installer'); // eslint-disable-line global-require
-  const extensions = ['REACT_DEVELOPER_TOOLS', 'REDUX_DEVTOOLS'];
-  const forceDownload = !!process.env.UPGRADE_EXTENSIONS;
-  for (const name of extensions) {
-    try {
-      await installer.default(installer[name], forceDownload);
-    } catch (e) {
-      console.log(e);
-    } // eslint-disable-line
-  }
+  const {
+    default: installExtension,
+    REACT_DEVELOPER_TOOLS,
+    REDUX_DEVTOOLS,
+  } = require('electron-devtools-installer');
+
+  const REACT_PERF_DEVTOOLS = 'fcombecpigkkfcbfaeikoeegkmkjfbfm';
+  const extensions = [
+    REACT_DEVELOPER_TOOLS,
+    REDUX_DEVTOOLS,
+    REACT_PERF_DEVTOOLS,
+  ];
+
+  await Promise.all(
+    extensions.map(extension => {
+      return new Promise(resolve => {
+        resolve(installExtension(extension));
+      });
+    })
+  )
+    .then(name => console.log(`Added Extensions:  ${name}`))
+    .catch(err => console.log('An error occurred: ', err));
 };
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -29,22 +40,19 @@ let mainWindow;
 
 function createWindow() {
   // Create the browser window.
-  mainWindow = new BrowserWindow({ width: 1080, height: 675 });
+  mainWindow = new BrowserWindow({ width: 1440, height: 900 });
 
   // and load the index.html of the app.
   mainWindow.loadURL(
     isDev
-      ? 'http://localhost:3000' // Dev server ran by react-scripts
+      ? 'http://localhost:3000?react_perf' // Dev server ran by react-scripts
       : `file://${path.join(__dirname, '/build/index.html')}` // Bundled application
   );
-  // mainWindow.loadURL(url.format({
-  //   pathname: path.join(__dirname, 'index.html'),
-  //   protocol: 'file:',
-  //   slashes: true
-  // }))
 
+  // if (isDev) {
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
+  // }
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
