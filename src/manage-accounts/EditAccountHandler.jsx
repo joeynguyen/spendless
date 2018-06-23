@@ -42,15 +42,18 @@ export default function withEditAccountHandler(OriginalComponent) {
   return (Form.create({
     mapPropsToFields(props) {
       return {
-        accountName: {
+        accountName: Form.createFormField({
+          ...props.accountName,
           value: props.initialValues.accountName,
-        },
-        accountType: {
+        }),
+        accountType: Form.createFormField({
+          ...props.accountType,
           value: props.initialValues.accountType,
-        },
-        companyName: {
+        }),
+        companyName: Form.createFormField({
+          ...props.companyName,
           value: props.initialValues.accountCompany,
-        },
+        }),
       };
     },
   })(WrapperClass));
