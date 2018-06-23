@@ -32,7 +32,7 @@ const AccountPage = ({
   const uploadedTransactionsModal = uploadedTransactionsExist ? <UploadedTransactionsContainer /> : null;
 
   return (
-    <div>
+    <React.Fragment>
       <AccountDetails
         accounts={accounts}
         activeAccountId={activeAccountId}
@@ -46,7 +46,7 @@ const AccountPage = ({
       />
       { manageTransactionModal }
       { uploadedTransactionsModal }
-    </div>
+    </React.Fragment>
   );
 };
 

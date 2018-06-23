@@ -16,7 +16,7 @@ const AccountDetails = ({ accounts, activeAccountId, uploadedTransactionsExist }
   }
 
   return (
-    <div>
+    <React.Fragment>
       <div className="header">
         <h3 className={styles.header}>{activeAccount.name} {icon}<br />
           <small>{activeAccount.company}</small></h3>
@@ -29,7 +29,7 @@ const AccountDetails = ({ accounts, activeAccountId, uploadedTransactionsExist }
           <AddTransactionButton />
         </Col>
       </Row>
-    </div>
+    </React.Fragment>
   );
 };
 AccountDetails.propTypes = {

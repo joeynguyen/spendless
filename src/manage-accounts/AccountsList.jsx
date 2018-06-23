@@ -4,7 +4,7 @@ import AccountsListItem from './AccountsListItem.jsx';
 
 const AccountsList = ({ accounts }) => {
   return (
-    <div>
+    <React.Fragment>
     {
       accounts.map(function(account) {
         return (
@@ -12,7 +12,7 @@ const AccountsList = ({ accounts }) => {
         );
       })
     }
-    </div>
+    </React.Fragment>
   );
 };
 AccountsList.propTypes = {

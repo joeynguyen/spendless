@@ -98,10 +98,10 @@ class TransactionsList extends Component {
     const data = mapTransactionData(this.props.accountTransactions);
 
     return (
-      <div>
+      <React.Fragment>
         <DeleteTransactionsButton selectedTransactionsIds={this.state.selectedTransactionsIds} />
         <Table rowSelection={rowSelection} columns={renderColumns} dataSource={data} />
-      </div>
+      </React.Fragment>
     );
   }
 }

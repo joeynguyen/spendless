@@ -45,9 +45,9 @@ export default class AccountsListItem extends Component {
         <h4 className="account-name">{this.props.account.name}</h4>
         <p className="company-info">{this.props.account.type === 'bank' ? 'Bank' : 'Credit Card'} - {this.props.account.company}</p>
         <Collapse isOpened={this.state.settingsVisible}>
-          <div>
+          <React.Fragment>
             { editAccountForm }
-          </div>
+          </React.Fragment>
         </Collapse>
       </div>
     );
