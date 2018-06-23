@@ -6,6 +6,17 @@
   color: #00a854;
 }
 
+.btn-link {
+  background-color: transparent;
+  border: none;
+  color: #108ee9;
+  transition: color 0.3s ease;
+}
+.btn-link:hover {
+  cursor: pointer;
+  color: #49a9ee;
+}
+
 /*
 Adding styles here because CSS modules can't target nested class names
 http://andrewhfarmer.com/css-modules-by-example/#example-4-nested-class-names

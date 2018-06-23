@@ -84,9 +84,12 @@ class TransactionsList extends Component {
         dataIndex: 'actions',
         render: (text, record) => (
           <span>
-            <a href="#" onClick={e => this.handleEditClick(e, record.key)}>
+            <button
+              className="btn-link"
+              onClick={e => this.handleEditClick(e, record.key)}
+            >
               Edit
-            </a>
+            </button>
             <span className="ant-divider" />
             <Popconfirm
               onConfirm={() => this.handleDeleteTransaction(record.key)}
@@ -95,7 +98,7 @@ class TransactionsList extends Component {
               cancelText="No"
               placement="left"
             >
-              <a href="#">Delete</a>
+              <button className="btn-link">Delete</button>
             </Popconfirm>
           </span>
         ),
