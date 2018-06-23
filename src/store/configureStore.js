@@ -22,8 +22,8 @@ export const configureStore = initialState => {
 
   // Logging Middleware
   const logger = createLogger({
-    level: 'info',
     collapsed: true,
+    level: 'info',
   });
   middleware.push(logger);
 

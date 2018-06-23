@@ -82,35 +82,35 @@ class ManageTransactionContainer extends Component {
 
 function mapStateToProps(state) {
   let initialValues = {
+    amount: undefined,
+    category: undefined,
     date: undefined,
     description: undefined,
-    category: undefined,
-    amount: undefined,
     notes: '',
   };
 
   if (state.activeTransaction !== null) {
     const {
+      amount,
+      category,
       date,
       description,
-      category,
-      amount,
       notes,
     } = state.activeTransaction;
     const dateFormat = 'YYYY-MM-DD';
     initialValues = {
+      amount: amount,
+      category: category,
       date: moment(date, dateFormat),
       description: description,
-      category: category,
-      amount: amount,
       notes: notes,
     };
   }
   return {
     activeAccountId: state.activeAccountId,
     activeTransaction: state.activeTransaction,
-    manageTransactionVisible: state.manageTransactionVisible,
     initialValues,
+    manageTransactionVisible: state.manageTransactionVisible,
   };
 }
 
@@ -120,21 +120,24 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(
   Form.create({
     mapPropsToFields(props) {
       return {
-        description: {
-          value: props.initialValues.description,
-        },
-        date: {
-          value: props.initialValues.date,
+        amount: {
+          value: props.initialValues.amount,
         },
         category: {
           value: props.initialValues.category,
         },
-        amount: {
-          value: props.initialValues.amount,
+        date: {
+          value: props.initialValues.date,
+        },
+        description: {
+          value: props.initialValues.description,
         },
         notes: {
           value: props.initialValues.notes,

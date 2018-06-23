@@ -20,7 +20,10 @@ class EditBankAccount extends Component {
         <FormItem label="Name">
           {getFieldDecorator('accountName', {
             rules: [
-              { required: true, message: 'Enter a name for the account' },
+              {
+                message: 'Enter a name for the account',
+                required: true,
+              },
             ],
           })(<Input placeholder="Enter a name for the account" />)}
         </FormItem>
@@ -29,8 +32,8 @@ class EditBankAccount extends Component {
           {getFieldDecorator('companyName', {
             rules: [
               {
-                required: true,
                 message: 'Enter the name of the financial institution',
+                required: true,
               },
             ],
           })(<Select>{renderAntdOptions(accountCompanyOptions)}</Select>)}
@@ -70,8 +73,8 @@ class EditBankAccount extends Component {
 
 EditBankAccount.propTypes = {
   form: PropTypes.object.isRequired,
-  removeFromDB: PropTypes.func.isRequired,
   handleUpdateAccount: PropTypes.func.isRequired,
+  removeFromDB: PropTypes.func.isRequired,
   // to be used by withEditAccountHandler
   saveToDB: PropTypes.func.isRequired,
   toggleSettings: PropTypes.func.isRequired,

@@ -7,9 +7,9 @@ import TransactionsList from './TransactionsList.jsx';
 
 class TransactionsListContainer extends Component {
   static propTypes = {
-    activeAccountId: PropTypes.string.isRequired,
     accountTransactions: PropTypes.arrayOf(PropTypes.object),
     actions: PropTypes.object.isRequired,
+    activeAccountId: PropTypes.string.isRequired,
     uploadedTransactions: PropTypes.arrayOf(PropTypes.object),
   };
 
@@ -52,6 +52,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  TransactionsListContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TransactionsListContainer);

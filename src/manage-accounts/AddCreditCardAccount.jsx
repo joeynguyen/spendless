@@ -22,7 +22,10 @@ class AddCreditCardAccount extends Component {
         <FormItem label="Name">
           {getFieldDecorator('accountName', {
             rules: [
-              { required: true, message: 'Enter a name for the account' },
+              {
+                message: 'Enter a name for the account',
+                required: true,
+              },
             ],
           })(<Input placeholder="Enter a name for the account" />)}
         </FormItem>
@@ -31,8 +34,8 @@ class AddCreditCardAccount extends Component {
           {getFieldDecorator('companyName', {
             rules: [
               {
-                required: true,
                 message: 'Enter the name of the financial institution',
+                required: true,
               },
             ],
           })(<Select>{renderAntdOptions(accountCompanyOptions)}</Select>)}

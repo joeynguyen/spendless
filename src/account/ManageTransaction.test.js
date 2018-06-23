@@ -9,9 +9,6 @@ function setup() {
   const mockOnSubmit = expect.createSpy();
   const mockOnCancel = expect.createSpy();
   const props = {
-    manageType: 'edit',
-    pristine: true,
-    toggleManageTransaction: mockOnCancel,
     doSubmit: mockOnSubmit,
     fields: {
       amount: {
@@ -35,6 +32,9 @@ function setup() {
         value: 'Add notes here',
       },
     },
+    manageType: 'edit',
+    pristine: true,
+    toggleManageTransaction: mockOnCancel,
   };
 
   return mount(<ManageTransaction {...props} />);

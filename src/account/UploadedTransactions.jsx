@@ -4,28 +4,27 @@ import { Button, Modal, Table } from 'antd';
 
 const mapTransactionData = data =>
   data.map(transaction => ({
-    key: transaction._id,
     amount: transaction.amount,
     category: transaction.category,
     date: transaction.date,
     description: transaction.description,
+    key: transaction._id,
   }));
 
 const renderColumns = [
   {
-    title: 'Date',
     dataIndex: 'date',
+    title: 'Date',
   },
   {
-    title: 'Description',
     dataIndex: 'description',
+    title: 'Description',
   },
   {
-    title: 'Category',
     dataIndex: 'category',
+    title: 'Category',
   },
   {
-    title: 'Amount',
     className: 'column-amount',
     dataIndex: 'amount',
     render: amount => (
@@ -33,6 +32,7 @@ const renderColumns = [
         {Number(amount).toFixed(2)}
       </span>
     ),
+    title: 'Amount',
   },
 ];
 
@@ -85,10 +85,10 @@ const UploadedTransactions = ({
 };
 
 UploadedTransactions.propTypes = {
-  uploadedTransactions: PropTypes.arrayOf(PropTypes.object),
+  handleSave: PropTypes.func.isRequired,
   negateUploadedTransactions: PropTypes.func.isRequired,
   resetUploadedTransactions: PropTypes.func.isRequired,
-  handleSave: PropTypes.func.isRequired,
+  uploadedTransactions: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default UploadedTransactions;

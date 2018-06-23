@@ -19,9 +19,9 @@ export default class AccountsListItem extends Component {
     if (this.state.settingsVisible) {
       const formInitialValues = {
         initialValues: {
+          accountCompany: this.props.account.company,
           accountName: this.props.account.name,
           accountType: this.props.account.type,
-          accountCompany: this.props.account.company,
         },
       };
       // adding EditAccount form this way so that the component will mount and

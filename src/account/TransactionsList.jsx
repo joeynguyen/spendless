@@ -7,11 +7,11 @@ import DeleteTransactionsButton from './DeleteTransactionsButton.jsx';
 
 const mapTransactionData = data =>
   data.map(transaction => ({
-    key: transaction._id,
     amount: transaction.amount,
     category: transaction.category,
     date: transaction.date,
     description: transaction.description,
+    key: transaction._id,
     notes: transaction.notes,
   }));
 
@@ -46,19 +46,18 @@ class TransactionsList extends Component {
   render() {
     const renderColumns = [
       {
-        title: 'Date',
         dataIndex: 'date',
+        title: 'Date',
       },
       {
-        title: 'Description',
         dataIndex: 'description',
+        title: 'Description',
       },
       {
-        title: 'Category',
         dataIndex: 'category',
+        title: 'Category',
       },
       {
-        title: 'Amount',
         className: 'column-amount',
         dataIndex: 'amount',
         render: amount => (
@@ -66,9 +65,9 @@ class TransactionsList extends Component {
             {Number(amount).toFixed(2)}
           </span>
         ),
+        title: 'Amount',
       },
       {
-        title: 'Notes',
         className: 'column-notes',
         dataIndex: 'notes',
         render: text =>
@@ -77,9 +76,9 @@ class TransactionsList extends Component {
               <Icon type="file-text" style={{ fontSize: 14 }} />
             </Tooltip>
           ) : null,
+        title: 'Notes',
       },
       {
-        title: 'Actions',
         className: 'column-actions',
         dataIndex: 'actions',
         render: (text, record) => (
@@ -102,6 +101,7 @@ class TransactionsList extends Component {
             </Popconfirm>
           </span>
         ),
+        title: 'Actions',
       },
     ];
     const rowSelection = {

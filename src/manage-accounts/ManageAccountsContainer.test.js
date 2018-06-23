@@ -4,7 +4,6 @@ import { shallow } from 'enzyme';
 import { ManageAccountsContainer } from './ManageAccountsContainer.jsx';
 
 const myProps = {
-  actions: {},
   accounts: [
     {
       _id: '2016-04-24T20:47:37.374Z',
@@ -28,6 +27,7 @@ const myProps = {
       type: 'bank',
     },
   ],
+  actions: {},
   manageAccountsVisible: true,
 };
 

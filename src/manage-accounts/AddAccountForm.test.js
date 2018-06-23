@@ -4,23 +4,23 @@ import { mount } from 'enzyme'; // need to use mount because we are rendering Bo
 import AddAccountForm from './AddAccountForm.jsx';
 
 const props = {
-  doSubmit: () => {},
+  doSubmit: () => null,
   fields: {
-    accountName: {
-      name: 'accountName',
+    accountCompany: {
       initialValue: '',
+      name: 'accountCompany',
+      valid: true,
+      value: '',
+    },
+    accountName: {
+      initialValue: '',
+      name: 'accountName',
       valid: true,
       value: '',
     },
     accountType: {
+      initialValue: '',
       name: 'accountType',
-      initialValue: '',
-      valid: true,
-      value: '',
-    },
-    accountCompany: {
-      name: 'accountCompany',
-      initialValue: '',
       valid: true,
       value: '',
     },

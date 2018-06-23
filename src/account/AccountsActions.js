@@ -8,24 +8,24 @@ export const TOGGLE_UNSAVED_WARNING = 'TOGGLE_UNSAVED_WARNING';
 // Load in UI the current list of accounts
 function loadAccountsSuccess(accounts) {
   return {
-    type: LOAD_ACCOUNTS_SUCCESS,
     payload: accounts,
+    type: LOAD_ACCOUNTS_SUCCESS,
   };
 }
 
 // TODO: change removeAccount to removeAccount like Pluralsight tutorial?
 function removeAccount(accountId) {
   return {
-    type: REMOVE_ACCOUNT,
     data: accountId,
+    type: REMOVE_ACCOUNT,
   };
 }
 
 // TODO: change updateAccounts to updateAccountsSuccess like Pluralsight tutorial?
 function updateAccounts(accountData) {
   return {
-    type: UPDATE_ACCOUNTS,
     data: accountData,
+    type: UPDATE_ACCOUNTS,
   };
 }
 

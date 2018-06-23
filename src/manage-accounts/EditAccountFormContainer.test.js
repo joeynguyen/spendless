@@ -7,36 +7,36 @@ function setup() {
   const props = {
     account: { name: 'Test Bank', id: '2' },
     actions: {
-      saveAccount: () => {
-        return Promise.resolve({ name: 'Test account' });
-      },
       deleteAccount: () => {
         return Promise.resolve({ id: '2' });
+      },
+      saveAccount: () => {
+        return Promise.resolve({ name: 'Test account' });
       },
     },
     activeAccountId: '1',
     fields: {
+      accountCompany: {
+        initialValue: 'Santander Bank',
+        name: 'accountCompany',
+        valid: true,
+        value: 'Santander Bank',
+      },
       accountName: {
-        name: 'accountName',
         initialValue: 'Santander Checking',
+        name: 'accountName',
         valid: true,
         value: 'Santander Checking',
       },
       accountType: {
-        name: 'accountType',
         initialValue: 'bank',
+        name: 'accountType',
         valid: true,
         value: 'bank',
       },
-      accountCompany: {
-        name: 'accountCompany',
-        initialValue: 'Santander Bank',
-        valid: true,
-        value: 'Santander Bank',
-      },
     },
     pristine: true,
-    resetForm: () => {},
+    resetForm: () => null,
     toggleSettings: expect.createSpy(),
   };
 

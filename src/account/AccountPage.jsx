@@ -11,11 +11,11 @@ import UploadedTransactionsContainer from './UploadedTransactionsContainer.jsx';
 const AccountPage = ({
   accounts,
   activeAccountId,
+  localHandleAlertLeave,
+  localHandleAlertStay,
   manageTransactionVisible,
   unsavedWarningVisible,
   uploadedTransactionsExist,
-  localHandleAlertStay,
-  localHandleAlertLeave,
 }) => {
   // show loading spinner until accounts are loaded
   if (accounts.length < 1 && activeAccountId) {
@@ -50,8 +50,8 @@ const AccountPage = ({
       <TransactionsListContainer activeAccountId={activeAccountId} />
       <UnsavedWarning
         show={unsavedWarningVisible}
-        localHandleAlertStay={localHandleAlertStay}
         localHandleAlertLeave={localHandleAlertLeave}
+        localHandleAlertStay={localHandleAlertStay}
       />
       {manageTransactionModal}
       {uploadedTransactionsModal}
@@ -62,11 +62,11 @@ const AccountPage = ({
 AccountPage.propTypes = {
   accounts: PropTypes.arrayOf(PropTypes.object).isRequired,
   activeAccountId: PropTypes.string.isRequired,
+  localHandleAlertLeave: PropTypes.func.isRequired,
+  localHandleAlertStay: PropTypes.func.isRequired,
   manageTransactionVisible: PropTypes.bool.isRequired,
   unsavedWarningVisible: PropTypes.bool.isRequired,
   uploadedTransactionsExist: PropTypes.bool.isRequired,
-  localHandleAlertStay: PropTypes.func.isRequired,
-  localHandleAlertLeave: PropTypes.func.isRequired,
 };
 
 export default AccountPage;

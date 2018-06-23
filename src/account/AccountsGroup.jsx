@@ -41,16 +41,16 @@ const AccountsGroup = ({ accounts, activeAccountId }) => {
   const bankAccounts = accounts.filter(account => account.type === 'bank');
   const accountTypes = [
     {
-      title: 'Banks',
-      icon: 'bank',
       accounts: bankAccounts,
+      icon: 'bank',
       subMenuKey: 'sub0',
+      title: 'Banks',
     },
     {
-      title: 'Credit Cards',
-      icon: 'credit-card',
       accounts: ccAccounts,
+      icon: 'credit-card',
       subMenuKey: 'sub1',
+      title: 'Credit Cards',
     },
   ];
   const allSubMenus = accountTypes.reduce((a, b) => a.concat(b.subMenuKey), []);

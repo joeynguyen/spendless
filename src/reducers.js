@@ -11,16 +11,16 @@ import UnsavedWarningVisibleReducer from './account/UnsavedWarningVisibleReducer
 import NextRoutePathReducer from './app/NextRoutePathReducer.js';
 
 const rootReducer = combineReducers({
-  router: router,
-  accounts: AccountsReducer,
   accountTransactions: AccountTransactionsReducer,
+  accounts: AccountsReducer,
   activeAccountId: ActiveAccountIdReducer,
   activeTransaction: ActiveTransactionReducer,
-  uploadedTransactions: UploadedTransactionsReducer,
   manageAccountsVisible: ManageAccountsVisibleReducer,
   manageTransactionVisible: ManageTransactionVisibleReducer,
-  unsavedWarningVisible: UnsavedWarningVisibleReducer,
   nextRoutePath: NextRoutePathReducer,
+  router: router,
+  unsavedWarningVisible: UnsavedWarningVisibleReducer,
+  uploadedTransactions: UploadedTransactionsReducer,
 });
 
 export default rootReducer;

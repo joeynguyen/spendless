@@ -14,9 +14,9 @@ class AccountPageContainer extends Component {
     manageTransactionVisible: PropTypes.bool.isRequired,
     match: PropTypes.object.isRequired,
     // route: PropTypes.object.isRequired,
-    uploadedTransactions: PropTypes.arrayOf(PropTypes.object),
-    unsavedWarningVisible: PropTypes.bool.isRequired,
     nextRoutePath: PropTypes.string.isRequired,
+    unsavedWarningVisible: PropTypes.bool.isRequired,
+    uploadedTransactions: PropTypes.arrayOf(PropTypes.object),
   };
 
   static contextTypes = {
@@ -87,11 +87,11 @@ class AccountPageContainer extends Component {
       <AccountPage
         accounts={this.props.accounts}
         activeAccountId={this.props.activeAccountId}
+        localHandleAlertLeave={this.handleAlertLeave}
+        localHandleAlertStay={this.handleAlertStay}
         manageTransactionVisible={this.props.manageTransactionVisible}
         unsavedWarningVisible={this.props.unsavedWarningVisible}
         uploadedTransactionsExist={this.props.uploadedTransactions.length > 0}
-        localHandleAlertStay={this.handleAlertStay}
-        localHandleAlertLeave={this.handleAlertLeave}
       />
     );
   }
@@ -102,9 +102,9 @@ function mapStateToProps(state) {
     accounts: state.accounts,
     activeAccountId: state.activeAccountId,
     manageTransactionVisible: state.manageTransactionVisible,
+    nextRoutePath: state.nextRoutePath,
     unsavedWarningVisible: state.unsavedWarningVisible,
     uploadedTransactions: state.uploadedTransactions,
-    nextRoutePath: state.nextRoutePath,
   };
 }
 
@@ -112,14 +112,15 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(
       {
-        toggleUnsavedWarning: toggleUnsavedWarning,
         storeNextRoutePath: storeNextRoutePath,
+        toggleUnsavedWarning: toggleUnsavedWarning,
       },
       dispatch
     ),
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  AccountPageContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AccountPageContainer);

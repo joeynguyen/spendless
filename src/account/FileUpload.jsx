@@ -34,7 +34,6 @@ class FileUpload extends Component {
           this.props.actions.addUploadedTransactions(val);
         })
         .catch(err => {
-          console.log('err', err);
           message.error(err);
         });
     }
@@ -85,4 +84,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(null, mapDispatchToProps)(FileUpload);
+export default connect(
+  null,
+  mapDispatchToProps
+)(FileUpload);

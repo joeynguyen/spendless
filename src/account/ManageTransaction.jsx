@@ -6,11 +6,11 @@ const FormItem = Form.Item;
 const { TextArea } = Input;
 
 const ManageTransaction = ({
-  form,
-  manageType = 'add',
-  manageTransactionVisible,
-  toggleManageTransaction,
   doSubmit,
+  form,
+  manageTransactionVisible,
+  manageType = 'add',
+  toggleManageTransaction,
 }) => {
   const { getFieldDecorator } = form;
   const componentTitle =
@@ -86,11 +86,11 @@ const ManageTransaction = ({
 };
 
 ManageTransaction.propTypes = {
+  doSubmit: PropTypes.func.isRequired,
   form: PropTypes.object.isRequired,
   manageTransactionVisible: PropTypes.bool.isRequired,
   manageType: PropTypes.string.isRequired,
   toggleManageTransaction: PropTypes.func.isRequired,
-  doSubmit: PropTypes.func.isRequired,
 };
 
 export default ManageTransaction;

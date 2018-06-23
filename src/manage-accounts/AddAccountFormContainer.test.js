@@ -11,27 +11,27 @@ function setup() {
       },
     },
     fields: {
+      accountCompany: {
+        initialValue: 'Santander Bank',
+        name: 'accountCompany',
+        valid: true,
+        value: 'Santander Bank',
+      },
       accountName: {
-        name: 'accountName',
         initialValue: 'Santander Checking',
+        name: 'accountName',
         valid: true,
         value: 'Santander Checking',
       },
       accountType: {
-        name: 'accountType',
         initialValue: 'bank',
+        name: 'accountType',
         valid: true,
         value: 'bank',
       },
-      accountCompany: {
-        name: 'accountCompany',
-        initialValue: 'Santander Bank',
-        valid: true,
-        value: 'Santander Bank',
-      },
     },
-    resetForm: () => {},
     handleSubmit: callback => callback,
+    resetForm: () => null,
     submitting: false,
     visible: false,
   };

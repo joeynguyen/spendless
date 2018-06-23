@@ -1,8 +1,8 @@
 export const accountTypeOptions = [
   {
+    disabled: true,
     label: 'select...',
     value: '',
-    disabled: true,
   },
   {
     label: 'Bank',
@@ -15,9 +15,9 @@ export const accountTypeOptions = [
 ];
 export const accountCompanyOptions = [
   {
+    disabled: true,
     label: 'select...',
     value: '',
-    disabled: true,
   },
   {
     label: 'Visa',
