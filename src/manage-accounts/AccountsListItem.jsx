@@ -53,7 +53,7 @@ export default class AccountsListItem extends Component {
           {this.props.account.company}
         </p>
         <Collapse isOpened={this.state.settingsVisible}>
-          <div>{editAccountForm}</div>
+          <React.Fragment>{editAccountForm}</React.Fragment>
         </Collapse>
       </div>
     );

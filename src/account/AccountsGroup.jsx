@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Menu, Icon } from 'antd';
+import { Row, Col, Menu, Icon, Spin } from 'antd';
 import { Link } from 'react-router-dom';
 
 const { SubMenu } = Menu;
@@ -35,7 +35,18 @@ function renderSubMenu(activeAccountId) {
 
 const AccountsGroup = ({ accounts, activeAccountId }) => {
   if (!accounts) {
-    return <div>Loading...</div>;
+    return (
+      <Row
+        type="flex"
+        justify="center"
+        align="middle"
+        style={{ height: '90%' }}
+      >
+        <Col span={12} style={{ textAlign: 'center' }}>
+          <Spin size="large" />
+        </Col>
+      </Row>
+    );
   }
   const ccAccounts = accounts.filter(account => account.type === 'creditcard');
   const bankAccounts = accounts.filter(account => account.type === 'bank');

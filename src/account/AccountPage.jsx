@@ -41,7 +41,7 @@ const AccountPage = ({
   ) : null;
 
   return (
-    <div>
+    <React.Fragment>
       <AccountDetails
         accounts={accounts}
         activeAccountId={activeAccountId}
@@ -55,7 +55,7 @@ const AccountPage = ({
       />
       {manageTransactionModal}
       {uploadedTransactionsModal}
-    </div>
+    </React.Fragment>
   );
 };
 

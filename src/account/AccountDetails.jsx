@@ -22,7 +22,7 @@ const AccountDetails = ({
   }
 
   return (
-    <div>
+    <React.Fragment>
       <div className="header">
         <h3 className={styles.header}>
           {activeAccount.name} {icon}
@@ -41,7 +41,7 @@ const AccountDetails = ({
           <AddTransactionButton />
         </Col>
       </Row>
-    </div>
+    </React.Fragment>
   );
 };
 AccountDetails.propTypes = {

@@ -4,10 +4,10 @@ import AccountsGroupContainer from '../account/AccountsGroupContainer.jsx';
 
 const Sidebar = () => {
   return (
-    <div>
+    <React.Fragment>
       <SidebarHeaderContainer />
       <AccountsGroupContainer />
-    </div>
+    </React.Fragment>
   );
 };
 

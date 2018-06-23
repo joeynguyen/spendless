@@ -120,25 +120,33 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(
   Form.create({
     mapPropsToFields(props) {
       return {
-        description: {
+        description: Form.createFormField({
+          ...props.description,
           value: props.initialValues.description,
-        },
-        date: {
+        }),
+        date: Form.createFormField({
+          ...props.date,
           value: props.initialValues.date,
-        },
-        category: {
+        }),
+        category: Form.createFormField({
+          ...props.category,
           value: props.initialValues.category,
-        },
-        amount: {
+        }),
+        amount: Form.createFormField({
+          ...props.amount,
           value: props.initialValues.amount,
-        },
-        notes: {
+        }),
+        notes: Form.createFormField({
+          ...props.notes,
           value: props.initialValues.notes,
-        },
+        }),
       };
     },
   })(ManageTransactionContainer)
