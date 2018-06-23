@@ -3,27 +3,53 @@ exports.__esModule = true;
 var electron_1 = require('electron');
 var path = require('path');
 var isDev = process.env.ELECTRON_IS_DEV;
+// install dev tools for debugging during development
+// const installExtensions = async () => {
+//   const {
+//     default: installExtension,
+//     REACT_DEVELOPER_TOOLS,
+//     REDUX_DEVTOOLS,
+//   } = require('electron-devtools-installer');
+//   const REACT_PERF_DEVTOOLS = 'fcombecpigkkfcbfaeikoeegkmkjfbfm';
+//   const extensions = [
+//     REACT_DEVELOPER_TOOLS,
+//     REDUX_DEVTOOLS,
+//     REACT_PERF_DEVTOOLS,
+//   ];
+//   await Promise.all(
+//     extensions.map(extension => {
+//       return new Promise(resolve => {
+//         resolve(installExtension(extension));
+//       });
+//     })
+//   )
+//     .then(name => console.log(`Added Extensions:  ${name}`))
+//     .catch(err => console.log('An error occurred: ', err));
+// };
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 var mainWindow = null;
-var createWindow = function() {
+function createWindow() {
   // Create the browser window.
   mainWindow = new electron_1.BrowserWindow({
     darkTheme: true,
-    height: 600,
+    height: 900,
     webPreferences: {
+      nodeIntegration: false,
       webSecurity: false,
     },
-    width: 800,
+    width: 1440,
   });
   // and load the index.html of the app.
   mainWindow.loadURL(
     isDev
-      ? 'http://localhost:3000' // Dev server ran by react-scripts
+      ? 'http://localhost:3000?react_perf' // Dev server ran by react-scripts
       : 'file://' + path.join(__dirname, '/build/index.html') // Bundled application
   );
+  // if (isDev) {
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
+  // }
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
     // Dereference the window object, usually you would store windows
@@ -31,11 +57,17 @@ var createWindow = function() {
     // when you should delete the corresponding element.
     mainWindow = null;
   });
-};
+}
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-electron_1.app.on('ready', createWindow);
+electron_1.app.on('ready', function() {
+  // app.on('ready', async () => {
+  // if (isDev) {
+  //   await installExtensions();
+  // }
+  createWindow();
+});
 // Quit when all windows are closed.
 electron_1.app.on('window-all-closed', function() {
   // On OS X it is common for applications and their menu bar
