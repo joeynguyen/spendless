@@ -61,9 +61,9 @@
     "react-file-reader": "1.1.2",
     "react-motion": "0.5.2",
     "react-redux": "5.0.5",
-    "react-router": "4.1.1",
-    "react-router-dom": "4.1.1",
-    "react-router-redux": "5.0.0-alpha.6",
+    "react-router": "4.3.1",
+    "react-router-dom": "4.3.1",
+    "react-router-redux": "5.0.0-alpha.9",
     "redux": "3.5.2",
     "redux-thunk": "2.0.1"
   }
