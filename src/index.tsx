@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import Root from './app/Root.jsx';
 import registerServiceWorker from './registerServiceWorker';
 import { configureStore, history } from './store/configureStore.js';
@@ -16,6 +16,6 @@ if (isDev) {
 
 ReactDOM.render(
   <Root store={store} history={history} />,
-  document.getElementById('root')
+  document.getElementById('root') as HTMLElement
 );
 registerServiceWorker();
