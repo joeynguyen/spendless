@@ -4,30 +4,30 @@ import * as path from 'path';
 const isDev = process.env.ELECTRON_IS_DEV;
 
 // install dev tools for debugging during development
-// const installExtensions = async () => {
-//   const {
-//     default: installExtension,
-//     REACT_DEVELOPER_TOOLS,
-//     REDUX_DEVTOOLS,
-//   } = require('electron-devtools-installer');
+const installExtensions = async () => {
+  const {
+    default: installExtension,
+    REACT_DEVELOPER_TOOLS,
+    REDUX_DEVTOOLS,
+  } = require('electron-devtools-installer');
 
-//   const REACT_PERF_DEVTOOLS = 'fcombecpigkkfcbfaeikoeegkmkjfbfm';
-//   const extensions = [
-//     REACT_DEVELOPER_TOOLS,
-//     REDUX_DEVTOOLS,
-//     REACT_PERF_DEVTOOLS,
-//   ];
+  const REACT_PERF_DEVTOOLS = 'fcombecpigkkfcbfaeikoeegkmkjfbfm';
+  const extensions = [
+    REACT_DEVELOPER_TOOLS,
+    REDUX_DEVTOOLS,
+    REACT_PERF_DEVTOOLS,
+  ];
 
-//   await Promise.all(
-//     extensions.map(extension => {
-//       return new Promise(resolve => {
-//         resolve(installExtension(extension));
-//       });
-//     })
-//   )
-//     .then(name => console.log(`Added Extensions:  ${name}`))
-//     .catch(err => console.log('An error occurred: ', err));
-// };
+  await Promise.all(
+    extensions.map(extension => {
+      return new Promise(resolve => {
+        resolve(installExtension(extension));
+      });
+    })
+  )
+    .then(name => console.log(`Added Extensions:  ${name}`))
+    .catch(err => console.log('An error occurred: ', err));
+};
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -69,11 +69,10 @@ function createWindow() {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', () => {
-  // app.on('ready', async () => {
-  // if (isDev) {
-  //   await installExtensions();
-  // }
+app.on('ready', async () => {
+  if (isDev) {
+    await installExtensions();
+  }
   createWindow();
 });
 
