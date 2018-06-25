@@ -33,9 +33,11 @@
     "es6",
     "node",
     "pouchdb",
+    "prettier",
     "react",
     "react-router",
-    "redux"
+    "redux",
+    "typescript"
   ],
   "homepage": "https://github.com/joeynguyen/spendless",
   "devDependencies": {
