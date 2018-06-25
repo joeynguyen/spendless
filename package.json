@@ -14,7 +14,7 @@
     "electron-ts-compile": "tsc --lib 'es2015, dom' main.ts",
     "electron-start": "yarn electron-ts-compile && ELECTRON_IS_DEV=1 electron .",
     "react-build": "react-scripts-ts build",
-    "electron-build": "electron-packager ./ --overwrite",
+    "electron-build": "yarn electron-ts-compile && electron-packager ./ --overwrite",
     "prettier": "prettier --write './src/**/*.{ts,js,css,json}'",
     "precommit": "pretty-quick --staged"
   },

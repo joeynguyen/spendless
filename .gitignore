@@ -1,6 +1,7 @@
 *.log
 bower_components/
 node_modules/
+build/
 dist/
 .nyc_output/
 .vscode/
