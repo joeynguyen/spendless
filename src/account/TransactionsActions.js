@@ -12,15 +12,15 @@ export const TOGGLE_MANAGE_TRANSACTION = 'TOGGLE_MANAGE_TRANSACTION';
 function loadAccountTransactions(accountTransactions) {
   // Load in UI the current list of accounts
   return {
-    type: LOAD_ACCOUNT_TRANSACTIONS,
     payload: accountTransactions,
+    type: LOAD_ACCOUNT_TRANSACTIONS,
   };
 }
 
 function updateAccountTransactions(transactions) {
   return {
-    type: UPDATE_ACCOUNT_TRANSACTIONS,
     payload: transactions,
+    type: UPDATE_ACCOUNT_TRANSACTIONS,
   };
 }
 
@@ -54,15 +54,15 @@ export function saveAccountTransactions(transactions) {
 
 export function resetAccountTransactions() {
   return {
-    type: RESET_ACCOUNT_TRANSACTIONS,
     payload: [],
+    type: RESET_ACCOUNT_TRANSACTIONS,
   };
 }
 
 export function addUploadedTransactions(uploadedTransactions) {
   return {
-    type: ADD_UPLOADED_TRANSACTIONS,
     payload: uploadedTransactions,
+    type: ADD_UPLOADED_TRANSACTIONS,
   };
 }
 
@@ -74,8 +74,8 @@ export function negateUploadedTransactions() {
 
 function removeAccountTransactions(transactions) {
   return {
-    type: REMOVE_ACCOUNT_TRANSACTIONS,
     payload: transactions,
+    type: REMOVE_ACCOUNT_TRANSACTIONS,
   };
 }
 
@@ -96,14 +96,14 @@ export function deleteAccountTransactions(transactions) {
 
 export function resetUploadedTransactions() {
   return {
-    type: RESET_UPLOADED_TRANSACTIONS,
     payload: [],
+    type: RESET_UPLOADED_TRANSACTIONS,
   };
 }
 
 export function toggleManageTransaction(transaction = null) {
   return {
-    type: TOGGLE_MANAGE_TRANSACTION,
     data: transaction,
+    type: TOGGLE_MANAGE_TRANSACTION,
   };
 }

@@ -82,35 +82,35 @@ class ManageTransactionContainer extends Component {
 
 function mapStateToProps(state) {
   let initialValues = {
+    amount: undefined,
+    category: undefined,
     date: undefined,
     description: undefined,
-    category: undefined,
-    amount: undefined,
     notes: '',
   };
 
   if (state.activeTransaction !== null) {
     const {
+      amount,
+      category,
       date,
       description,
-      category,
-      amount,
       notes,
     } = state.activeTransaction;
     const dateFormat = 'YYYY-MM-DD';
     initialValues = {
+      amount: amount,
+      category: category,
       date: moment(date, dateFormat),
       description: description,
-      category: category,
-      amount: amount,
       notes: notes,
     };
   }
   return {
     activeAccountId: state.activeAccountId,
     activeTransaction: state.activeTransaction,
-    manageTransactionVisible: state.manageTransactionVisible,
     initialValues,
+    manageTransactionVisible: state.manageTransactionVisible,
   };
 }
 
@@ -127,21 +127,21 @@ export default connect(
   Form.create({
     mapPropsToFields(props) {
       return {
-        description: Form.createFormField({
-          ...props.description,
-          value: props.initialValues.description,
-        }),
-        date: Form.createFormField({
-          ...props.date,
-          value: props.initialValues.date,
+        amount: Form.createFormField({
+          ...props.amount,
+          value: props.initialValues.amount,
         }),
         category: Form.createFormField({
           ...props.category,
           value: props.initialValues.category,
         }),
-        amount: Form.createFormField({
-          ...props.amount,
-          value: props.initialValues.amount,
+        date: Form.createFormField({
+          ...props.date,
+          value: props.initialValues.date,
+        }),
+        description: Form.createFormField({
+          ...props.description,
+          value: props.initialValues.description,
         }),
         notes: Form.createFormField({
           ...props.notes,

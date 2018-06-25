@@ -5,18 +5,18 @@ import { Link } from 'react-router-dom';
 
 const styles = {
   logo: {
-    height: 60,
     float: 'left',
+    height: 60,
   },
   logoImg: {
     display: 'inline-block',
   },
   logoSpan: {
+    WebkitFontSmoothing: 'antialiased',
     display: 'inline-block',
     // fontFamily: 'Pinyon Script',
     fontFamily: ['Dawning of a New Day', 'cursive'],
     fontSize: 28,
-    WebkitFontSmoothing: 'antialiased',
   },
   navbar: {
     marginTop: 10,

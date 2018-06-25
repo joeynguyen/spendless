@@ -24,8 +24,8 @@ export class ManageAccountsContainer extends Component {
 
 function mapStateToProps(state) {
   return {
-    manageAccountsVisible: state.manageAccountsVisible,
     accounts: state.accounts,
+    manageAccountsVisible: state.manageAccountsVisible,
   };
 }
 
@@ -35,6 +35,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  ManageAccountsContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ManageAccountsContainer);

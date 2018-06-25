@@ -7,8 +7,7 @@ const db = new PouchDB('transactions');
 const remoteCouch = 'http://127.0.0.1:5984/transactions';
 
 function syncDB() {
-  db
-    .sync(remoteCouch, { live: false })
+  db.sync(remoteCouch, { live: false })
     .on('complete', function(success) {
       console.log(
         'PouchDB-Server transactions database sync success :',
@@ -23,18 +22,16 @@ function syncDB() {
 class TransactionsApi {
   static getAccountTransactionsFromDB(accountId) {
     return new Promise((resolve, reject) => {
-      db
-        .createIndex({
-          index: {
-            fields: ['date', 'accountId'],
-          },
-        })
+      db.createIndex({
+        index: {
+          fields: ['date', 'accountId'],
+        },
+      })
         .then(() => {
           // create a PouchDB index
           return db.find({
             // using $gt: null because "$exists doesn't do what you think it does"
             // http://stackoverflow.com/questions/34366615/creating-a-usable-index-in-pouchdb-with-pouchdb-find
-            selector: { date: { $gt: null }, accountId: accountId },
             fields: [
               '_id',
               '_rev',
@@ -45,6 +42,7 @@ class TransactionsApi {
               'date',
               'notes',
             ],
+            selector: { date: { $gt: null }, accountId: accountId },
             sort: [{ date: 'desc' }],
           });
         })
@@ -57,8 +55,8 @@ class TransactionsApi {
                 accountId: doc.accountId,
                 amount: doc.amount,
                 category: doc.category,
-                description: doc.description,
                 date: doc.date,
+                description: doc.description,
                 notes: doc.notes,
               };
             })
@@ -75,18 +73,16 @@ class TransactionsApi {
     return new Promise((resolve, reject) => {
       if (Array.isArray(transactions)) {
         // handle saving multiple transactions
-        db
-          .bulkDocs(transactions)
+        db.bulkDocs(transactions)
           .then(savedTransactions => {
             const newTransactionsKeys = savedTransactions.map(
               transaction => transaction.id
             );
             // GET newly saved transactions from DB
-            db
-              .allDocs({
-                include_docs: true,
-                keys: newTransactionsKeys,
-              })
+            db.allDocs({
+              include_docs: true,
+              keys: newTransactionsKeys,
+            })
               .then(newTransactions => {
                 syncDB();
                 resolve(
@@ -104,11 +100,9 @@ class TransactionsApi {
           });
       } else {
         // handle saving single transaction
-        db
-          .put(transactions)
+        db.put(transactions)
           .then(savedTransaction => {
-            db
-              .get(savedTransaction.id)
+            db.get(savedTransaction.id)
               .then(doc => {
                 syncDB();
                 resolve(doc);
@@ -129,8 +123,7 @@ class TransactionsApi {
   static deleteTransactionsFromDB(transactions) {
     return new Promise((resolve, reject) => {
       if (Array.isArray(transactions)) {
-        db
-          .bulkDocs(transactions)
+        db.bulkDocs(transactions)
           .then(deletedTransactions => {
             // return IDs of deleted transactions
             resolve(deletedTransactions.map(transaction => transaction.id));
@@ -140,8 +133,7 @@ class TransactionsApi {
             reject(err);
           });
       } else {
-        db
-          .remove(transactions)
+        db.remove(transactions)
           .then(deletedTransaction => {
             syncDB();
             resolve(deletedTransaction);

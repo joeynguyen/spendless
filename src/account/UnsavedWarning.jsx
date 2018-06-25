@@ -3,8 +3,8 @@ import React from 'react';
 import { Alert, Modal } from 'antd';
 
 const UnsavedWarning = ({
-  localHandleAlertStay,
   localHandleAlertLeave,
+  localHandleAlertStay,
   show,
 }) => {
   return (
@@ -27,8 +27,8 @@ const UnsavedWarning = ({
   );
 };
 UnsavedWarning.propTypes = {
-  localHandleAlertStay: PropTypes.func.isRequired,
   localHandleAlertLeave: PropTypes.func.isRequired,
+  localHandleAlertStay: PropTypes.func.isRequired,
   show: PropTypes.bool.isRequired,
 };
 

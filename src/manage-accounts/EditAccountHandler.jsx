@@ -10,9 +10,9 @@ export default function withEditAccountHandler(OriginalComponent) {
       this.props.form.validateFields((err, values) => {
         if (!err) {
           const newAccountObj = Object.assign({}, this.props.account, {
+            company: values.companyName,
             name: values.accountName,
             type: values.accountType,
-            company: values.companyName,
           });
 
           // Update account in DB

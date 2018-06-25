@@ -14,9 +14,9 @@ export default function withAddAccountHandler(OriginalComponent) {
         if (!err) {
           const newAccount = {
             _id: new Date().toISOString(),
+            company: values.companyName,
             name: values.accountName,
             type: values.accountType,
-            company: values.companyName,
           };
 
           this.props.actions
@@ -53,5 +53,8 @@ export default function withAddAccountHandler(OriginalComponent) {
     };
   }
 
-  return connect(null, mapDispatchToProps)(Form.create({})(WrapperClass));
+  return connect(
+    null,
+    mapDispatchToProps
+  )(Form.create({})(WrapperClass));
 }

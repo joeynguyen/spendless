@@ -27,8 +27,8 @@ class EditBankAccount extends Component {
           {getFieldDecorator('companyName', {
             rules: [
               {
-                required: true,
                 message: 'Enter the name of the financial institution',
+                required: true,
               },
             ],
           })(
@@ -70,8 +70,8 @@ class EditBankAccount extends Component {
 
 EditBankAccount.propTypes = {
   form: PropTypes.object.isRequired,
-  removeFromDB: PropTypes.func.isRequired,
   handleUpdateAccount: PropTypes.func.isRequired,
+  removeFromDB: PropTypes.func.isRequired,
   // to be used by withEditAccountHandler
   saveToDB: PropTypes.func.isRequired,
   toggleSettings: PropTypes.func.isRequired,

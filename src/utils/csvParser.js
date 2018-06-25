@@ -3,7 +3,7 @@ import moment from 'moment';
 import {
   convertNumStrToAbsoluteNum,
   convertNumStrToValidNum,
-  trimMultipleSpaces
+  trimMultipleSpaces,
 } from './strings';
 
 // convert each row of text from CSV into JS arrays for formatting use
@@ -18,14 +18,12 @@ function convertTransactionTextToArray(text) {
 
   // source: https://stackoverflow.com/a/23667311
   const re = /"[^"]*"|(,)/g;
-  const textFormatted = text
-    .replace(/[\r\n]/, '')
-    .replace(re, (m, group1) => {
-      if (!group1) {
-        return m;
-      }
-      return '__DELIMITER__';
-    });
+  const textFormatted = text.replace(/[\r\n]/, '').replace(re, (m, group1) => {
+    if (!group1) {
+      return m;
+    }
+    return '__DELIMITER__';
+  });
 
   const textAsArray = textFormatted
     .replace(/"/g, '') // remove double quotes
@@ -36,7 +34,13 @@ function convertTransactionTextToArray(text) {
 }
 
 // convert each transaction array to objects for easier data manipulation
-function convertTransactionArrayToObject(transaction, index, accountId, headerRowArray, dateColumnTitle) {
+function convertTransactionArrayToObject(
+  transaction,
+  index,
+  accountId,
+  headerRowArray,
+  dateColumnTitle
+) {
   const newTransObj = headerRowArray.reduce((obj, columnName, i) => {
     return {
       ...obj,
@@ -67,7 +71,10 @@ function convertTransactionArrayToObject(transaction, index, accountId, headerRo
 
   // date has to be in this format for input[type="date"] to read it
   // TODO: check if date value is in 'MM-DD-YYYY' format before formatting with momemt
-  const dateFormatted = moment(newTransObj[dateColumnTitle], 'MM-DD-YYYY').format('YYYY-MM-DD');
+  const dateFormatted = moment(
+    newTransObj[dateColumnTitle],
+    'MM-DD-YYYY'
+  ).format('YYYY-MM-DD');
 
   return {
     // added 'index' to prevent duplicate _id error but still
@@ -76,8 +83,8 @@ function convertTransactionArrayToObject(transaction, index, accountId, headerRo
     accountId,
     amount: newTransObj.Amount,
     category: newTransObj.Category || '',
-    description: newTransObj.Description || '',
     date: dateFormatted,
+    description: newTransObj.Description || '',
     notes: newTransObj.Notes || '',
   };
 }
@@ -89,10 +96,8 @@ function isHeaderRow(rowStr) {
   return (
     rowStr.includes('Date') &&
     rowStr.includes('Description') &&
-    (
-      rowStr.includes('Amount') ||
-      (rowStr.includes('Credit') && rowStr.includes('Debit'))
-    )
+    (rowStr.includes('Amount') ||
+      (rowStr.includes('Credit') && rowStr.includes('Debit')))
   );
 }
 
@@ -134,7 +139,9 @@ export default function parseCSV(selectedFile, accountId) {
         const rowsAfterHeaderRow = rows.slice(headerRowIndex + 1);
 
         // convert each row of text from CSV into JS arrays for formatting use
-        const transactionRowsArray = rowsAfterHeaderRow.map(convertTransactionTextToArray);
+        const transactionRowsArray = rowsAfterHeaderRow.map(
+          convertTransactionTextToArray
+        );
 
         const headerRowArray = headerRow
           .replace(/"/g, '')
@@ -146,10 +153,19 @@ export default function parseCSV(selectedFile, accountId) {
 
         // find the name of the column that has the word "Date"
         // if there's more than one, use the first one (e.g. Discover CSV has "Trans. Date" and "Post Date")
-        const dateColumnTitle = headerRowArray.find(column => column.includes('Date'));
+        const dateColumnTitle = headerRowArray.find(column =>
+          column.includes('Date')
+        );
 
         newTransactions = transactionRowsArray.map((transaction, i) =>
-          convertTransactionArrayToObject(transaction, i, accountId, headerRowArray, dateColumnTitle));
+          convertTransactionArrayToObject(
+            transaction,
+            i,
+            accountId,
+            headerRowArray,
+            dateColumnTitle
+          )
+        );
       }
 
       resolve(newTransactions);
