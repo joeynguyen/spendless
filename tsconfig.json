@@ -21,8 +21,11 @@
     "noUnusedLocals": true
   },
   "exclude": [
-    "node_modules",
+    "assets",
     "build",
+    "data",
+    "node_modules",
+    "public",
     "scripts",
     "acceptance-tests",
     "webpack",
