@@ -40,7 +40,7 @@
     "redux",
     "typescript"
   ],
-  "homepage": "https://github.com/joeynguyen/spendless",
+  "homepage": "./",
   "devDependencies": {
     "@types/jest": "23.1.1",
     "@types/react": "16.4.1",
