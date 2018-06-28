@@ -4,6 +4,7 @@
   "description": "Personal finance tracker built using electron",
   "main": "main.js",
   "scripts": {
+    "analyze": "source-map-explorer build/static/js/main.*",
     "db-server": "pouchdb-server -d data/",
     "coverage": "nyc report",
     "start": "concurrently 'yarn react-start' 'wait-on http://localhost:3000/ && yarn electron-start'",
@@ -56,6 +57,7 @@
     "react-perf-devtool": "3.0.7",
     "redux-immutable-state-invariant": "1.2.3",
     "redux-logger": "3.0.6",
+    "source-map-explorer": "1.5.0",
     "typescript": "2.9.2",
     "wait-on": "2.1.0"
   },
