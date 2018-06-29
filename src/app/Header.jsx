@@ -35,7 +35,7 @@ const Header = props => {
         <Link to="/" style={styles.logo}>
           <img
             alt="Piggy Bank Logo"
-            src="../assets/piggybank.png"
+            src="./assets/piggybank.png"
             width="50px"
             style={styles.logoImg}
           />{' '}
