@@ -28,8 +28,8 @@
     "jest",
     "node_modules",
     "public",
+    "release-builds",
     "scripts",
-    "spendless-darwin-x64",
     "src/setupTests.ts",
     "webpack"
   ]

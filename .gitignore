@@ -2,7 +2,7 @@
 bower_components/
 node_modules/
 build/
-spendless-darwin-x64/
+release-builds/
 dist/
 .nyc_output/
 .vscode/

@@ -1,5 +1,6 @@
 {
   "name": "spendless",
+  "productName": "spendLess",
   "version": "0.3.0",
   "description": "Personal finance tracker built using electron",
   "main": "main.js",
@@ -15,7 +16,8 @@
     "electron-ts-compile": "tsc --lib 'es2015, dom' main.ts",
     "electron-start": "yarn electron-ts-compile && ELECTRON_IS_DEV=1 electron .",
     "react-build": "react-app-rewired build --scripts-version react-scripts-ts",
-    "electron-build": "yarn electron-ts-compile && electron-packager ./ --overwrite",
+    "electron-build": "yarn electron-ts-compile && yarn macos-build",
+    "macos-build": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/piggybank.icns --prune=true --out=release-builds",
     "prettier": "prettier --write './src/**/*.{ts,js,css,json}'",
     "precommit": "pretty-quick --staged"
   },
