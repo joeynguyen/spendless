@@ -5,7 +5,6 @@ import { Col, Row } from 'antd';
 import FileUpload from './FileUpload.jsx';
 import AddTransactionButton from './AddTransactionButton.jsx';
 import { getCreditIcon } from '../utils/icons.js';
-import styles from './Account.module.css';
 
 const AccountDetails = ({
   accounts,
@@ -24,11 +23,11 @@ const AccountDetails = ({
   return (
     <React.Fragment>
       <div className="header">
-        <h3 className={styles.header}>
+        <h2>
           {activeAccount.name} {icon}
           <br />
           <small>{activeAccount.company}</small>
-        </h3>
+        </h2>
       </div>
       <Row>
         <Col span={6}>
