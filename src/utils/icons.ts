@@ -1,4 +1,4 @@
-export const getCreditIcon = (cc) => {
+export const getCreditIcon = (cc: string) => {
   let iconSuffix;
   switch (cc) {
     case 'American Express':

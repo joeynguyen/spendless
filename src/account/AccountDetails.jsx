@@ -4,7 +4,7 @@ import { Col, Row } from 'antd';
 
 import FileUpload from './FileUpload.jsx';
 import AddTransactionButton from './AddTransactionButton.jsx';
-import { getCreditIcon } from '../utils/icons.js';
+import { getCreditIcon } from '../utils/icons';
 
 const AccountDetails = ({
   accounts,

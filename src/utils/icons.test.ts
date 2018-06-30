@@ -1,5 +1,4 @@
-import { getCreditIcon } from './icons.js'
-import expect from 'expect';
+import { getCreditIcon } from './icons';
 
 describe('getCreditIcon', () => {
   const creditCards = [
@@ -14,6 +13,6 @@ describe('getCreditIcon', () => {
   it('renders the correct icon for each credit card', () => {
     creditCards.forEach(card => {
       expect(getCreditIcon(card.issuer)).toBe(card.iconSuffix);
-    })
+    });
   });
 });
