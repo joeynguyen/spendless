@@ -1,0 +1,393 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ManageTransaction renders correctly 1`] = `
+<form
+  className="ant-form ant-form-vertical"
+  id="manage-transaction"
+  onSubmit={[Function]}
+>
+  <div
+    className="ant-row ant-form-item"
+    style={undefined}
+  >
+    <div
+      className="ant-form-item-label"
+    >
+      <label
+        className="ant-form-item-required"
+        htmlFor="description"
+        onClick={[Function]}
+        title="Description"
+      >
+        Description
+      </label>
+    </div>
+    <div
+      className="ant-form-item-control-wrapper"
+    >
+      <div
+        className="ant-form-item-control has-success"
+      >
+        <span
+          className="ant-form-item-children"
+        >
+          <input
+            className="ant-input"
+            data-__field={
+              Object {
+                "name": "description",
+                "value": "This is a description",
+              }
+            }
+            data-__meta={
+              Object {
+                "name": "description",
+                "originalProps": Object {
+                  "disabled": false,
+                  "prefixCls": "ant-input",
+                  "type": "text",
+                },
+                "ref": null,
+                "rules": Array [
+                  Object {
+                    "message": "Enter a description",
+                    "required": true,
+                  },
+                ],
+                "trigger": "onChange",
+                "validate": Array [
+                  Object {
+                    "rules": Array [
+                      Object {
+                        "message": "Enter a description",
+                        "required": true,
+                      },
+                    ],
+                    "trigger": Array [
+                      "onChange",
+                    ],
+                  },
+                ],
+                "valuePropName": "value",
+              }
+            }
+            disabled={false}
+            id="description"
+            onChange={[Function]}
+            onKeyDown={[Function]}
+            type="text"
+            value="This is a description"
+          />
+        </span>
+      </div>
+    </div>
+  </div>
+  <div
+    className="ant-row"
+    style={undefined}
+  >
+    <div
+      className="ant-col-8"
+    >
+      <div
+        className="ant-row ant-form-item"
+        style={undefined}
+      >
+        <div
+          className="ant-form-item-label"
+        >
+          <label
+            className="ant-form-item-required"
+            htmlFor="amount"
+            onClick={[Function]}
+            title="Amount"
+          >
+            Amount
+          </label>
+        </div>
+        <div
+          className="ant-form-item-control-wrapper"
+        >
+          <div
+            className="ant-form-item-control has-success"
+          >
+            <span
+              className="ant-form-item-children"
+            >
+              <span
+                className="ant-input-group-wrapper"
+                style={undefined}
+              >
+                <span
+                  className="ant-input-wrapper ant-input-group"
+                >
+                  <span
+                    className="ant-input-group-addon"
+                  >
+                    $
+                  </span>
+                  <input
+                    className="ant-input"
+                    data-__field={
+                      Object {
+                        "name": "amount",
+                        "value": "12.34",
+                      }
+                    }
+                    data-__meta={
+                      Object {
+                        "name": "amount",
+                        "originalProps": Object {
+                          "addonBefore": "$",
+                          "disabled": false,
+                          "prefixCls": "ant-input",
+                          "type": "text",
+                        },
+                        "ref": null,
+                        "rules": Array [
+                          Object {
+                            "message": "Enter an amount",
+                            "required": true,
+                          },
+                        ],
+                        "trigger": "onChange",
+                        "validate": Array [
+                          Object {
+                            "rules": Array [
+                              Object {
+                                "message": "Enter an amount",
+                                "required": true,
+                              },
+                            ],
+                            "trigger": Array [
+                              "onChange",
+                            ],
+                          },
+                        ],
+                        "valuePropName": "value",
+                      }
+                    }
+                    disabled={false}
+                    id="amount"
+                    onChange={[Function]}
+                    onKeyDown={[Function]}
+                    style={null}
+                    type="text"
+                    value="12.34"
+                  />
+                </span>
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="ant-col-12 ant-col-offset-4"
+    >
+      <div
+        className="ant-row ant-form-item"
+        style={undefined}
+      >
+        <div
+          className="ant-form-item-label"
+        >
+          <label
+            className="ant-form-item-required"
+            htmlFor="date"
+            onClick={[Function]}
+            title="Date"
+          >
+            Date
+          </label>
+        </div>
+        <div
+          className="ant-form-item-control-wrapper"
+        >
+          <div
+            className="ant-form-item-control has-success"
+          >
+            <span
+              className="ant-form-item-children"
+            >
+              <span
+                className="ant-calendar-picker"
+                id="date"
+                onBlur={[Function]}
+                onFocus={[Function]}
+                style={undefined}
+              >
+                <div
+                  onBlur={undefined}
+                  onClick={[Function]}
+                  onContextMenu={undefined}
+                  onFocus={undefined}
+                  onKeyDown={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseEnter={undefined}
+                  onMouseLeave={undefined}
+                  onTouchStart={[Function]}
+                >
+                  <input
+                    className="ant-calendar-picker-input ant-input"
+                    disabled={undefined}
+                    placeholder="Select date"
+                    readOnly={true}
+                    value="2014-07-25"
+                  />
+                  <i
+                    className="anticon anticon-cross-circle ant-calendar-picker-clear"
+                    onClick={[Function]}
+                  />
+                  <span
+                    className="ant-calendar-picker-icon"
+                  />
+                </div>
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="ant-row ant-form-item"
+    style={undefined}
+  >
+    <div
+      className="ant-form-item-label"
+    >
+      <label
+        className="ant-form-item-required"
+        htmlFor="category"
+        onClick={[Function]}
+        title="Category"
+      >
+        Category
+      </label>
+    </div>
+    <div
+      className="ant-form-item-control-wrapper"
+    >
+      <div
+        className="ant-form-item-control has-success"
+      >
+        <span
+          className="ant-form-item-children"
+        >
+          <input
+            className="ant-input"
+            data-__field={
+              Object {
+                "name": "category",
+                "value": "Auto",
+              }
+            }
+            data-__meta={
+              Object {
+                "name": "category",
+                "originalProps": Object {
+                  "disabled": false,
+                  "prefixCls": "ant-input",
+                  "type": "text",
+                },
+                "ref": null,
+                "rules": Array [
+                  Object {
+                    "message": "Enter a category",
+                    "required": true,
+                  },
+                ],
+                "trigger": "onChange",
+                "validate": Array [
+                  Object {
+                    "rules": Array [
+                      Object {
+                        "message": "Enter a category",
+                        "required": true,
+                      },
+                    ],
+                    "trigger": Array [
+                      "onChange",
+                    ],
+                  },
+                ],
+                "valuePropName": "value",
+              }
+            }
+            disabled={false}
+            id="category"
+            onChange={[Function]}
+            onKeyDown={[Function]}
+            type="text"
+            value="Auto"
+          />
+        </span>
+      </div>
+    </div>
+  </div>
+  <div
+    className="ant-row ant-form-item"
+    style={
+      Object {
+        "marginBottom": 5,
+      }
+    }
+  >
+    <div
+      className="ant-form-item-label"
+    >
+      <label
+        className=""
+        htmlFor="notes"
+        onClick={[Function]}
+        title="Notes"
+      >
+        Notes
+      </label>
+    </div>
+    <div
+      className="ant-form-item-control-wrapper"
+    >
+      <div
+        className="ant-form-item-control has-success"
+      >
+        <span
+          className="ant-form-item-children"
+        >
+          <textarea
+            className="ant-input"
+            data-__field={
+              Object {
+                "name": "notes",
+                "value": "Add notes here",
+              }
+            }
+            data-__meta={
+              Object {
+                "name": "notes",
+                "originalProps": Object {
+                  "placeholder": "Add notes for this transaction",
+                  "prefixCls": "ant-input",
+                  "rows": 4,
+                },
+                "ref": null,
+                "trigger": "onChange",
+                "validate": Array [],
+                "valuePropName": "value",
+              }
+            }
+            id="notes"
+            onChange={[Function]}
+            onKeyDown={[Function]}
+            placeholder="Add notes for this transaction"
+            rows={4}
+            style={Object {}}
+            value="Add notes here"
+          />
+        </span>
+      </div>
+    </div>
+  </div>
+</form>
+`;

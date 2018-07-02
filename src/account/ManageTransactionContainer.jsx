@@ -2,9 +2,8 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Button, Modal } from 'antd';
 import moment from 'moment';
-import { message } from 'antd';
-import { Form } from 'antd';
 import ManageTransaction from './ManageTransaction.jsx';
 import * as transactionsActions from './TransactionsActions.js';
 
@@ -13,69 +12,55 @@ class ManageTransactionContainer extends Component {
     actions: PropTypes.object.isRequired,
     activeAccountId: PropTypes.string.isRequired,
     activeTransaction: PropTypes.object,
-    form: PropTypes.object.isRequired,
     initialValues: PropTypes.object.isRequired,
     manageTransactionVisible: PropTypes.bool.isRequired,
   };
 
-  toggleManageTransaction = () => {
-    this.props.actions.toggleManageTransaction();
-  };
-
-  handleSaveTransaction = e => {
-    e.preventDefault();
-    let newTransactionObj;
-    this.props.form.validateFields((err, values) => {
-      if (!err) {
-        // values.date is returned as a moment object so we have to convert it here
-        const dateStringified = values.date.format('YYYY-MM-DD');
-        if (this.props.activeTransaction !== null) {
-          // update transaction
-          newTransactionObj = Object.assign({}, this.props.activeTransaction, {
-            amount: Number(values.amount).toFixed(2),
-            category: values.category,
-            date: dateStringified,
-            description: values.description,
-            notes: values.notes,
-          });
-        } else {
-          // add new transaction
-          newTransactionObj = {
-            _id: new Date().getTime().toString(),
-            accountId: this.props.activeAccountId,
-            amount: Number(values.amount).toFixed(2),
-            category: values.category,
-            date: dateStringified,
-            description: values.description,
-            notes: values.notes,
-          };
-        }
-
-        // Save account in DB
-        this.props.actions
-          .saveAccountTransactions(newTransactionObj)
-          .then(() => {
-            message.success('Transaction saved');
-            // reset current transaction being edited to null
-            this.toggleManageTransaction();
-          })
-          .catch(() => {
-            message.error('Restart the application and retry');
-          });
-      }
-    });
-  };
-
   render() {
+    const {
+      saveAccountTransactions,
+      toggleManageTransaction,
+    } = this.props.actions;
     const manageType = this.props.activeTransaction !== null ? 'edit' : 'add';
+    const componentTitle =
+      manageType === 'edit' ? 'Edit Transaction' : 'Add Transaction';
+    const modalFooter = [
+      <Button
+        key="confirm"
+        type="primary"
+        htmlType="submit"
+        form="manage-transaction"
+      >
+        Save
+      </Button>,
+      <Button
+        key="cancel"
+        id="cancel-manage-transaction"
+        size="large"
+        onClick={toggleManageTransaction}
+      >
+        Cancel
+      </Button>,
+    ];
+
     return (
-      <ManageTransaction
-        form={this.props.form}
-        manageType={manageType}
-        manageTransactionVisible={this.props.manageTransactionVisible}
-        toggleManageTransaction={this.toggleManageTransaction}
-        doSubmit={this.handleSaveTransaction}
-      />
+      <Modal
+        id="ManageTransaction"
+        closable
+        maskClosable={false}
+        visible={this.props.manageTransactionVisible}
+        onCancel={toggleManageTransaction}
+        title={componentTitle}
+        footer={modalFooter}
+      >
+        <ManageTransaction
+          activeTransaction={this.props.activeTransaction}
+          activeAccountId={this.props.activeAccountId}
+          initialValues={this.props.initialValues}
+          saveAccountTransactions={saveAccountTransactions}
+          toggleManageTransaction={toggleManageTransaction}
+        />
+      </Modal>
     );
   }
 }
@@ -123,31 +108,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(
-  Form.create({
-    mapPropsToFields(props) {
-      return {
-        amount: Form.createFormField({
-          ...props.amount,
-          value: props.initialValues.amount,
-        }),
-        category: Form.createFormField({
-          ...props.category,
-          value: props.initialValues.category,
-        }),
-        date: Form.createFormField({
-          ...props.date,
-          value: props.initialValues.date,
-        }),
-        description: Form.createFormField({
-          ...props.description,
-          value: props.initialValues.description,
-        }),
-        notes: Form.createFormField({
-          ...props.notes,
-          value: props.initialValues.notes,
-        }),
-      };
-    },
-  })(ManageTransactionContainer)
-);
+)(ManageTransactionContainer);
