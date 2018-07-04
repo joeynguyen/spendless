@@ -32,13 +32,12 @@ describe('ManageTransaction', () => {
     const tree = renderer.create(<ManageTransaction {...props} />).toJSON();
     expect(tree).toMatchSnapshot();
   });
-  const component = setup();
   afterEach(() => {
     jest.clearAllMocks();
   });
 
   describe('renders all the fields with correct values', () => {
-    // const component = setup();
+    const component = setup();
 
     // the modal component has been moved to ManageTransactionContainer file
     xit('renders correct modal title', () => {
@@ -79,9 +78,10 @@ describe('ManageTransaction', () => {
   });
 
   describe('has submit button that submits', () => {
+    const component = setup();
+
     // the modal submit button has been moved to ManageTransactionContainer file
     xit('has submit button', () => {
-      const component = setup();
       const submitBtn = component.find('button[type="submit"]');
       expect(submitBtn.length).toBe(1);
     });
