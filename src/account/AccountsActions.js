@@ -10,7 +10,7 @@ export const REMOVE_ACCOUNT = 'REMOVE_ACCOUNT';
 export const TOGGLE_UNSAVED_WARNING = 'TOGGLE_UNSAVED_WARNING';
 
 // Load in UI the current list of accounts
-function loadAccountsSuccess(accounts) {
+function loadAccountsSuccess(accounts = []) {
   return {
     payload: accounts,
     type: LOAD_ACCOUNTS_SUCCESS,

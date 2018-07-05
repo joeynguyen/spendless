@@ -12,7 +12,7 @@ class AccountContainer extends Component {
     activeAccountId: PropTypes.string,
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.actions.getAccounts();
   }
 
@@ -41,4 +41,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AccountContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AccountContainer);
