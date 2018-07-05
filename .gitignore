@@ -17,6 +17,9 @@ dist/
 log.txt
 /data/
 config.json
+# PouchDB files created by Node when 'npm test' is run
+/accounts/
+/transactions/
 
 # App packaged
 main.js

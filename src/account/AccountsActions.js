@@ -1,4 +1,8 @@
-import AccountsApi from '../api/accountsApi';
+import {
+  deleteAccountFromDB,
+  getAccountsFromDB,
+  saveAccountToDB,
+} from '../api/accountsApi';
 
 export const LOAD_ACCOUNTS_SUCCESS = 'LOAD_ACCOUNTS_SUCCESS';
 export const UPDATE_ACCOUNTS = 'UPDATE_ACCOUNTS';
@@ -37,7 +41,7 @@ export function toggleUnsavedWarning() {
 
 export function saveAccount(account) {
   return function(dispatch) {
-    return AccountsApi.saveAccountToDB(account)
+    return saveAccountToDB(account)
       .then(savedAccount => {
         dispatch(updateAccounts(savedAccount));
         // pass account object back to invoker's success method
@@ -52,7 +56,7 @@ export function saveAccount(account) {
 
 export function getAccounts() {
   return function(dispatch) {
-    return AccountsApi.getAccountsFromDB()
+    return getAccountsFromDB()
       .then(accounts => {
         dispatch(loadAccountsSuccess(accounts));
       })
@@ -65,7 +69,7 @@ export function getAccounts() {
 
 export function deleteAccount(account) {
   return function(dispatch) {
-    return AccountsApi.deleteAccountFromDB(account)
+    return deleteAccountFromDB(account)
       .then(deletedAccount => {
         dispatch(removeAccount(deletedAccount.id));
         // pass deleted account object back to invoker's success method

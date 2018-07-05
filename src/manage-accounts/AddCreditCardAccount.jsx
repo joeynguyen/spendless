@@ -1,64 +1,57 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { Button, Form, Select, Input } from 'antd';
+import React from 'react';
+import { Button, Select, Input } from 'antd';
 
-import withAddAccountHandler from './AddAccountHandler.jsx';
 import { renderAntdOptions } from '../utils/helpers.js';
 import { accountCompanyOptions } from '../constants.js';
 
-const FormItem = Form.Item;
+const AddCreditCardAccount = ({ FormItem, getFieldDecorator }) => {
+  return (
+    <React.Fragment>
+      {/* hidden field to pass on save data */}
+      {getFieldDecorator('accountType', { initialValue: 'creditcard' })(
+        <Input type="hidden" />
+      )}
 
-class AddCreditCardAccount extends Component {
-  render() {
-    const { getFieldDecorator } = this.props.form;
+      <FormItem label="Name">
+        {getFieldDecorator('accountName', {
+          rules: [
+            {
+              message: 'Enter a name for the account',
+              required: true,
+            },
+          ],
+        })(<Input placeholder="Enter a name for the account" />)}
+      </FormItem>
 
-    return (
-      <Form onSubmit={this.props.handleSubmit} layout="vertical">
-        {/* hidden field to pass on save data */}
-        {getFieldDecorator('accountType', { initialValue: 'creditcard' })(
-          <Input type="hidden" />
-        )}
+      <FormItem label="Credit Card Company">
+        {getFieldDecorator('companyName', {
+          rules: [
+            {
+              message: 'Enter the name of the financial institution',
+              required: true,
+            },
+          ],
+        })(<Select>{renderAntdOptions(accountCompanyOptions)}</Select>)}
+      </FormItem>
 
-        <FormItem label="Name">
-          {getFieldDecorator('accountName', {
-            rules: [
-              {
-                message: 'Enter a name for the account',
-                required: true,
-              },
-            ],
-          })(<Input placeholder="Enter a name for the account" />)}
-        </FormItem>
-
-        <FormItem label="Credit Card Company">
-          {getFieldDecorator('companyName', {
-            rules: [
-              {
-                message: 'Enter the name of the financial institution',
-                required: true,
-              },
-            ],
-          })(<Select>{renderAntdOptions(accountCompanyOptions)}</Select>)}
-        </FormItem>
-
-        <FormItem>
-          <Button
-            name="add-account"
-            type="primary"
-            htmlType="submit"
-            size="large"
-          >
-            Save
-          </Button>
-        </FormItem>
-      </Form>
-    );
-  }
-}
-
-AddCreditCardAccount.propTypes = {
-  form: PropTypes.object.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
+      <FormItem>
+        <Button
+          name="add-account"
+          type="primary"
+          htmlType="submit"
+          size="large"
+        >
+          Save
+        </Button>
+      </FormItem>
+    </React.Fragment>
+  );
 };
 
-export default withAddAccountHandler(AddCreditCardAccount);
+AddCreditCardAccount.propTypes = {
+  FormItem: PropTypes.func.isRequired,
+  getFieldDecorator: PropTypes.func.isRequired,
+};
+
+export default AddCreditCardAccount;
