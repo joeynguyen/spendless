@@ -37,6 +37,8 @@ export default class AccountsListItem extends Component {
       );
     }
 
+    const accountTypeText =
+      this.props.account.type === 'bank' ? 'Bank' : 'Credit Card';
     return (
       <div className="well" key={this.props.account._id}>
         <div
@@ -49,11 +51,10 @@ export default class AccountsListItem extends Component {
         </div>
         <h4 className="account-name">{this.props.account.name}</h4>
         <p className="company-info">
-          {this.props.account.type === 'bank' ? 'Bank' : 'Credit Card'} -{' '}
-          {this.props.account.company}
+          {`${accountTypeText} - ${this.props.account.company}`}
         </p>
         <Collapse isOpened={this.state.settingsVisible}>
-          <React.Fragment>{editAccountForm}</React.Fragment>
+          {editAccountForm}
         </Collapse>
       </div>
     );

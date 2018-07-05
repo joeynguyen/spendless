@@ -1,8 +1,8 @@
 import expect from 'expect';
 import React from 'react';
 import { shallow } from 'enzyme';
+import toJson from 'enzyme-to-json';
 import AccountsListItem from './AccountsListItem.jsx';
-import EditAccountFormContainer from './EditAccountFormContainer.jsx';
 
 const mockAccount = (type = 'creditcard') => {
   return {
@@ -19,44 +19,32 @@ function setup(account) {
 }
 
 describe('AccountsListItem', () => {
-  describe('renders correct elements by default', () => {
-    const wrapper = setup(mockAccount());
+  describe('renders correct elements: ', () => {
+    it('default', () => {
+      const wrapper = setup(mockAccount());
+      expect(toJson(wrapper)).toMatchSnapshot();
+    });
 
-    it('renders the account name', () => {
-      expect(wrapper.find('.account-name').text()).toBe('Chase Freedom');
-    });
-    it('renders a cog icon element', () => {
-      expect(wrapper.find('.fa-cog').length).toBe(1);
-    });
-    it('renders the company info with type as Credit Card by default', () => {
-      expect(wrapper.find('.company-info').text()).toBe(
-        'Credit Card - MasterCard'
-      );
-    });
-  });
-
-  describe('renders correct elements based on specific behaviors', () => {
-    it('renders the company info with Bank if type is "bank"', done => {
+    it('company info with Bank if type is "bank"', () => {
       const wrapper = setup(mockAccount('bank'));
-      expect(wrapper.find('.company-info').text()).toBe('Bank - MasterCard');
-      done();
+      expect(toJson(wrapper)).toMatchSnapshot();
     });
   });
 
-  describe('it has correct component state based on behavior', () => {
+  describe('has correct component state based on behavior -', () => {
     const wrapper = setup(mockAccount());
-    it('has settingsVisible as false by default', () => {
+
+    it('default: settingsVisible is false and no EditAccountFormContainer', () => {
       expect(wrapper.state().settingsVisible).toBe(false);
+      expect(wrapper.find('Connect(EditAccountFormContainer)').length).toBe(0);
     });
-    it("doesn't show EditAccountFormContainer by default", () => {
-      expect(wrapper.find(EditAccountFormContainer).length).toBe(0);
-    });
-    it('when cog is clicked, settingsVisible state is true and EditAccountFormContainer is rendered', done => {
-      const cogIcon = wrapper.find('.fa-cog');
+
+    it('when cog is clicked: settingsVisible is true and EditAccountFormContainer is rendered', () => {
+      const cogIcon = wrapper.find('Icon');
       cogIcon.simulate('click');
       expect(wrapper.state().settingsVisible).toBe(true);
-      expect(wrapper.find(EditAccountFormContainer).length).toBe(1);
-      done();
+      expect(wrapper.find('Connect(EditAccountFormContainer)').length).toBe(1);
+      expect(toJson(wrapper)).toMatchSnapshot();
     });
   });
 });

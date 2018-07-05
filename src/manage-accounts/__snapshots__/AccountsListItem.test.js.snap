@@ -1,0 +1,147 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AccountsListItem has correct component state based on behavior - when cog is clicked: settingsVisible is true and EditAccountFormContainer is rendered 1`] = `
+<div
+  className="well"
+  key="2016-02-24T07:01:24.948Z"
+>
+  <div
+    className="expanded toggle-account-setting-icon float-right"
+  >
+    <Icon
+      onClick={[Function]}
+      type="setting"
+    />
+  </div>
+  <h4
+    className="account-name"
+  >
+    Chase Freedom
+  </h4>
+  <p
+    className="company-info"
+  >
+    Credit Card - MasterCard
+  </p>
+  <Collapse
+    fixedHeight={-1}
+    forceInitialAnimation={false}
+    hasNestedCollapse={false}
+    isOpened={true}
+    onMeasure={[Function]}
+    onRender={[Function]}
+    onRest={[Function]}
+    style={Object {}}
+    theme={
+      Object {
+        "collapse": "ReactCollapse--collapse",
+        "content": "ReactCollapse--content",
+      }
+    }
+  >
+    <Connect(EditAccountFormContainer)
+      account={
+        Object {
+          "_id": "2016-02-24T07:01:24.948Z",
+          "_rev": "13-2bfa9371e269957dcbf2946c1cdd6cd5",
+          "company": "MasterCard",
+          "name": "Chase Freedom",
+          "type": "creditcard",
+        }
+      }
+      initialValues={
+        Object {
+          "accountCompany": "MasterCard",
+          "accountName": "Chase Freedom",
+          "accountType": "creditcard",
+        }
+      }
+      toggleSettings={[Function]}
+    />
+  </Collapse>
+</div>
+`;
+
+exports[`AccountsListItem renders correct elements:  company info with Bank if type is "bank" 1`] = `
+<div
+  className="well"
+  key="2016-02-24T07:01:24.948Z"
+>
+  <div
+    className=" toggle-account-setting-icon float-right"
+  >
+    <Icon
+      onClick={[Function]}
+      type="setting"
+    />
+  </div>
+  <h4
+    className="account-name"
+  >
+    Chase Freedom
+  </h4>
+  <p
+    className="company-info"
+  >
+    Bank - MasterCard
+  </p>
+  <Collapse
+    fixedHeight={-1}
+    forceInitialAnimation={false}
+    hasNestedCollapse={false}
+    isOpened={false}
+    onMeasure={[Function]}
+    onRender={[Function]}
+    onRest={[Function]}
+    style={Object {}}
+    theme={
+      Object {
+        "collapse": "ReactCollapse--collapse",
+        "content": "ReactCollapse--content",
+      }
+    }
+  />
+</div>
+`;
+
+exports[`AccountsListItem renders correct elements:  default 1`] = `
+<div
+  className="well"
+  key="2016-02-24T07:01:24.948Z"
+>
+  <div
+    className=" toggle-account-setting-icon float-right"
+  >
+    <Icon
+      onClick={[Function]}
+      type="setting"
+    />
+  </div>
+  <h4
+    className="account-name"
+  >
+    Chase Freedom
+  </h4>
+  <p
+    className="company-info"
+  >
+    Credit Card - MasterCard
+  </p>
+  <Collapse
+    fixedHeight={-1}
+    forceInitialAnimation={false}
+    hasNestedCollapse={false}
+    isOpened={false}
+    onMeasure={[Function]}
+    onRender={[Function]}
+    onRest={[Function]}
+    style={Object {}}
+    theme={
+      Object {
+        "collapse": "ReactCollapse--collapse",
+        "content": "ReactCollapse--content",
+      }
+    }
+  />
+</div>
+`;
