@@ -18,7 +18,6 @@ function syncDB() {
 
 export function getAccountsFromDB() {
   return new Promise((resolve, reject) => {
-    resolve();
     db.allDocs({
       descending: true,
       include_docs: true,
