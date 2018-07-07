@@ -1,6 +1,7 @@
 import expect from 'expect';
 import React from 'react';
 import { shallow } from 'enzyme';
+import toJson from 'enzyme-to-json';
 import ManageAccounts from './ManageAccounts.jsx';
 
 const myProps = {
@@ -31,35 +32,9 @@ const myProps = {
   manageAccountsVisible: true,
 };
 
-function setup(props) {
-  return shallow(<ManageAccounts {...props} />);
-}
-
 describe('ManageAccounts', () => {
-  const component = setup(myProps);
-
-  it('has an AddAccount component', done => {
-    expect(component.find('AddAccount').length).toBe(1);
-    done();
-  });
-
-  it('has a AccountsList component', done => {
-    expect(component.find('AccountsList').length).toBe(1);
-    done();
-  });
-
-  it('AccountsList has an accounts prop with list of accounts passed to it', done => {
-    expect(component.find('AccountsList').props().accounts).toExist();
-    expect(component.find('AccountsList').props().accounts).toBe(
-      myProps.accounts
-    );
-    done();
-  });
-
-  it('has a close modal button', done => {
-    expect(component.find('Button[name="close-manage-accounts"]').length).toBe(
-      1
-    );
-    done();
+  it('has an ManageAccounts component with props', () => {
+    const wrapper = shallow(<ManageAccounts {...myProps} />);
+    expect(toJson(wrapper)).toMatchSnapshot();
   });
 });

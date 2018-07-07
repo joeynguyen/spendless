@@ -35,6 +35,18 @@
     lodash "^4.17.5"
     to-fast-properties "^2.0.0"
 
+"@gerhobbelt/linewrap@0.2.2-3":
+  version "0.2.2-3"
+  resolved "https://registry.yarnpkg.com/@gerhobbelt/linewrap/-/linewrap-0.2.2-3.tgz#49d5667922ad02bd0a37084fb8f31309a382f829"
+
+"@gerhobbelt/nomnom@^1.8.4-24":
+  version "1.8.4-24"
+  resolved "https://registry.yarnpkg.com/@gerhobbelt/nomnom/-/nomnom-1.8.4-24.tgz#d03a5e3093f5f68fb5217b1d1e4d7d67d017bf22"
+  dependencies:
+    "@gerhobbelt/linewrap" "0.2.2-3"
+    chalk "2.1.0"
+    exit "0.1.2"
+
 "@types/cheerio@*":
   version "0.22.8"
   resolved "https://registry.yarnpkg.com/@types/cheerio/-/cheerio-0.22.8.tgz#5702f74f78b73e13f1eb1bd435c2c9de61a250d4"
@@ -109,7 +121,7 @@ abstract-leveldown@~5.0.0:
   dependencies:
     xtend "~4.0.0"
 
-accepts@~1.3.4:
+accepts@~1.3.4, accepts@~1.3.5:
   version "1.3.5"
   resolved "https://registry.yarnpkg.com/accepts/-/accepts-1.3.5.tgz#eb777df6011723a3b14e8a72c0805c8e86746bd2"
   dependencies:
@@ -247,15 +259,11 @@ ansi-styles@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-2.2.1.tgz#b432dd3358b634cf75e1e4664368240533c1ddbe"
 
-ansi-styles@^3.2.0, ansi-styles@^3.2.1:
+ansi-styles@^3.1.0, ansi-styles@^3.2.0, ansi-styles@^3.2.1:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-3.2.1.tgz#41fbb20243e50b12be0f04b8dedbf07520ce841d"
   dependencies:
     color-convert "^1.9.0"
-
-ansi-styles@~1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-1.0.0.tgz#cb102df1c56f5123eab8b67cd7b98027a0279178"
 
 antd@3.6.4:
   version "3.6.4"
@@ -537,10 +545,6 @@ async@^2.5.0:
   resolved "https://registry.yarnpkg.com/async/-/async-2.6.1.tgz#b245a23ca71930044ec53fa46aa00a3e87c6a610"
   dependencies:
     lodash "^4.17.10"
-
-async@~0.9.0:
-  version "0.9.2"
-  resolved "https://registry.yarnpkg.com/async/-/async-0.9.2.tgz#aea74d5e61c1f899613bf64bda66d4c78f2fd17d"
 
 asynckit@^0.4.0:
   version "0.4.0"
@@ -1288,16 +1292,13 @@ base64-js@^1.0.2:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.2.3.tgz#fb13668233d9614cf5fb4bce95a9ba4096cdf801"
 
-base64url@^1.0.5:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/base64url/-/base64url-1.0.6.tgz#d64d375d68a7c640d912e2358d170dca5bb54681"
-  dependencies:
-    concat-stream "~1.4.7"
-    meow "~2.0.0"
-
 base64url@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/base64url/-/base64url-2.0.0.tgz#eac16e03ea1438eff9423d69baa36262ed1f70bb"
+
+base64url@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/base64url/-/base64url-3.0.0.tgz#f2ba30b15f80413d88e3e6116c4f3f7f61e28a2a"
 
 base@^0.11.1:
   version "0.11.2"
@@ -1311,9 +1312,11 @@ base@^0.11.1:
     mixin-deep "^1.2.0"
     pascalcase "^0.1.1"
 
-basic-auth@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/basic-auth/-/basic-auth-1.1.0.tgz#45221ee429f7ee1e5035be3f51533f1cdfd29884"
+basic-auth@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/basic-auth/-/basic-auth-2.0.0.tgz#015db3f353e02e56377755f962742e8981e7bbba"
+  dependencies:
+    safe-buffer "5.1.1"
 
 batch@0.6.1:
   version "0.6.1"
@@ -1356,17 +1359,9 @@ block-stream@*:
   dependencies:
     inherits "~2.0.0"
 
-bluebird@^2.3.11:
-  version "2.11.0"
-  resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-2.11.0.tgz#534b9033c022c9579c56ba3b3e5a5caafbb650e1"
-
 bluebird@^3.1.1, bluebird@^3.4.7, bluebird@^3.5.0, bluebird@^3.5.1:
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.1.tgz#d9551f9de98f1fcda1e683d17ee91a0602ee2eb9"
-
-bluebird@~1.2.4:
-  version "1.2.4"
-  resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-1.2.4.tgz#5985ec23cb6ff1a5834cc6447b3c5ef010fd321a"
 
 bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.4.0:
   version "4.11.8"
@@ -1661,13 +1656,6 @@ camel-case@3.0.x:
     no-case "^2.2.0"
     upper-case "^1.1.1"
 
-camelcase-keys@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/camelcase-keys/-/camelcase-keys-1.0.0.tgz#bd1a11bf9b31a1ce493493a930de1a0baf4ad7ec"
-  dependencies:
-    camelcase "^1.0.1"
-    map-obj "^1.0.0"
-
 camelcase-keys@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/camelcase-keys/-/camelcase-keys-2.1.0.tgz#308beeaffdf28119051efa1d932213c91b8f92e7"
@@ -1675,7 +1663,7 @@ camelcase-keys@^2.0.0:
     camelcase "^2.0.0"
     map-obj "^1.0.0"
 
-camelcase@^1.0.1, camelcase@^1.0.2:
+camelcase@^1.0.2:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-1.2.1.tgz#9bb5304d2e0b56698b2c758b08a3eaa9daa58a39"
 
@@ -1759,6 +1747,14 @@ chalk@1.1.3, chalk@^1.1.3:
     strip-ansi "^3.0.0"
     supports-color "^2.0.0"
 
+chalk@2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/chalk/-/chalk-2.1.0.tgz#ac5becf14fa21b99c6c92ca7a7d7cfd5b17e743e"
+  dependencies:
+    ansi-styles "^3.1.0"
+    escape-string-regexp "^1.0.5"
+    supports-color "^4.0.0"
+
 chalk@^2.0.0, chalk@^2.0.1, chalk@^2.3.1:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-2.3.2.tgz#250dc96b07491bfd601e648d66ddf5f60c7a5c65"
@@ -1774,14 +1770,6 @@ chalk@^2.1.0, chalk@^2.3.0:
     ansi-styles "^3.2.1"
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
-
-chalk@~0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/chalk/-/chalk-0.4.0.tgz#5199a3ddcd0c1efe23bc08c1b027b06176e0c64f"
-  dependencies:
-    ansi-styles "~1.0.0"
-    has-color "~0.1.0"
-    strip-ansi "~0.1.0"
 
 chardet@^0.4.0:
   version "0.4.2"
@@ -2103,14 +2091,6 @@ concat-stream@^1.5.0, concat-stream@^1.6.0:
     readable-stream "^2.2.2"
     typedarray "^0.0.6"
 
-concat-stream@~1.4.7:
-  version "1.4.11"
-  resolved "https://registry.yarnpkg.com/concat-stream/-/concat-stream-1.4.11.tgz#1dc9f666f2621da9c618b1e7f8f3b2ff70b5f76f"
-  dependencies:
-    inherits "~2.0.1"
-    readable-stream "~1.1.9"
-    typedarray "~0.0.5"
-
 concurrently@3.5.1:
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/concurrently/-/concurrently-3.5.1.tgz#ee8b60018bbe86b02df13e5249453c6ececd2521"
@@ -2235,44 +2215,44 @@ couchdb-calculate-session-id@^1.1.0:
     base64url "^2.0.0"
     crypto-lite "^0.2.0"
 
-couchdb-eval@^1.0.0:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/couchdb-eval/-/couchdb-eval-1.0.6.tgz#03ce6a14da628c9f97b60269053bfbffe9cb3539"
+couchdb-eval@4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/couchdb-eval/-/couchdb-eval-4.0.1.tgz#7b7ce0f504a0a3d7c4d299271b5a31022567ed12"
   dependencies:
-    extend "^1.2.1"
-    pouchdb-plugin-error "^1.0.0"
+    extend "^3.0.0"
+    pouchdb-plugin-error "4.0.1"
 
 couchdb-log-parse@^0.0.4:
   version "0.0.4"
   resolved "https://registry.yarnpkg.com/couchdb-log-parse/-/couchdb-log-parse-0.0.4.tgz#7594c6a7b481effc7647c711760dfc090658a326"
 
-couchdb-objects@^1.0.0, couchdb-objects@^1.0.7:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/couchdb-objects/-/couchdb-objects-1.0.7.tgz#0a7e4067de9e08ca1c576e3822142d2aa55804d8"
+couchdb-objects@4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/couchdb-objects/-/couchdb-objects-4.0.1.tgz#3bbac475e5b4d131733415dd4140583ec0b50d8d"
   dependencies:
-    extend "^1.2.1"
-    header-case-normalizer "^1.0.0"
-    is-empty "^0.0.1"
-    pouchdb-promise "^0.0.0"
-    random-uuid-v4 "^0.0.4"
+    extend "^3.0.0"
+    header-case-normalizer "^1.0.3"
+    is-empty "^1.2.0"
+    pouchdb-promise "^6.4.1"
+    random-uuid-v4 "0.0.6"
 
-couchdb-render@^1.0.0, couchdb-render@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/couchdb-render/-/couchdb-render-1.0.1.tgz#892e5a4040dbdc0d07b8e0ca12c0f57ab1bb102f"
+couchdb-render@4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/couchdb-render/-/couchdb-render-4.0.1.tgz#d76f7c012b13943c7ec13e8ea27cac8ce3822d7d"
   dependencies:
-    couchdb-eval "^1.0.0"
-    couchdb-resp-completer "^1.0.0"
-    extend "^1.2.1"
-    is-empty "^0.0.1"
-    pouchdb-plugin-error "^1.0.0"
+    couchdb-eval "4.0.1"
+    couchdb-resp-completer "4.0.1"
+    extend "^3.0.0"
+    is-empty "^1.2.0"
+    pouchdb-plugin-error "4.0.1"
 
-couchdb-resp-completer@^1.0.0:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/couchdb-resp-completer/-/couchdb-resp-completer-1.0.3.tgz#aa4b0c02bf0906fdf7367fbf8bde8e0ac532d213"
+couchdb-resp-completer@4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/couchdb-resp-completer/-/couchdb-resp-completer-4.0.1.tgz#3785aaa3104a9606cb5e0b722c20ee016dce826f"
   dependencies:
-    extend "^1.2.1"
-    is-empty "^0.0.1"
-    pouchdb-plugin-error "^1.0.1"
+    extend "^3.0.0"
+    is-empty "^1.2.0"
+    pouchdb-plugin-error "4.0.1"
 
 cpx@^1.5.0:
   version "1.5.0"
@@ -2377,10 +2357,6 @@ crypto-browserify@^3.11.0:
     public-encrypt "^4.0.0"
     randombytes "^2.0.0"
     randomfill "^1.0.3"
-
-crypto-lite@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/crypto-lite/-/crypto-lite-0.1.0.tgz#976ba0f6ebb73eb580644bf08d53ea84ac40c490"
 
 crypto-lite@^0.2.0:
   version "0.2.0"
@@ -2705,7 +2681,7 @@ depd@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/depd/-/depd-1.1.1.tgz#5783b4e1c459f06fa5ca27f991f3d06e7a310359"
 
-depd@~1.1.1:
+depd@~1.1.1, depd@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/depd/-/depd-1.1.2.tgz#9bcd52e14c097763e749b274c4346ed2e560b5a9"
 
@@ -3049,7 +3025,7 @@ emojis-list@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/emojis-list/-/emojis-list-2.1.0.tgz#4daa4d9db00f9819880c79fa457ae5b09a1fd389"
 
-encodeurl@~1.0.1:
+encodeurl@~1.0.1, encodeurl@~1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/encodeurl/-/encodeurl-1.0.2.tgz#ad3ff4c86ec2d029322f5a02c3a9a606c95b3f59"
 
@@ -3466,10 +3442,6 @@ esutils@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/esutils/-/esutils-2.0.2.tgz#0abf4f1caa5bcb1f7a9d8acc6dea4faaa04bac9b"
 
-etag@~1.7.0:
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/etag/-/etag-1.7.0.tgz#03d30b5f67dd6e632d2945d30d6652731a34d5d8"
-
 etag@~1.8.1:
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
@@ -3536,7 +3508,7 @@ execa@^0.8.0:
     signal-exit "^3.0.0"
     strip-eof "^1.0.0"
 
-exit@^0.1.2:
+exit@0.1.2, exit@^0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/exit/-/exit-0.1.2.tgz#0632638f8d877cc82107d30a0fff1a17cba1cd0c"
 
@@ -3585,42 +3557,42 @@ expect@^22.4.0:
     jest-message-util "^22.4.3"
     jest-regex-util "^22.4.3"
 
-express-pouchdb@2.3.7:
-  version "2.3.7"
-  resolved "https://registry.yarnpkg.com/express-pouchdb/-/express-pouchdb-2.3.7.tgz#ff4952b7f745e23da1a0511394a656ba05352269"
+express-pouchdb@4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/express-pouchdb/-/express-pouchdb-4.0.1.tgz#e7543d3ac440c4e710422bd938e9f39efbe56b48"
   dependencies:
-    basic-auth "^1.1.0"
+    basic-auth "^2.0.0"
     body-parser "^1.16.1"
     compression "^1.6.2"
     cookie-parser "^1.4.3"
     denodeify "^1.2.1"
-    express "^4.10.4"
+    express "^4.14.1"
     extend "^3.0.0"
     header-case-normalizer "^1.0.3"
     mkdirp "^0.5.0"
     multiparty "^4.1.3"
     on-finished "^2.3.0"
     pouchdb-all-dbs "^1.0.2"
-    pouchdb-auth "^2.1.1"
-    pouchdb-collections "^6.1.2"
+    pouchdb-auth "4.0.1"
+    pouchdb-collections "^6.4.1"
     pouchdb-fauxton "^0.0.6"
-    pouchdb-find "^0.10.4"
-    pouchdb-list "^1.1.0"
-    pouchdb-promise "^6.1.2"
-    pouchdb-replicator "2.3.7"
-    pouchdb-rewrite "^1.0.7"
-    pouchdb-security "2.3.7"
-    pouchdb-show "^1.0.8"
-    pouchdb-size "^1.2.2"
-    pouchdb-update "^1.0.8"
-    pouchdb-validation "^1.2.1"
-    pouchdb-vhost "^1.0.2"
-    pouchdb-wrappers "^1.3.6"
+    pouchdb-find "^6.4.1"
+    pouchdb-list "4.0.1"
+    pouchdb-promise "^6.4.1"
+    pouchdb-replicator "4.0.1"
+    pouchdb-rewrite "4.0.1"
+    pouchdb-security "4.0.1"
+    pouchdb-show "4.0.1"
+    pouchdb-size "4.0.1"
+    pouchdb-update "4.0.1"
+    pouchdb-validation "4.0.1"
+    pouchdb-vhost "4.0.1"
+    pouchdb-wrappers "4.0.1"
     raw-body "^2.2.0"
     sanitize-filename "^1.6.1"
     uuid "^3.0.1"
 
-express@^4.10.4, express@^4.13.3:
+express@^4.13.3:
   version "4.16.2"
   resolved "https://registry.yarnpkg.com/express/-/express-4.16.2.tgz#e35c6dfe2d64b7dca0a5cd4f21781be3299e076c"
   dependencies:
@@ -3655,6 +3627,41 @@ express@^4.10.4, express@^4.13.3:
     utils-merge "1.0.1"
     vary "~1.1.2"
 
+express@^4.14.1:
+  version "4.16.3"
+  resolved "https://registry.yarnpkg.com/express/-/express-4.16.3.tgz#6af8a502350db3246ecc4becf6b5a34d22f7ed53"
+  dependencies:
+    accepts "~1.3.5"
+    array-flatten "1.1.1"
+    body-parser "1.18.2"
+    content-disposition "0.5.2"
+    content-type "~1.0.4"
+    cookie "0.3.1"
+    cookie-signature "1.0.6"
+    debug "2.6.9"
+    depd "~1.1.2"
+    encodeurl "~1.0.2"
+    escape-html "~1.0.3"
+    etag "~1.8.1"
+    finalhandler "1.1.1"
+    fresh "0.5.2"
+    merge-descriptors "1.0.1"
+    methods "~1.1.2"
+    on-finished "~2.3.0"
+    parseurl "~1.3.2"
+    path-to-regexp "0.1.7"
+    proxy-addr "~2.0.3"
+    qs "6.5.1"
+    range-parser "~1.2.0"
+    safe-buffer "5.1.1"
+    send "0.16.2"
+    serve-static "1.13.2"
+    setprototypeof "1.1.0"
+    statuses "~1.4.0"
+    type-is "~1.6.16"
+    utils-merge "1.0.1"
+    vary "~1.1.2"
+
 extend-shallow@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/extend-shallow/-/extend-shallow-2.0.1.tgz#51af7d614ad9a9f610ea1bafbb989d6b1c56890f"
@@ -3667,10 +3674,6 @@ extend-shallow@^3.0.0, extend-shallow@^3.0.2:
   dependencies:
     assign-symbols "^1.0.0"
     is-extendable "^1.0.1"
-
-extend@^1.2.1, extend@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/extend/-/extend-1.3.0.tgz#d1516fb0ff5624d2ebf9123ea1dac5a1994004f8"
 
 extend@^3.0.0, extend@~3.0.0, extend@~3.0.1:
   version "3.0.1"
@@ -3870,6 +3873,18 @@ finalhandler@1.1.0:
     statuses "~1.3.1"
     unpipe "~1.0.0"
 
+finalhandler@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/finalhandler/-/finalhandler-1.1.1.tgz#eebf4ed840079c83f4249038c9d703008301b105"
+  dependencies:
+    debug "2.6.9"
+    encodeurl "~1.0.2"
+    escape-html "~1.0.3"
+    on-finished "~2.3.0"
+    parseurl "~1.3.2"
+    statuses "~1.4.0"
+    unpipe "~1.0.0"
+
 find-cache-dir@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/find-cache-dir/-/find-cache-dir-0.1.1.tgz#c8defae57c8a52a8a784f9e31c57c742e993a0b9"
@@ -3990,10 +4005,6 @@ fragment-cache@^0.2.1:
   resolved "https://registry.yarnpkg.com/fragment-cache/-/fragment-cache-0.2.1.tgz#4290fad27f13e89be7f33799c6bc5a0abfff0d19"
   dependencies:
     map-cache "^0.2.2"
-
-fresh@0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/fresh/-/fresh-0.3.0.tgz#651f838e22424e7566de161d8358caa199f83d4f"
 
 fresh@0.5.2:
   version "0.5.2"
@@ -4123,6 +4134,10 @@ functional-red-black-tree@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
 
+gar@^1.0.2:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/gar/-/gar-1.0.3.tgz#cd6e954dff11821697a9ed5852c7ac5f18df02ce"
+
 gauge@~2.7.3:
   version "2.7.4"
   resolved "https://registry.yarnpkg.com/gauge/-/gauge-2.7.4.tgz#2c03405c7538c39d7eb37b317022e325fb018bf7"
@@ -4140,12 +4155,12 @@ get-caller-file@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/get-caller-file/-/get-caller-file-1.0.2.tgz#f702e63127e7e231c160a80c1554acb70d5047e5"
 
-get-folder-size@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/get-folder-size/-/get-folder-size-0.1.1.tgz#d1b84c5100bf96a7c51380ea3ce040022108a8a0"
+get-folder-size@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/get-folder-size/-/get-folder-size-2.0.0.tgz#f0ecb4aa30ea855e051366714eaabcc41cf9d43f"
   dependencies:
-    async "~0.9.0"
-    minimist "~0.1.0"
+    gar "^1.0.2"
+    tiny-each-async "2.0.3"
 
 get-package-info@^1.0.0:
   version "1.0.0"
@@ -4370,10 +4385,6 @@ has-ansi@^2.0.0:
   dependencies:
     ansi-regex "^2.0.0"
 
-has-color@~0.1.0:
-  version "0.1.7"
-  resolved "https://registry.yarnpkg.com/has-color/-/has-color-0.1.7.tgz#67144a5260c34fc3cca677d041daf52fe7b78b2f"
-
 has-flag@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/has-flag/-/has-flag-1.0.0.tgz#9d9e793165ce017a00f00418c43f942a7b1d11fa"
@@ -4493,7 +4504,7 @@ he@1.1.x:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/he/-/he-1.1.1.tgz#93410fd21b009735151f8868c2f271f3427e23fd"
 
-header-case-normalizer@^1.0.0, header-case-normalizer@^1.0.3:
+header-case-normalizer@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/header-case-normalizer/-/header-case-normalizer-1.0.3.tgz#fb1d4c8d0c6169dcab4f7c7e21b186a6a22ac0c1"
 
@@ -4646,14 +4657,13 @@ http-parser-js@>=0.4.0:
   version "0.4.11"
   resolved "https://registry.yarnpkg.com/http-parser-js/-/http-parser-js-0.4.11.tgz#5b720849c650903c27e521633d94696ee95f3529"
 
-http-pouchdb@^2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/http-pouchdb/-/http-pouchdb-2.1.2.tgz#c1bbe10623b1854264c36769c9a7330cd8282b59"
+http-pouchdb@4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/http-pouchdb/-/http-pouchdb-4.0.1.tgz#11db6e7e99720bc130fa55103cd756dd39876e5f"
   dependencies:
     bluebird "^3.4.7"
     extend "^3.0.0"
-    pouchdb "^6.1.1"
-    pouchdb-wrappers "^1.3.6"
+    pouchdb-wrappers "4.0.1"
     xhr2 "^0.1.3"
 
 http-proxy-middleware@~0.17.4:
@@ -4746,7 +4756,7 @@ immediate@3.0.6, immediate@~3.0.5:
   version "3.0.6"
   resolved "https://registry.yarnpkg.com/immediate/-/immediate-3.0.6.tgz#9db1dbd0faf8de6fbe0f5dd5e56bb606280de69b"
 
-immediate@^3.0.0, immediate@^3.2.2, immediate@^3.2.3:
+immediate@^3.2.2, immediate@^3.2.3:
   version "3.2.3"
   resolved "https://registry.yarnpkg.com/immediate/-/immediate-3.2.3.tgz#d140fa8f614659bd6541233097ddaac25cdd991c"
 
@@ -4779,14 +4789,6 @@ import-local@^1.0.0:
 imurmurhash@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/imurmurhash/-/imurmurhash-0.1.4.tgz#9218b9b2b928a238b13dc4fb6b6d576f231453ea"
-
-indent-string@^1.1.0:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/indent-string/-/indent-string-1.2.2.tgz#db99bcc583eb6abbb1e48dcbb1999a986041cb6b"
-  dependencies:
-    get-stdin "^4.0.1"
-    minimist "^1.1.0"
-    repeating "^1.1.0"
 
 indent-string@^2.1.0:
   version "2.1.0"
@@ -4993,9 +4995,9 @@ is-dotfile@^1.0.0:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/is-dotfile/-/is-dotfile-1.0.3.tgz#a6a2f32ffd2dfb04f5ca25ecd0f6b83cf798a1e1"
 
-is-empty@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/is-empty/-/is-empty-0.0.1.tgz#09fdc3d649dda5969156c0853a9b76bd781c5a33"
+is-empty@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/is-empty/-/is-empty-1.2.0.tgz#de9bb5b278738a05a0b09a57e1fb4d4a341a9f6b"
 
 is-equal-shallow@^0.1.3:
   version "0.1.3"
@@ -6035,12 +6037,6 @@ lie@3.1.1:
   dependencies:
     immediate "~3.0.5"
 
-lie@~2.7.4:
-  version "2.7.7"
-  resolved "https://registry.yarnpkg.com/lie/-/lie-2.7.7.tgz#7cf959bed48959b062f03ae46bbbf3aac3026ab9"
-  dependencies:
-    immediate "^3.0.0"
-
 load-json-file@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/load-json-file/-/load-json-file-1.1.0.tgz#956905708d58b4bab4c2261b04f59f31c99374c0"
@@ -6362,15 +6358,6 @@ meow@^3.1.0, meow@^3.3.0, meow@^3.7.0:
     redent "^1.0.0"
     trim-newlines "^1.0.0"
 
-meow@~2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/meow/-/meow-2.0.0.tgz#8f530a8ecf5d40d3f4b4df93c3472900fba2a8f1"
-  dependencies:
-    camelcase-keys "^1.0.0"
-    indent-string "^1.1.0"
-    minimist "^1.1.0"
-    object-assign "^1.0.0"
-
 merge-descriptors@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/merge-descriptors/-/merge-descriptors-1.0.1.tgz#b00aaa556dd8b44568150ec9d1b953f3f90cbb61"
@@ -6498,10 +6485,6 @@ minimist@~0.0.1:
   version "0.0.10"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-0.0.10.tgz#de3f98543dbf96082be48ad1a0c7cda836301dcf"
 
-minimist@~0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/minimist/-/minimist-0.1.0.tgz#99df657a52574c21c9057497df742790b2b4c0de"
-
 minipass@^2.2.1, minipass@^2.3.3:
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/minipass/-/minipass-2.3.3.tgz#a7dcc8b7b833f5d368759cce544dccb55f50f233"
@@ -6588,13 +6571,13 @@ mri@^1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/mri/-/mri-1.1.1.tgz#85aa26d3daeeeedf80dc5984af95cc5ca5cad9f1"
 
-ms@0.7.2:
-  version "0.7.2"
-  resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.2.tgz#ae25cf2512b3885a1d95d7f037868d8431124765"
-
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
+
+ms@2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.1.tgz#30a5864eb3ebb0a66f2ebe6d727af06a09d86e0a"
 
 multicast-dns-service-types@^1.1.0:
   version "1.1.0"
@@ -6803,13 +6786,6 @@ nodeify@^1.0.1:
     is-promise "~1.0.0"
     promise "~1.3.0"
 
-nomnom@^1.8.1:
-  version "1.8.1"
-  resolved "https://registry.yarnpkg.com/nomnom/-/nomnom-1.8.1.tgz#2151f722472ba79e50a76fc125bb8c8f2e4dc2a7"
-  dependencies:
-    chalk "~0.4.0"
-    underscore "~1.6.0"
-
 nomnom@~1.6.2:
   version "1.6.2"
   resolved "https://registry.yarnpkg.com/nomnom/-/nomnom-1.6.2.tgz#84a66a260174408fc5b77a18f888eccc44fb6971"
@@ -6977,10 +6953,6 @@ oauth-sign@~0.8.1, oauth-sign@~0.8.2:
 object-assign@4.1.1, object-assign@4.x, object-assign@^4.0.1, object-assign@^4.1.0, object-assign@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
-
-object-assign@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-1.0.0.tgz#e65dc8766d3b47b4b8307465c8311da030b070a6"
 
 object-assign@^2.0.0:
   version "2.1.1"
@@ -7290,7 +7262,7 @@ parse5@^3.0.1:
   dependencies:
     "@types/node" "*"
 
-parseurl@~1.3.1, parseurl@~1.3.2:
+parseurl@~1.3.2:
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/parseurl/-/parseurl-1.3.2.tgz#fc289d4ed8993119460c156253262cdc8de65bf3"
 
@@ -7732,7 +7704,7 @@ pouchdb-abstract-mapreduce@6.4.3:
     pouchdb-promise "6.4.3"
     pouchdb-utils "6.4.3"
 
-pouchdb-adapter-http@^6.1.0:
+pouchdb-adapter-http@^6.4.1:
   version "6.4.3"
   resolved "https://registry.yarnpkg.com/pouchdb-adapter-http/-/pouchdb-adapter-http-6.4.3.tgz#0bc713e4d5f5b7bbaa4dc509d417d38b7733a71f"
   dependencies:
@@ -7743,7 +7715,7 @@ pouchdb-adapter-http@^6.1.0:
     pouchdb-promise "6.4.3"
     pouchdb-utils "6.4.3"
 
-pouchdb-adapter-leveldb-core@6.4.3, pouchdb-adapter-leveldb-core@^6.1.0:
+pouchdb-adapter-leveldb-core@6.4.3, pouchdb-adapter-leveldb-core@^6.4.1:
   version "6.4.3"
   resolved "https://registry.yarnpkg.com/pouchdb-adapter-leveldb-core/-/pouchdb-adapter-leveldb-core-6.4.3.tgz#0b623fc12e63acbf5606508ba2008e501803076a"
   dependencies:
@@ -7763,7 +7735,7 @@ pouchdb-adapter-leveldb-core@6.4.3, pouchdb-adapter-leveldb-core@^6.1.0:
     sublevel-pouchdb "6.4.3"
     through2 "2.0.3"
 
-pouchdb-adapter-leveldb@^6.1.0:
+pouchdb-adapter-leveldb@^6.4.1:
   version "6.4.3"
   resolved "https://registry.yarnpkg.com/pouchdb-adapter-leveldb/-/pouchdb-adapter-leveldb-6.4.3.tgz#0fe0f69b090df849c15b54e09a0e20db13cfa581"
   dependencies:
@@ -7775,7 +7747,7 @@ pouchdb-adapter-leveldb@^6.1.0:
     pouchdb-utils "6.4.3"
     through2 "2.0.3"
 
-pouchdb-adapter-memory@^6.1.0:
+pouchdb-adapter-memory@^6.4.1:
   version "6.4.3"
   resolved "https://registry.yarnpkg.com/pouchdb-adapter-memory/-/pouchdb-adapter-memory-6.4.3.tgz#06edb687be9d063b27e9b58ca30ea1a08a9b94f4"
   dependencies:
@@ -7783,7 +7755,7 @@ pouchdb-adapter-memory@^6.1.0:
     pouchdb-adapter-leveldb-core "6.4.3"
     pouchdb-utils "6.4.3"
 
-pouchdb-adapter-node-websql@^6.1.0:
+pouchdb-adapter-node-websql@^6.4.1:
   version "6.4.3"
   resolved "https://registry.yarnpkg.com/pouchdb-adapter-node-websql/-/pouchdb-adapter-node-websql-6.4.3.tgz#0e6cc29945f363f0130a798ffc15c3483058ceff"
   dependencies:
@@ -7836,21 +7808,21 @@ pouchdb-all-dbs@^1.0.2:
     pouchdb-promise "5.4.3"
     tiny-queue "^0.2.0"
 
-pouchdb-auth@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/pouchdb-auth/-/pouchdb-auth-2.1.1.tgz#5f4e2216f424de1d5ca50f4b4ceb7625cd589654"
+pouchdb-auth@4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/pouchdb-auth/-/pouchdb-auth-4.0.1.tgz#f8781ac519b5b49e6fb1d280d84510a5348acd98"
   dependencies:
-    base64url "^1.0.5"
+    base64url "^3.0.0"
     couchdb-calculate-session-id "^1.1.0"
-    crypto-lite "^0.1.0"
-    pouchdb-bulkdocs-wrapper "^1.0.0"
-    pouchdb-plugin-error "^1.0.0"
-    pouchdb-promise "^5.4.0"
-    pouchdb-req-http-query "^1.0.2"
-    pouchdb-system-db "^1.0.0"
-    pouchdb-validation "^1.1.0"
-    pouchdb-wrappers "^1.0.0"
-    promise-nodify "^1.0.0"
+    crypto-lite "^0.2.0"
+    pouchdb-bulkdocs-wrapper "4.0.1"
+    pouchdb-plugin-error "4.0.1"
+    pouchdb-promise "^6.4.1"
+    pouchdb-req-http-query "4.0.1"
+    pouchdb-system-db "4.0.1"
+    pouchdb-validation "4.0.1"
+    pouchdb-wrappers "4.0.1"
+    promise-nodify "^1.0.2"
     secure-random "^1.1.1"
 
 pouchdb-binary-utils@6.4.3:
@@ -7859,11 +7831,11 @@ pouchdb-binary-utils@6.4.3:
   dependencies:
     buffer-from "0.1.1"
 
-pouchdb-bulkdocs-wrapper@^1.0.0, pouchdb-bulkdocs-wrapper@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/pouchdb-bulkdocs-wrapper/-/pouchdb-bulkdocs-wrapper-1.0.2.tgz#0c362519583717920060328812c947b6a1afc211"
+pouchdb-bulkdocs-wrapper@4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/pouchdb-bulkdocs-wrapper/-/pouchdb-bulkdocs-wrapper-4.0.1.tgz#36d05fcc3d41b0f2689433f842e3cde706e37952"
   dependencies:
-    pouchdb-promise "^0.0.0"
+    pouchdb-promise "^6.4.1"
 
 pouchdb-changes-filter@6.4.3:
   version "6.4.3"
@@ -7873,9 +7845,9 @@ pouchdb-changes-filter@6.4.3:
     pouchdb-selector-core "6.4.3"
     pouchdb-utils "6.4.3"
 
-pouchdb-changeslike-wrapper@^1.0.0, pouchdb-changeslike-wrapper@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/pouchdb-changeslike-wrapper/-/pouchdb-changeslike-wrapper-1.0.1.tgz#390b9aa57fe17f22ff3a6281461f6af0e0407135"
+pouchdb-changeslike-wrapper@4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/pouchdb-changeslike-wrapper/-/pouchdb-changeslike-wrapper-4.0.1.tgz#6311644b7835f1197da8e11696139fd9e3e60aa7"
 
 pouchdb-checkpointer@6.4.3:
   version "6.4.3"
@@ -7893,7 +7865,7 @@ pouchdb-collate@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/pouchdb-collate/-/pouchdb-collate-1.2.0.tgz#cae3b830fca124b7f97d23046e4faa311ec3828c"
 
-pouchdb-collections@6.4.3, pouchdb-collections@^6.1.2:
+pouchdb-collections@6.4.3, pouchdb-collections@^6.4.1:
   version "6.4.3"
   resolved "https://registry.yarnpkg.com/pouchdb-collections/-/pouchdb-collections-6.4.3.tgz#2b70ca3143134c361dba6e466518b4f4d8e92ff4"
 
@@ -7901,7 +7873,7 @@ pouchdb-collections@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/pouchdb-collections/-/pouchdb-collections-1.0.1.tgz#fe63a17da977611abef7cb8026cb1a9553fd8359"
 
-pouchdb-core@^6.1.0:
+pouchdb-core@^6.4.1:
   version "6.4.3"
   resolved "https://registry.yarnpkg.com/pouchdb-core/-/pouchdb-core-6.4.3.tgz#8a25d60f95b6861191228327e56c04a661389426"
   dependencies:
@@ -7935,7 +7907,7 @@ pouchdb-fauxton@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/pouchdb-fauxton/-/pouchdb-fauxton-0.0.6.tgz#fcfae265a3d621e913ebd035eec338a4efa92aa1"
 
-pouchdb-find@0.10.5, pouchdb-find@^0.10.4:
+pouchdb-find@0.10.5:
   version "0.10.5"
   resolved "https://registry.yarnpkg.com/pouchdb-find/-/pouchdb-find-0.10.5.tgz#34f285b8a56496a98f9cef2e1a1f6a0aac4eae8b"
   dependencies:
@@ -7948,6 +7920,17 @@ pouchdb-find@0.10.5, pouchdb-find@^0.10.4:
     pouchdb-promise "5.4.0"
     pouchdb-upsert "~2.0.1"
     spark-md5 "2.0.2"
+
+pouchdb-find@^6.4.1:
+  version "6.4.3"
+  resolved "https://registry.yarnpkg.com/pouchdb-find/-/pouchdb-find-6.4.3.tgz#1d0128306071434a5e397bb14ce69c831356c95e"
+  dependencies:
+    pouchdb-abstract-mapreduce "6.4.3"
+    pouchdb-collate "6.4.3"
+    pouchdb-md5 "6.4.3"
+    pouchdb-promise "6.4.3"
+    pouchdb-selector-core "6.4.3"
+    pouchdb-utils "6.4.3"
 
 pouchdb-generate-replication-id@6.4.3:
   version "6.4.3"
@@ -7963,17 +7946,17 @@ pouchdb-json@6.4.3:
   dependencies:
     vuvuzela "1.0.3"
 
-pouchdb-list@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/pouchdb-list/-/pouchdb-list-1.1.0.tgz#3e4619937dd76aa8909eac93ff29c07bf0b9b451"
+pouchdb-list@4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/pouchdb-list/-/pouchdb-list-4.0.1.tgz#5a1a409a003b029e51ec75f915261bcd98a36ccd"
   dependencies:
-    couchdb-objects "^1.0.0"
-    couchdb-render "^1.0.0"
+    couchdb-objects "4.0.1"
+    couchdb-render "4.0.1"
     extend "^3.0.0"
-    pouchdb-plugin-error "^1.0.0"
-    pouchdb-promise "^0.0.0"
-    pouchdb-req-http-query "^1.0.0"
-    promise-nodify "^1.0.0"
+    pouchdb-plugin-error "4.0.1"
+    pouchdb-promise "^6.4.1"
+    pouchdb-req-http-query "4.0.1"
+    promise-nodify "^1.0.2"
 
 pouchdb-mapreduce-utils@6.4.3:
   version "6.4.3"
@@ -7984,7 +7967,7 @@ pouchdb-mapreduce-utils@6.4.3:
     pouchdb-collections "6.4.3"
     pouchdb-utils "6.4.3"
 
-pouchdb-mapreduce@^6.1.0:
+pouchdb-mapreduce@^6.4.1:
   version "6.4.3"
   resolved "https://registry.yarnpkg.com/pouchdb-mapreduce/-/pouchdb-mapreduce-6.4.3.tgz#941bcda91356196cc32fbb7eb769650e857cc280"
   dependencies:
@@ -8003,9 +7986,9 @@ pouchdb-merge@6.4.3:
   version "6.4.3"
   resolved "https://registry.yarnpkg.com/pouchdb-merge/-/pouchdb-merge-6.4.3.tgz#4ef901f4aaa27be6aec0108998a127fe55bb0628"
 
-pouchdb-plugin-error@^1.0.0, pouchdb-plugin-error@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/pouchdb-plugin-error/-/pouchdb-plugin-error-1.0.1.tgz#c72f06014124a9fa9038fc8eda27c58b348805ca"
+pouchdb-plugin-error@4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/pouchdb-plugin-error/-/pouchdb-plugin-error-4.0.1.tgz#a9f0cd804592ac20f28cebe28313653d4eaf10c7"
 
 pouchdb-promise@5.4.0:
   version "5.4.0"
@@ -8019,26 +8002,19 @@ pouchdb-promise@5.4.3:
   dependencies:
     lie "3.0.4"
 
-pouchdb-promise@6.4.3, pouchdb-promise@^6.1.2, pouchdb-promise@^6.2.0:
+pouchdb-promise@6.4.3, pouchdb-promise@^6.4.1:
   version "6.4.3"
   resolved "https://registry.yarnpkg.com/pouchdb-promise/-/pouchdb-promise-6.4.3.tgz#74516f4acf74957b54debd0fb2c0e5b5a68ca7b3"
   dependencies:
     lie "3.1.1"
 
-pouchdb-promise@^0.0.0:
-  version "0.0.0"
-  resolved "https://registry.yarnpkg.com/pouchdb-promise/-/pouchdb-promise-0.0.0.tgz#3c014e627766d945be3f270e079a7db4d2d19827"
-  dependencies:
-    bluebird "~1.2.4"
-    lie "~2.7.4"
-
-pouchdb-promise@^5.4.0, pouchdb-promise@^5.4.3:
+pouchdb-promise@^5.4.3:
   version "5.4.5"
   resolved "https://registry.yarnpkg.com/pouchdb-promise/-/pouchdb-promise-5.4.5.tgz#5c2a69759141eb73be1e172e522fd84da2e0752e"
   dependencies:
     lie "3.0.4"
 
-pouchdb-replication@^6.1.0:
+pouchdb-replication@^6.4.1:
   version "6.4.3"
   resolved "https://registry.yarnpkg.com/pouchdb-replication/-/pouchdb-replication-6.4.3.tgz#33718e2b100883707d56a9cc0ec7acba1a7355dd"
   dependencies:
@@ -8049,82 +8025,59 @@ pouchdb-replication@^6.1.0:
     pouchdb-promise "6.4.3"
     pouchdb-utils "6.4.3"
 
-pouchdb-replicator@2.3.7:
-  version "2.3.7"
-  resolved "https://registry.yarnpkg.com/pouchdb-replicator/-/pouchdb-replicator-2.3.7.tgz#131a99eb56aa99e0f4493f327467c5ed5d6afe95"
+pouchdb-replicator@4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/pouchdb-replicator/-/pouchdb-replicator-4.0.1.tgz#1de77d05310580f1620dc95f0c63ca43da3cc729"
   dependencies:
     equals "^1.0.5"
     extend "^3.0.0"
-    pouchdb-plugin-error "^1.0.1"
-    pouchdb-promise "^6.1.2"
-    pouchdb-system-db "^1.0.4"
-    pouchdb-validation "^1.2.1"
+    pouchdb-plugin-error "4.0.1"
+    pouchdb-promise "^6.4.1"
+    pouchdb-system-db "4.0.1"
+    pouchdb-validation "4.0.1"
     promise-nodify "^1.0.2"
     random-uuid-v4 "0.0.6"
 
-pouchdb-req-http-query@^1.0.0, pouchdb-req-http-query@^1.0.2, pouchdb-req-http-query@^1.0.3:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/pouchdb-req-http-query/-/pouchdb-req-http-query-1.0.4.tgz#77e735c4106f3b9725c7d55959a9323364dd2371"
-  dependencies:
-    extend "^1.3.0"
-    header-case-normalizer "^1.0.0"
-    pouchdb-plugin-error "^1.0.0"
-    pouchdb-promise "^0.0.0"
-    xmlhttprequest-cookie "^0.9.2"
-
-pouchdb-req-http-query@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/pouchdb-req-http-query/-/pouchdb-req-http-query-2.0.0.tgz#43a5e07276a402632c8fe0f2ab68c982babcb7aa"
-  dependencies:
-    extend "^1.3.0"
-    header-case-normalizer "^1.0.0"
-    pouchdb-plugin-error "^1.0.0"
-    pouchdb-promise "^0.0.0"
-    xmlhttprequest-cookie "^0.9.2"
-
-pouchdb-rewrite@^1.0.7:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/pouchdb-rewrite/-/pouchdb-rewrite-1.0.7.tgz#3f977e3df4c9e54cf75e872de9e911f87790c2d8"
-  dependencies:
-    couchdb-objects "^1.0.0"
-    extend "^1.2.1"
-    pouchdb-plugin-error "^1.0.0"
-    pouchdb-req-http-query "^1.0.3"
-    pouchdb-route "^1.0.0"
-    promise-nodify "^1.0.0"
-
-pouchdb-route@^1.0.0:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/pouchdb-route/-/pouchdb-route-1.0.3.tgz#e5021b768adf7e1f4750d94d950f54a9fd6b5340"
-  dependencies:
-    extend "^1.2.1"
-    pouchdb-plugin-error "^1.0.0"
-
-pouchdb-security@2.3.7:
-  version "2.3.7"
-  resolved "https://registry.yarnpkg.com/pouchdb-security/-/pouchdb-security-2.3.7.tgz#68d3cc26555ed48721222dedd13eef75e65201a6"
+pouchdb-req-http-query@4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/pouchdb-req-http-query/-/pouchdb-req-http-query-4.0.1.tgz#048f8711402c71c3dd510a71a40f039eefffb7fd"
   dependencies:
     extend "^3.0.0"
-    pouchdb-bulkdocs-wrapper "^1.0.2"
-    pouchdb-changeslike-wrapper "^1.0.1"
-    pouchdb-plugin-error "^1.0.1"
-    pouchdb-promise "^6.1.2"
-    pouchdb-req-http-query "^1.0.3"
-    pouchdb-wrappers "^1.3.6"
+    header-case-normalizer "^1.0.3"
+    pouchdb-plugin-error "4.0.1"
+    pouchdb-promise "^6.4.1"
+    xmlhttprequest-cookie "^0.9.2"
+
+pouchdb-rewrite@4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/pouchdb-rewrite/-/pouchdb-rewrite-4.0.1.tgz#5ef967d16ec70a44ddcbc18d857b8ecba90be642"
+  dependencies:
+    couchdb-objects "4.0.1"
+    extend "^3.0.0"
+    pouchdb-plugin-error "4.0.1"
+    pouchdb-req-http-query "4.0.1"
+    pouchdb-route "4.0.1"
     promise-nodify "^1.0.2"
 
-pouchdb-security@^1.0.0:
-  version "1.2.6"
-  resolved "https://registry.yarnpkg.com/pouchdb-security/-/pouchdb-security-1.2.6.tgz#384fd289a803e71a9885350babb4ac1110443904"
+pouchdb-route@4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/pouchdb-route/-/pouchdb-route-4.0.1.tgz#547a6285aea65004981c0724c257e72c3a21729f"
   dependencies:
-    extend "^1.2.1"
-    pouchdb-bulkdocs-wrapper "^1.0.0"
-    pouchdb-changeslike-wrapper "^1.0.0"
-    pouchdb-plugin-error "^1.0.0"
-    pouchdb-promise "^0.0.0"
-    pouchdb-req-http-query "^1.0.0"
-    pouchdb-wrappers "^1.3.6"
-    promise-nodify "^1.0.0"
+    extend "^3.0.0"
+    pouchdb-plugin-error "4.0.1"
+
+pouchdb-security@4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/pouchdb-security/-/pouchdb-security-4.0.1.tgz#f4aabd5ffb24532a07fb207319f97e216b975863"
+  dependencies:
+    extend "^3.0.0"
+    pouchdb-bulkdocs-wrapper "4.0.1"
+    pouchdb-changeslike-wrapper "4.0.1"
+    pouchdb-plugin-error "4.0.1"
+    pouchdb-promise "^6.4.1"
+    pouchdb-req-http-query "4.0.1"
+    pouchdb-wrappers "4.0.1"
+    promise-nodify "^1.0.2"
 
 pouchdb-selector-core@6.4.3:
   version "6.4.3"
@@ -8133,75 +8086,74 @@ pouchdb-selector-core@6.4.3:
     pouchdb-collate "6.4.3"
     pouchdb-utils "6.4.3"
 
-pouchdb-server@2.3.7:
-  version "2.3.7"
-  resolved "https://registry.yarnpkg.com/pouchdb-server/-/pouchdb-server-2.3.7.tgz#d8dca7e4fe1ff1dc79332237093b0a68b550f40d"
+pouchdb-server@4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/pouchdb-server/-/pouchdb-server-4.0.1.tgz#1e5a9e6c7de12a5ca60d94ca285d170af0d396d7"
   dependencies:
+    "@gerhobbelt/nomnom" "^1.8.4-24"
     colors "^1.0.3"
     corser "~2.0.0"
     couchdb-log-parse "^0.0.4"
-    express "^4.10.4"
-    express-pouchdb "2.3.7"
-    http-pouchdb "^2.1.2"
+    express "^4.14.1"
+    express-pouchdb "4.0.1"
+    http-pouchdb "4.0.1"
     killable "^1.0.0"
     mkdirp "^0.5.0"
-    nomnom "^1.8.1"
     object-assign "^4.1.0"
-    pouchdb-adapter-http "^6.1.0"
-    pouchdb-adapter-leveldb-core "^6.1.0"
-    pouchdb-adapter-memory "^6.1.0"
-    pouchdb-core "^6.1.0"
-    pouchdb-find "^0.10.4"
-    pouchdb-mapreduce "^6.1.0"
-    pouchdb-promise "^6.1.2"
-    pouchdb-replication "^6.1.0"
-    serve-favicon "~2.3.2"
+    pouchdb-adapter-http "^6.4.1"
+    pouchdb-adapter-leveldb-core "^6.4.1"
+    pouchdb-adapter-memory "^6.4.1"
+    pouchdb-core "^6.4.1"
+    pouchdb-mapreduce "^6.4.1"
+    pouchdb-promise "^6.4.1"
+    pouchdb-replication "^6.4.1"
+    serve-favicon "~2.5.0"
     tail "^1.2.1"
     wordwrap "1.0.0"
   optionalDependencies:
-    pouchdb-adapter-leveldb "^6.1.0"
-    pouchdb-adapter-node-websql "^6.1.0"
+    pouchdb-adapter-leveldb "^6.4.1"
+    pouchdb-adapter-node-websql "^6.4.1"
 
-pouchdb-show@^1.0.8:
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/pouchdb-show/-/pouchdb-show-1.0.9.tgz#a4b6b00a2591471527c354b5ee3a80b257fa22b1"
+pouchdb-show@4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/pouchdb-show/-/pouchdb-show-4.0.1.tgz#0939decfa494ee15a4faf88794068794f9ff61f9"
   dependencies:
-    couchdb-objects "^1.0.7"
-    couchdb-render "^1.0.1"
-    pouchdb-plugin-error "^1.0.1"
-    pouchdb-promise "^6.2.0"
-    pouchdb-req-http-query "^2.0.0"
+    couchdb-objects "4.0.1"
+    couchdb-render "4.0.1"
+    pouchdb-plugin-error "4.0.1"
+    pouchdb-promise "^6.4.1"
+    pouchdb-req-http-query "4.0.1"
     promise-nodify "^1.0.2"
 
-pouchdb-size@^1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/pouchdb-size/-/pouchdb-size-1.2.2.tgz#12915f13e9d241cb0e70a66c18e7d5ff699f10a8"
+pouchdb-size@4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/pouchdb-size/-/pouchdb-size-4.0.1.tgz#c208c48cb35252adebc3f2febbdbb51b3fe3cc15"
   dependencies:
-    bluebird "^2.3.11"
-    get-folder-size "^0.1.1"
-    pouchdb-wrappers "^1.2.0"
-    promise-nodify "^1.0.1"
+    bluebird "^3.4.7"
+    get-folder-size "^2.0.0"
+    pouchdb-wrappers "4.0.1"
+    promise-nodify "^1.0.2"
 
-pouchdb-system-db@^1.0.0, pouchdb-system-db@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/pouchdb-system-db/-/pouchdb-system-db-1.0.4.tgz#15018d8719f02bcfd9cb69e7243b8b094174baa2"
+pouchdb-system-db@4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/pouchdb-system-db/-/pouchdb-system-db-4.0.1.tgz#c603c677e6a22bb7590513750efac1522cb9e99b"
   dependencies:
-    pouchdb-changeslike-wrapper "^1.0.0"
-    pouchdb-plugin-error "^1.0.0"
-    pouchdb-security "^1.0.0"
-    pouchdb-wrappers "^1.0.0"
+    pouchdb-changeslike-wrapper "4.0.1"
+    pouchdb-plugin-error "4.0.1"
+    pouchdb-security "4.0.1"
+    pouchdb-wrappers "4.0.1"
 
-pouchdb-update@^1.0.8:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/pouchdb-update/-/pouchdb-update-1.0.8.tgz#97e93d5bad7d8d283e0d14de653bce24c36178b4"
+pouchdb-update@4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/pouchdb-update/-/pouchdb-update-4.0.1.tgz#0990970752096dfabd08beb90da0a29ef6e383e5"
   dependencies:
-    couchdb-eval "^1.0.0"
-    couchdb-objects "^1.0.0"
-    couchdb-resp-completer "^1.0.0"
-    pouchdb-plugin-error "^1.0.0"
-    pouchdb-promise "^0.0.0"
-    pouchdb-req-http-query "^1.0.3"
-    promise-nodify "^1.0.0"
+    couchdb-eval "4.0.1"
+    couchdb-objects "4.0.1"
+    couchdb-resp-completer "4.0.1"
+    pouchdb-plugin-error "4.0.1"
+    pouchdb-promise "^6.4.1"
+    pouchdb-req-http-query "4.0.1"
+    promise-nodify "^1.0.2"
 
 pouchdb-upsert@~2.0.1:
   version "2.0.2"
@@ -8222,30 +8174,30 @@ pouchdb-utils@6.4.3:
     pouchdb-promise "6.4.3"
     uuid "3.2.1"
 
-pouchdb-validation@^1.1.0, pouchdb-validation@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/pouchdb-validation/-/pouchdb-validation-1.2.1.tgz#60921282615b60d77f518537f90cc0791069c02b"
+pouchdb-validation@4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/pouchdb-validation/-/pouchdb-validation-4.0.1.tgz#8c70861f270cafeb9ab992d6149079f3cf7ec48d"
   dependencies:
-    couchdb-eval "^1.0.0"
-    couchdb-objects "^1.0.0"
-    pouchdb-bulkdocs-wrapper "^1.0.0"
-    pouchdb-plugin-error "^1.0.0"
-    pouchdb-promise "^0.0.0"
-    pouchdb-wrappers "^1.0.0"
-    random-uuid-v4 "^0.0.4"
+    couchdb-eval "4.0.1"
+    couchdb-objects "4.0.1"
+    pouchdb-bulkdocs-wrapper "4.0.1"
+    pouchdb-plugin-error "4.0.1"
+    pouchdb-promise "^6.4.1"
+    pouchdb-wrappers "4.0.1"
+    random-uuid-v4 "0.0.6"
 
-pouchdb-vhost@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/pouchdb-vhost/-/pouchdb-vhost-1.0.2.tgz#511517db3c7f5fd590e3ee8b20e3ef9e89400fd6"
+pouchdb-vhost@4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/pouchdb-vhost/-/pouchdb-vhost-4.0.1.tgz#c2ecee9b6cf0e3bf70318cdf825d06897f3a1f08"
   dependencies:
-    pouchdb-route "^1.0.0"
-    promise-nodify "^1.0.0"
+    pouchdb-route "4.0.1"
+    promise-nodify "^1.0.2"
 
-pouchdb-wrappers@^1.0.0, pouchdb-wrappers@^1.2.0, pouchdb-wrappers@^1.3.6:
-  version "1.3.6"
-  resolved "https://registry.yarnpkg.com/pouchdb-wrappers/-/pouchdb-wrappers-1.3.6.tgz#f3e11b664e89a9b317e785c96151ccb1736f25d0"
+pouchdb-wrappers@4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/pouchdb-wrappers/-/pouchdb-wrappers-4.0.1.tgz#b80f0f1987ffff2a90a42e56555484e6f76e382d"
   dependencies:
-    promise-nodify "^1.0.1"
+    promise-nodify "^1.0.2"
 
 pouchdb@7.0.0:
   version "7.0.0"
@@ -8266,31 +8218,6 @@ pouchdb@7.0.0:
     ltgt "2.2.1"
     node-fetch "^2.0.0"
     readable-stream "1.0.33"
-    spark-md5 "3.0.0"
-    through2 "2.0.3"
-    uuid "3.2.1"
-    vuvuzela "1.0.3"
-
-pouchdb@^6.1.1:
-  version "6.4.3"
-  resolved "https://registry.yarnpkg.com/pouchdb/-/pouchdb-6.4.3.tgz#077e812a054ac44e13622a64e0c802325d1d44ad"
-  dependencies:
-    argsarray "0.0.1"
-    buffer-from "0.1.1"
-    clone-buffer "1.0.0"
-    debug "3.1.0"
-    double-ended-queue "2.1.0-0"
-    immediate "3.0.6"
-    inherits "2.0.3"
-    level "2.1.1"
-    level-codec "7.0.1"
-    level-write-stream "1.0.0"
-    leveldown "2.1.1"
-    levelup "2.0.1"
-    lie "3.1.1"
-    ltgt "2.2.0"
-    readable-stream "1.0.33"
-    request "2.83.0"
     spark-md5 "3.0.0"
     through2 "2.0.3"
     uuid "3.2.1"
@@ -8414,7 +8341,7 @@ promise-inflight@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/promise-inflight/-/promise-inflight-1.0.1.tgz#98472870bf228132fcbdd868129bad12c3c029e3"
 
-promise-nodify@^1.0.0, promise-nodify@^1.0.1, promise-nodify@^1.0.2:
+promise-nodify@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/promise-nodify/-/promise-nodify-1.0.2.tgz#0d0fb143c33400b0061b47e581257557047d4c5a"
 
@@ -8465,7 +8392,7 @@ property-is-enumerable-x@^1.1.0:
     to-object-x "^1.4.1"
     to-property-key-x "^2.0.1"
 
-proxy-addr@~2.0.2:
+proxy-addr@~2.0.2, proxy-addr@~2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/proxy-addr/-/proxy-addr-2.0.3.tgz#355f262505a621646b3130a728eb647e22055341"
   dependencies:
@@ -8589,10 +8516,6 @@ randexp@0.4.6:
 random-uuid-v4@0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/random-uuid-v4/-/random-uuid-v4-0.0.6.tgz#dc5edb7926adf471b55d79cbfc983af5b4979b03"
-
-random-uuid-v4@^0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/random-uuid-v4/-/random-uuid-v4-0.0.4.tgz#4a189b0569098dbb7a435b095401f881e361eb6a"
 
 randomatic@^1.1.3:
   version "1.1.7"
@@ -9495,12 +9418,6 @@ repeat-string@^1.5.2, repeat-string@^1.6.1:
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/repeat-string/-/repeat-string-1.6.1.tgz#8dcae470e1c88abc2d600fff4a776286da75e637"
 
-repeating@^1.1.0:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/repeating/-/repeating-1.1.3.tgz#3d4114218877537494f97f77f9785fab810fa4ac"
-  dependencies:
-    is-finite "^1.0.0"
-
 repeating@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/repeating/-/repeating-2.0.1.tgz#5214c53a926d3552707527fbab415dbc08d06dda"
@@ -9882,18 +9799,37 @@ send@0.16.1:
     range-parser "~1.2.0"
     statuses "~1.3.1"
 
+send@0.16.2:
+  version "0.16.2"
+  resolved "https://registry.yarnpkg.com/send/-/send-0.16.2.tgz#6ecca1e0f8c156d141597559848df64730a6bbc1"
+  dependencies:
+    debug "2.6.9"
+    depd "~1.1.2"
+    destroy "~1.0.4"
+    encodeurl "~1.0.2"
+    escape-html "~1.0.3"
+    etag "~1.8.1"
+    fresh "0.5.2"
+    http-errors "~1.6.2"
+    mime "1.4.1"
+    ms "2.0.0"
+    on-finished "~2.3.0"
+    range-parser "~1.2.0"
+    statuses "~1.4.0"
+
 serialize-javascript@^1.4.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/serialize-javascript/-/serialize-javascript-1.5.0.tgz#1aa336162c88a890ddad5384baebc93a655161fe"
 
-serve-favicon@~2.3.2:
-  version "2.3.2"
-  resolved "https://registry.yarnpkg.com/serve-favicon/-/serve-favicon-2.3.2.tgz#dd419e268de012ab72b319d337f2105013f9381f"
+serve-favicon@~2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/serve-favicon/-/serve-favicon-2.5.0.tgz#935d240cdfe0f5805307fdfe967d88942a2cbcf0"
   dependencies:
-    etag "~1.7.0"
-    fresh "0.3.0"
-    ms "0.7.2"
-    parseurl "~1.3.1"
+    etag "~1.8.1"
+    fresh "0.5.2"
+    ms "2.1.1"
+    parseurl "~1.3.2"
+    safe-buffer "5.1.1"
 
 serve-index@^1.7.2:
   version "1.9.1"
@@ -9915,6 +9851,15 @@ serve-static@1.13.1:
     escape-html "~1.0.3"
     parseurl "~1.3.2"
     send "0.16.1"
+
+serve-static@1.13.2:
+  version "1.13.2"
+  resolved "https://registry.yarnpkg.com/serve-static/-/serve-static-1.13.2.tgz#095e8472fd5b46237db50ce486a43f4b86c6cec1"
+  dependencies:
+    encodeurl "~1.0.2"
+    escape-html "~1.0.3"
+    parseurl "~1.3.2"
+    send "0.16.2"
 
 serviceworker-cache-polyfill@^4.0.0:
   version "4.0.0"
@@ -10293,7 +10238,7 @@ static-extend@^0.1.1:
     define-property "^0.2.5"
     object-copy "^0.1.0"
 
-"statuses@>= 1.3.1 < 2":
+"statuses@>= 1.3.1 < 2", statuses@~1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.4.0.tgz#bb73d446da2796106efcc1b601a253d6c46bd087"
 
@@ -10407,10 +10352,6 @@ strip-ansi@^4.0.0:
   dependencies:
     ansi-regex "^3.0.0"
 
-strip-ansi@~0.1.0:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-0.1.1.tgz#39e8a98d044d150660abe4a6808acf70bb7bc991"
-
 strip-bom@3.0.0, strip-bom@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/strip-bom/-/strip-bom-3.0.0.tgz#2334c18e9c759f7bdd56fdef7e9ae3d588e68ed3"
@@ -10488,7 +10429,7 @@ supports-color@^3.1.2, supports-color@^3.2.3:
   dependencies:
     has-flag "^1.0.0"
 
-supports-color@^4.2.1:
+supports-color@^4.0.0, supports-color@^4.2.1:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-4.5.0.tgz#be7a0de484dec5c5cddf8b3d59125044912f635b"
   dependencies:
@@ -10719,6 +10660,10 @@ timers-browserify@^2.0.4:
   resolved "https://registry.yarnpkg.com/timers-browserify/-/timers-browserify-2.0.6.tgz#241e76927d9ca05f4d959819022f5b3664b64bae"
   dependencies:
     setimmediate "^1.0.4"
+
+tiny-each-async@2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/tiny-each-async/-/tiny-each-async-2.0.3.tgz#8ebbbfd6d6295f1370003fbb37162afe5a0a51d1"
 
 tiny-queue@^0.2.0, tiny-queue@^0.2.1:
   version "0.2.1"
@@ -11031,14 +10976,14 @@ type-check@~0.3.2:
   dependencies:
     prelude-ls "~1.1.2"
 
-type-is@~1.6.15:
+type-is@~1.6.15, type-is@~1.6.16:
   version "1.6.16"
   resolved "https://registry.yarnpkg.com/type-is/-/type-is-1.6.16.tgz#f89ce341541c672b25ee7ae3c73dee3b2be50194"
   dependencies:
     media-typer "0.3.0"
     mime-types "~2.1.18"
 
-typedarray@^0.0.6, typedarray@~0.0.5:
+typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
@@ -11109,10 +11054,6 @@ underscore@^1.8.3:
 underscore@~1.4.4:
   version "1.4.4"
   resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.4.4.tgz#61a6a32010622afa07963bf325203cf12239d604"
-
-underscore@~1.6.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.6.0.tgz#8b38b10cacdef63337b8b24e4ff86d45aea529a8"
 
 union-value@^1.0.0:
   version "1.0.0"
