@@ -1,8 +1,10 @@
 # spendLess
+
 Personal finance tool built with the following goals:
-* help users track their monthly income and expenses
-* promote awareness of spending behavior and current financial health
-* encourage users to spend less than they earn so they're able to put more money towards investments and savings, enabling them to retire comfortably and possibly even early.
+
+- help users track their monthly income and expenses
+- promote awareness of spending behavior and current financial health
+- encourage users to spend less than they earn so they're able to put more money towards investments and savings, enabling them to retire comfortably and possibly even early.
 
 (How it currently looks. Still lots of work to be done...)
 <img src="assets/screenshot-app-v0.3.0.jpg" />
@@ -12,29 +14,35 @@ Personal finance tool built with the following goals:
 Install dependencies.
 
 ```bash
+yarn
+```
+
+or
+
+```bash
 npm install
 ```
 
 ## Run
 
-Run these two commands __in the order they're given__ and  __simultaneously__ in different terminal windows.
-
 ```bash
-npm run hot-server
-npm run start-hot
+yarn start
 ```
 
-## Sync accounts/transactions data
-Sync with a local PouchDB server to more easily see what's in your database. Navigate to http://127.0.0.1:5984/_utils after running the following command in a separate terminal window:
+or
 
 ```bash
-npm run db-server
+npm start
 ```
+
+Wait for the Electron app to load with the React UI
+
+## View accounts/transactions data
+
+Navigate to http://127.0.0.1:5984/_utils to see a GUI of the PouchDB database
 
 ## Use
 
 Test the CSV upload functionality by uploading one of the sample CSV files found inside the assets directory. (Currently only supports Discover credit card CSVs. More financial institutions will be supported in the future.)
 
-*Note: requires a node version >= 6 and an npm version >= 3.*
-
-Architecture for this app was inspired by react-transform-boilerplate, webpack-react-boilerplate, and electron-react-boilerplate
+\*Note: confirmed working on node version 8.7.0 and npm version 5.7.1
