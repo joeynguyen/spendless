@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddAccount by default Add Account button is shown and form section is hidden 1`] = `
+<div
+  style={
+    Object {
+      "marginBottom": "15px",
+    }
+  }
+>
+  <Button
+    ghost={false}
+    icon="plus"
+    loading={false}
+    onClick={[Function]}
+    prefixCls="ant-btn"
+    size="large"
+    type="primary"
+  >
+     Add Account
+  </Button>
+  <Collapse
+    fixedHeight={-1}
+    forceInitialAnimation={false}
+    hasNestedCollapse={false}
+    isOpened={false}
+    onMeasure={[Function]}
+    onRender={[Function]}
+    onRest={[Function]}
+    style={Object {}}
+    theme={
+      Object {
+        "collapse": "ReactCollapse--collapse",
+        "content": "ReactCollapse--content",
+      }
+    }
+  >
+    <Form(AddAccountForm) />
+  </Collapse>
+</div>
+`;
+
+exports[`AddAccount when Button is clicked form section is shown and button changes to Cancel 1`] = `
+<div
+  style={
+    Object {
+      "marginBottom": "15px",
+    }
+  }
+>
+  <Button
+    ghost={false}
+    icon=""
+    loading={false}
+    onClick={[Function]}
+    prefixCls="ant-btn"
+    size="large"
+    type="danger"
+  >
+    Cancel
+  </Button>
+  <Collapse
+    fixedHeight={-1}
+    forceInitialAnimation={false}
+    hasNestedCollapse={false}
+    isOpened={true}
+    onMeasure={[Function]}
+    onRender={[Function]}
+    onRest={[Function]}
+    style={Object {}}
+    theme={
+      Object {
+        "collapse": "ReactCollapse--collapse",
+        "content": "ReactCollapse--content",
+      }
+    }
+  >
+    <Form(AddAccountForm) />
+  </Collapse>
+</div>
+`;

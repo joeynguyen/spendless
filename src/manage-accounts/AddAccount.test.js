@@ -1,47 +1,29 @@
 import expect from 'expect';
 import React from 'react';
 import { shallow } from 'enzyme';
+import toJson from 'enzyme-to-json';
 import AddAccount from './AddAccount.jsx';
-
-function setup() {
-  return shallow(<AddAccount />);
-}
 
 describe('AddAccount', () => {
   describe('by default', () => {
-    const component = setup();
+    const component = shallow(<AddAccount />);
 
-    it('has a Button', done => {
-      expect(component.find('Button').length).toBe(1);
-      done();
-    });
-
-    it('has a Panel', done => {
-      expect(component.find('Panel').length).toBe(1);
-      done();
-    });
-
-    it('addAccountVisible state is false by default', done => {
+    it('Add Account button is shown and form section is hidden', () => {
       expect(component.state().addAccountVisible).toBe(false);
-      done();
+
+      expect(toJson(component)).toMatchSnapshot();
     });
   });
 
   describe('when Button is clicked', () => {
-    const component = setup();
+    const component = shallow(<AddAccount />);
 
-    expect(component.state().addAccountVisible).toBe(false);
-    expect(component.find('Panel').props().expanded).toBe(false);
     component.find('Button').simulate('click');
 
-    it('addAccountVisible state to be true when Button is clicked', done => {
+    it('form section is shown and button changes to Cancel', () => {
       expect(component.state().addAccountVisible).toBe(true);
-      done();
-    });
-
-    it('form section is hidden by default but shows when Button is clicked', done => {
-      expect(component.find('Panel').props().expanded).toBe(true);
-      done();
+      expect(component.find('Collapse').props().isOpened).toBe(true);
+      expect(toJson(component)).toMatchSnapshot();
     });
   });
 });
