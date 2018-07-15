@@ -1,3 +1,6 @@
+export const MONTH_STORED_FORMAT = 'YYYY-MM';
+export const MONTH_PICKER_FORMAT = 'MMMM YYYY';
+
 export const accountTypeOptions = [
   {
     disabled: true,

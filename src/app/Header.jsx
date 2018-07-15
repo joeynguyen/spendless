@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Col, Row, Menu } from 'antd';
+import { Col, DatePicker, Menu, Row } from 'antd';
 import { Link } from 'react-router-dom';
 
+import { MONTH_PICKER_FORMAT, MONTH_STORED_FORMAT } from '../constants.js';
+
+const { MonthPicker } = DatePicker;
 const styles = {
   logo: {
     float: 'left',
@@ -14,7 +17,6 @@ const styles = {
   logoSpan: {
     WebkitFontSmoothing: 'antialiased',
     display: 'inline-block',
-    // fontFamily: 'Pinyon Script',
     fontFamily: ['Dawning of a New Day', 'cursive'],
     fontSize: 28,
   },
@@ -28,7 +30,11 @@ const routeKeyMap = {
   '/help': 'help',
 };
 
-const Header = props => {
+const Header = ({ activeMonth, currentRoute, selectActiveMonth }) => {
+  function onMonthChange(date) {
+    selectActiveMonth(date.format(MONTH_STORED_FORMAT));
+  }
+
   return (
     <Row>
       <Col span={8}>
@@ -42,9 +48,9 @@ const Header = props => {
           <span style={styles.logoSpan}>spendLess</span>
         </Link>
       </Col>
-      <Col span={8} offset={8}>
+      <Col span={8} offset={4}>
         <Menu
-          selectedKeys={[routeKeyMap[props.currentRoute]]}
+          selectedKeys={[routeKeyMap[currentRoute]]}
           mode="horizontal"
           style={{ borderBottom: 'none' }}
         >
@@ -56,11 +62,22 @@ const Header = props => {
           </Menu.Item>
         </Menu>
       </Col>
+      <Col span={4}>
+        <MonthPicker
+          value={activeMonth}
+          format={MONTH_PICKER_FORMAT}
+          onChange={onMonthChange}
+          size="large"
+        />
+      </Col>
     </Row>
   );
 };
 Header.propTypes = {
+  // MonthPicker `value` prop expects a moment object
+  activeMonth: PropTypes.object.isRequired,
   currentRoute: PropTypes.string.isRequired,
+  selectActiveMonth: PropTypes.func.isRequired,
 };
 
 export default Header;
