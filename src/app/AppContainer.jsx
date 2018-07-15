@@ -3,12 +3,11 @@ import React, { Component } from 'react';
 import { Layout, LocaleProvider } from 'antd';
 import enUS from 'antd/lib/locale-provider/en_US';
 import HeaderContainer from './HeaderContainer.jsx';
-import AppSidebar from './Sidebar.jsx';
+import Sidebar from './Sidebar.jsx';
 import ManageAccountsContainer from '../manage-accounts/ManageAccountsContainer.jsx';
 
 import './App.css';
 
-const { Header, Sider, Content } = Layout;
 const headerStyle = {
   background: '#fff',
   height: '70px',
@@ -23,15 +22,17 @@ class AppContainer extends Component {
     return (
       <LocaleProvider locale={enUS}>
         <Layout style={{ height: '100%', width: '100%' }}>
-          <Header style={headerStyle}>
+          <Layout.Header style={headerStyle}>
             <HeaderContainer />
-          </Header>
+          </Layout.Header>
 
           <Layout>
-            <Sider collapsible style={{ background: '#333' }}>
-              <AppSidebar />
-            </Sider>
-            <Content style={{ padding: 16 }}>{this.props.children}</Content>
+            <Layout.Sider collapsible style={{ background: '#333' }}>
+              <Sidebar />
+            </Layout.Sider>
+            <Layout.Content style={{ padding: 16 }}>
+              {this.props.children}
+            </Layout.Content>
           </Layout>
 
           <ManageAccountsContainer />
