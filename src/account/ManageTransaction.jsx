@@ -8,6 +8,7 @@ const { TextArea } = Input;
 class ManageTransaction extends React.Component {
   static propTypes = {
     activeAccountId: PropTypes.string.isRequired,
+    activeMonth: PropTypes.string.isRequired,
     activeTransaction: PropTypes.object,
     form: PropTypes.object.isRequired,
     initialValues: PropTypes.object.isRequired,
@@ -45,6 +46,7 @@ class ManageTransaction extends React.Component {
             category: values.category,
             date: dateStringified,
             description: values.description,
+            month: this.props.activeMonth,
             notes: values.notes,
           };
         }

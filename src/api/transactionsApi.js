@@ -125,6 +125,7 @@ class TransactionsApi {
       if (Array.isArray(transactions)) {
         db.bulkDocs(transactions)
           .then(deletedTransactions => {
+            syncDB();
             // return IDs of deleted transactions
             resolve(deletedTransactions.map(transaction => transaction.id));
           })

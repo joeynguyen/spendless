@@ -11,12 +11,14 @@ class FileUpload extends Component {
   static propTypes = {
     accountId: PropTypes.string.isRequired,
     actions: PropTypes.object.isRequired,
+    activeMonth: PropTypes.string.isRequired,
     uploadedTransactionsExist: PropTypes.bool.isRequired,
   };
   state = {
     uploadedFile: '',
   };
-  componentWillReceiveProps(nextProps) {
+
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (
       nextProps.uploadedTransactionsExist !==
         this.props.uploadedTransactionsExist &&
@@ -28,7 +30,7 @@ class FileUpload extends Component {
   handleFile = files => {
     // TODO: Fix not being able to upload same file twice in a row if canceled first time
     if (files[0]) {
-      parseCSV(files[0], this.props.accountId)
+      parseCSV(files[0], this.props.accountId, this.props.activeMonth)
         .then(val => {
           this.setState({ uploadedFile: files[0].name });
           this.props.actions.addUploadedTransactions(val);
@@ -78,6 +80,12 @@ class FileUpload extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    activeMonth: state.activeMonth,
+  };
+}
+
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(transactionsActions, dispatch),
@@ -85,6 +93,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(FileUpload);

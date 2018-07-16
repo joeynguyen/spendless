@@ -54,8 +54,9 @@ class ManageTransactionContainer extends Component {
         footer={modalFooter}
       >
         <ManageTransaction
-          activeTransaction={this.props.activeTransaction}
           activeAccountId={this.props.activeAccountId}
+          activeMonth={this.props.activeMonth}
+          activeTransaction={this.props.activeTransaction}
           initialValues={this.props.initialValues}
           saveAccountTransactions={saveAccountTransactions}
           toggleManageTransaction={toggleManageTransaction}
@@ -93,6 +94,7 @@ function mapStateToProps(state) {
   }
   return {
     activeAccountId: state.activeAccountId,
+    activeMonth: state.activeMonth,
     activeTransaction: state.activeTransaction,
     initialValues,
     manageTransactionVisible: state.manageTransactionVisible,

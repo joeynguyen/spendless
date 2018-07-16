@@ -39,7 +39,8 @@ function convertTransactionArrayToObject(
   index,
   accountId,
   headerRowArray,
-  dateColumnTitle
+  dateColumnTitle,
+  activeMonth
 ) {
   const newTransObj = headerRowArray.reduce((obj, columnName, i) => {
     return {
@@ -85,6 +86,7 @@ function convertTransactionArrayToObject(
     category: newTransObj.Category || '',
     date: dateFormatted,
     description: newTransObj.Description || '',
+    month: activeMonth,
     notes: newTransObj.Notes || '',
   };
 }
@@ -113,7 +115,7 @@ function findRowDelimiter(str) {
   return rowDelimiter;
 }
 
-export default function parseCSV(selectedFile, accountId) {
+export default function parseCSV(selectedFile, accountId, activeMonth) {
   return new Promise((resolve, reject) => {
     const fileReader = new FileReader();
     let newTransactions = [];
@@ -163,7 +165,8 @@ export default function parseCSV(selectedFile, accountId) {
             i,
             accountId,
             headerRowArray,
-            dateColumnTitle
+            dateColumnTitle,
+            activeMonth
           )
         );
       }
