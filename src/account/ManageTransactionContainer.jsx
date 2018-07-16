@@ -11,6 +11,7 @@ class ManageTransactionContainer extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
     activeAccountId: PropTypes.string.isRequired,
+    activeMonth: PropTypes.string.isRequired,
     activeTransaction: PropTypes.object,
     initialValues: PropTypes.object.isRequired,
     manageTransactionVisible: PropTypes.bool.isRequired,

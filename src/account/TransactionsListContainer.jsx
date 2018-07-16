@@ -10,17 +10,24 @@ class TransactionsListContainer extends Component {
     accountTransactions: PropTypes.arrayOf(PropTypes.object),
     actions: PropTypes.object.isRequired,
     activeAccountId: PropTypes.string.isRequired,
+    activeMonth: PropTypes.string.isRequired,
     uploadedTransactions: PropTypes.arrayOf(PropTypes.object),
   };
 
   componentDidMount() {
-    this.props.actions.getAccountTransactions(this.props.activeAccountId);
+    this.props.actions.getAccountTransactions(
+      this.props.activeAccountId,
+      this.props.activeMonth
+    );
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.activeAccountId !== prevProps.activeAccountId) {
       this.props.actions.resetAccountTransactions();
-      this.props.actions.getAccountTransactions(this.props.activeAccountId);
+      this.props.actions.getAccountTransactions(
+        this.props.activeAccountId,
+        this.props.activeMonth
+      );
     }
   }
 
@@ -42,6 +49,7 @@ class TransactionsListContainer extends Component {
 function mapStateToProps(state) {
   return {
     accountTransactions: state.accountTransactions,
+    activeMonth: state.activeMonth,
     uploadedTransactions: state.uploadedTransactions,
   };
 }

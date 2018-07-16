@@ -20,29 +20,34 @@ function syncDB() {
 }
 
 class TransactionsApi {
-  static getAccountTransactionsFromDB(accountId) {
+  static getAccountTransactionsFromDB(accountId, month) {
     return new Promise((resolve, reject) => {
       // create a PouchDB index
       db.createIndex({
         index: {
-          fields: ['date', 'accountId'],
+          fields: ['date', 'month', 'accountId'],
         },
       })
         .then(() => {
           return db.find({
-            // using $gt: null because "$exists doesn't do what you think it does"
-            // http://stackoverflow.com/questions/34366615/creating-a-usable-index-in-pouchdb-with-pouchdb-find
             fields: [
               '_id',
               '_rev',
               'accountId',
               'amount',
               'category',
-              'description',
               'date',
+              'description',
+              'month',
               'notes',
             ],
-            selector: { date: { $gt: null }, accountId: accountId },
+            selector: {
+              accountId,
+              // using $gt: null because "$exists doesn't do what you think it does"
+              // http://stackoverflow.com/questions/34366615/creating-a-usable-index-in-pouchdb-with-pouchdb-find
+              date: { $gt: null },
+              month,
+            },
             sort: [{ date: 'desc' }],
           });
         })
@@ -57,6 +62,7 @@ class TransactionsApi {
                 category: doc.category,
                 date: doc.date,
                 description: doc.description,
+                month: doc.month,
                 notes: doc.notes,
               };
             })

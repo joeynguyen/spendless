@@ -24,9 +24,9 @@ function updateAccountTransactions(transactions) {
   };
 }
 
-export function getAccountTransactions(accountId) {
+export function getAccountTransactions(accountId, month) {
   return function(dispatch) {
-    return TransactionsApi.getAccountTransactionsFromDB(accountId)
+    return TransactionsApi.getAccountTransactionsFromDB(accountId, month)
       .then(transactions => {
         dispatch(loadAccountTransactions(transactions));
       })
