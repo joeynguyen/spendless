@@ -22,13 +22,13 @@ function syncDB() {
 class TransactionsApi {
   static getAccountTransactionsFromDB(accountId) {
     return new Promise((resolve, reject) => {
+      // create a PouchDB index
       db.createIndex({
         index: {
           fields: ['date', 'accountId'],
         },
       })
         .then(() => {
-          // create a PouchDB index
           return db.find({
             // using $gt: null because "$exists doesn't do what you think it does"
             // http://stackoverflow.com/questions/34366615/creating-a-usable-index-in-pouchdb-with-pouchdb-find

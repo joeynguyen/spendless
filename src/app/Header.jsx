@@ -30,7 +30,7 @@ const routeKeyMap = {
   '/help': 'help',
 };
 
-const Header = ({ activeMonth, currentRoute, selectActiveMonth }) => {
+const Header = ({ activeMonthObj, currentRoute, selectActiveMonth }) => {
   function onMonthChange(date) {
     selectActiveMonth(date.format(MONTH_STORED_FORMAT));
   }
@@ -64,7 +64,7 @@ const Header = ({ activeMonth, currentRoute, selectActiveMonth }) => {
       </Col>
       <Col span={4}>
         <MonthPicker
-          value={activeMonth}
+          value={activeMonthObj}
           format={MONTH_PICKER_FORMAT}
           onChange={onMonthChange}
           size="large"
@@ -75,7 +75,7 @@ const Header = ({ activeMonth, currentRoute, selectActiveMonth }) => {
 };
 Header.propTypes = {
   // MonthPicker `value` prop expects a moment object
-  activeMonth: PropTypes.object.isRequired,
+  activeMonthObj: PropTypes.object.isRequired,
   currentRoute: PropTypes.string.isRequired,
   selectActiveMonth: PropTypes.func.isRequired,
 };

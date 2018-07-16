@@ -10,16 +10,40 @@ import Header from './Header';
 
 class HeaderContainer extends Component {
   static propTypes = {
-    activeMonth: PropTypes.object.isRequired,
+    activeMonth: PropTypes.string,
     selectActiveMonth: PropTypes.func.isRequired,
   };
+
   static contextTypes = {
     router: PropTypes.object,
   };
+
+  constructor() {
+    super();
+
+    this.currentMonthAsMoment = moment().startOf('month');
+  }
+
+  componentDidMount() {
+    if (!this.props.activeMonth) {
+      // on initial app load, the activeMonth will not yet have
+      // been selected, so we set it in redux to the current month
+      // ex: 2018-07
+      const currentMonth = this.currentMonthAsMoment.format(
+        MONTH_STORED_FORMAT
+      );
+      this.props.selectActiveMonth(currentMonth);
+    }
+  }
+
   render() {
+    const activeMonthAsMoment = this.props.activeMonth
+      ? moment(this.props.activeMonth, MONTH_STORED_FORMAT)
+      : this.currentMonthAsMoment;
+
     return (
       <Header
-        activeMonth={this.props.activeMonth}
+        activeMonthObj={activeMonthAsMoment}
         selectActiveMonth={this.props.selectActiveMonth}
         currentRoute={this.context.router.route.location.pathname}
       />
@@ -29,9 +53,7 @@ class HeaderContainer extends Component {
 
 function mapStateToProps(state) {
   return {
-    activeMonth: state.activeMonth
-      ? moment(state.activeMonth, MONTH_STORED_FORMAT)
-      : moment().startOf('month'),
+    activeMonth: state.activeMonth,
   };
 }
 
