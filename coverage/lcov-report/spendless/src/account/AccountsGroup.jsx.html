@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for spendless/src/account/AccountsGroup.jsx</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">spendless/src/account</a> AccountsGroup.jsx
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/21</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/4</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/7</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/18</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types';</span>
+<span class="cstat-no" title="statement not covered" >import React from 'react';</span>
+<span class="cstat-no" title="statement not covered" >import { Row, Col, Menu, Icon, Spin } from 'antd';</span>
+<span class="cstat-no" title="statement not covered" >import { Link } from 'react-router-dom';</span>
+&nbsp;
+const { SubMenu } = Menu;
+&nbsp;
+function <span class="fstat-no" title="function not covered" >renderSubMenu(activeAccountId) {</span>
+<span class="cstat-no" title="statement not covered" >  return <span class="fstat-no" title="function not covered" >(a</span>ccountType, i) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    return (</span>
+      &lt;SubMenu
+        key={`sub${i}`}
+        title={
+          &lt;span&gt;
+            &lt;Icon type={accountType.icon} /&gt;
+            &lt;span&gt;{accountType.title}&lt;/span&gt;
+          &lt;/span&gt;
+        }
+      &gt;
+        {accountType.accounts.map(<span class="fstat-no" title="function not covered" >account =&gt; </span>{
+          // remove link tag for active account so that user can't change routes
+          // to the same route which resets uploadedTransactions state
+          const isCurrentAccount = <span class="cstat-no" title="statement not covered" >account._id === activeAccountId;</span>
+          const accountLabel = <span class="cstat-no" title="statement not covered" >isCurrentAccount ? (</span>
+            account.name
+          ) : (
+            &lt;Link to={`/account/${account._id}`}&gt;{account.name}&lt;/Link&gt;
+          );
+<span class="cstat-no" title="statement not covered" >          return &lt;Menu.Item key={account._id}&gt;{accountLabel}&lt;/Menu.Item&gt;;</span>
+        })}
+      &lt;/SubMenu&gt;
+    );
+  };
+}
+&nbsp;
+const AccountsGroup = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >({</span> accounts, activeAccountId }) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >  if (!accounts) {</span>
+<span class="cstat-no" title="statement not covered" >    return (</span>
+      &lt;Row
+        type="flex"
+        justify="center"
+        align="middle"
+        style={{ height: '90%' }}
+      &gt;
+        &lt;Col span={12} style={{ textAlign: 'center' }}&gt;
+          &lt;Spin size="large" /&gt;
+        &lt;/Col&gt;
+      &lt;/Row&gt;
+    );
+  }
+  const ccAccounts = <span class="cstat-no" title="statement not covered" >accounts.filter(<span class="fstat-no" title="function not covered" >account =&gt; <span class="cstat-no" title="statement not covered" ></span>account.type === 'creditcard');</span></span>
+  const bankAccounts = <span class="cstat-no" title="statement not covered" >accounts.filter(<span class="fstat-no" title="function not covered" >account =&gt; <span class="cstat-no" title="statement not covered" ></span>account.type === 'bank');</span></span>
+  const accountTypes = <span class="cstat-no" title="statement not covered" >[</span>
+    {
+      accounts: bankAccounts,
+      icon: 'bank',
+      subMenuKey: 'sub0',
+      title: 'Banks',
+    },
+    {
+      accounts: ccAccounts,
+      icon: 'credit-card',
+      subMenuKey: 'sub1',
+      title: 'Credit Cards',
+    },
+  ];
+  const allSubMenus = <span class="cstat-no" title="statement not covered" >accountTypes.reduce(<span class="fstat-no" title="function not covered" >(a</span>, b) =&gt; <span class="cstat-no" title="statement not covered" >a.concat(b.subMenuKey), []);</span></span>
+<span class="cstat-no" title="statement not covered" >  return (</span>
+    &lt;Menu
+      theme="dark"
+      mode="inline"
+      selectedKeys={[activeAccountId]}
+      defaultOpenKeys={allSubMenus}
+    &gt;
+      {accountTypes.map(renderSubMenu(activeAccountId))}
+    &lt;/Menu&gt;
+  );
+};
+<span class="cstat-no" title="statement not covered" >AccountsGroup.propTypes = {</span>
+  accounts: PropTypes.array.isRequired,
+  activeAccountId: PropTypes.string,
+};
+&nbsp;
+export default AccountsGroup;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Oct 29 2018 18:59:52 GMT-0500 (CDT)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

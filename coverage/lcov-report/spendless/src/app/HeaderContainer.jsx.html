@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for spendless/src/app/HeaderContainer.jsx</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">spendless/src/app</a> HeaderContainer.jsx
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/21</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/6</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/6</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/21</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types';</span>
+<span class="cstat-no" title="statement not covered" >import React, { Component } from 'react';</span>
+<span class="cstat-no" title="statement not covered" >import { connect } from 'react-redux';</span>
+<span class="cstat-no" title="statement not covered" >import { bindActionCreators } from 'redux';</span>
+<span class="cstat-no" title="statement not covered" >import moment from 'moment';</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >import { selectActiveMonth } from './AppActions.js';</span>
+<span class="cstat-no" title="statement not covered" >import {</span>
+  getAccountTransactions,
+  resetAccountTransactions,
+} from '../account/TransactionsActions.js';
+<span class="cstat-no" title="statement not covered" >import { MONTH_STORED_FORMAT } from '../constants.js';</span>
+<span class="cstat-no" title="statement not covered" >import Header from './Header';</span>
+&nbsp;
+class HeaderContainer extends Component {
+  static propTypes = {
+    activeAccountId: PropTypes.string,
+    activeMonth: PropTypes.string,
+    selectActiveMonth: PropTypes.func.isRequired,
+  };
+&nbsp;
+  static contextTypes = {
+    router: PropTypes.object,
+  };
+&nbsp;
+<span class="fstat-no" title="function not covered" >  constructor() </span>{
+<span class="cstat-no" title="statement not covered" >    super();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.currentMonthAsMoment = moment().startOf('month');</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  componentDidMount() </span>{
+<span class="cstat-no" title="statement not covered" >    if (!this.props.activeMonth) {</span>
+      // on initial app load, the activeMonth will not yet have
+      // been selected, so we set it in redux to the current month
+      // ex: 2018-07
+      const currentMonth = <span class="cstat-no" title="statement not covered" >this.currentMonthAsMoment.format(</span>
+        MONTH_STORED_FORMAT
+      );
+<span class="cstat-no" title="statement not covered" >      this.props.selectActiveMonth(currentMonth);</span>
+    }
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  componentDidUpdate(</span>prevProps) {
+<span class="cstat-no" title="statement not covered" >    if (this.props.activeMonth !== prevProps.activeMonth) {</span>
+<span class="cstat-no" title="statement not covered" >      this.props.resetAccountTransactions();</span>
+<span class="cstat-no" title="statement not covered" >      this.props.getAccountTransactions(</span>
+        this.props.activeAccountId,
+        this.props.activeMonth
+      );
+    }
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  render() </span>{
+    const activeMonthAsMoment = <span class="cstat-no" title="statement not covered" >this.props.activeMonth</span>
+      ? moment(this.props.activeMonth, MONTH_STORED_FORMAT)
+      : this.currentMonthAsMoment;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return (</span>
+      &lt;Header
+        activeMonthObj={activeMonthAsMoment}
+        selectActiveMonth={this.props.selectActiveMonth}
+        currentRoute={this.context.router.route.location.pathname}
+      /&gt;
+    );
+  }
+}
+&nbsp;
+function <span class="fstat-no" title="function not covered" >mapStateToProps(state) {</span>
+<span class="cstat-no" title="statement not covered" >  return {</span>
+    activeAccountId: state.activeAccountId,
+    activeMonth: state.activeMonth,
+  };
+}
+&nbsp;
+function <span class="fstat-no" title="function not covered" >mapDispatchToProps(dispatch) {</span>
+<span class="cstat-no" title="statement not covered" >  return bindActionCreators(</span>
+    {
+      getAccountTransactions: getAccountTransactions,
+      resetAccountTransactions: resetAccountTransactions,
+      selectActiveMonth: selectActiveMonth,
+    },
+    dispatch
+  );
+}
+&nbsp;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(HeaderContainer);
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Oct 29 2018 18:59:52 GMT-0500 (CDT)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

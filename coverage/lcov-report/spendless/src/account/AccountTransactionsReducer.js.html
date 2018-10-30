@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for spendless/src/account/AccountTransactionsReducer.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">spendless/src/account</a> AccountTransactionsReducer.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/16</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/10</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/3</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/15</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import {</span>
+  LOAD_ACCOUNT_TRANSACTIONS,
+  RESET_ACCOUNT_TRANSACTIONS,
+  UPDATE_ACCOUNT_TRANSACTIONS,
+  REMOVE_ACCOUNT_TRANSACTIONS,
+} from './TransactionsActions.js';
+&nbsp;
+export default function(state = <span class="branch-0 cbranch-no" title="branch not covered" >[], action) {</span>
+<span class="cstat-no" title="statement not covered" >  switch (action.type) {</span>
+    case LOAD_ACCOUNT_TRANSACTIONS:
+<span class="cstat-no" title="statement not covered" >      return action.payload;</span>
+    case RESET_ACCOUNT_TRANSACTIONS:
+<span class="cstat-no" title="statement not covered" >      return action.payload;</span>
+    case UPDATE_ACCOUNT_TRANSACTIONS:
+      const updatedTransactionIndex = <span class="cstat-no" title="statement not covered" >state.findIndex(</span>
+<span class="fstat-no" title="function not covered" >        item =&gt; <span class="cstat-no" title="statement not covered" ></span>item._id === action.payload._id</span>
+      );
+&nbsp;
+      // Adding new transaction(s)
+<span class="cstat-no" title="statement not covered" >      if (updatedTransactionIndex &lt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >        return state.concat(action.payload);</span>
+      }
+&nbsp;
+      // Updating existing transaction
+<span class="cstat-no" title="statement not covered" >      return [</span>
+        ...state.slice(0, updatedTransactionIndex),
+        action.payload,
+        ...state.slice(updatedTransactionIndex + 1),
+      ];
+    case REMOVE_ACCOUNT_TRANSACTIONS:
+      // handle bulk delete
+<span class="cstat-no" title="statement not covered" >      if (Array.isArray(action.payload)) {</span>
+        // get transactions that aren't part of the deleted group
+<span class="cstat-no" title="statement not covered" >        return state.filter(<span class="fstat-no" title="function not covered" >item =&gt; <span class="cstat-no" title="statement not covered" ></span>action.payload.indexOf(item._id) &lt; 0);</span></span>
+      }
+&nbsp;
+      // handle single delete
+      const deletedTransactionIndex = <span class="cstat-no" title="statement not covered" >state.findIndex(</span>
+<span class="fstat-no" title="function not covered" >        item =&gt; <span class="cstat-no" title="statement not covered" ></span>item._id === action.payload.id</span>
+      );
+<span class="cstat-no" title="statement not covered" >      return [</span>
+        ...state.slice(0, deletedTransactionIndex),
+        ...state.slice(deletedTransactionIndex + 1),
+      ];
+&nbsp;
+    default:
+<span class="cstat-no" title="statement not covered" >      return state;</span>
+  }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Oct 29 2018 18:59:52 GMT-0500 (CDT)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

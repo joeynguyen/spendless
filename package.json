@@ -7,7 +7,7 @@
   "scripts": {
     "analyze": "source-map-explorer build/static/js/main.*",
     "db-server": "pouchdb-server -d data/",
-    "coverage": "nyc report",
+    "coverage": "react-scripts-ts test --env=jsdom --coverage",
     "start": "concurrently 'yarn react-start' 'wait-on http://localhost:3000/ && yarn electron-start' 'yarn db-server'",
     "build": "yarn react-build && yarn electron-build",
     "test": "react-scripts-ts test --env=jsdom",
@@ -65,8 +65,7 @@
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.1.0",
     "husky": "0.14.3",
-    "nyc": "8.3.0",
-    "pouchdb-server": "4.0.1",
+    "pouchdb-server": "4.1.0",
     "prettier": "1.13.0",
     "pretty-quick": "1.6.0",
     "react-app-rewired": "1.5.2",
@@ -74,7 +73,7 @@
     "react-test-renderer": "16.4.1",
     "redux-immutable-state-invariant": "1.2.3",
     "redux-logger": "3.0.6",
-    "source-map-explorer": "1.5.0",
+    "source-map-explorer": "1.6.0",
     "typescript": "2.9.2",
     "wait-on": "2.1.0"
   },
@@ -98,5 +97,15 @@
     "react-scripts-ts": "2.16.0",
     "redux": "3.5.2",
     "redux-thunk": "2.0.1"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!src/**/*.d.ts",
+      "<rootDir>/main.ts",
+      "!<rootDir>/node_modules/",
+      "!<rootDir>/release-builds/",
+      "!src/registerServiceWorker.ts"
+    ]
   }
 }

@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for spendless/src/utils/csvParser.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">spendless/src/utils</a> csvParser.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/53</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/35</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/13</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/53</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import moment from 'moment';</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >import {</span>
+  convertNumStrToAbsoluteNum,
+  convertNumStrToValidNum,
+  trimMultipleSpaces,
+} from './strings';
+&nbsp;
+// convert each row of text from CSV into JS arrays for formatting use
+function <span class="fstat-no" title="function not covered" >convertTransactionTextToArray(text) {</span>
+  // Some CSV files have hidden carriage returns in their fields so we have to remove them.
+  // example: '"Cleared","01/13/2017","TARGET        00024943   HOUSTON      TX↵","23.09","","JAY EN"'
+  // see VISA_561_010115_113015.CSV
+&nbsp;
+  // Some fields have commas in them that break our .split(',')
+  // example: 'Cleared,11/22/15,"ONLINE PAYMENT, THANK YOU               ",,14.66'
+  // Solution: match all instances of commas not inside quotes and tokenize and split on them
+&nbsp;
+  // source: https://stackoverflow.com/a/23667311
+  const re = <span class="cstat-no" title="statement not covered" >/"[^"]*"|(,)/g;</span>
+  const textFormatted = <span class="cstat-no" title="statement not covered" >text.replace(/[\r\n]/, '').replace(re, <span class="fstat-no" title="function not covered" >(m</span>, group1) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    if (!group1) {</span>
+<span class="cstat-no" title="statement not covered" >      return m;</span>
+    }
+<span class="cstat-no" title="statement not covered" >    return '__DELIMITER__';</span>
+  });
+&nbsp;
+  const textAsArray = <span class="cstat-no" title="statement not covered" >textFormatted</span>
+    .replace(/"/g, '') // remove double quotes
+    .trim()
+    .split('__DELIMITER__');
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return textAsArray;</span>
+}
+&nbsp;
+// convert each transaction array to objects for easier data manipulation
+function <span class="fstat-no" title="function not covered" >convertTransactionArrayToObject(</span>
+  transaction,
+  index,
+  accountId,
+  headerRowArray,
+  dateColumnTitle,
+  activeMonth
+) {
+  const newTransObj = <span class="cstat-no" title="statement not covered" >headerRowArray.reduce(<span class="fstat-no" title="function not covered" >(o</span>bj, columnName, i) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    return {</span>
+      ...obj,
+      [columnName]: transaction[i],
+    };
+  }, {});
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (newTransObj.Amount) {</span>
+<span class="cstat-no" title="statement not covered" >    newTransObj.Amount = convertNumStrToValidNum(newTransObj.Amount);</span>
+  }
+&nbsp;
+  // Merge values from Credit/Debit columns into single Amount field. Make debit values negative
+<span class="cstat-no" title="statement not covered" >  if (newTransObj.Credit) {</span>
+<span class="cstat-no" title="statement not covered" >    newTransObj.Amount = convertNumStrToAbsoluteNum(newTransObj.Credit);</span>
+  } else <span class="cstat-no" title="statement not covered" >if (newTransObj.Debit) {</span>
+<span class="cstat-no" title="statement not covered" >    newTransObj.Amount = convertNumStrToAbsoluteNum(newTransObj.Debit) * -1;</span>
+  }
+&nbsp;
+  // Some transactions have no value for amount. See "MEMBERSHIP FEE" in file VISA_561_010115_113015.CSV
+<span class="cstat-no" title="statement not covered" >  if (typeof newTransObj.Amount === 'undefined' || !newTransObj.Amount) {</span>
+<span class="cstat-no" title="statement not covered" >    newTransObj.Amount = 0;</span>
+  }
+&nbsp;
+  // for Descriptions that look like this in CSV - "NEPAL RESTAURANT         ESTES PARK   CO"
+<span class="cstat-no" title="statement not covered" >  if (newTransObj.Description &amp;&amp; newTransObj.Description.match(/\s{2,}/)) {</span>
+<span class="cstat-no" title="statement not covered" >    newTransObj.Description = trimMultipleSpaces(newTransObj.Description);</span>
+  }
+&nbsp;
+  // date has to be in this format for input[type="date"] to read it
+  // TODO: check if date value is in 'MM-DD-YYYY' format before formatting with momemt
+  const dateFormatted = <span class="cstat-no" title="statement not covered" >moment(</span>
+    newTransObj[dateColumnTitle],
+    'MM-DD-YYYY'
+  ).format('YYYY-MM-DD');
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return {</span>
+    // added 'index' to prevent duplicate _id error but still
+    // preserve valid date format in case we need to use it later
+    _id: (new Date().getTime() + index).toString(), // PouchDB requires _id to be string type
+    accountId,
+    amount: newTransObj.Amount,
+    category: newTransObj.Category || '',
+    date: dateFormatted,
+    description: newTransObj.Description || '',
+    month: activeMonth,
+    notes: newTransObj.Notes || '',
+  };
+}
+&nbsp;
+// Naive approach for testing if a row in the CSV is a header row
+// Most CSV files from financial institutions that include headers
+// have header columns with the titles: "Date", "Description", and either "Amount" or "Credit" and "Debit" for transactions
+function <span class="fstat-no" title="function not covered" >isHeaderRow(rowStr) {</span>
+<span class="cstat-no" title="statement not covered" >  return (</span>
+    rowStr.includes('Date') &amp;&amp;
+    rowStr.includes('Description') &amp;&amp;
+    (rowStr.includes('Amount') ||
+      (rowStr.includes('Credit') &amp;&amp; rowStr.includes('Debit')))
+  );
+}
+&nbsp;
+function <span class="fstat-no" title="function not covered" >findRowDelimiter(str) {</span>
+  let rowDelimiter;
+<span class="cstat-no" title="statement not covered" >  if (str.includes('\r\n')) {</span>
+<span class="cstat-no" title="statement not covered" >    rowDelimiter = '\r\n';</span>
+  } else <span class="cstat-no" title="statement not covered" >if (str.includes('\n')) {</span>
+<span class="cstat-no" title="statement not covered" >    rowDelimiter = '\n';</span>
+  } else {
+<span class="cstat-no" title="statement not covered" >    rowDelimiter = '\r';</span>
+  }
+<span class="cstat-no" title="statement not covered" >  return rowDelimiter;</span>
+}
+&nbsp;
+export default function <span class="fstat-no" title="function not covered" >parseCSV(selectedFile, accountId, activeMonth) {</span>
+<span class="cstat-no" title="statement not covered" >  return new Promise(<span class="fstat-no" title="function not covered" >(r</span>esolve, reject) =&gt; {</span>
+    const fileReader = <span class="cstat-no" title="statement not covered" >new FileReader();</span>
+    let newTransactions = <span class="cstat-no" title="statement not covered" >[];</span>
+<span class="cstat-no" title="statement not covered" >    fileReader.readAsText(selectedFile);</span>
+<span class="cstat-no" title="statement not covered" >    fileReader.onload = function <span class="fstat-no" title="function not covered" >onLoad() {</span></span>
+      const rowDelimiter = <span class="cstat-no" title="statement not covered" >findRowDelimiter(this.result);</span>
+&nbsp;
+      const rows = <span class="cstat-no" title="statement not covered" >this.result.trim().split(rowDelimiter);</span>
+&nbsp;
+      let headerRowIndex;
+      const headerRow = <span class="cstat-no" title="statement not covered" >rows.find(<span class="fstat-no" title="function not covered" >(r</span>ow, i) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        if (isHeaderRow(row)) {</span>
+<span class="cstat-no" title="statement not covered" >          headerRowIndex = i;</span>
+<span class="cstat-no" title="statement not covered" >          return true;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        return false;</span>
+      });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (headerRow === undefined) {</span>
+        // TODO: Prompt user to add a header row to the CSV file
+<span class="cstat-no" title="statement not covered" >        reject('Unable to find a header row in the CSV file');</span>
+      } else {
+        const rowsAfterHeaderRow = <span class="cstat-no" title="statement not covered" >rows.slice(headerRowIndex + 1);</span>
+&nbsp;
+        // convert each row of text from CSV into JS arrays for formatting use
+        const transactionRowsArray = <span class="cstat-no" title="statement not covered" >rowsAfterHeaderRow.map(</span>
+          convertTransactionTextToArray
+        );
+&nbsp;
+        const headerRowArray = <span class="cstat-no" title="statement not covered" >headerRow</span>
+          .replace(/"/g, '')
+          .trim()
+          .split(',')
+          // remove possible surrounding whitespace of items in header row
+          // ex: LMCU Checking Statement: 'Date,Description,Comments,Check Number, Amount, Balance'
+          .map(<span class="fstat-no" title="function not covered" >item =&gt; <span class="cstat-no" title="statement not covered" ></span>item.trim());</span>
+&nbsp;
+        // find the name of the column that has the word "Date"
+        // if there's more than one, use the first one (e.g. Discover CSV has "Trans. Date" and "Post Date")
+        const dateColumnTitle = <span class="cstat-no" title="statement not covered" >headerRowArray.find(<span class="fstat-no" title="function not covered" >column =&gt;</span></span>
+<span class="cstat-no" title="statement not covered" >          column.includes('Date')</span>
+        );
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        newTransactions = transactionRowsArray.map(<span class="fstat-no" title="function not covered" >(t</span>ransaction, i) =&gt;</span>
+<span class="cstat-no" title="statement not covered" >          convertTransactionArrayToObject(</span>
+            transaction,
+            i,
+            accountId,
+            headerRowArray,
+            dateColumnTitle,
+            activeMonth
+          )
+        );
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      resolve(newTransactions);</span>
+    };
+  });
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Oct 29 2018 18:59:52 GMT-0500 (CDT)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>
