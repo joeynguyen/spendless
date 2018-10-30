@@ -25,7 +25,7 @@ class TransactionsApi {
       // create a PouchDB index
       db.createIndex({
         index: {
-          fields: ['date', 'month', 'accountId'],
+          fields: ['accountId', 'date', 'month'],
         },
       })
         .then(() => {
