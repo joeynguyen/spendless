@@ -25,7 +25,7 @@ class TransactionsApi {
       // create a PouchDB index
       db.createIndex({
         index: {
-          fields: ['accountId', 'date', 'month'],
+          fields: ['accountId', 'month', 'date'],
         },
       })
         .then(() => {
@@ -43,10 +43,10 @@ class TransactionsApi {
             ],
             selector: {
               accountId,
+              month,
               // using $gt: null because "$exists doesn't do what you think it does"
               // http://stackoverflow.com/questions/34366615/creating-a-usable-index-in-pouchdb-with-pouchdb-find
               date: { $gt: null },
-              month,
             },
             sort: [{ date: 'desc' }],
           });
