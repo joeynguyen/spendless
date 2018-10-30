@@ -14,22 +14,10 @@ Personal finance tool built with the following goals:
 Install dependencies.
 
 ```bash
-yarn
-```
-
-or
-
-```bash
 npm install
 ```
 
 ## Run
-
-```bash
-yarn start
-```
-
-or
 
 ```bash
 npm start
