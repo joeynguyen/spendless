@@ -67,7 +67,6 @@
     "react-perf-devtool": "3.0.7",
     "react-scripts": "2.1.0",
     "react-test-renderer": "16.6.0",
-    "redux-immutable-state-invariant": "1.2.3",
     "redux-logger": "3.0.6",
     "source-map-explorer": "1.6.0",
     "typescript": "3.1.4",
