@@ -99,7 +99,7 @@
       "<rootDir>/main.ts",
       "!<rootDir>/node_modules/",
       "!<rootDir>/release-builds/",
-      "!src/registerServiceWorker.ts"
+      "!src/serviceWorker.ts"
     ]
   },
   "eslintConfig": {
