@@ -9,6 +9,8 @@ Personal finance tool built with the following goals:
 (How it currently looks. Still lots of work to be done...)
 <img src="assets/screenshot-app-v0.3.0.jpg" />
 
+# Development
+
 ## Install
 
 **Note:**
@@ -30,7 +32,7 @@ yarn start
 
 Wait for the Electron app to load with the React UI
 
-## View accounts/transactions data
+### View accounts/transactions data
 
 Navigate to http://127.0.0.1:5984/_utils while the _start_ script is running to see a GUI of the PouchDB database
 
