@@ -1,5 +1,11 @@
-dist
-public
-node_modules
+.vscode
+.git
+assets
+build
 coverage
+data
+dist
+node_modules
+public
+release-builds
 webpack.*.js
