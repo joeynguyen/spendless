@@ -24,10 +24,7 @@ export function convertNumStrToAbsoluteNum(str) {
 export function convertNumStrToValidNum(str) {
   let newNum = convertNumStrToAbsoluteNum(str);
 
-  if (
-    str.startsWith('-') ||
-    (str.startsWith('(') && str.endsWith(')'))
-  ) {
+  if (str.startsWith('-') || (str.startsWith('(') && str.endsWith(')'))) {
     // Convert to negative number strings with preceding
     // minus symbol or surrounding parentheses, e.g. '-18', '(50.33)'
     newNum *= -1;
