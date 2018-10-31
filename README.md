@@ -21,7 +21,7 @@ yarn
 **Note:**
 
 - verified that it works with `node@10.13.0` and `yarn@1.12.1`
-- verified that it does not working with `npm@6.4.1` due to conflict with `npm test` using Babel 6.23.3 instead of 7.0.0
+- verified that it is not working with `npm@6.4.1` due to conflict with `npm test` using Babel 6.23.3 instead of 7.0.0
 
 ### Run the app in dev mode
 
