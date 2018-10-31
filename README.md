@@ -11,6 +11,11 @@ Personal finance tool built with the following goals:
 
 ## Install
 
+**Note:**
+
+- verified that it works with `node@10.13.0` and `yarn@1.12.1`
+- verified that it does not working with `npm@6.4.1` due to conflict with `npm test` using Babel 6.23.3 instead of 7.0.0
+
 Install dependencies.
 
 ```bash
@@ -31,9 +36,18 @@ Navigate to http://127.0.0.1:5984/_utils while the _start_ script is running to 
 
 ## Use
 
-Test the CSV upload functionality by uploading one of the sample CSV files found inside the assets directory. (Currently only supports Discover credit card CSVs. More financial institutions will be supported in the future.)
+Test the CSV upload functionality by uploading one of the sample CSV files found inside the **assets/** directory. (Currently only supports Discover credit card CSVs. More financial institutions will be supported in the future.)
 
-**Note:**
+## Test
 
-- works with `node@10.13.0` and `yarn@1.12.1`
-- not working with `npm@6.4.1` due to conflict with `npm test` using Babel 6.23.3 instead of 7.0.0
+```bash
+yarn test
+```
+
+## Build desktop app
+
+```bash
+yarn build
+```
+
+Currently only supports building a MacOS app. Windows and Linux to be supported at a later time.
