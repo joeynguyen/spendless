@@ -13,8 +13,9 @@
     "electron-build": "yarn electron-ts-compile && yarn macos-build",
     "electron-start": "yarn electron-ts-compile && ELECTRON_IS_DEV=1 electron .",
     "electron-ts-compile": "tsc --lib 'es2015, dom' main.ts",
+    "lint": "eslint --debug src/",
+    "lint:write": "eslint --debug src/ --fix",
     "macos-build": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/piggybank.icns --prune=true --out=release-builds",
-    "precommit": "pretty-quick --staged",
     "prettier": "prettier --write './src/**/*.{ts,js,css,json}'",
     "react-build": "react-app-rewired build",
     "react-start": "BROWSER=none react-app-rewired start",
@@ -58,10 +59,10 @@
     "enzyme": "3.7.0",
     "enzyme-adapter-react-16": "1.6.0",
     "enzyme-to-json": "3.3.4",
-    "husky": "0.14.3",
+    "husky": "1.1.2",
+    "lint-staged": "8.0.4",
     "pouchdb-server": "4.1.0",
     "prettier": "1.13.0",
-    "pretty-quick": "1.6.0",
     "prop-types": "15.5.10",
     "react-app-rewired": "1.6.2",
     "react-perf-devtool": "3.1.8",
@@ -91,20 +92,26 @@
     "redux": "3.5.2",
     "redux-thunk": "2.0.1"
   },
+  "browserslist": [
+    "Chrome >= 66"
+  ],
+  "eslintConfig": {
+    "extends": "react-app"
+  },
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,ts,tsx}",
       "!src/**/*.d.ts",
+      "!src/serviceWorker.ts",
       "<rootDir>/main.ts",
       "!<rootDir>/node_modules/",
-      "!<rootDir>/release-builds/",
-      "!src/serviceWorker.ts"
+      "!<rootDir>/release-builds/"
     ]
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": [
-    "Chrome >= 66"
-  ]
+  "lint-staged": {
+    "*.(js|jsx|ts|tsx)": [
+      "npm run lint:write",
+      "git add"
+    ]
+  }
 }
