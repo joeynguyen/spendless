@@ -5,7 +5,7 @@
   "description": "Personal finance tracker built using electron",
   "main": "main.js",
   "scripts": {
-    "analyze": "source-map-explorer build/static/js/main.*",
+    "analyze": "yarn react-build --stats && webpack-bundle-analyzer build/bundle-stats.json",
     "db-server": "pouchdb-server -d data/",
     "coverage": "react-app-rewired test --coverage",
     "start": "concurrently 'yarn react-start' 'wait-on http://localhost:3000/ && yarn electron-start' 'yarn db-server'",
@@ -68,9 +68,9 @@
     "react-scripts": "2.1.0",
     "react-test-renderer": "16.6.0",
     "redux-logger": "3.0.6",
-    "source-map-explorer": "1.6.0",
     "typescript": "3.1.4",
-    "wait-on": "2.1.0"
+    "wait-on": "2.1.0",
+    "webpack-bundle-analyzer": "3.0.3"
   },
   "dependencies": {
     "antd": "3.10.3",
