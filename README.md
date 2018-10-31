@@ -33,4 +33,4 @@ Navigate to http://127.0.0.1:5984/_utils while the _start_ script is running to 
 
 Test the CSV upload functionality by uploading one of the sample CSV files found inside the assets directory. (Currently only supports Discover credit card CSVs. More financial institutions will be supported in the future.)
 
-\*Note: confirmed working on node version 8.7.0 and npm version 5.7.1
+**Note:** works with `node@10.13.0` and `npm@6.4.1`
