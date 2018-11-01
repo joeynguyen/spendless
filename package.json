@@ -45,6 +45,8 @@
   ],
   "homepage": "./",
   "devDependencies": {
+    "@commitlint/cli": "7.2.1",
+    "@commitlint/config-conventional": "7.1.2",
     "@types/enzyme": "3.1.14",
     "@types/enzyme-adapter-react-16": "1.0.3",
     "@types/jest": "23.3.9",
@@ -97,6 +99,12 @@
   ],
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
+    }
   },
   "jest": {
     "collectCoverageFrom": [
