@@ -13,6 +13,7 @@ const mapTransactionData = data =>
 
 const renderColumns = [
   {
+    width: 120,
     dataIndex: 'date',
     title: 'Date',
   },
@@ -25,6 +26,7 @@ const renderColumns = [
     title: 'Category',
   },
   {
+    width: 115,
     className: 'column-amount',
     dataIndex: 'amount',
     render: amount => (
@@ -71,7 +73,7 @@ const UploadedTransactions = ({
       onCancel={resetUploadedTransactions}
       title="Manage Uploaded Transactions"
       footer={modalFooter}
-      width={840}
+      width={900}
     >
       <Button
         id="negate-uploaded-transactions-amounts"
