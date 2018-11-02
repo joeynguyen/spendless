@@ -2,7 +2,8 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Button, Popconfirm, message } from 'antd';
+import { Button, Icon, message, Upload } from 'antd';
+
 import ReactFileReader from 'react-file-reader';
 import parseCSV from '../utils/csvParser.js';
 import * as transactionsActions from './TransactionsActions.js';
@@ -27,6 +28,7 @@ class FileUpload extends Component {
       this.setState({ uploadedFile: '' });
     }
   }
+
   handleFile = files => {
     // TODO: Fix not being able to upload same file twice in a row if canceled first time
     if (files[0]) {
@@ -40,10 +42,6 @@ class FileUpload extends Component {
         });
     }
   };
-  removeUploadedFile = () => {
-    this.setState({ uploadedFile: '' });
-    this.props.actions.resetUploadedTransactions();
-  };
   render() {
     const uploadedFileContent = this.state.uploadedFile ? (
       <div
@@ -51,26 +49,19 @@ class FileUpload extends Component {
         style={{ marginTop: 0 }}
       >
         <div className="ant-upload-list-item-info">
-          <i className="anticon anticon-paper-clip" />
+          <Icon type="paper-clip" />
           <span className="ant-upload-list-item-name">
             {this.state.uploadedFile}
           </span>
         </div>
-        <Popconfirm
-          onConfirm={this.removeUploadedFile}
-          title="Remove this file and its transactions？"
-          okText="Yes"
-          cancelText="No"
-        >
-          <i title="Remove file" className="anticon anticon-cross" />
-        </Popconfirm>
       </div>
     ) : null;
     return (
       <form encType="multipart/form-data" style={{ display: 'inline-block' }}>
         {/* inline-block prevents file input clickable window from extending across screen */}
         <ReactFileReader handleFiles={this.handleFile} fileTypes=".csv">
-          <Button size="large" icon="upload">
+          <Button size="large">
+            <Icon type="upload" />
             Upload Transactions
           </Button>
         </ReactFileReader>
