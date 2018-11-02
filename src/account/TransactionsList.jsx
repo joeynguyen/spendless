@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Icon, Popconfirm, Table, Tooltip } from 'antd';
+import { Divider, Icon, Popconfirm, Table, Tooltip } from 'antd';
 import { message } from 'antd';
 
 import DeleteTransactionsButton from './DeleteTransactionsButton.jsx';
@@ -116,6 +116,7 @@ class TransactionsList extends Component {
         <DeleteTransactionsButton
           selectedTransactionsIds={this.state.selectedTransactionsIds}
         />
+        <Divider />
         <Table
           rowSelection={rowSelection}
           columns={renderColumns}

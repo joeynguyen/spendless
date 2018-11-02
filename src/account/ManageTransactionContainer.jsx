@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Button, Modal } from 'antd';
+import { Button, Drawer, Modal } from 'antd';
 import moment from 'moment';
 import ManageTransaction from './ManageTransaction.jsx';
 import * as transactionsActions from './TransactionsActions.js';
@@ -45,14 +45,15 @@ class ManageTransactionContainer extends Component {
     ];
 
     return (
-      <Modal
+      <Drawer
         id="ManageTransaction"
-        closable
         maskClosable={false}
         visible={this.props.manageTransactionVisible}
-        onCancel={toggleManageTransaction}
+        onClose={toggleManageTransaction}
         title={componentTitle}
         footer={modalFooter}
+        width={720}
+        placement="right"
       >
         <ManageTransaction
           activeAccountId={this.props.activeAccountId}
@@ -62,7 +63,7 @@ class ManageTransactionContainer extends Component {
           saveAccountTransactions={saveAccountTransactions}
           toggleManageTransaction={toggleManageTransaction}
         />
-      </Modal>
+      </Drawer>
     );
   }
 }

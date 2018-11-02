@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { message, Col, DatePicker, Form, Input, Row } from 'antd';
+import { message, Button, Col, DatePicker, Form, Input, Row } from 'antd';
+import DrawerFooter from '../shared-components/DrawerFooter'
 
 const FormItem = Form.Item;
 const { TextArea } = Input;
@@ -110,6 +111,15 @@ class ManageTransaction extends React.Component {
             <TextArea rows={4} placeholder="Add notes for this transaction" />
           )}
         </FormItem>
+        <DrawerFooter>
+          <Button
+            style={{ marginRight: 8 }}
+            onClick={this.props.toggleManageTransaction}
+          >
+            Cancel
+          </Button>
+          <Button type="primary" htmlType="submit">Submit</Button>
+        </DrawerFooter>
       </Form>
     );
   }
