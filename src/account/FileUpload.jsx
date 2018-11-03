@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Button, Icon, message, Upload } from 'antd';
+import { Button, Icon, message } from 'antd';
 
 import ReactFileReader from 'react-file-reader';
 import parseCSV from '../utils/csvParser.js';
