@@ -10,6 +10,7 @@ const mockOnCancel = jest.fn();
 const DATE_FORMAT = 'YYYY-MM-DD';
 const props = {
   activeAccountId: '2018-03-12T04:44:13.400Z',
+  activeMonth: '2018-07',
   activeTransaction: {},
   initialValues: {
     amount: '12.34',
@@ -18,8 +19,6 @@ const props = {
     description: 'This is a description',
     notes: 'Add notes here',
   },
-  manageTransactionVisible: true,
-  manageType: 'edit',
   saveAccountTransactions: mockOnSubmit,
   toggleManageTransaction: mockOnCancel,
 };
