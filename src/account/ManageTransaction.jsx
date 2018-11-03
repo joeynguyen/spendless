@@ -6,32 +6,18 @@ import DrawerFooter from '../shared-components/DrawerFooter'
 const FormItem = Form.Item;
 const { TextArea } = Input;
 
-class ManageTransaction extends React.Component {
-  static propTypes = {
-    activeAccountId: PropTypes.string.isRequired,
-    activeMonth: PropTypes.string.isRequired,
-    activeTransaction: PropTypes.object,
-    form: PropTypes.object.isRequired,
-    initialValues: PropTypes.object.isRequired,
-    saveAccountTransactions: PropTypes.func.isRequired,
-    toggleManageTransaction: PropTypes.func.isRequired,
-  };
-
-  constructor(props) {
-    super(props);
-    this.handleSaveTransaction = this.handleSaveTransaction.bind(this);
-  }
-
-  handleSaveTransaction(e) {
+const ManageTransaction = (props) => {
+  function handleSaveTransaction(e) {
     e.preventDefault();
-    this.props.form.validateFields((err, values) => {
+    props.form.validateFields((err, values) => {
       if (!err) {
         // values.date is returned as a moment object so we have to convert it here
         const dateStringified = values.date.format('YYYY-MM-DD');
         let newTransactionObj;
-        if (this.props.activeTransaction !== null) {
+
+        if (props.activeTransaction !== null) {
           // update transaction
-          newTransactionObj = Object.assign({}, this.props.activeTransaction, {
+          newTransactionObj = Object.assign({}, props.activeTransaction, {
             amount: Number(values.amount).toFixed(2),
             category: values.category,
             date: dateStringified,
@@ -42,23 +28,23 @@ class ManageTransaction extends React.Component {
           // add new transaction
           newTransactionObj = {
             _id: new Date().getTime().toString(),
-            accountId: this.props.activeAccountId,
+            accountId: props.activeAccountId,
             amount: Number(values.amount).toFixed(2),
             category: values.category,
             date: dateStringified,
             description: values.description,
-            month: this.props.activeMonth,
+            month: props.activeMonth,
             notes: values.notes,
           };
         }
 
         // Save account in DB
-        this.props
+        props
           .saveAccountTransactions(newTransactionObj)
           .then(() => {
             message.success('Transaction saved');
             // reset current transaction being edited to null
-            this.props.toggleManageTransaction();
+            props.toggleManageTransaction();
           })
           .catch(() => {
             message.error('Restart the application and retry');
@@ -67,62 +53,61 @@ class ManageTransaction extends React.Component {
     });
   }
 
-  render() {
-    const { getFieldDecorator } = this.props.form;
+  const { getFieldDecorator } = props.form;
 
-    return (
-      <Form
-        id="manage-transaction"
-        onSubmit={this.handleSaveTransaction}
-        layout="vertical"
-      >
-        <FormItem label="Description">
-          {getFieldDecorator('description', {
-            rules: [{ required: true, message: 'Enter a description' }],
-          })(<Input />)}
-        </FormItem>
+  return (
+    <Form
+      id="manage-transaction"
+      onSubmit={handleSaveTransaction}
+      layout="vertical"
+    >
+      <FormItem label="Description">
+        {getFieldDecorator('description', {
+          rules: [{ required: true, message: 'Enter a description' }],
+        })(<Input />)}
+      </FormItem>
 
-        <Row>
-          <Col span={8}>
-            <FormItem label="Amount">
-              {getFieldDecorator('amount', {
-                rules: [{ required: true, message: 'Enter an amount' }],
-              })(<Input addonBefore="$" />)}
-            </FormItem>
-          </Col>
+      <Row>
+        <Col span={8}>
+          <FormItem label="Amount">
+            {getFieldDecorator('amount', {
+              rules: [{ required: true, message: 'Enter an amount' }],
+            })(<Input addonBefore="$" />)}
+          </FormItem>
+        </Col>
 
-          <Col offset={4} span={12}>
-            <FormItem label="Date">
-              {getFieldDecorator('date', {
-                rules: [{ required: true, message: 'Enter a date' }],
-              })(<DatePicker />)}
-            </FormItem>
-          </Col>
-        </Row>
+        <Col offset={4} span={12}>
+          <FormItem label="Date">
+            {getFieldDecorator('date', {
+              rules: [{ required: true, message: 'Enter a date' }],
+            })(<DatePicker />)}
+          </FormItem>
+        </Col>
+      </Row>
 
-        <FormItem label="Category">
-          {getFieldDecorator('category', {
-            rules: [{ required: true, message: 'Enter a category' }],
-          })(<Input />)}
-        </FormItem>
+      <FormItem label="Category">
+        {getFieldDecorator('category', {
+          rules: [{ required: true, message: 'Enter a category' }],
+        })(<Input />)}
+      </FormItem>
 
-        <FormItem label="Notes" style={{ marginBottom: 5 }}>
-          {getFieldDecorator('notes', {})(
-            <TextArea rows={4} placeholder="Add notes for this transaction" />
-          )}
-        </FormItem>
-        <DrawerFooter>
-          <Button
-            style={{ marginRight: 8 }}
-            onClick={this.props.toggleManageTransaction}
-          >
-            Cancel
-          </Button>
-          <Button type="primary" htmlType="submit">Submit</Button>
-        </DrawerFooter>
-      </Form>
-    );
-  }
+      <FormItem label="Notes" style={{ marginBottom: 5 }}>
+        {getFieldDecorator('notes', {})(
+          <TextArea rows={4} placeholder="Add notes for this transaction" />
+        )}
+      </FormItem>
+
+      <DrawerFooter>
+        <Button
+          style={{marginRight: 8}}
+          onClick={props.toggleManageTransaction}
+        >
+          Cancel
+        </Button>
+        <Button type="primary" htmlType="submit">Submit</Button>
+      </DrawerFooter>
+    </Form>
+  );
 }
 
 const WrappedManageTransaction = Form.create({
@@ -151,5 +136,15 @@ const WrappedManageTransaction = Form.create({
     };
   },
 })(ManageTransaction);
+
+ManageTransaction.propTypes = {
+  activeAccountId: PropTypes.string.isRequired,
+  activeMonth: PropTypes.string.isRequired,
+  activeTransaction: PropTypes.object,
+  form: PropTypes.object.isRequired,
+  initialValues: PropTypes.object.isRequired,
+  saveAccountTransactions: PropTypes.func.isRequired,
+  toggleManageTransaction: PropTypes.func.isRequired,
+};
 
 export default WrappedManageTransaction;
