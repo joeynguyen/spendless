@@ -17,13 +17,14 @@ const ManageTransaction = (props) => {
 
         if (props.activeTransaction !== null) {
           // update transaction
-          newTransactionObj = Object.assign({}, props.activeTransaction, {
+          newTransactionObj = {
+            ...props.activeTransaction,
             amount: Number(values.amount).toFixed(2),
             category: values.category,
             date: dateStringified,
             description: values.description,
             notes: values.notes,
-          });
+          };
         } else {
           // add new transaction
           newTransactionObj = {
