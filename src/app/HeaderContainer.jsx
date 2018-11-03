@@ -33,7 +33,8 @@ class HeaderContainer extends Component {
     if (!this.props.activeMonth) {
       // on initial app load, the activeMonth will not yet have
       // been selected, so we set it in redux to the current month
-      // ex: 2018-07
+      // convert to MONTH_STORED_FORMAT ex: '2018-07'
+      // so that we can have a readable string to save to database
       const currentMonth = this.currentMonthAsMoment.format(
         MONTH_STORED_FORMAT
       );
@@ -53,7 +54,7 @@ class HeaderContainer extends Component {
 
   render() {
     const activeMonthAsMoment = this.props.activeMonth
-      ? moment(this.props.activeMonth, MONTH_STORED_FORMAT)
+      ? moment(this.props.activeMonth)
       : this.currentMonthAsMoment;
 
     return (
