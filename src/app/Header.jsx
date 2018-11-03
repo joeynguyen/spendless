@@ -32,7 +32,10 @@ const routeKeyMap = {
 
 const Header = ({ activeMonthObj, currentRoute, selectActiveMonth }) => {
   function onMonthChange(date) {
-    selectActiveMonth(date.format(MONTH_STORED_FORMAT));
+    // `date` can be null if user clicks "x" icon to clear out the MonthPicker input
+    if (date) {
+      selectActiveMonth(date.format(MONTH_STORED_FORMAT));
+    }
   }
 
   return (
@@ -64,7 +67,7 @@ const Header = ({ activeMonthObj, currentRoute, selectActiveMonth }) => {
       </Col>
       <Col span={4}>
         <MonthPicker
-          value={activeMonthObj}
+          defaultValue={activeMonthObj}
           format={MONTH_PICKER_FORMAT}
           onChange={onMonthChange}
           size="large"
