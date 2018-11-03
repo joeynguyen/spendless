@@ -2,14 +2,15 @@
 
 exports[`ManageAccounts has an ManageAccounts component with props 1`] = `
 <Modal
+  cancelButtonDisabled={false}
   closable={true}
   confirmLoading={false}
   footer={
     Array [
       <Button
+        block={false}
         ghost={false}
         loading={false}
-        onClick={undefined}
         prefixCls="ant-btn"
         size="large"
       >
@@ -20,6 +21,7 @@ exports[`ManageAccounts has an ManageAccounts component with props 1`] = `
   id="ManageAccounts"
   maskClosable={false}
   maskTransitionName="fade"
+  okButtonDisabled={false}
   okType="primary"
   prefixCls="ant-modal"
   title="Manage Accounts"

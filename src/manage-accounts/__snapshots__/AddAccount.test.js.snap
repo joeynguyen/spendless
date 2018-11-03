@@ -9,6 +9,7 @@ exports[`AddAccount by default Add Account button is shown and form section is h
   }
 >
   <Button
+    block={false}
     ghost={false}
     icon="plus"
     loading={false}
@@ -49,6 +50,7 @@ exports[`AddAccount when Button is clicked form section is shown and button chan
   }
 >
   <Button
+    block={false}
     ghost={false}
     icon=""
     loading={false}
