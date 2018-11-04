@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Button, Drawer, Modal } from 'antd';
+import { Button, Drawer } from 'antd';
 import moment from 'moment';
 import ManageTransaction from './ManageTransaction.jsx';
 import * as transactionsActions from './TransactionsActions.js';
@@ -87,11 +87,11 @@ function mapStateToProps(state) {
     } = state.activeTransaction;
     const dateFormat = 'YYYY-MM-DD';
     initialValues = {
-      amount: amount,
-      category: category,
+      amount,
+      category,
       date: moment(date, dateFormat),
-      description: description,
-      notes: notes,
+      description,
+      notes,
     };
   }
   return {
