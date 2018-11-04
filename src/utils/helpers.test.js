@@ -14,6 +14,11 @@ describe('helpers', () =>  {
       expect(currencyUSDRegex.test('100,000.00')).toBe(true);
     });
 
+    it('fails for blank spaces', () => {
+      expect(currencyUSDRegex.test(' ')).toBe(false);
+      expect(currencyUSDRegex.test('    ')).toBe(false);
+    });
+
     it('fails for zero/single digit decimals', () => {
       expect(currencyUSDRegex.test('10.5')).toBe(false); // single decimal
       expect(currencyUSDRegex.test('10.')).toBe(false); // single decimal
