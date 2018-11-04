@@ -14,6 +14,9 @@ describe('strings', () =>  {
 
   describe('convertToUSD', () => {
     it('converts number "string" type to USD currency "number" type', () => {
+      expect(convertToUSD('.6')).toBe(.6);
+      expect(convertToUSD('.60')).toBe(.6);
+      expect(convertToUSD('.65')).toBe(.65);
       expect(convertToUSD('10')).toBe(10.00);
       expect(convertToUSD('10.01')).toBe(10.01);
       expect(convertToUSD('1,000.01')).toBe(1000.01);
