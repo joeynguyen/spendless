@@ -1,6 +1,7 @@
 import expect from 'expect';
 import React from 'react';
 import { shallow } from 'enzyme';
+import toJson from 'enzyme-to-json';
 import AccountsList from './AccountsList';
 
 const myProps = {
@@ -47,5 +48,9 @@ describe('AccountsList', () => {
         myProps.accounts[i]
       );
     });
+  });
+
+  it('matches Jest snapshot', () => {
+    expect(toJson(wrapper)).toMatchSnapshot();
   });
 });

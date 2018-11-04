@@ -1006,6 +1006,13 @@
   dependencies:
     "@types/enzyme" "*"
 
+"@types/enzyme-to-json@1.5.2":
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/@types/enzyme-to-json/-/enzyme-to-json-1.5.2.tgz#fc33d5c6d81c1bd3ab35460c402185a7dcb94ef2"
+  integrity sha512-3f5gJ+cf77nF4Erx/YmCdeP39Tk3iBjXl4yZOqQEHjriqqgYkYJDKDjOdKOsGsktOi/cTH+iXLbz6u66w1SUVA==
+  dependencies:
+    "@types/enzyme" "*"
+
 "@types/enzyme@*", "@types/enzyme@3.1.14":
   version "3.1.14"
   resolved "https://registry.yarnpkg.com/@types/enzyme/-/enzyme-3.1.14.tgz#379c26205f6e0e272f3a51d6bbdd50071a9d03a6"
