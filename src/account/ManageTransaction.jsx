@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { message, Button, Col, DatePicker, Form, Input, Row } from 'antd';
-import DrawerFooter from '../shared-components/DrawerFooter'
+import DrawerFooter from '../shared-components/DrawerFooter';
+import { currencyUSDRegex } from '../utils/helpers';
+
 
 const FormItem = Form.Item;
 const { TextArea } = Input;
@@ -56,6 +58,8 @@ const ManageTransaction = (props) => {
 
   const { getFieldDecorator } = props.form;
 
+  const currencyReg = currencyUSDRegex;
+
   return (
     <Form
       id="manage-transaction"
@@ -72,7 +76,10 @@ const ManageTransaction = (props) => {
         <Col span={8}>
           <FormItem label="Amount">
             {getFieldDecorator('amount', {
-              rules: [{ required: true, message: 'Enter an amount' }],
+              rules: [
+                { required: true, message: 'Enter an amount' },
+                { pattern: currencyReg, message: 'Must be in valid US currency format' }
+              ],
             })(<Input addonBefore="$" />)}
           </FormItem>
         </Col>

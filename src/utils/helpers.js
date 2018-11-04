@@ -16,3 +16,6 @@ export const renderAntdOptions = options =>
       {option.label}
     </Option>
   ));
+
+// https://stackoverflow.com/a/354216
+export const currencyUSDRegex = /^[0-9]{0,3}(?:(,[0-9]{3})*|([0-9]{3})*)(?:\.[0-9]{2})?$/;
