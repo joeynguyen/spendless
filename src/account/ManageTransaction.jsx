@@ -114,9 +114,7 @@ const ManageTransaction = (props) => {
       </FormItem>
 
       <FormItem label="Category">
-        {getFieldDecorator('category', {
-          rules: [{ required: true, message: 'Enter a category' }],
-        })(<Input />)}
+        {getFieldDecorator('category')(<Input />)}
       </FormItem>
 
       <FormItem label="Notes" style={{ marginBottom: 5 }}>

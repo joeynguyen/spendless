@@ -367,7 +367,7 @@ exports[`ManageTransaction renders correctly 1`] = `
       className="ant-form-item-label"
     >
       <label
-        className="ant-form-item-required"
+        className=""
         htmlFor="category"
         onClick={[Function]}
         title="Category"
@@ -401,26 +401,8 @@ exports[`ManageTransaction renders correctly 1`] = `
                   "type": "text",
                 },
                 "ref": null,
-                "rules": Array [
-                  Object {
-                    "message": "Enter a category",
-                    "required": true,
-                  },
-                ],
                 "trigger": "onChange",
-                "validate": Array [
-                  Object {
-                    "rules": Array [
-                      Object {
-                        "message": "Enter a category",
-                        "required": true,
-                      },
-                    ],
-                    "trigger": Array [
-                      "onChange",
-                    ],
-                  },
-                ],
+                "validate": Array [],
                 "valuePropName": "value",
               }
             }
