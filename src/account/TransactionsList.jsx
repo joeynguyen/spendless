@@ -112,7 +112,7 @@ class TransactionsList extends Component {
     const data = mapTransactionData(this.props.accountTransactions);
 
     return (
-      <React.Fragment>
+      <>
         <DeleteTransactionsButton
           selectedTransactionsIds={this.state.selectedTransactionsIds}
         />
@@ -122,7 +122,7 @@ class TransactionsList extends Component {
           columns={renderColumns}
           dataSource={data}
         />
-      </React.Fragment>
+      </>
     );
   }
 }

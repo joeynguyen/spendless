@@ -4,11 +4,11 @@ import AccountsListItem from './AccountsListItem.jsx';
 
 const AccountsList = ({ accounts }) => {
   return (
-    <React.Fragment>
+    <>
       {accounts.map(function(account) {
         return <AccountsListItem account={account} key={account._id} />;
       })}
-    </React.Fragment>
+    </>
   );
 };
 AccountsList.propTypes = {

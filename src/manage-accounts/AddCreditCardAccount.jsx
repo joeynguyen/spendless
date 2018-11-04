@@ -7,7 +7,7 @@ import { accountCompanyOptions } from '../constants.js';
 
 const AddCreditCardAccount = ({ FormItem, getFieldDecorator }) => {
   return (
-    <React.Fragment>
+    <>
       {/* hidden field to pass on save data */}
       {getFieldDecorator('accountType', { initialValue: 'creditcard' })(
         <Input type="hidden" />
@@ -45,7 +45,7 @@ const AddCreditCardAccount = ({ FormItem, getFieldDecorator }) => {
           Save
         </Button>
       </FormItem>
-    </React.Fragment>
+    </>
   );
 };
 

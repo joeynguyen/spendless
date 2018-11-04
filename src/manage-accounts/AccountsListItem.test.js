@@ -10,7 +10,7 @@ const mockAccount = (type = 'creditcard') => {
     _rev: '13-2bfa9371e269957dcbf2946c1cdd6cd5',
     company: 'MasterCard',
     name: 'Chase Freedom',
-    type: type,
+    type,
   };
 };
 

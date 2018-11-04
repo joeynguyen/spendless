@@ -4,7 +4,7 @@ import { Button, Input } from 'antd';
 
 const AddBankAccount = ({ FormItem, getFieldDecorator }) => {
   return (
-    <React.Fragment>
+    <>
       {/* hidden field to pass on save data */}
       {getFieldDecorator('accountType', { initialValue: 'bank' })(
         <Input type="hidden" />
@@ -42,7 +42,7 @@ const AddBankAccount = ({ FormItem, getFieldDecorator }) => {
           Save
         </Button>
       </FormItem>
-    </React.Fragment>
+    </>
   );
 };
 
