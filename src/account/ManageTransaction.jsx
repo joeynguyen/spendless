@@ -3,7 +3,7 @@ import React from 'react';
 import { message, Button, Col, DatePicker, Form, Input, Row } from 'antd';
 import DrawerFooter from '../shared-components/DrawerFooter';
 import { currencyUSDRegex } from '../utils/helpers';
-
+import { convertToUSD } from '../utils/stringd';
 
 const FormItem = Form.Item;
 const { TextArea } = Input;
@@ -21,7 +21,7 @@ const ManageTransaction = (props) => {
           // update transaction
           newTransactionObj = {
             ...props.activeTransaction,
-            amount: Number(values.amount).toFixed(2),
+            amount: convertToUSD(values.amount),
             category: values.category,
             date: dateStringified,
             description: values.description,
@@ -32,7 +32,7 @@ const ManageTransaction = (props) => {
           newTransactionObj = {
             _id: new Date().getTime().toString(),
             accountId: props.activeAccountId,
-            amount: Number(values.amount).toFixed(2),
+            amount: convertToUSD(values.amount),
             category: values.category,
             date: dateStringified,
             description: values.description,
