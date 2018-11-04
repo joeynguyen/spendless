@@ -1,11 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { message, Button, Col, DatePicker, Form, Input, Row } from 'antd';
+import { message, Button, Col, DatePicker, Form, Input, Row, Radio } from 'antd';
 import DrawerFooter from '../shared-components/DrawerFooter';
 import { currencyUSDRegex } from '../utils/helpers';
-import { convertToUSD } from '../utils/stringd';
+import { convertToUSD } from '../utils/strings';
 
 const FormItem = Form.Item;
+const RadioButton = Radio.Button;
+const RadioGroup = Radio.Group;
 const { TextArea } = Input;
 
 const ManageTransaction = (props) => {
@@ -16,12 +18,17 @@ const ManageTransaction = (props) => {
         // values.date is returned as a moment object so we have to convert it here
         const dateStringified = values.date.format('YYYY-MM-DD');
         let newTransactionObj;
+        let amountAsCurrency = convertToUSD(values.amount);
+
+        if (values.transactionType === 'expense') {
+          amountAsCurrency = -amountAsCurrency;
+        }
 
         if (props.activeTransaction !== null) {
           // update transaction
           newTransactionObj = {
             ...props.activeTransaction,
-            amount: convertToUSD(values.amount),
+            amount: amountAsCurrency,
             category: values.category,
             date: dateStringified,
             description: values.description,
@@ -32,7 +39,7 @@ const ManageTransaction = (props) => {
           newTransactionObj = {
             _id: new Date().getTime().toString(),
             accountId: props.activeAccountId,
-            amount: convertToUSD(values.amount),
+            amount: amountAsCurrency,
             category: values.category,
             date: dateStringified,
             description: values.description,
@@ -85,13 +92,26 @@ const ManageTransaction = (props) => {
         </Col>
 
         <Col offset={4} span={12}>
-          <FormItem label="Date">
-            {getFieldDecorator('date', {
-              rules: [{ required: true, message: 'Enter a date' }],
-            })(<DatePicker />)}
+          <FormItem
+            label="Transaction Type"
+          >
+            {getFieldDecorator('transactionType', {
+              rules: [{ required: true, message: 'Choose a type' }],
+            })(
+              <RadioGroup>
+                <RadioButton value="expense">Expense</RadioButton>
+                <RadioButton value="income">Income</RadioButton>
+              </RadioGroup>
+            )}
           </FormItem>
         </Col>
       </Row>
+
+      <FormItem label="Date">
+        {getFieldDecorator('date', {
+          rules: [{ required: true, message: 'Enter a date' }],
+        })(<DatePicker />)}
+      </FormItem>
 
       <FormItem label="Category">
         {getFieldDecorator('category', {
@@ -140,6 +160,10 @@ const WrappedManageTransaction = Form.create({
       notes: Form.createFormField({
         ...props.notes,
         value: props.initialValues.notes,
+      }),
+      transactionType: Form.createFormField({
+        ...props.notes,
+        value: props.initialValues.transactionType,
       }),
     };
   },

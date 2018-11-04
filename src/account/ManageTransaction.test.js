@@ -18,6 +18,7 @@ const props = {
     date: moment('2014-07-25', DATE_FORMAT),
     description: 'This is a description',
     notes: 'Add notes here',
+    transactionType: 'expense',
   },
   saveAccountTransactions: mockOnSubmit,
   toggleManageTransaction: mockOnCancel,

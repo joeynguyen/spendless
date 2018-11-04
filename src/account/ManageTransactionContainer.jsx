@@ -75,6 +75,7 @@ function mapStateToProps(state) {
     date: undefined,
     description: undefined,
     notes: '',
+    transactionType: 'expense',
   };
 
   if (state.activeTransaction !== null) {
@@ -86,12 +87,16 @@ function mapStateToProps(state) {
       notes,
     } = state.activeTransaction;
     const dateFormat = 'YYYY-MM-DD';
+
     initialValues = {
-      amount,
+      // amount field validation prohibits minus sign and expects a string for convertToUSD
+      amount: Math.abs(amount).toString(),
       category,
       date: moment(date, dateFormat),
       description,
       notes,
+      // transactionType is not saved to DB
+      transactionType: amount > 0 ? 'income' : 'expense',
     };
   }
   return {
