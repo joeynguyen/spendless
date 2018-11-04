@@ -1,5 +1,5 @@
-function removeCommas(str) {
-  return str.replace(',', '');
+export function removeCommas(str) {
+  return str.replace(/,/g, '');
 }
 
 // ignores parentheses, currency symbols, etc.
@@ -31,6 +31,12 @@ export function convertNumStrToValidNum(str) {
   }
 
   return newNum;
+}
+
+export const convertToUSD = numStr => {
+  let newNum = removeCommas(numStr);
+  // Number.toFixed() returns a string
+  return Number(Number(newNum).toFixed(2));
 }
 
 export function trimMultipleSpaces(str) {
