@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Col, Row, Button, Modal } from 'antd';
-import AddAccount from './AddAccount.jsx';
-import AccountsList from './AccountsList.jsx';
+import AddAccount from './AddAccount';
+import AccountsList from './AccountsList';
 
 const ManageAccounts = ({ accounts, actions, manageAccountsVisible }) => {
   const ccAccounts = accounts.filter(account => account.type === 'creditcard');
