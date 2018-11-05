@@ -1,16 +1,8 @@
 import React from 'react';
-import AccountsListItem from './AccountsListItem.jsx';
+import AccountsListItem, { Account } from './AccountsListItem';
 
-interface Props {
+type Props = {
   accounts: Account[];
-}
-
-interface Account {
-  _id: string;
-  _rev: string;
-  company: string;
-  name: string;
-  type: string;
 }
 
 const AccountsList = (props: Props) => {

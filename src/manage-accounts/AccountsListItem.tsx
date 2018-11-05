@@ -1,13 +1,25 @@
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import EditAccountFormContainer from './EditAccountFormContainer.jsx';
 import { Collapse } from 'react-collapse';
 import { Icon } from 'antd';
 
-export default class AccountsListItem extends Component {
-  static propTypes = {
-    account: PropTypes.object.isRequired,
-  };
+type Props = {
+  account: Account
+}
+
+type State = {
+  settingsVisible: boolean,
+}
+
+export interface Account {
+  _id: string;
+  _rev: string;
+  company: string;
+  name: string;
+  type: string;
+}
+
+export default class AccountsListItem extends Component<Props, State> {
   state = {
     settingsVisible: false,
   };
@@ -15,7 +27,7 @@ export default class AccountsListItem extends Component {
     this.setState({ settingsVisible: !this.state.settingsVisible });
   };
   render() {
-    let editAccountForm = '';
+    let editAccountForm : string | JSX.Element = '';
     if (this.state.settingsVisible) {
       const formInitialValues = {
         initialValues: {
