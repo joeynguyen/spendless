@@ -1,12 +1,10 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, {lazy, Suspense} from 'react';
 import { Spin, Col, Row } from 'antd';
 
 import AccountDetails from './AccountDetails.jsx';
 import TransactionsListContainer from './TransactionsListContainer.jsx';
-import ManageTransactionContainer from './ManageTransactionContainer.jsx';
 import UnsavedWarning from './UnsavedWarning.jsx';
-import UploadedTransactionsContainer from './UploadedTransactionsContainer.jsx';
 
 const AccountPage = ({
   accounts,
@@ -33,12 +31,25 @@ const AccountPage = ({
     );
   }
 
-  const manageTransactionModal = manageTransactionVisible ? (
-    <ManageTransactionContainer />
-  ) : null;
-  const uploadedTransactionsModal = uploadedTransactionsExist ? (
-    <UploadedTransactionsContainer />
-  ) : null;
+  let uploadedTransactionsModal;
+  if (uploadedTransactionsExist) {
+    const UploadedTransactionsContainer = lazy(() => import('./UploadedTransactionsContainer'));
+    uploadedTransactionsModal = (
+      <Suspense fallback={''}>
+        <UploadedTransactionsContainer />
+      </Suspense>
+    )
+  }
+
+  let manageTransactionModal;
+  if (manageTransactionVisible) {
+    const ManageTransactionContainer = lazy(() => import('./ManageTransactionContainer'));
+    manageTransactionModal = (
+      <Suspense fallback={''}>
+        <ManageTransactionContainer />
+      </Suspense>
+    )
+  }
 
   return (
     <>
