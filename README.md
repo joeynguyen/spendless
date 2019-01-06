@@ -33,7 +33,7 @@ Wait for the Electron app to load with the React UI
 
 #### View accounts/transactions data
 
-Navigate to http://127.0.0.1:5984/_utils while the _start_ script is running to see a GUI of the PouchDB database
+Navigate to *http://127.0.0.1:5984/_utils* while the *start* script is running to see a GUI of the PouchDB database
 
 #### Verify functionality
 
