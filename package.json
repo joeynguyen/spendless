@@ -16,7 +16,7 @@
     "lint": "eslint --debug src/",
     "lint:write": "eslint --debug src/ --fix",
     "macos-build": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/piggybank.icns --prune=true --out=release-builds",
-    "prettier": "prettier --write './src/**/*.{ts,js,css,json}'",
+    "prettier": "prettier --write './src/**/*.{ts,tsx,js,jsx,scss,css,json}'",
     "react-build": "react-app-rewired build",
     "react-start": "BROWSER=none react-app-rewired start",
     "start": "concurrently 'yarn react-start' 'wait-on http://localhost:3000/ && yarn electron-start' 'yarn db-server'",
